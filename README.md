@@ -3,15 +3,22 @@
 基于 Django 框架开发的旅游资讯展示平台。
 
 ## 运行环境要求
-*   **Python**: 3.10 / 3.11 / 3.12+ (推荐 3.12)
-*   **Django**: 5.2 (LTS 长期支持版)
-*   **数据库**: MySQL 8.0.28+ 或 **MariaDB 10.6+** (最佳推荐 MySQL 8.4 LTS)
+*   **Python**: 3.12+ 
+*   **Django**: 5.2 (LTS)
+*   **数据库**: MySQL 8.4 (LTS) —— 推荐使用 Docker 一键安装
 
 ## 快速启动手册
 
 如果你是在一台新机器上拉取了本代码，请按照以下步骤进行配置：
 
-### 1. 环境准备
+### 1. 启动数据库 (推荐方式)
+确保你的机器上已安装 Docker。
+```powershell
+# 在根目录运行，一键启动 MySQL 8.4
+docker-compose up -d
+```
+
+### 2. 环境准备
 ```powershell
 # 创建并激活虚拟环境
 python -m venv venv
@@ -21,28 +28,26 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-### 2. 环境配置
+### 3. 环境配置
 ```powershell
 copy .env.example .env
 ```
-编辑 `.env` 文件，根据本地环境修改 `DATABASE_URL`。
+编辑 `.env` 文件，确保 `DATABASE_URL` 与 Docker 容器内的账号密码匹配。
 
-### 3. 数据库初始化
-在确保本地数据库服务已启动并配置正确后：
+### 4. 数据库初始化
 ```powershell
-# 执行数据库迁移
+# 此时数据库已就绪，直接执行迁移
 python manage.py migrate
 
 # 创建超级管理员
 python manage.py createsuperuser
 ```
 
-### 4. 运行
+### 5. 运行开发服务器
 ```powershell
 python manage.py runserver
 ```
 访问地址：[http://127.0.0.1:8000](http://127.0.0.1:8000)
-
 
 ---
 
