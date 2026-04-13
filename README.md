@@ -2,13 +2,16 @@
 
 基于 Django 框架开发的旅游资讯展示平台。
 
+## 运行环境要求
+*   **Python**: 3.10 / 3.11 / 3.12+ (推荐 3.12)
+*   **Django**: 5.2 (LTS 长期支持版)
+*   **数据库**: MySQL 8.0.28+ 或 **MariaDB 10.6+** (最佳推荐 MySQL 8.4 LTS)
+
 ## 快速启动手册
 
 如果你是在一台新机器上拉取了本代码，请按照以下步骤进行配置：
 
 ### 1. 环境准备
-确保你的机器已安装 Python 3.10+。
-
 ```powershell
 # 创建并激活虚拟环境
 python -m venv venv
@@ -19,34 +22,32 @@ pip install -r requirements.txt
 ```
 
 ### 2. 环境配置
-本项目使用 `.env` 文件管理配置。请根据模板创建：
-
 ```powershell
 copy .env.example .env
 ```
-然后编辑 `.env` 文件，根据你的本地环境修改数据库连接字符串（`DATABASE_URL`）和其他关键变量。
+编辑 `.env` 文件，根据本地环境修改 `DATABASE_URL`。
 
 ### 3. 数据库初始化
-在确保本地数据库服务已启动并配置正确后，运行以下命令：
-
+在确保本地数据库服务已启动并配置正确后：
 ```powershell
-# 执行数据库迁移（创建表结构）
+# 执行数据库迁移
 python manage.py migrate
 
-# 创建管理员账号
+# 创建超级管理员
 python manage.py createsuperuser
 ```
 
-### 4. 运行开发服务器
+### 4. 运行
 ```powershell
 python manage.py runserver
 ```
-访问 [http://127.0.0.1:8000](http://127.0.0.1:8000) 查看效果。
+访问地址：[http://127.0.0.1:8000](http://127.0.0.1:8000)
+
 
 ---
 
 ## 目录结构说明
-- `apps/`: 存放业务逻辑模块。
-- `config/`: 项目全局配置信息。
-- `docs/`: 存放项目详细文档及原始资料。
-- `static/` & `media/`: 存放静态资源和用户上传文件。
+- `apps/`: 业务模块。
+- `config/`: 全局配置。
+- `docs/`: 项目文档及原始资料。
+- `static/` & `media/`: 资源文件。
