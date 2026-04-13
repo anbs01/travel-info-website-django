@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -142,3 +143,37 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Session timeout (30 minutes)
 SESSION_COOKIE_AGE = 1800
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# SimpleUI Settings
+SIMPLEUI_HOME_INFO = False  # 隐藏官方分析页
+SIMPLEUI_ANALYSIS = False   # 隐藏分析统计
+
+# 自定义图标配置
+SIMPLEUI_ICON = {
+    # Core 模块
+    '网站基本信息': 'fas fa-info-circle',
+    '搜索关键词': 'fas fa-search',
+    '首页文字推荐': 'fas fa-thumbs-up',
+    
+    # Foods 模块
+    '特产·美食': 'fas fa-utensils',
+    'Food': 'fas fa-utensils',
+    
+    # Goods 模块
+    '好物·文创': 'fas fa-shopping-bag',
+    'Good': 'fas fa-shopping-bag',
+    
+    # News 模块
+    '资讯·动态': 'fas fa-newspaper',
+    'News': 'fas fa-newspaper',
+    
+    # Places 模块
+    '行政区域': 'fas fa-globe-asia',
+    '城乡/街巷': 'fas fa-city',
+    '打卡地/景区': 'fas fa-camera-retro',
+    '交通出行': 'fas fa-bus',
+    
+    # Travelogue 模块
+    '游记攻略': 'fas fa-paper-plane',
+    'Travelogue': 'fas fa-paper-plane',
+}

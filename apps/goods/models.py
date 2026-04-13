@@ -1,12 +1,16 @@
 from django.db import models
 from core.models import BaseContent
+from places.models import Place
 
 class Good(BaseContent):
-    """地方特产模型"""
-    origin_place = models.CharField('产地', max_length=100, blank=True)
-    storage_method = models.CharField('保存方式', max_length=100, blank=True)
-    is_recommend_gift = models.BooleanField('是否推荐伴手礼', default=True)
+    """好物·文创 - 灵魂基准版"""
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='归属城乡')
+    english_code = models.SlugField('英文标识(Slug)', max_length=100, unique=True)
+    price = models.DecimalField('价格/参考价', max_digits=10, decimal_places=2, null=True, blank=True)
+    
+    # level_tag 用于存储“非遗级别”
+    # feature_tags 用于存储“产品特色”
 
     class Meta:
-        verbose_name = '地方特产'
+        verbose_name = '好物·文创'
         verbose_name_plural = verbose_name

@@ -1,35 +1,53 @@
 from django.db import models
 from core.models import BaseContent
 
+class Region(models.Model):
+    """行政区域/省份/国家"""
+    name = models.CharField('名称', max_length=100)
+    english_name = models.CharField('英文名称', max_length=100, blank=True)
+    is_active = models.BooleanField('是否启用', default=True)
+    sort_order = models.PositiveIntegerField('排序', default=0)
+
+    class Meta:
+        verbose_name = '行政区域'
+        verbose_name_plural = verbose_name
+        ordering = ['-sort_order', 'name']
+
+    def __str__(self):
+        return self.name
+
 class Place(BaseContent):
-    """地区与打卡地模型"""
-    PLACE_TYPE_CHOICES = [
-        ('city', '城市'),
-        ('scenic', '景区'),
-        ('spot', '打卡点'),
-    ]
-
-    parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children', verbose_name='上级地区')
-    place_type = models.CharField('地点类型', max_length=10, choices=PLACE_TYPE_CHOICES, default='city')
+    """城乡/街巷 - 灵魂基准版"""
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, verbose_name='所属区域')
+    english_code = models.SlugField('英文标识(Slug)', max_length=100, unique=True, help_text='用于URL路由，如: hangzhou')
     
-    # 扩展字段
+    # 设计图补强字段
+    alias = models.CharField('别名', max_length=100, blank=True, help_text='如: 泉城')
+    best_time = models.CharField('最佳游玩时间', max_length=200, blank=True, help_text='如: 4月-10月')
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='sub_places', verbose_name='上级城乡')
+
+    class Meta:
+        verbose_name = '城乡/街巷'
+        verbose_name_plural = verbose_name
+
+class ScenicSpot(BaseContent):
+    """热门打卡地/景区"""
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='所属城乡')
+    english_code = models.SlugField('英文标识(Slug)', max_length=100, unique=True, help_text='用于URL路由')
     address = models.CharField('详细地址', max_length=255, blank=True)
-    phone = models.CharField('联系电话', max_length=50, blank=True)
     opening_hours = models.CharField('开放时间', max_length=200, blank=True)
-    ticket_price = models.CharField('门票信息', max_length=100, blank=True)
+    ticket_info = models.CharField('门票信息', max_length=200, blank=True)
 
     class Meta:
-        verbose_name = '地区打卡地'
+        verbose_name = '打卡地/景区'
         verbose_name_plural = verbose_name
 
-class PlaceImage(models.Model):
-    """打卡地相册"""
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField('图片', upload_to='places/%Y/%m/')
-    description = models.CharField('图片描述', max_length=200, blank=True)
-    sort_order = models.IntegerField('排序系数', default=0)
+class Traffic(BaseContent):
+    """交通出行"""
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='目的地城乡')
+    traffic_type = models.CharField('交通方式', max_length=50, help_text='如: 高铁, 飞机, 自驾')
+    duration = models.CharField('耗时/说明', max_length=100, blank=True)
 
     class Meta:
-        verbose_name = '打卡地图片'
+        verbose_name = '交通出行'
         verbose_name_plural = verbose_name
-        ordering = ['sort_order']
