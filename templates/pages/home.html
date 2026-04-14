@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="bg-gray-50 py-12">
+    <div class="container-wide">
+        <div class="bg-white p-8 flex space-x-8 shadow-sm">
+            <!-- 1. 左侧：视觉轮播区 (1:1 还原设计稿尺寸与层级) -->
+            <div class="w-2/3 relative group overflow-hidden">
+                <div class="aspect-video bg-gray-200">
+                    <!-- 使用占位图模拟设计稿中的摩天轮场景 -->
+                    <img src="https://images.unsplash.com/photo-1513413173476-2aa2aa89a804?auto=format&fit=crop&q=80&w=1200" 
+                         alt="推荐图" class="w-full h-full object-cover">
+                </div>
+                <!-- 底部标题遮罩 -->
+                <div class="absolute bottom-0 left-0 right-0 bg-black/40 text-white p-4">
+                    <span class="text-xl font-medium tracking-wide">爱在烟台，难以离开</span>
+                </div>
+                <!-- 轮播控制圆点 -->
+                <div class="absolute bottom-4 right-6 flex space-x-2">
+                    <div class="w-3 h-3 rounded-full bg-orange-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-gray-400/60"></div>
+                    <div class="w-3 h-3 rounded-full bg-gray-400/60"></div>
+                </div>
+            </div>
+
+            <!-- 2. 右侧：精华推荐列表 (同步后台数据逻辑) -->
+            <div class="w-1/3 flex flex-col justify-start">
+                <ul class="space-y-4">
+                    <li class="flex justify-between items-center group cursor-pointer border-b border-transparent hover:border-travel-brown pb-1 transition-all">
+                        <div class="flex items-center">
+                            <span class="w-1.5 h-1.5 bg-travel-brown mr-3"></span>
+                            <span class="text-gray-700 group-hover:text-travel-brown">设置在首页推荐的文字记录，不取消或未到期会一直显示在最上边</span>
+                        </div>
+                    </li>
+                    <li class="flex justify-between items-center group cursor-pointer">
+                        <div class="flex items-center overflow-hidden">
+                            <span class="w-1.5 h-1.5 bg-travel-brown mr-3 flex-shrink-0"></span>
+                            <span class="text-gray-700 truncate group-hover:text-travel-brown">台湾写真：台北寻“杠子头”，咬一口“硬邦邦”的乡愁</span>
+                        </div>
+                        <span class="text-xs text-gray-400 ml-2 whitespace-nowrap">[纪行]</span>
+                    </li>
+                    <li class="flex justify-between items-center group cursor-pointer text-sm">
+                        <div class="flex items-center overflow-hidden">
+                            <span class="w-1.5 h-1.5 bg-travel-brown mr-3 flex-shrink-0"></span>
+                            <span class="text-gray-700 truncate group-hover:text-travel-brown">“海绵”常德，一条老街留住文化与乡愁</span>
+                        </div>
+                        <span class="text-xs text-gray-400 ml-2 whitespace-nowrap">[攻略]</span>
+                    </li>
+                    <li class="flex justify-between items-center group cursor-pointer text-sm font-medium">
+                        <div class="flex items-center overflow-hidden">
+                            <span class="w-1.5 h-1.5 bg-travel-brown mr-3 flex-shrink-0"></span>
+                            <span class="text-gray-700 truncate group-hover:text-travel-brown">打卡青岛明月山海间不夜城，全攻略带你深度游城阳</span>
+                        </div>
+                        <span class="text-xs text-gray-400 ml-2 whitespace-nowrap">[资讯]</span>
+                    </li>
+                    <li class="flex justify-between items-center group cursor-pointer">
+                        <div class="flex items-center overflow-hidden">
+                            <span class="w-1.5 h-1.5 bg-travel-brown mr-3 flex-shrink-0"></span>
+                            <span class="text-gray-700 truncate group-hover:text-travel-brown">周末，在岱山来场Citywalk！</span>
+                        </div>
+                        <span class="text-xs text-gray-400 ml-2 whitespace-nowrap">[纪行]</span>
+                    </li>
+                    <li class="flex justify-between items-center group cursor-pointer">
+                        <div class="flex items-center overflow-hidden">
+                            <span class="w-1.5 h-1.5 bg-travel-brown mr-3 flex-shrink-0"></span>
+                            <span class="text-gray-700 truncate group-hover:text-travel-brown">绮罗古镇：六百年岁月里的古村肌理与人文印记</span>
+                        </div>
+                        <span class="text-xs text-gray-400 ml-2 whitespace-nowrap">[攻略]</span>
+                    </li>
+                    <li class="flex justify-between items-center group cursor-pointer">
+                        <div class="flex items-center overflow-hidden">
+                            <span class="w-1.5 h-1.5 bg-travel-brown mr-3 flex-shrink-0"></span>
+                            <span class="text-gray-700 truncate group-hover:text-travel-brown">超600年历史！广州这条避世古村，藏得太深了！</span>
+                        </div>
+                        <span class="text-xs text-gray-400 ml-2 whitespace-nowrap">[资讯]</span>
+                    </li>
+                    <li class="flex justify-between items-center group cursor-pointer">
+                        <div class="flex items-center overflow-hidden">
+                            <span class="w-1.5 h-1.5 bg-travel-brown mr-3 flex-shrink-0"></span>
+                            <span class="text-gray-700 truncate group-hover:text-travel-brown">江西省景德镇市浮梁县瑶里村：古村白墙黛瓦 瓷韵茶香悠长</span>
+                        </div>
+                        <span class="text-xs text-gray-400 ml-2 whitespace-nowrap">[纪行]</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

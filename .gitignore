@@ -36,4 +36,7 @@ staticfiles/
 media/
 
 # 即使全局忽略，也允许提交 .md 文件
+# 前端依赖
+node_modules/
+
 !*.md

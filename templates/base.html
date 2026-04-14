@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}旅游信息网{% endblock %}</title>
+    <!-- 引入设计稿常用的 Inter 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 引入 Tailwind 编译后的样式 -->
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <style>
+        /* 针对设计稿中的特殊间距进行微调 */
+        .container-wide { width: 1200px; margin: 0 auto; }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="text-travel-dark bg-white">
+
+    <!-- Header: 按照设计页-首页.png 1:1 还原 -->
+    <header class="bg-white border-b border-gray-100">
+        <!-- 1. 顶层轻量导航 (首页 | 纪行·攻略 ...) -->
+        <div class="border-b border-gray-50 py-2">
+            <div class="container-wide flex justify-between items-center text-sm font-medium">
+                <nav class="flex space-x-8">
+                    <a href="/" class="hover:text-travel-brown transition-colors">首页</a>
+                    <a href="#" class="hover:text-travel-brown transition-colors">纪行·攻略</a>
+                    <a href="#" class="hover:text-travel-brown transition-colors">城乡·街巷</a>
+                    <a href="#" class="hover:text-travel-brown transition-colors">特产·美食</a>
+                    <a href="#" class="hover:text-travel-brown transition-colors">好物·文创</a>
+                    <a href="#" class="hover:text-travel-brown transition-colors">资讯·动态</a>
+                </nav>
+                <div class="flex items-center space-x-6">
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-travel-brown">登录</a>
+                        <a href="#" class="hover:text-travel-brown">注册</a>
+                    </div>
+                    <!-- 二维码入口 -->
+                    <div class="cursor-pointer text-gray-400 hover:text-travel-brown">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h2M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" /></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Logo 行 -->
+        <div class="py-10 text-center">
+            <div class="inline-block border-4 border-travel-brown p-4">
+                <span class="text-5xl font-bold tracking-widest text-travel-dark">网站LOGO</span>
+            </div>
+        </div>
+
+        <!-- 3. 核心搜索区 (设计稿主搜索框) -->
+        <div class="pb-12">
+            <div class="container-wide max-w-4xl flex items-center shadow-sm border border-gray-200 rounded overflow-hidden">
+                <input type="text" class="flex-1 py-4 px-6 outline-none text-lg" placeholder="搜索目的地、纪行、美食...">
+                <div class="bg-gray-50 border-l px-6 py-4 flex items-center cursor-pointer text-gray-600">
+                    <span class="mr-2">纪行·攻略</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                </div>
+                <button class="bg-travel-brown hover:bg-travel-brown-light text-white px-10 py-4 font-bold text-lg transition-colors">
+                    搜索
+                </button>
+            </div>
+            <!-- 热搜标签云 (底部推荐条) -->
+             <div class="container-wide mt-4 flex justify-center space-x-4 text-xs text-gray-400">
+                <a href="#" class="hover:text-travel-brown">历史文化名城</a>
+                <a href="#" class="hover:text-travel-brown">宜居城市</a>
+                <a href="#" class="hover:text-travel-brown">特别推荐</a>
+                <a href="#" class="hover:text-travel-brown">红色旅游</a>
+             </div>
+        </div>
+    </header>
+
+    <main class="min-h-screen">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer: 1:1 还原 -->
+    <footer class="bg-white border-t border-gray-100 py-12 mt-20">
+        <div class="container-wide text-center">
+            <div class="flex justify-center space-x-6 text-gray-500 mb-4 text-sm">
+                <a href="#" class="hover:underline">关于我们</a>
+                <a href="#" class="hover:underline">服务协议</a>
+                <a href="#" class="hover:underline">合作事宜</a>
+                <a href="#" class="hover:underline">意见建议</a>
+                <a href="#" class="hover:underline">联系我们</a>
+            </div>
+            <div class="text-xs text-gray-300 space-y-2">
+                <p>Copyright © 2026-2027 NAME.COM All Rights Reserved</p>
+                <p>版权所有：网站名称 鲁ICP备123456789号</p>
+            </div>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

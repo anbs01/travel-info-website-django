@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-travel-dark bg-white font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* 预设一些符合设计稿的组件样式 */
+  .btn-primary {
+    @apply bg-travel-brown text-white py-2 px-6 hover:bg-travel-brown-light transition-colors duration-200;
+  }
+}
