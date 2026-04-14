@@ -151,6 +151,7 @@ SIMPLEUI_ANALYSIS = False   # 隐藏分析统计
 # 像素级还原菜单配置 (完全对齐设计图：网站名称.png)
 SIMPLEUI_CONFIG = {
     'system_keep': False,  # 完全接管系统菜单，自定义排序
+    'system_keep_alive': False,  # 禁用 iframe 模式，恢复原生稳定性
     'menu_display': ['综合管理', '纪行攻略', '行业资讯', '城镇乡村', '打卡地', '特产美食', '文创商品', '系统管理'],
     'menus': [
         {
@@ -218,4 +219,22 @@ SIMPLEUI_ICON = {
     '打卡地/景区': 'fas fa-camera-retro',
     '交通出行': 'fas fa-bus',
     '游记攻略': 'fas fa-paper-plane',
+}
+
+# CKEditor 配置 (对齐需求文档 4.0 & 15.3)
+CKEDITOR_UPLOAD_PATH = 'admin/%Y%m/'  # 自动按年月分目录
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'height': 400,
+        'width': 'auto',
+        # 激活拖拽上传与图片等比缩放
+        'extraPlugins': ','.join([
+            'uploadimage',
+            'image2',
+            'widget',
+            'lineutils',
+        ]),
+    },
 }

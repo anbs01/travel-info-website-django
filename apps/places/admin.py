@@ -13,14 +13,22 @@ class RegionAdmin(admin.ModelAdmin):
 class PlaceAdmin(admin.ModelAdmin):
     list_display = ('title', 'alias', 'region', 'english_code', 'level_tag', 'is_sticky', 'is_home', 'is_hidden')
     list_filter = ('region', 'is_sticky', 'is_home', 'is_hidden')
-    search_fields = ('title', 'alias', 'english_code')
     readonly_fields = ('created_at', 'updated_at')
+    
+    class Media:
+        css = {
+            'all': ('core/css/custom_admin.css',)
+        }
+
     fieldsets = (
         ('基础信息', {
             'fields': ('title', 'full_title', 'alias', 'english_code', 'region', 'parent')
         }),
         ('灵魂展示字段', {
             'fields': ('level_tag', 'feature_tags', 'best_time', 'summary')
+        }),
+        ('正文详情', {
+            'fields': ('content',),
         }),
         ('媒体与水印', {
             'fields': ('image', 'image_show_watermark', 'watermark_pos')
@@ -42,14 +50,22 @@ class PlaceAdmin(admin.ModelAdmin):
 class ScenicSpotAdmin(admin.ModelAdmin):
     list_display = ('title', 'place', 'level_tag', 'is_sticky', 'is_home', 'is_hidden')
     list_filter = ('place', 'is_sticky', 'is_home', 'is_hidden')
-    search_fields = ('title', 'address')
     readonly_fields = ('created_at', 'updated_at')
+    
+    class Media:
+        css = {
+            'all': ('core/css/custom_admin.css',)
+        }
+
     fieldsets = (
         ('基础信息', {
             'fields': ('title', 'full_title', 'english_code', 'place', 'address', 'opening_hours', 'ticket_info')
         }),
         ('灵魂展示字段', {
             'fields': ('level_tag', 'feature_tags', 'summary')
+        }),
+        ('正文详情', {
+            'fields': ('content',),
         }),
         ('媒体与水印', {
             'fields': ('image', 'image_show_watermark', 'watermark_pos')

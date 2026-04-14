@@ -4,6 +4,7 @@ import time
 
 class News(BaseContent):
     """资讯·动态 - 灵魂基准版"""
+    place = models.ForeignKey('places.Place', on_delete=models.SET_NULL, null=True, blank=True, verbose_name='关联目的地')
     slug = models.SlugField('URL标识', max_length=100, unique=True, blank=True)
     
     # level_tag 用于存储“资讯分类” (如：官方动态, 行业新闻)

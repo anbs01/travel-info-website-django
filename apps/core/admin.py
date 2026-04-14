@@ -6,7 +6,10 @@ from .models import SiteInfo, HomeTextRecommend, SearchKeyword, Feedback
 class SiteInfoAdmin(admin.ModelAdmin):
     """网站基本信息 - 单例，禁止新增多条"""
     fieldsets = (
-        ('常规页面', {'fields': ('about', 'service', 'contact', 'cooperation')}),
+        ('关于我们', {'fields': ('about',)}),
+        ('服务协议', {'fields': ('service',)}),
+        ('联系我们', {'fields': ('contact',)}),
+        ('合作事宜', {'fields': ('cooperation',)}),
         ('版权信息', {'fields': ('copyright', 'copyright_home')}),
     )
 

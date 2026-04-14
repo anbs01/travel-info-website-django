@@ -4,8 +4,9 @@ from places.models import Place
 
 class Food(BaseContent):
     """特产·美食 - 灵魂基准版"""
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='归属城乡')
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='所属城镇乡村')
     english_code = models.SlugField('英文标识(Slug)', max_length=100, unique=True)
+    price = models.DecimalField('参考价格', max_digits=10, decimal_places=2, null=True, blank=True)
     
     # level_tag 用于存储“菜系统别”或“非遗级别”
     # feature_tags 用于存储“产品特色”

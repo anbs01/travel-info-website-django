@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class BaseContent(models.Model):
     """内容抽象基类 - 灵魂基准版 (高保真还原设计图)"""
@@ -14,6 +15,7 @@ class BaseContent(models.Model):
     title = models.CharField('标题(简称)', max_length=200, help_text='用于列表、版面受限处')
     full_title = models.CharField('全称', max_length=200, blank=True, help_text='用于详情页展示')
     summary = models.TextField('内容概述', blank=True, help_text='详情页顶部的导语/特色说明')
+    content = RichTextUploadingField('详细内容', blank=True, help_text='正文详情/富文本内容')
     
     # 2. 视觉灵魂字段 (补强)
     level_tag = models.CharField('级别/品别标签', max_length=50, blank=True, help_text='右上角突出显示的标签，如：非遗级别、口气、菜系等')
@@ -55,10 +57,10 @@ class BaseContent(models.Model):
 
 class SiteInfo(models.Model):
     """网站基本信息 (单例)"""
-    about = models.TextField('关于我们', blank=True)
-    service = models.TextField('服务协议', blank=True)
-    contact = models.TextField('联系我们', blank=True)
-    cooperation = models.TextField('合作事宜', blank=True)
+    about = RichTextUploadingField('关于我们', blank=True)
+    service = RichTextUploadingField('服务协议', blank=True)
+    contact = RichTextUploadingField('联系我们', blank=True)
+    cooperation = RichTextUploadingField('合作事宜', blank=True)
     copyright = models.TextField('版权信息(底部)', blank=True)
     copyright_home = models.TextField('首页专用版权信息', blank=True)
 

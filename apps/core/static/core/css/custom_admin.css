@@ -1,0 +1,25 @@
+/* 修复 SimpleUI 非 Iframe 模式下的滚动条与日历定位冲突 */
+
+/* 1. 消除双滚动条：隐藏 HTML 层的溢出，以内容区滚动为主 */
+html, body {
+    overflow: hidden !important;
+    height: 100% !important;
+}
+
+/* 2. 确保内容区是唯一滚动源 */
+#content {
+    overflow-y: auto !important;
+    height: calc(100vh - 50px) !important; /* 减去顶部导航高度 */
+}
+
+/* 3. 修复日历控件定位与显示 */
+.calendarbox {
+    z-index: 2000 !important; /* 提升层级，防止被遮挡 */
+    position: fixed !important; /* 改为 fixed 定位，防止随页面滚动漂移 */
+}
+
+/* 4. 优化表单宽度 (对齐需求文档 15.4) */
+.vTextField, .vURLField, .vEmailField, .vIntegerField {
+    width: 90% !important;
+    max-width: 800px !important;
+}

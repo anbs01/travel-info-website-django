@@ -17,6 +17,9 @@ class GoodAdmin(admin.ModelAdmin):
             # feature_tags: 产品特色标签云 (如：手工,限量,传承)
             'fields': ('level_tag', 'feature_tags', 'summary')
         }),
+        ('正文详情', {
+            'fields': ('content',),
+        }),
         ('媒体与水印', {
             'fields': ('image', 'image_show_watermark', 'watermark_pos')
         }),

@@ -8,6 +8,12 @@ class TravelogueAdmin(admin.ModelAdmin):
     list_filter = ('place', 'is_sticky', 'is_home', 'is_hidden')
     search_fields = ('title', 'summary', 'feature_tags', 'content')
     readonly_fields = ('slug', 'created_at', 'updated_at')  # slug 自动生成
+    
+    class Media:
+        css = {
+            'all': ('core/css/custom_admin.css',)
+        }
+
     fieldsets = (
         ('基础信息', {
             'fields': ('title', 'full_title', 'slug', 'place')

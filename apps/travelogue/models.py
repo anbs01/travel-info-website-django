@@ -4,11 +4,8 @@ from core.models import BaseContent
 from places.models import Place
 
 class Travelogue(BaseContent):
-    """游记攻略模型 - 文档 3.2 版"""
-    slug = models.CharField('URL缩略名', max_length=20, unique=True, help_text='发布时自动生成（YYYYMMDDHHmm）')
-    source = models.CharField('来源', max_length=100, blank=True)
-    author = models.CharField('作者', max_length=100, blank=True)
-    content = models.TextField('富文本正文')
+    """游记攻略 - 补全设计图业务项"""
+    slug = models.CharField('URL码', max_length=20, unique=True, help_text='系统自动生成：YYYYMMDDHHmm格式')
     place = models.ForeignKey(Place, on_delete=models.SET_NULL, null=True, blank=True, related_name='travelogues', verbose_name='关联城乡')
 
     class Meta:

@@ -4,7 +4,7 @@ from places.models import Place
 
 class Good(BaseContent):
     """好物·文创 - 灵魂基准版"""
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='归属城乡')
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='所属城镇乡村')
     english_code = models.SlugField('英文标识(Slug)', max_length=100, unique=True)
     price = models.DecimalField('价格/参考价', max_digits=10, decimal_places=2, null=True, blank=True)
     
