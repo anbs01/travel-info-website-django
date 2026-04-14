@@ -1,0 +1,124 @@
+<!-- 反馈弹窗组件 (需包含在 base.html 中) -->
+<div id="feedbackModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <!-- 背景遮罩 (需求第50条: 背景变灰) -->
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeFeedbackModal()"></div>
+    
+    <!-- 弹窗主体 -->
+    <div class="relative bg-white w-full max-w-lg rounded-sm shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+        <!-- 头部导航 -->
+        <div class="flex border-b border-gray-100">
+            <button onclick="switchFeedbackType('suggestion')" id="tab-suggestion" class="flex-1 py-4 text-sm font-bold border-b-2 border-travel-brown text-travel-brown">
+                提交建议
+            </button>
+            <button onclick="switchFeedbackType('correction')" id="tab-correction" class="flex-1 py-4 text-sm font-bold border-b-2 border-transparent text-gray-400 hover:text-gray-600">
+                信息揪错
+            </button>
+            <button onclick="switchFeedbackType('material')" id="tab-material" class="flex-1 py-4 text-sm font-bold border-b-2 border-transparent text-gray-400 hover:text-gray-600">
+                补充材料
+            </button>
+            <button onclick="closeFeedbackModal()" class="px-5 text-gray-300 hover:text-gray-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+        </div>
+
+        <!-- 表单区域 -->
+        <form id="feedbackForm" class="p-6 space-y-4">
+            {% csrf_token %}
+            <input type="hidden" name="title" id="feedbackTitle" value="提交建议">
+            <input type="hidden" name="source_url" id="sourceUrl">
+            
+            <div>
+                <label class="block text-xs text-gray-400 mb-1 uppercase tracking-wider">反馈内容 <span class="text-red-500">*</span></label>
+                <textarea name="content" required rows="5" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-sm text-sm focus:outline-none focus:border-travel-brown transition-colors placeholder-gray-300" placeholder="请详细描述您的问题或建议..."></textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1 uppercase tracking-wider">联系人</label>
+                    <input type="text" name="name" class="w-full px-4 py-2 bg-gray-50 border border-gray-100 rounded-sm text-sm focus:outline-none focus:border-travel-brown" placeholder="您的姓名">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1 uppercase tracking-wider">联系方式</label>
+                    <input type="text" name="contact" class="w-full px-4 py-2 bg-gray-50 border border-gray-100 rounded-sm text-sm focus:outline-none focus:border-travel-brown" placeholder="手机/微信号">
+                </div>
+            </div>
+
+            <div id="feedbackMsg" class="hidden text-sm py-2"></div>
+
+            <div class="pt-2">
+                <button type="submit" class="w-full bg-travel-brown text-white py-3 rounded-sm font-bold hover:bg-opacity-90 transition-all shadow-lg shadow-travel-brown/20 uppercase tracking-widest text-sm">
+                    提交反馈
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function openFeedbackModal(type = 'suggestion') {
+    const modal = document.getElementById('feedbackModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden'; // 禁止滚动
+    document.getElementById('sourceUrl').value = window.location.href;
+    switchFeedbackType(type);
+}
+
+function closeFeedbackModal() {
+    const modal = document.getElementById('feedbackModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+    document.getElementById('feedbackForm').reset();
+    document.getElementById('feedbackMsg').className = 'hidden text-sm py-2';
+}
+
+function switchFeedbackType(type) {
+    const tabs = {
+        'suggestion': { title: '提交建议', el: document.getElementById('tab-suggestion') },
+        'correction': { title: '信息揪错', el: document.getElementById('tab-correction') },
+        'material': { title: '补充材料', el: document.getElementById('tab-material') }
+    };
+
+    Object.keys(tabs).forEach(k => {
+        tabs[k].el.classList.remove('border-travel-brown', 'text-travel-brown');
+        tabs[k].el.classList.add('border-transparent', 'text-gray-400');
+    });
+
+    tabs[type].el.classList.add('border-travel-brown', 'text-travel-brown');
+    tabs[type].el.classList.remove('border-transparent', 'text-gray-400');
+    document.getElementById('feedbackTitle').value = tabs[type].title;
+}
+
+document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const msg = document.getElementById('feedbackMsg');
+    const formData = new FormData(this);
+
+    msg.textContent = '提交中...';
+    msg.className = 'text-sm py-2 text-travel-brown block';
+
+    fetch('{% url "core:feedback_add" %}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === 'success') {
+            msg.textContent = data.message;
+            msg.className = 'text-sm py-2 text-green-600 block';
+            setTimeout(closeFeedbackModal, 2000);
+        } else {
+            msg.textContent = data.message;
+            msg.className = 'text-sm py-2 text-red-600 block';
+        }
+    })
+    .catch(error => {
+        msg.textContent = '提交失败，请稍后重试';
+        msg.className = 'text-sm py-2 text-red-600 block';
+    });
+});
+</script>

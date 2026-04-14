@@ -50,18 +50,32 @@
             </div>
         </div>
 
-        <!-- 3. 核心搜索区 (缩窄高度与比例) -->
+        <!-- 3. 核心搜索区 (支持分类搜索分发) -->
         <div class="pb-8">
-            <div class="container-wide max-w-3xl flex items-center shadow-sm border border-gray-200 rounded overflow-hidden">
-                <input type="text" class="flex-1 py-3 px-5 outline-none text-base" placeholder="搜索目的地、纪行、美食...">
-                <div class="bg-gray-50 border-l px-4 py-3 flex items-center cursor-pointer text-gray-500 text-sm">
-                    <span class="mr-1">纪行·攻略</span>
+            <form action="/search/" method="get" class="container-wide max-w-3xl flex items-center shadow-sm border border-gray-200 rounded overflow-hidden">
+                <input type="text" name="q" class="flex-1 py-3 px-5 outline-none text-base" placeholder="搜索目的地、纪行、美食..." required>
+                
+                <div class="relative group bg-gray-50 border-l px-4 py-3 flex items-center cursor-pointer text-gray-500 text-sm">
+                    <span id="search-type-label" class="mr-1">纪行·攻略</span>
+                    <input type="hidden" name="type" id="search-type-input" value="travelogue">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    
+                    <!-- 下拉选项面板 -->
+                    <div class="absolute top-full left-[-1px] right-[-1px] bg-white border border-gray-200 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                        <div class="py-1">
+                            <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('travelogue', '纪行·攻略')">纪行·攻略</div>
+                            <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('places', '城乡·街巷')">城乡·街巷</div>
+                            <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('foods', '特产·美食')">特产·美食</div>
+                            <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('goods', '好物·文创')">好物·文创</div>
+                            <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('news', '资讯·动态')">资讯·动态</div>
+                        </div>
+                    </div>
                 </div>
-                <button class="bg-travel-brown hover:bg-travel-brown-light text-white px-8 py-3 font-bold text-base transition-colors">
+
+                <button type="submit" class="bg-travel-brown hover:bg-travel-brown-light text-white px-8 py-3 font-bold text-base transition-colors">
                     搜索
                 </button>
-            </div>
+            </form>
             <!-- 热搜标签云 -->
              <div class="container-wide mt-3 flex justify-center space-x-4 text-[12px] text-gray-400">
                 {% for kw in search_keywords %}
@@ -84,11 +98,11 @@
     <footer class="bg-white border-t border-gray-100 py-12 mt-20">
         <div class="container-wide text-center">
             <div class="flex justify-center space-x-6 text-gray-500 mb-4 text-sm">
-                <a href="#" class="hover:underline">关于我们</a>
-                <a href="#" class="hover:underline">服务协议</a>
-                <a href="#" class="hover:underline">合作事宜</a>
-                <a href="#" class="hover:underline">意见建议</a>
-                <a href="#" class="hover:underline">联系我们</a>
+                <a href="{% url 'core:about' %}" class="hover:underline">关于我们</a>
+                <a href="{% url 'core:service' %}" class="hover:underline">服务协议</a>
+                <a href="{% url 'core:cooperation' %}" class="hover:underline">合作事宜</a>
+                <a href="javascript:void(0)" onclick="openFeedbackModal('suggestion')" class="hover:underline">意见建议</a>
+                <a href="{% url 'core:contact' %}" class="hover:underline">联系我们</a>
             </div>
             <div class="text-xs text-gray-300 space-y-2">
                 <p>Copyright © 2026-2027 NAME.COM All Rights Reserved</p>
@@ -96,6 +110,16 @@
             </div>
         </div>
     </footer>
+
+    <!-- 全局反馈弹窗组件 -->
+    {% include "includes/modal_feedback.html" %}
+
+    <script>
+        function setSearchType(type, label) {
+            document.getElementById('search-type-label').innerText = label;
+            document.getElementById('search-type-input').value = type;
+        }
+    </script>
 
     {% block extra_js %}{% endblock %}
 </body>

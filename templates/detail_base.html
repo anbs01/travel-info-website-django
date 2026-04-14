@@ -1,6 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+<style>
+    /* 水印容器逻辑 */
+    .watermark-container { position: relative; display: block; width: 100%; }
+    .watermark-overlay {
+        position: absolute;
+        pointer-events: none;
+        background: url('{% static "images/watermark.png" %}') no-repeat;
+        background-size: contain;
+        width: 180px;  /* 适配设计稿的水印比例 */
+        height: 60px;
+        opacity: 0.5;
+        z-index: 10;
+        transition: opacity 0.3s;
+    }
+    /* 位置映射 */
+    .pos-center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .pos-bottom_center { bottom: 30px; left: 50%; transform: translateX(-50%); }
+    .pos-bottom_right { bottom: 30px; right: 30px; }
+
+    /* 需求第26条：仅在宽度大于 960px 时显示水印 */
+    @media (max-width: 960px) {
+        .watermark-overlay { display: none !important; }
+    }
+</style>
+{% endblock %}
+
 {% block breadcrumbs_bar %}
 <!-- 1. 设计稿风格通栏面包屑 -->
 <div class="bg-gray-100/80 border-b border-gray-200 py-3">
@@ -22,6 +49,18 @@
     <div class="container-wide max-w-[1000px]">
         <!-- 2. 主内容卡片 (居中且加宽) -->
         <article class="bg-white p-12 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-100">
+            <!-- 焦点图 Hero Section (支持水印) -->
+            {% block hero_section %}
+                {% if object.image %}
+                <div class="mb-12 watermark-container group overflow-hidden rounded-sm border border-gray-100 shadow-sm bg-gray-50">
+                    <img src="{{ object.image.url }}" class="w-full h-auto object-cover max-h-[550px] block mx-auto" alt="{{ object.title }}">
+                    {% if object.image_show_watermark %}
+                    <div class="watermark-overlay pos-{{ object.watermark_pos }}"></div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endblock %}
+
             <!-- 文章标题 -->
             <h1 class="text-3xl font-bold text-gray-900 leading-tight mb-8 text-center">
                 {% block detail_title %}{% endblock %}

@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from .models import Food
 from places.models import Region
-from core.views import ViewCountMixin
+from core.views import ViewCountMixin, DetailRedirectMixin
 
 class FoodListView(ListView):
     # ... (原有代码保持不变)
@@ -38,7 +38,7 @@ class FoodListView(ListView):
         context['category_tags'] = ['特色菜', '小吃', '伴手礼', '老字号', '非遗美食']
         return context
 
-class FoodDetailView(ViewCountMixin, DetailView):
+class FoodDetailView(DetailRedirectMixin, ViewCountMixin, DetailView):
     model = Food
     template_name = 'pages/food_detail.html'
     context_object_name = 'food'

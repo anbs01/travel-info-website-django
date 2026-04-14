@@ -4,7 +4,7 @@ from .models import Place, Region, ScenicSpot, Traffic
 from foods.models import Food
 from goods.models import Good
 from travelogue.models import Travelogue
-from core.views import ViewCountMixin
+from core.views import ViewCountMixin, DetailRedirectMixin
 
 class PlaceListView(ListView):
     # ... (原有逻辑保持不变)
@@ -15,9 +15,8 @@ class PlaceListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset().filter(is_hidden=False)
-        region_id = self.request.GET.get('region')
-        if region_id:
-            queryset = queryset.filter(region_id=region_id)
+        
+        # 1. 关键字过滤
         q = self.request.GET.get('q')
         if q:
             queryset = queryset.filter(
@@ -25,14 +24,21 @@ class PlaceListView(ListView):
                 Q(full_title__icontains=q) |
                 Q(alias__icontains=q)
             )
-        return queryset
+            
+        # 2. 地区过滤
+        region_id = self.request.GET.get('region')
+        if region_id:
+            queryset = queryset.filter(region_id=region_id)
+
+        # 3. 排序策略 (需求第10条): 置顶优先(is_sticky)，且置顶内按置顶时间倒序，普通按创建时间倒序
+        return queryset.order_by('-is_sticky', '-sticky_at', '-created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['all_regions'] = Region.objects.filter(is_active=True)
         return context
 
-class PlaceDetailView(ViewCountMixin, DetailView):
+class PlaceDetailView(DetailRedirectMixin, ViewCountMixin, DetailView):
     model = Place
     template_name = 'pages/place_detail.html'
     context_object_name = 'place'

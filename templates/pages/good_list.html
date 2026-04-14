@@ -20,7 +20,7 @@
     {% for good in goods %}
     <article class="flex group">
         {% if good.english_code %}
-        <a href="{% url 'goods:detail' slug=good.english_code %}" class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0">
+        <a href="{% url 'goods:detail' slug=good.english_code %}" target="_blank" class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0">
             {% if good.image %}
             <img src="{{ good.image.url }}" alt="{{ good.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             {% else %}
@@ -38,7 +38,7 @@
                 <div class="flex items-center space-x-3 mb-3">
                     <h3 class="text-xl font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
                         {% if good.english_code %}
-                        <a href="{% url 'goods:detail' slug=good.english_code %}">{{ good.title }}</a>
+                        <a href="{% url 'goods:detail' slug=good.english_code %}" target="_blank">{{ good.title }}</a>
                         {% else %}
                         {{ good.title }}
                         {% endif %}

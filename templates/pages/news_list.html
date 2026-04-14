@@ -21,7 +21,7 @@
     <article class="flex group">
         <!-- 资讯由于通常图较小，采用稍窄的比例 -->
         {% if news.slug %}
-        <a href="{% url 'news:detail' slug=news.slug %}" class="block w-[240px] h-[150px] overflow-hidden rounded-sm flex-shrink-0">
+        <a href="{% url 'news:detail' slug=news.slug %}" target="_blank" class="block w-[240px] h-[150px] overflow-hidden rounded-sm flex-shrink-0">
             {% if news.image %}
             <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             {% else %}
@@ -39,7 +39,7 @@
                 <div class="flex items-center space-x-3 mb-2">
                     <h3 class="text-xl font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
                         {% if news.slug %}
-                        <a href="{% url 'news:detail' slug=news.slug %}">{{ news.title }}</a>
+                        <a href="{% url 'news:detail' slug=news.slug %}" target="_blank">{{ news.title }}</a>
                         {% else %}
                         {{ news.title }}
                         {% endif %}

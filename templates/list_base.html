@@ -37,15 +37,27 @@
 
 {% block content %}
 <div class="container-wide py-8">
-    <!-- 过滤器标签云 (例如: 攻略, 路线, 玩法...) -->
+    <!-- 过滤器标签云 / 搜索结果反馈 (需求第18条) -->
     <div class="mb-10 flex items-baseline border-b border-gray-100 pb-4">
-        <span class="text-gray-400 text-sm mr-6 whitespace-nowrap">{% block filter_label %}所有{% endblock %}</span>
-        <div class="flex flex-wrap gap-4 text-sm">
-            <a href="?" class="px-3 py-1 rounded-full {% if not request.GET.tag %}bg-travel-brown text-white{% else %}text-gray-600 hover:text-travel-brown{% endif %}">全部</a>
-            {% block filter_tags %}
-            <!-- 子页面填充具体标签 -->
-            {% endblock %}
-        </div>
+        {% if request.GET.q %}
+            <span class="text-gray-400 text-sm mr-6 whitespace-nowrap">搜索反馈</span>
+            <div class="text-sm">
+                {% if paginator.count > 0 %}
+                    <span class="text-gray-900">找到关于 “<span class="text-travel-brown font-bold">{{ request.GET.q }}</span>” 的相关数据共 <span class="font-bold">{{ paginator.count }}</span> 条</span>
+                {% else %}
+                    <span class="text-gray-400 italic">找不到相关数据的文字提示</span>
+                {% endif %}
+                <a href="?" class="ml-4 text-xs text-travel-brown hover:underline">清除搜索</a>
+            </div>
+        {% else %}
+            <span class="text-gray-400 text-sm mr-6 whitespace-nowrap">{% block filter_label %}所有{% endblock %}</span>
+            <div class="flex flex-wrap gap-4 text-sm">
+                <a href="?" class="px-3 py-1 rounded-full {% if not request.GET.tag %}bg-travel-brown text-white{% else %}text-gray-600 hover:text-travel-brown{% endif %}">全部</a>
+                {% block filter_tags %}
+                <!-- 子页面填充具体标签 -->
+                {% endblock %}
+            </div>
+        {% endif %}
     </div>
 
     <!-- 列表内容区 -->

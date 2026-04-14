@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from .models import News
 from places.models import Region
-from core.views import ViewCountMixin
+from core.views import ViewCountMixin, DetailRedirectMixin
 
 class NewsListView(ListView):
     # ... (原有代码保持不变)
@@ -37,7 +37,7 @@ class NewsListView(ListView):
         context['category_tags'] = ['官方动态', '行业新闻', '活动预告', '媒体报道']
         return context
 
-class NewsDetailView(ViewCountMixin, DetailView):
+class NewsDetailView(DetailRedirectMixin, ViewCountMixin, DetailView):
     model = News
     template_name = 'pages/news_detail.html'
     context_object_name = 'news'

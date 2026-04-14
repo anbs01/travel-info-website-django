@@ -1,0 +1,106 @@
+{% extends 'list_base.html' %}
+
+{% block title %}搜索结果: {{ q }} - 旅游信息网{% endblock %}
+
+{% block list_title %}搜索结果: <span class="text-travel-brown">{{ q }}</span>{% endblock %}
+
+{% block filter_label %}搜索统计{% endblock %}
+
+{% block filter_tags %}
+<span class="text-sm text-gray-500">共找到 {{ total_count }} 条相关数据</span>
+{% endblock %}
+
+{% block list_content %}
+<div class="space-y-16">
+    {% if total_count == 0 %}
+    <div class="py-20 text-center">
+        <div class="text-6xl mb-4">🔍</div>
+        <p class="text-gray-400 text-lg">找不到相关数据的文字提示</p>
+        <p class="text-gray-300 text-sm mt-2">请尝试更换关键词重新搜索</p>
+    </div>
+    {% else %}
+    
+    <!-- 1. 城乡结果 (Places) -->
+    {% if results.places %}
+    <section>
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-lg font-bold border-l-4 border-travel-brown pl-3">城乡·街巷</h3>
+            <a href="{% url 'places:list' %}?q={{ q }}" class="text-sm text-gray-400 hover:text-travel-brown">查看全部 ></a>
+        </div>
+        <div class="grid grid-cols-3 gap-6">
+            {% for place in results.places %}
+            <div class="group border border-gray-100 rounded p-3 hover:shadow-md transition-shadow">
+                <a href="{% url 'places:detail' slug=place.english_code %}" target="_blank" class="block aspect-video overflow-hidden rounded mb-3">
+                    {% if place.image %}
+                    <img src="{{ place.image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+                    {% else %}
+                    <div class="w-full h-full bg-gray-50 flex items-center justify-center text-gray-300 text-xs">暂无图片</div>
+                    {% endif %}
+                </a>
+                <h4 class="font-bold text-gray-800 group-hover:text-travel-brown text-sm line-clamp-1">
+                    <a href="{% url 'places:detail' slug=place.english_code %}" target="_blank">{{ place.title }}</a>
+                </h4>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- 2. 纪行·攻略 (Travelogues) -->
+    {% if results.travelogues %}
+    <section>
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-lg font-bold border-l-4 border-travel-brown pl-3">纪行·攻略</h3>
+            <a href="{% url 'travelogue:list' %}?q={{ q }}" class="text-sm text-gray-400 hover:text-travel-brown">查看全部 ></a>
+        </div>
+        <div class="space-y-4">
+            {% for item in results.travelogues %}
+            <div class="flex items-center justify-between border-b border-gray-50 pb-4">
+                <a href="{% url 'travelogue:detail' slug=item.slug %}" target="_blank" class="text-gray-700 hover:text-travel-brown font-medium">
+                    {{ item.title }}
+                </a>
+                <span class="text-xs text-gray-400">{{ item.publish_date|date:"Y-m-d" }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- 3. 特产美食 & 好物 (Foods & Goods) -->
+    <div class="grid grid-cols-2 gap-12">
+        {% if results.foods %}
+        <section>
+            <h3 class="text-lg font-bold border-l-4 border-travel-brown pl-3 mb-6">特产·美食</h3>
+            <div class="space-y-4">
+                {% for item in results.foods %}
+                <div class="flex items-center space-x-3">
+                    <span class="w-1.5 h-1.5 rounded-full bg-travel-brown"></span>
+                    <a href="{% url 'foods:detail' slug=item.english_code %}" target="_blank" class="text-sm text-gray-600 hover:text-travel-brown line-clamp-1">
+                        {{ item.title }}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if results.goods %}
+        <section>
+            <h3 class="text-lg font-bold border-l-4 border-travel-brown pl-3 mb-6">好物·文创</h3>
+            <div class="space-y-4">
+                {% for item in results.goods %}
+                <div class="flex items-center space-x-3">
+                    <span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                    <a href="{% url 'goods:detail' slug=item.english_code %}" target="_blank" class="text-sm text-gray-600 hover:text-travel-brown line-clamp-1">
+                        {{ item.title }}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+    </div>
+
+    {% endif %}
+</div>
+{% endblock %}

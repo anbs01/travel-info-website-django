@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}页面未找到 - 404 - 旅游信息网{% endblock %}
+
+{% block content %}
+<div class="min-h-[70vh] flex items-center justify-center bg-gray-50 py-20 px-4">
+    <div class="max-w-xl w-full text-center">
+        <!-- 视觉符号 -->
+        <div class="relative mb-8">
+            <h1 class="text-[180px] font-black text-gray-200 leading-none select-none">404</h1>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-travel-brown/80">
+                    <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 20l-5.447-2.724A2 2 0 013 15.487V6.513a2 2 0 011.553-1.943L9 2l5 2.5L19 2l3.447 1.724A2 2 0 0124 5.669v8.974a2 2 0 01-1.553 1.943L19 19l-5-2.5-5 4z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 20V5l5 2.5V22l-5-2.5z" /></svg>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-3xl font-bold text-gray-900 mb-4 tracking-widest">迷失在旅途中...</h2>
+        <p class="text-gray-500 mb-10 text-lg leading-relaxed">
+            抱歉，您访问的页面像那些消失在时光里的古街巷一样，暂时无法找到。
+            <br>
+            建议您检查链接是否正确，或者返回首页开启新的旅程。
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <a href="{% url 'core:index' %}" class="w-full sm:w-auto px-8 py-3 bg-travel-brown text-white font-bold tracking-widest hover:bg-opacity-90 transition-all shadow-md active:scale-95">
+                返回首页
+            </a>
+            <button onclick="window.history.back()" class="w-full sm:w-auto px-8 py-3 border border-gray-300 text-gray-600 font-bold tracking-widest hover:bg-gray-100 transition-all active:scale-95">
+                返回上一页
+            </button>
+        </div>
+
+        <!-- 常用入口 -->
+        <div class="mt-16 pt-10 border-t border-gray-200">
+            <p class="text-xs text-gray-400 uppercase tracking-[0.2em] mb-4">您可以尝试以下板块</p>
+            <div class="flex flex-wrap justify-center gap-6 text-sm">
+                <a href="{% url 'places:list' %}" class="text-gray-500 hover:text-travel-brown transition-colors">城镇·街巷</a>
+                <a href="{% url 'travelogue:list' %}" class="text-gray-500 hover:text-travel-brown transition-colors">纪行·攻略</a>
+                <a href="{% url 'news:list' %}" class="text-gray-500 hover:text-travel-brown transition-colors">站点资讯</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

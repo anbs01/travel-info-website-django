@@ -20,7 +20,7 @@
     {% for food in foods %}
     <article class="flex group">
         {% if food.english_code %}
-        <a href="{% url 'foods:detail' slug=food.english_code %}" class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0">
+        <a href="{% url 'foods:detail' slug=food.english_code %}" target="_blank" class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0">
             {% if food.image %}
             <img src="{{ food.image.url }}" alt="{{ food.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             {% else %}
@@ -38,7 +38,7 @@
                 <div class="flex items-center space-x-3 mb-3">
                     <h3 class="text-xl font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
                         {% if food.english_code %}
-                        <a href="{% url 'foods:detail' slug=food.english_code %}">{{ food.title }}</a>
+                        <a href="{% url 'foods:detail' slug=food.english_code %}" target="_blank">{{ food.title }}</a>
                         {% else %}
                         {{ food.title }}
                         {% endif %}

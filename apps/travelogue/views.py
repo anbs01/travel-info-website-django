@@ -2,6 +2,7 @@ from django.views.generic import DetailView, ListView
 from django.db.models import Q
 from .models import Travelogue
 from places.models import Region
+from core.views import ViewCountMixin, DetailRedirectMixin
 
 class TravelogueListView(ListView):
     model = Travelogue
@@ -40,7 +41,8 @@ class TravelogueListView(ListView):
         context['category_tags'] = ['攻略', '路线', '玩法', '目的地', '交通', '住宿']
         return context
 
-class TravelogueDetailView(DetailView):
+
+class TravelogueDetailView(DetailRedirectMixin, ViewCountMixin, DetailView):
     model = Travelogue
     template_name = 'pages/travelogue_detail.html'
     context_object_name = 'travelogue'
@@ -49,10 +51,6 @@ class TravelogueDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # 增加阅读量
-        self.object.views += 1
-        self.object.save(update_fields=['views'])
-        
         # 获取相关推荐
         if self.object.place:
             context['related_travelogues'] = Travelogue.objects.filter(

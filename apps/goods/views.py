@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from .models import Good
 from places.models import Region
-from core.views import ViewCountMixin
+from core.views import ViewCountMixin, DetailRedirectMixin
 
 class GoodListView(ListView):
     # ... (原有代码保持不变)
@@ -38,7 +38,7 @@ class GoodListView(ListView):
         context['category_tags'] = ['工艺品', '纪念品', '生活用品', '文创周边', '非遗']
         return context
 
-class GoodDetailView(ViewCountMixin, DetailView):
+class GoodDetailView(DetailRedirectMixin, ViewCountMixin, DetailView):
     model = Good
     template_name = 'pages/good_detail.html'
     context_object_name = 'good'

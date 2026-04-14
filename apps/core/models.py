@@ -97,6 +97,7 @@ class Feedback(models.Model):
     content = models.TextField('正文内容')
     name = models.CharField('联系人', max_length=100, blank=True)
     contact = models.CharField('联系方式', max_length=100, blank=True, help_text='电话、邮箱或微信')
+    source_url = models.URLField('来源页面', blank=True, help_text='用户提交反馈时的页面地址')
     is_processed = models.BooleanField('已处理', default=False)
     created_at = models.DateTimeField('提交时间', auto_now_add=True)
 

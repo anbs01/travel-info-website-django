@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page_title }} - 旅游信息网{% endblock %}
+
+{% block content %}
+<div class="bg-gray-50 border-b border-gray-100 py-6">
+    <div class="container-wide">
+        <h1 class="text-2xl font-bold text-gray-900">{{ page_title }}</h1>
+    </div>
+</div>
+
+<div class="container-wide py-12">
+    <div class="flex flex-col md:flex-row gap-12">
+        <!-- 左侧导航菜单 (需求第146条) -->
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <nav class="bg-white border border-gray-100 rounded-sm overflow-hidden sticky top-24">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-100 font-bold text-travel-brown">
+                    站点中心
+                </div>
+                <ul class="divide-y divide-gray-50">
+                    <li>
+                        <a href="{% url 'core:about' %}" class="block px-4 py-3 text-sm transition-colors {% if page_type == 'about' %}bg-travel-brown text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-travel-brown{% endif %}">
+                            关于我们
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'core:service' %}" class="block px-4 py-3 text-sm transition-colors {% if page_type == 'service' %}bg-travel-brown text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-travel-brown{% endif %}">
+                            服务协议
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'core:cooperation' %}" class="block px-4 py-3 text-sm transition-colors {% if page_type == 'cooperation' %}bg-travel-brown text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-travel-brown{% endif %}">
+                            合作事宜
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'core:contact' %}" class="block px-4 py-3 text-sm transition-colors {% if page_type == 'contact' %}bg-travel-brown text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-travel-brown{% endif %}">
+                            联系我们
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 右侧富文本内容区 -->
+        <main class="flex-1 bg-white border border-gray-100 rounded-sm p-8 md:p-12 min-h-[600px]">
+            <article class="prose prose-sm max-w-none">
+                {{ content|safe }}
+            </article>
+            
+            {% if not content or content == "内容正在补充中..." %}
+            <div class="flex flex-col items-center justify-center py-20 text-gray-400">
+                <svg class="w-16 h-16 mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <p>编辑正在奋力撰写中，请稍后再来...</p>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+</div>
+{% endblock %}
