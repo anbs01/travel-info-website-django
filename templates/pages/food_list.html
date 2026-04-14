@@ -1,0 +1,82 @@
+{% extends "list_base.html" %}
+
+{% block title %}特产·美食 - 旅游信息网{% endblock %}
+
+{% block list_title %}特产·美食{% endblock %}
+
+{% block filter_label %}美食分类{% endblock %}
+
+{% block filter_tags %}
+    {% for tag in category_tags %}
+    <a href="?tag={{ tag }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.region %}&region={{ request.GET.region }}{% endif %}" 
+       class="px-3 py-1 rounded-full {% if request.GET.tag == tag %}bg-travel-brown text-white{% else %}text-gray-600 hover:text-travel-brown transition-colors{% endif %}">
+        {{ tag }}
+    </a>
+    {% endfor %}
+{% endblock %}
+
+{% block list_content %}
+<div class="space-y-12">
+    {% for food in foods %}
+    <article class="flex group">
+        {% if food.english_code %}
+        <a href="{% url 'foods:detail' slug=food.english_code %}" class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0">
+            {% if food.image %}
+            <img src="{{ food.image.url }}" alt="{{ food.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            {% else %}
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">暂无图片</div>
+            {% endif %}
+        </a>
+        {% else %}
+        <div class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0 bg-gray-50 flex items-center justify-center text-gray-300 text-xs">
+            暂无详情
+        </div>
+        {% endif %}
+
+        <div class="ml-8 flex-1 flex flex-col justify-between py-1 border-b border-gray-50 border-dashed pb-8 group-last:border-b-0">
+            <div>
+                <div class="flex items-center space-x-3 mb-3">
+                    <h3 class="text-xl font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
+                        {% if food.english_code %}
+                        <a href="{% url 'foods:detail' slug=food.english_code %}">{{ food.title }}</a>
+                        {% else %}
+                        {{ food.title }}
+                        {% endif %}
+                    </h3>
+{% if food.level_tag %}
+                    <span class="text-[12px] bg-gray-50 text-gray-400 px-2 py-0.5 rounded border border-gray-100">{{ food.level_tag }}</span>
+                    {% endif %}
+                </div>
+                
+                <p class="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">
+                    {{ food.summary|default:"点击进入详情查看介绍..." }}
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                    {% for tag in food.feature_tags.split %}
+                    <span class="text-[12px] text-gray-400">#{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center text-[13px] text-gray-400 mt-4">
+                <div class="flex items-center space-x-4">
+                    <span class="flex items-center">
+                        <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        {{ food.place.title }}
+                    </span>
+                    {% if food.price %}
+                    <span class="text-travel-brown font-medium">参考价: ¥{{ food.price }}</span>
+                    {% endif %}
+                </div>
+                <span>{{ food.publish_date|date:"Y/m/d"|default:food.created_at|date:"Y/m/d" }}</span>
+            </div>
+        </div>
+    </article>
+    {% empty %}
+    <div class="py-20 text-center text-gray-400">
+        <p>暂无相关美食信息</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

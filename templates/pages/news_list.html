@@ -1,0 +1,80 @@
+{% extends "list_base.html" %}
+
+{% block title %}资讯·动态 - 旅游信息网{% endblock %}
+
+{% block list_title %}资讯·动态{% endblock %}
+
+{% block filter_label %}资讯分类{% endblock %}
+
+{% block filter_tags %}
+    {% for tag in category_tags %}
+    <a href="?tag={{ tag }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.region %}&region={{ request.GET.region }}{% endif %}" 
+       class="px-3 py-1 rounded-full {% if request.GET.tag == tag %}bg-travel-brown text-white{% else %}text-gray-600 hover:text-travel-brown transition-colors{% endif %}">
+        {{ tag }}
+    </a>
+    {% endfor %}
+{% endblock %}
+
+{% block list_content %}
+<div class="space-y-10">
+    {% for news in news_list %}
+    <article class="flex group">
+        <!-- 资讯由于通常图较小，采用稍窄的比例 -->
+        {% if news.slug %}
+        <a href="{% url 'news:detail' slug=news.slug %}" class="block w-[240px] h-[150px] overflow-hidden rounded-sm flex-shrink-0">
+            {% if news.image %}
+            <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            {% else %}
+            <div class="w-full h-full bg-slate-50 flex items-center justify-center text-slate-300">NEWS</div>
+            {% endif %}
+        </a>
+        {% else %}
+        <div class="block w-[240px] h-[150px] overflow-hidden rounded-sm flex-shrink-0 bg-gray-50 flex items-center justify-center text-gray-300 text-xs">
+            暂无详情
+        </div>
+        {% endif %}
+
+        <div class="ml-8 flex-1 flex flex-col justify-between py-0.5 border-b border-gray-50 border-dashed pb-10 group-last:border-b-0">
+            <div>
+                <div class="flex items-center space-x-3 mb-2">
+                    <h3 class="text-xl font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
+                        {% if news.slug %}
+                        <a href="{% url 'news:detail' slug=news.slug %}">{{ news.title }}</a>
+                        {% else %}
+                        {{ news.title }}
+                        {% endif %}
+                    </h3>
+                </div>
+                
+                <p class="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-3">
+                    {{ news.summary|default:"获取更多官方动态与精选资讯..." }}
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                    {% if news.level_tag %}
+                    <span class="text-[11px] text-travel-brown bg-travel-brown/5 px-2 py-0.5 rounded">{{ news.level_tag }}</span>
+                    {% endif %}
+                    {% for tag in news.feature_tags.split %}
+                    <span class="text-[11px] text-gray-400">#{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center text-[12px] text-gray-400 mt-4">
+                <div class="flex items-center space-x-4">
+                    {% if news.place %}
+                    <span>{{ news.place.title }}</span>
+                    {% endif %}
+                    <span>{{ news.publish_date|date:"Y-m-d"|default:news.created_at|date:"Y-m-d" }}</span>
+                </div>
+                <span>热度 {{ news.views }}</span>
+            </div>
+        </div>
+    </article>
+    {% empty %}
+    <div class="py-20 text-center text-gray-400">
+        <p>暂无相关资讯动态</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

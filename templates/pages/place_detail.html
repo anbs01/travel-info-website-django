@@ -1,0 +1,126 @@
+{% extends 'detail_base.html' %}
+
+{% block title %}{{ place.title }} - 目的地指南{% endblock %}
+
+{% block breadcrumbs %}
+<a href="{% url 'places:list' %}" class="hover:text-travel-brown transition-colors">城乡/街巷</a>
+{% endblock %}
+
+{% block detail_title %}
+    {{ place.full_title|default:place.title }}
+{% endblock %}
+
+{% block metadata_extra %}
+    {% if place.alias %}
+    <div class="flex items-center space-x-1">
+        <span class="text-gray-400">别名：</span>
+        <span class="text-travel-brown font-medium">{{ place.alias }}</span>
+    </div>
+    {% endif %}
+    {% if place.best_time %}
+    <div class="flex items-center space-x-1">
+        <span class="text-gray-400">建议游玩：</span>
+        <span class="text-gray-600">{{ place.best_time }}</span>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block summary %}
+{{ place.summary }}
+{% endblock %}
+
+{% block detail_content %}
+    <article class="prose prose-sm max-w-none">
+        {{ place.content|safe }}
+    </article>
+
+    <!-- 热门打卡地 -->
+    {% if scenic_spots %}
+    <section class="mt-12 border-t pt-8">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-bold flex items-center">
+                <span class="w-1.5 h-6 bg-travel-brown mr-3"></span>热门打卡地
+            </h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {% for spot in scenic_spots %}
+            <div class="flex space-x-4 p-4 bg-gray-50 rounded-lg group hover:bg-white hover:shadow-md transition-all">
+                <div class="w-24 h-24 flex-shrink-0 bg-gray-200 rounded overflow-hidden">
+                    {% if spot.image %}
+                    <img src="{{ spot.image.url }}" alt="{{ spot.title }}" class="w-full h-full object-cover">
+                    {% endif %}
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h4 class="font-bold text-gray-800 mb-1 group-hover:text-travel-brown">{{ spot.title }}</h4>
+                    <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ spot.summary }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- 交通出行 -->
+    {% if traffic_info %}
+    <section class="mt-12 border-t pt-8">
+        <h3 class="text-xl font-bold flex items-center mb-6">
+            <span class="w-1.5 h-6 bg-travel-brown mr-3"></span>交通·出行
+        </h3>
+        <div class="space-y-3">
+            {% for item in traffic_info %}
+            <div class="flex items-center bg-blue-50/50 px-4 py-3 rounded-lg border border-blue-100/50">
+                <span class="text-blue-600 font-bold w-20 text-sm">{{ item.traffic_type }}</span>
+                <span class="text-gray-600 text-sm italic">{{ item.duration|default:"- - -" }}</span>
+                <span class="ml-auto text-xs text-gray-400">资讯仅供参考</span>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}
+
+{% block related_title %}特产·好物 / 攻略纪行{% endblock %}
+
+{% block related_content %}
+    <div class="space-y-8">
+        <!-- 美食与好物混合展示 -->
+        <div class="grid grid-cols-2 gap-4">
+            {% for food in foods|slice:":2" %}
+            <div class="bg-gray-50 p-3 rounded flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
+                    {% if food.image %}
+                    <img src="{{ food.image.url }}" class="w-full h-full object-cover">
+                    {% endif %}
+                </div>
+                <div class="min-w-0">
+                    <div class="text-xs font-bold truncate">{{ food.title }}</div>
+                    <div class="text-[10px] text-orange-500">¥{{ food.price|default:"--" }}</div>
+                </div>
+            </div>
+            {% endfor %}
+            {% for good in goods|slice:":2" %}
+            <div class="bg-gray-50 p-3 rounded flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gray-200 rounded flex-shrink-0">
+                    {% if good.image %}
+                    <img src="{{ good.image.url }}" class="w-full h-full object-cover">
+                    {% endif %}
+                </div>
+                <div class="min-w-0">
+                    <div class="text-xs font-bold truncate">{{ good.title }}</div>
+                    <div class="text-[10px] text-blue-500">文创好物</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- 攻略列表 -->
+        <div class="space-y-3 border-t pt-4">
+            {% for blog in travelogues|slice:":5" %}
+            <a href="{% url 'travelogue:detail' slug=blog.slug %}" class="flex items-center group">
+                <span class="text-travel-brown mr-2">攻略</span>
+                <span class="text-sm text-gray-600 line-clamp-1 group-hover:text-travel-brown">{{ blog.title }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

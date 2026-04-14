@@ -1,0 +1,88 @@
+{% extends "list_base.html" %}
+
+{% block title %}纪行·攻略 - 旅游信息网{% endblock %}
+
+{% block list_title %}纪行·攻略{% endblock %}
+
+{% block filter_label %}所有分类{% endblock %}
+
+{% block filter_tags %}
+    {% for tag in category_tags %}
+    <a href="?tag={{ tag }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.region %}&region={{ request.GET.region }}{% endif %}" 
+       class="px-3 py-1 rounded-full {% if request.GET.tag == tag %}bg-travel-brown text-white{% else %}text-gray-600 hover:text-travel-brown transition-colors{% endif %}">
+        {{ tag }}
+    </a>
+    {% endfor %}
+{% endblock %}
+
+{% block list_content %}
+<div class="space-y-12">
+    {% for travelogue in travelogues %}
+    <article class="flex group">
+        <!-- 左侧图片 -->
+        {% if travelogue.slug %}
+        <a href="{% url 'travelogue:detail' slug=travelogue.slug %}" class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0">
+            {% if travelogue.image %}
+            <img src="{{ travelogue.image.url }}" alt="{{ travelogue.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            {% else %}
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">暂无图片</div>
+            {% endif %}
+        </a>
+        {% else %}
+        <div class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0 bg-gray-50 flex items-center justify-center text-gray-300 text-xs">
+            暂无详情
+        </div>
+        {% endif %}
+
+        <!-- 右侧内容 -->
+        <div class="ml-8 flex-1 flex flex-col justify-between py-1 border-b border-gray-50 border-dashed pb-8 group-last:border-b-0">
+            <div>
+                <div class="flex items-center space-x-3 mb-3">
+                    {% if travelogue.slug %}
+                    <a href="{% url 'travelogue:detail' slug=travelogue.slug %}" class="text-xl font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
+                        {{ travelogue.title }}
+                    </a>
+                    {% else %}
+                    <span class="text-xl font-bold text-gray-900">{{ travelogue.title }}</span>
+                    {% endif %}
+{% if travelogue.level_tag %}
+                    <span class="text-[12px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded">{{ travelogue.level_tag }}</span>
+                    {% endif %}
+                </div>
+                
+                <p class="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">
+                    {{ travelogue.summary|default:"点击进入详情查看完整内容..." }}
+                </p>
+
+                <!-- 标签云 -->
+                <div class="flex flex-wrap gap-2">
+                    {% for tag in travelogue.feature_tags.split %}
+                    <span class="text-[12px] text-gray-400">#{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center text-[13px] text-gray-400 mt-4">
+                <div class="flex items-center space-x-4">
+                    {% if travelogue.place %}
+                    <span class="flex items-center">
+                        <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        {{ travelogue.place.title }}
+                    </span>
+                    {% endif %}
+                    <span>{{ travelogue.publish_date|date:"Y/m/d"|default:travelogue.created_at|date:"Y/m/d" }}</span>
+                </div>
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    {{ travelogue.views }}
+                </div>
+            </div>
+        </div>
+    </article>
+    {% empty %}
+    <div class="py-20 text-center text-gray-400">
+        <p>暂无相关内容，换个关键词搜搜看？</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

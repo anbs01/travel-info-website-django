@@ -1,0 +1,68 @@
+{% extends "list_base.html" %}
+
+{% block title %}城镇·街巷 - 旅游信息网{% endblock %}
+
+{% block list_title %}城镇·街巷{% endblock %}
+
+{% block filter_label %}所有地区{% endblock %}
+
+{% block list_content %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+    {% for place in places %}
+    <div class="group">
+        <!-- 卡片图片 -->
+        {% if place.english_code %}
+        <a href="{% url 'places:detail' slug=place.english_code %}" class="block aspect-[4/3] overflow-hidden rounded-sm mb-4 relative">
+            {% if place.image %}
+            <img src="{{ place.image.url }}" alt="{{ place.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            {% else %}
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">暂无图片</div>
+            {% endif %}
+            
+            <!-- 悬浮层 (装饰性) -->
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity"></div>
+        </a>
+        {% else %}
+        <div class="block aspect-[4/3] overflow-hidden rounded-sm mb-4 bg-gray-50 flex items-center justify-center text-gray-300 text-xs">
+            暂无详情
+        </div>
+        {% endif %}
+
+        <!-- 卡片信息 -->
+        <div class="text-center px-2">
+            <div class="flex items-center justify-center space-x-2 mb-1">
+                <h3 class="text-lg font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
+                    {% if place.english_code %}
+                    <a href="{% url 'places:detail' slug=place.english_code %}">{{ place.title }}</a>
+                    {% else %}
+                    {{ place.title }}
+                    {% endif %}
+                </h3>
+                {% if place.level_tag %}
+                <span class="text-[10px] border border-gray-200 text-gray-400 px-1 rounded leading-tight">{{ place.level_tag }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="text-gray-500 text-sm mb-2">
+                {% if place.alias %}
+                <span class="italic">“{{ place.alias }}”</span>
+                {% endif %}
+            </div>
+
+            <div class="flex justify-center items-center space-x-3 text-[12px] text-gray-400">
+                <span class="flex items-center">
+                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    {{ place.region.name }}
+                </span>
+                <span>|</span>
+                <span>浏览 {{ place.views }}</span>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-span-full py-20 text-center text-gray-400">
+        <p>暂无相关城镇信息</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

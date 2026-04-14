@@ -24,11 +24,11 @@
             <div class="container-wide flex justify-between items-center text-sm font-medium">
                 <nav class="flex space-x-8">
                     <a href="/" class="hover:text-travel-brown transition-colors">首页</a>
-                    <a href="#" class="hover:text-travel-brown transition-colors">纪行·攻略</a>
-                    <a href="#" class="hover:text-travel-brown transition-colors">城乡·街巷</a>
-                    <a href="#" class="hover:text-travel-brown transition-colors">特产·美食</a>
-                    <a href="#" class="hover:text-travel-brown transition-colors">好物·文创</a>
-                    <a href="#" class="hover:text-travel-brown transition-colors">资讯·动态</a>
+                    <a href="{% url 'travelogue:list' %}" class="hover:text-travel-brown transition-colors">纪行·攻略</a>
+                    <a href="{% url 'places:list' %}" class="hover:text-travel-brown transition-colors">城乡·街巷</a>
+                    <a href="{% url 'foods:list' %}" class="hover:text-travel-brown transition-colors">特产·美食</a>
+                    <a href="{% url 'goods:list' %}" class="hover:text-travel-brown transition-colors">好物·文创</a>
+                    <a href="{% url 'news:list' %}" class="hover:text-travel-brown transition-colors">资讯·动态</a>
                 </nav>
                 <div class="flex items-center space-x-6">
                     <div class="flex space-x-4">
@@ -43,33 +43,37 @@
             </div>
         </div>
 
-        <!-- 2. Logo 行 -->
-        <div class="py-10 text-center">
-            <div class="inline-block border-4 border-travel-brown p-4">
-                <span class="text-5xl font-bold tracking-widest text-travel-dark">网站LOGO</span>
+        <!-- 2. Logo 行 (缩小间距与字号) -->
+        <div class="py-8 text-center">
+            <div class="inline-block border-[3px] border-travel-brown p-3">
+                <span class="text-4xl font-bold tracking-[0.2em] text-travel-dark leading-none">网站LOGO</span>
             </div>
         </div>
 
-        <!-- 3. 核心搜索区 (设计稿主搜索框) -->
-        <div class="pb-12">
-            <div class="container-wide max-w-4xl flex items-center shadow-sm border border-gray-200 rounded overflow-hidden">
-                <input type="text" class="flex-1 py-4 px-6 outline-none text-lg" placeholder="搜索目的地、纪行、美食...">
-                <div class="bg-gray-50 border-l px-6 py-4 flex items-center cursor-pointer text-gray-600">
-                    <span class="mr-2">纪行·攻略</span>
+        <!-- 3. 核心搜索区 (缩窄高度与比例) -->
+        <div class="pb-8">
+            <div class="container-wide max-w-3xl flex items-center shadow-sm border border-gray-200 rounded overflow-hidden">
+                <input type="text" class="flex-1 py-3 px-5 outline-none text-base" placeholder="搜索目的地、纪行、美食...">
+                <div class="bg-gray-50 border-l px-4 py-3 flex items-center cursor-pointer text-gray-500 text-sm">
+                    <span class="mr-1">纪行·攻略</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                 </div>
-                <button class="bg-travel-brown hover:bg-travel-brown-light text-white px-10 py-4 font-bold text-lg transition-colors">
+                <button class="bg-travel-brown hover:bg-travel-brown-light text-white px-8 py-3 font-bold text-base transition-colors">
                     搜索
                 </button>
             </div>
-            <!-- 热搜标签云 (底部推荐条) -->
-             <div class="container-wide mt-4 flex justify-center space-x-4 text-xs text-gray-400">
-                <a href="#" class="hover:text-travel-brown">历史文化名城</a>
-                <a href="#" class="hover:text-travel-brown">宜居城市</a>
-                <a href="#" class="hover:text-travel-brown">特别推荐</a>
-                <a href="#" class="hover:text-travel-brown">红色旅游</a>
+            <!-- 热搜标签云 -->
+             <div class="container-wide mt-3 flex justify-center space-x-4 text-[12px] text-gray-400">
+                {% for kw in search_keywords %}
+                <a href="#" class="hover:text-travel-brown">{{ kw.keyword }}</a>
+                {% empty %}
+                <span class="opacity-0">placeholder</span>
+                {% endfor %}
              </div>
         </div>
+
+        <!-- 4. 详情页专用通栏面包屑 (占位，由子页面填充内容) -->
+        {% block breadcrumbs_bar %}{% endblock %}
     </header>
 
     <main class="min-h-screen">

@@ -19,12 +19,17 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from apps.core.views import IndexView
+# 从 apps.core.urls 统一管理
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('', IndexView.as_view(), name='index'),
+    path('travelogue/', include('travelogue.urls', namespace='travelogue')),
+    path('places/', include('places.urls', namespace='places')),
+    path('foods/', include('foods.urls', namespace='foods')),
+    path('goods/', include('goods.urls', namespace='goods')),
+    path('news/', include('news.urls', namespace='news')),
+    path('', include('apps.core.urls', namespace='core')),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,55 @@
+{% extends 'detail_base.html' %}
+
+{% block title %}{{ good.title }} - 好物·文创{% endblock %}
+
+{% block breadcrumbs %}
+<a href="{% url 'goods:list' %}" class="hover:text-travel-brown transition-colors">好物·文创</a>
+{% endblock %}
+
+{% block detail_title %}{{ good.title }}{% endblock %}
+
+{% block publish_date %}{{ good.created_at|date:"Y-m-d" }}{% endblock %}
+
+{% block view_count %}{{ good.views }}{% endblock %}
+
+{% block summary %}
+<div class="space-y-2">
+    {% if good.price %}
+    <div class="flex items-center text-sm mb-4">
+        <span class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full font-bold">参考价格：¥{{ good.price }}</span>
+    </div>
+    {% endif %}
+    
+    <div class="flex flex-wrap gap-2 mb-4">
+        {% if good.level_tag %}
+        <span class="text-xs bg-travel-brown/10 text-travel-brown px-2 py-0.5 rounded border border-travel-brown/20">{{ good.level_tag }}</span>
+        {% endif %}
+        {% for tag in good.get_feature_tags_list %}
+        <span class="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded border border-gray-200">{{ tag }}</span>
+        {% endfor %}
+    </div>
+
+    <p>{{ good.summary }}</p>
+</div>
+{% endblock %}
+
+{% block detail_content %}
+{{ good.content|safe }}
+{% endblock %}
+
+{% block related_content %}
+{% for item in related_goods %}
+<a href="{% url 'goods:detail' slug=item.english_code %}" class="group block bg-white border border-gray-100 p-2 hover:shadow-md transition-shadow">
+    <div class="aspect-[4/3] overflow-hidden bg-gray-100 mb-3">
+        {% if item.cover_image %}
+        <img src="{{ item.cover_image.url }}" alt="{{ item.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+        {% else %}
+        <div class="w-full h-full flex items-center justify-center text-gray-300">暂无图片</div>
+        {% endif %}
+    </div>
+    <div class="text-[14px] font-bold text-gray-800 text-center truncate group-hover:text-travel-brown">{{ item.title }}</div>
+</a>
+{% empty %}
+<div class="col-span-2 text-sm text-gray-400 italic">暂无相关推荐数据</div>
+{% endfor %}
+{% endblock %}

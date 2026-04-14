@@ -1,0 +1,34 @@
+{% extends 'detail_base.html' %}
+
+{% block title %}{{ news.title }} - 资讯·动态{% endblock %}
+
+{% block breadcrumbs %}
+<a href="{% url 'news:list' %}" class="hover:text-travel-brown transition-colors">资讯·动态</a>
+{% endblock %}
+
+{% block detail_title %}{{ news.title }}{% endblock %}
+
+{% block publish_date %}{{ news.created_at|date:"Y-m-d H:i" }}{% endblock %}
+
+{% block view_count %}{{ news.views }}{% endblock %}
+
+{% block summary %}
+{{ news.summary }}
+{% endblock %}
+
+{% block detail_content %}
+{{ news.content|safe }}
+{% endblock %}
+
+{% block related_content %}
+{% for item in related_news %}
+<div class="group cursor-pointer flex items-start space-x-2">
+    <span class="text-travel-brown mt-1">•</span>
+    <a href="{% url 'news:detail' slug=item.slug %}" class="text-[14px] text-gray-600 group-hover:text-travel-brown line-clamp-1 transition-colors">
+        {{ item.title }}
+    </a>
+</div>
+{% empty %}
+<div class="text-sm text-gray-400 italic">暂无相关资讯</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block breadcrumbs_bar %}
+<!-- 1. 设计稿风格通栏面包屑 -->
+<div class="bg-gray-100/80 border-b border-gray-200 py-3">
+    <div class="container-wide text-[13px] text-gray-500">
+        <span>您的位置：</span>
+        <a href="{% url 'core:index' %}" class="hover:text-travel-brown">首页</a>
+        <span class="mx-1">&gt;</span>
+        {% block breadcrumbs %}
+        <span>纪行·攻略</span>
+        {% endblock %}
+        <span class="mx-1">&gt;</span>
+        <span class="text-gray-400">正文</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="bg-gray-50 py-12 min-h-screen">
+    <div class="container-wide max-w-[1000px]">
+        <!-- 2. 主内容卡片 (居中且加宽) -->
+        <article class="bg-white p-12 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-100">
+            <!-- 文章标题 -->
+            <h1 class="text-3xl font-bold text-gray-900 leading-tight mb-8 text-center">
+                {% block detail_title %}{% endblock %}
+            </h1>
+
+            <!-- 元信息 (更加精致的排版) -->
+            <div class="flex items-center justify-center space-x-8 text-[13px] text-gray-400 border-b border-gray-100 pb-8 mb-10">
+                <div class="flex items-center">
+                    <span class="mr-2">来源:</span>
+                    <span class="text-gray-600">本站原创</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-2">发布日期:</span>
+                    <span>{% block publish_date %}{% endblock %}</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-2">作者:</span>
+                    <span class="text-gray-600">管理员</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-2">浏览量:</span>
+                    <span class="text-travel-brown">{% block view_count %}0{% endblock %}</span>
+                </div>
+            </div>
+
+            <!-- 摘要区 (导语) -->
+            <div class="bg-[#fcfaf2] border border-[#eee6d3] p-8 mb-12 relative">
+                 <div class="absolute -top-3 left-6 bg-white px-2 text-travel-brown font-bold text-sm tracking-widest">【 导 语 】</div>
+                <div class="text-gray-600 leading-relaxed italic text-[15px]">
+                    {% block summary %}{% endblock %}
+                </div>
+            </div>
+
+            <!-- 正文内容 (Rich Text Content) -->
+            <div class="prose prose-travel max-w-none text-gray-800 text-[16px] leading-[1.8]">
+                {% block detail_content %}{% endblock %}
+            </div>
+
+            <!-- 版权声明 (参考设计稿) -->
+            <div class="mt-16 pt-8 border-t border-dashed border-gray-200 text-[13px] text-gray-400 leading-relaxed">
+                <p>版权声明：热门景区和博物馆暂时不具备完全取消预约的条件，主要因为旺季的时间供给跟不上需求。必须对需求进行适当的管理才能保证合理的市场秩序。</p>
+            </div>
+            
+            <!-- 底部功能按钮 -->
+            <div class="mt-8 flex justify-end space-x-3">
+                <button class="bg-orange-500 text-white px-4 py-1.5 text-xs rounded shadow-sm hover:bg-orange-600">我要报错</button>
+                <button class="bg-orange-500 text-white px-4 py-1.5 text-xs rounded shadow-sm hover:bg-orange-600">关闭窗口</button>
+            </div>
+        </article>
+
+        <!-- 3. 底部相关推荐 (由子页面具体填充) -->
+        <section class="mt-12">
+            <h3 class="text-lg font-bold text-gray-800 border-l-4 border-travel-brown pl-4 mb-6">相关推荐</h3>
+            <div class="grid grid-cols-2 gap-x-12 gap-y-6">
+                {% block related_content %}{% endblock %}
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

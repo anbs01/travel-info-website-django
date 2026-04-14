@@ -1,0 +1,36 @@
+{% extends 'detail_base.html' %}
+
+{% block title %}{{ travelogue.title }} - 纪行·攻略{% endblock %}
+
+{% block breadcrumbs %}
+<a href="#" class="hover:text-travel-brown transition-colors">纪行·攻略</a>
+{% endblock %}
+
+{% block detail_title %}{{ travelogue.full_title|default:travelogue.title }}{% endblock %}
+
+{% block publish_date %}{{ travelogue.publish_date|date:"Y-m-d"|default:travelogue.created_at|date:"Y-m-d" }}{% endblock %}
+
+{% block category %}精华推荐{% endblock %}
+
+{% block view_count %}{{ travelogue.views }}{% endblock %}
+
+{% block summary %}
+{{ travelogue.summary }}
+{% endblock %}
+
+{% block detail_content %}
+{{ travelogue.content|safe }}
+{% endblock %}
+
+{% block related_content %}
+{% for related in related_travelogues %}
+<div class="group cursor-pointer flex items-start space-x-2">
+    <span class="text-travel-brown mt-1">•</span>
+    <a href="{% url 'travelogue:detail' slug=related.slug %}" class="text-[14px] text-gray-600 group-hover:text-travel-brown line-clamp-1 transition-colors">
+        {{ related.title }}
+    </a>
+</div>
+{% empty %}
+<div class="text-sm text-gray-400 italic">暂无相关推荐数据</div>
+{% endfor %}
+{% endblock %}
