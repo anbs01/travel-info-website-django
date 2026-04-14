@@ -148,32 +148,74 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SIMPLEUI_HOME_INFO = False  # 隐藏官方分析页
 SIMPLEUI_ANALYSIS = False   # 隐藏分析统计
 
-# 自定义图标配置
+# 像素级还原菜单配置 (完全对齐设计图：网站名称.png)
+SIMPLEUI_CONFIG = {
+    'system_keep': False,  # 完全接管系统菜单，自定义排序
+    'menu_display': ['综合管理', '纪行攻略', '行业资讯', '城镇乡村', '打卡地', '特产美食', '文创商品', '系统管理'],
+    'menus': [
+        {
+            'name': '综合管理',
+            'icon': 'fas fa-desktop',
+            'models': [
+                {'name': '互动信息(2)', 'icon': 'fas fa-comments', 'url': 'core/feedback/'},
+                {'name': '类别热词', 'icon': 'fas fa-tags', 'url': 'core/searchkeyword/'},
+                {'name': '版权引用', 'icon': 'fas fa-copyright', 'url': 'core/siteinfo/'},
+                {'name': '基本信息', 'icon': 'fas fa-info-circle', 'url': 'core/siteinfo/'},
+                {'name': '首页推荐', 'icon': 'fas fa-thumbs-up', 'url': 'core/hometextrecommend/'},
+            ]
+        },
+        {
+            'name': '纪行攻略',
+            'icon': 'fas fa-user-cog',
+            'url': 'travelogue/travelogue/'
+        },
+        {
+            'name': '行业资讯',
+            'icon': 'fas fa-cloud',
+            'url': 'news/news/'
+        },
+        {
+            'name': '城镇乡村',
+            'icon': 'fas fa-th-list',
+            'url': 'places/place/'
+        },
+        {
+            'name': '打卡地',
+            'icon': 'fas fa-university',
+            'url': 'places/scenicspot/'
+        },
+        {
+            'name': '特产美食',
+            'icon': 'fas fa-utensils',
+            'url': 'foods/food/'
+        },
+        {
+            'name': '文创商品',
+            'icon': 'fas fa-gift',
+            'url': 'goods/good/'
+        },
+        {
+            'name': '系统管理',
+            'icon': 'fas fa-cogs',
+            'models': [
+                {'name': '用户', 'icon': 'fas fa-user', 'url': 'auth/user/'},
+                {'name': '组', 'icon': 'fas fa-users-cog', 'url': 'auth/group/'},
+            ]
+        }
+    ]
+}
+
+# 自定义图标配置 (用于非菜单区域的备用显示)
 SIMPLEUI_ICON = {
-    # Core 模块
     '网站基本信息': 'fas fa-info-circle',
     '搜索关键词': 'fas fa-search',
     '首页文字推荐': 'fas fa-thumbs-up',
-    
-    # Foods 模块
     '特产·美食': 'fas fa-utensils',
-    'Food': 'fas fa-utensils',
-    
-    # Goods 模块
     '好物·文创': 'fas fa-shopping-bag',
-    'Good': 'fas fa-shopping-bag',
-    
-    # News 模块
     '资讯·动态': 'fas fa-newspaper',
-    'News': 'fas fa-newspaper',
-    
-    # Places 模块
     '行政区域': 'fas fa-globe-asia',
     '城乡/街巷': 'fas fa-city',
     '打卡地/景区': 'fas fa-camera-retro',
     '交通出行': 'fas fa-bus',
-    
-    # Travelogue 模块
     '游记攻略': 'fas fa-paper-plane',
-    'Travelogue': 'fas fa-paper-plane',
 }

@@ -88,3 +88,20 @@ class SearchKeyword(models.Model):
         verbose_name = '搜索关键词'
         verbose_name_plural = verbose_name
         ordering = ['-sort_order']
+
+class Feedback(models.Model):
+    """互动信息 / 意见建议 - 补全设计图业务项"""
+    title = models.CharField('标题/主题', max_length=200)
+    content = models.TextField('正文内容')
+    name = models.CharField('联系人', max_length=100, blank=True)
+    contact = models.CharField('联系方式', max_length=100, blank=True, help_text='电话、邮箱或微信')
+    is_processed = models.BooleanField('已处理', default=False)
+    created_at = models.DateTimeField('提交时间', auto_now_add=True)
+
+    class Meta:
+        verbose_name = '互动信息'
+        verbose_name_plural = verbose_name
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title
