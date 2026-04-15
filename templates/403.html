@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}访问受限 - 403 - 旅游信息网{% endblock %}
+
+{% block content %}
+<div class="min-h-[60vh] flex items-center justify-center bg-gray-50 py-20 px-4">
+    <div class="max-w-xl w-full text-center">
+        <div class="relative mb-8">
+            <h1 class="text-[150px] font-black text-gray-200 leading-none select-none">403</h1>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-red-400 opacity-80">
+                    <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m0 0v2m0-2h2m-2 0H10m11 0a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 9l6 6m0-6l-6 6" /></svg>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 tracking-widest">访问受限</h2>
+        <p class="text-gray-500 mb-10 text-lg leading-relaxed">
+            抱歉，您当前没有访问该区域的权限。
+            <br>
+            这可能是一个受限的内部目录或正在维护中的会员专区。
+        </p>
+
+        <a href="{% url 'core:index' %}" class="px-10 py-3 bg-travel-brown text-white font-bold tracking-widest hover:bg-opacity-90 transition-all shadow-md active:scale-95">
+            返回首页
+        </a>
+    </div>
+</div>
+{% endblock %}

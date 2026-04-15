@@ -5,5 +5,5 @@ app_name = 'foods'
 
 urlpatterns = [
     path('', FoodListView.as_view(), name='list'),
-    path('<str:slug>/', FoodDetailView.as_view(), name='detail'),
+    path('f<int:offset_id>/', FoodDetailView.as_view(), name='detail'),
 ]

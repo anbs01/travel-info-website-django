@@ -7,19 +7,24 @@
         <div class="bg-white p-8 flex space-x-8 shadow-sm">
             <!-- 1. 左侧：视觉轮播区 (1:1 还原设计稿尺寸与层级) -->
             <div class="w-2/3 relative group overflow-hidden">
-                <div class="aspect-video bg-gray-200">
-                    <!-- 使用占位图模拟设计稿中的摩天轮场景 -->
-                    <img src="https://images.unsplash.com/photo-1513413173476-2aa2aa89a804?auto=format&fit=crop&q=80&w=1200" 
-                         alt="推荐图" class="w-full h-full object-cover">
-                </div>
-                <!-- 底部标题遮罩 -->
-                <div class="absolute bottom-0 left-0 right-0 bg-black/40 text-white p-4">
-                    {% with featured=featured_travelogues|first %}
-                    <span class="text-xl font-medium tracking-wide">
-                        {% if featured %}{{ featured.title }}{% else %}暂无首页推荐{% endif %}
-                    </span>
-                    {% endwith %}
-                </div>
+                {% with featured=featured_travelogues|first %}
+                <a href="{% if featured %}{{ featured.get_absolute_url }}{% else %}#{% endif %}" class="block">
+                    <div class="aspect-video bg-gray-200">
+                        {% if featured and featured.image %}
+                        <img src="{{ featured.image.url }}" alt="{{ featured.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        {% else %}
+                        <img src="https://images.unsplash.com/photo-1513413173476-2aa2aa89a804?auto=format&fit=crop&q=80&w=1200" 
+                             alt="默认推荐图" class="w-full h-full object-cover">
+                        {% endif %}
+                    </div>
+                    <!-- 底部标题遮罩 -->
+                    <div class="absolute bottom-0 left-0 right-0 bg-black/40 text-white p-4 backdrop-blur-sm">
+                        <span class="text-xl font-medium tracking-wide">
+                            {% if featured %}{{ featured.title }}{% else %}暂无首页推荐{% endif %}
+                        </span>
+                    </div>
+                </a>
+                {% endwith %}
                 <!-- 轮播控制圆点 -->
                 <div class="absolute bottom-4 right-6 flex space-x-2">
                     <div class="w-3 h-3 rounded-full bg-orange-500"></div>

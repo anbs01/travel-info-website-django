@@ -19,29 +19,19 @@
 <div class="space-y-12">
     {% for good in goods %}
     <article class="flex group">
-        {% if good.english_code %}
-        <a href="{% url 'goods:detail' slug=good.english_code %}" target="_blank" class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0">
+        <a href="{{ good.get_absolute_url }}" target="_blank" class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0">
             {% if good.image %}
             <img src="{{ good.image.url }}" alt="{{ good.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             {% else %}
             <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">暂无图片</div>
             {% endif %}
         </a>
-        {% else %}
-        <div class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0 bg-gray-50 flex items-center justify-center text-gray-300 text-xs">
-            暂无详情
-        </div>
-        {% endif %}
 
         <div class="ml-8 flex-1 flex flex-col justify-between py-1 border-b border-gray-50 border-dashed pb-8 group-last:border-b-0">
             <div>
                 <div class="flex items-center space-x-3 mb-3">
                     <h3 class="text-xl font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
-                        {% if good.english_code %}
-                        <a href="{% url 'goods:detail' slug=good.english_code %}" target="_blank">{{ good.title }}</a>
-                        {% else %}
-                        {{ good.title }}
-                        {% endif %}
+                        <a href="{{ good.get_absolute_url }}" target="_blank">{{ good.title }}</a>
                     </h3>
 {% if good.level_tag %}
                     <span class="text-[12px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded border border-slate-100">{{ good.level_tag }}</span>

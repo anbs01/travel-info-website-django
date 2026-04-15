@@ -19,30 +19,21 @@
 <div class="space-y-10">
     {% for news in news_list %}
     <article class="flex group">
+    <article class="flex group">
         <!-- 资讯由于通常图较小，采用稍窄的比例 -->
-        {% if news.slug %}
-        <a href="{% url 'news:detail' slug=news.slug %}" target="_blank" class="block w-[240px] h-[150px] overflow-hidden rounded-sm flex-shrink-0">
+        <a href="{{ news.get_absolute_url }}" target="_blank" class="block w-[240px] h-[150px] overflow-hidden rounded-sm flex-shrink-0">
             {% if news.image %}
             <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             {% else %}
             <div class="w-full h-full bg-slate-50 flex items-center justify-center text-slate-300">NEWS</div>
             {% endif %}
         </a>
-        {% else %}
-        <div class="block w-[240px] h-[150px] overflow-hidden rounded-sm flex-shrink-0 bg-gray-50 flex items-center justify-center text-gray-300 text-xs">
-            暂无详情
-        </div>
-        {% endif %}
 
         <div class="ml-8 flex-1 flex flex-col justify-between py-0.5 border-b border-gray-50 border-dashed pb-10 group-last:border-b-0">
             <div>
                 <div class="flex items-center space-x-3 mb-2">
                     <h3 class="text-xl font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
-                        {% if news.slug %}
-                        <a href="{% url 'news:detail' slug=news.slug %}" target="_blank">{{ news.title }}</a>
-                        {% else %}
-                        {{ news.title }}
-                        {% endif %}
+                        <a href="{{ news.get_absolute_url }}" target="_blank">{{ news.title }}</a>
                     </h3>
                 </div>
                 

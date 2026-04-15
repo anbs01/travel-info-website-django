@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 from core.models import BaseContent
 from places.models import Place
@@ -14,3 +15,7 @@ class Food(BaseContent):
     class Meta:
         verbose_name = '特产·美食'
         verbose_name_plural = verbose_name
+
+    def get_absolute_url(self):
+        # 需求第35条：偏移10000显示
+        return reverse('foods:detail', kwargs={'offset_id': self.id + 10000})

@@ -36,7 +36,16 @@
         <a href="{% url 'core:index' %}" class="hover:text-travel-brown">首页</a>
         <span class="mx-1">&gt;</span>
         {% block breadcrumbs %}
-        <span>纪行·攻略</span>
+        {% if object.place.region or object.region %}
+            {% with region=object.place.region|default:object.region %}
+            <span class="cursor-pointer hover:text-travel-brown transition-colors" 
+                  onclick="openProvinceModal('{{ region.full_name|default:region.name }}', '{{ region.introduction|escapejs }}')">
+                {{ region.name }}
+            </span>
+            {% endwith %}
+        {% else %}
+            <span>纪行·攻略</span>
+        {% endif %}
         {% endblock %}
         <span class="mx-1">&gt;</span>
         <span class="text-gray-400">正文</span>

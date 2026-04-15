@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}会员中心 - 旅游信息网{% endblock %}
+
+{% block content %}
+<div class="min-h-[70vh] flex items-center justify-center bg-gray-50 py-16 px-4">
+    <div class="bg-white w-full max-w-md p-10 shadow-xl rounded-sm border border-gray-100">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-bold text-gray-900 tracking-widest uppercase">会员中心</h2>
+            <div class="h-1 w-10 bg-travel-brown mx-auto mt-2"></div>
+        </div>
+
+        <div class="space-y-6 text-center">
+            <div class="p-6 bg-orange-50 rounded-sm text-orange-600 border border-orange-100">
+                <p class="font-medium text-lg mb-2">系统建设中</p>
+                <p class="text-sm opacity-80">会员登录与注册功能暂未上线，敬请期待后续更新。</p>
+            </div>
+            
+            <div class="pt-6">
+                <a href="{% url 'core:index' %}" class="block w-full text-center py-4 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-all">
+                    返回首页浏览更多
+                </a>
+            </div>
+        </div>
+        
+        <div class="mt-12 text-center text-xs text-gray-300">
+            <p>如有疑问请通过“意见建议”与我们联系</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

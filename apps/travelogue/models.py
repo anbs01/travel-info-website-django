@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 from django.utils import timezone
 from core.models import BaseContent
@@ -14,8 +15,12 @@ class Travelogue(BaseContent):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            base_slug = timezone.now().strftime('%Y%M%d%H%M')
+            # 修正：%M -> %m (月份)
+            base_slug = timezone.now().strftime('%Y%m%d%H%M')
             if Travelogue.objects.filter(slug=base_slug).exists():
-                base_slug = timezone.now().strftime('%Y%M%d%H%M%S')[-14:]
+                base_slug = timezone.now().strftime('%Y%m%d%H%M%S')[-12:]
             self.slug = base_slug
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('travelogue:detail', kwargs={'slug': self.slug})

@@ -11,8 +11,7 @@
     {% for place in places %}
     <div class="group">
         <!-- 卡片图片 -->
-        {% if place.english_code %}
-        <a href="{% url 'places:detail' slug=place.english_code %}" target="_blank" class="block aspect-[4/3] overflow-hidden rounded-sm mb-4 relative">
+        <a href="{{ place.get_absolute_url }}" target="_blank" class="block aspect-[4/3] overflow-hidden rounded-sm mb-4 relative">
             {% if place.image %}
             <img src="{{ place.image.url }}" alt="{{ place.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             {% else %}
@@ -22,21 +21,12 @@
             <!-- 悬浮层 (装饰性) -->
             <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity"></div>
         </a>
-        {% else %}
-        <div class="block aspect-[4/3] overflow-hidden rounded-sm mb-4 bg-gray-50 flex items-center justify-center text-gray-300 text-xs">
-            暂无详情
-        </div>
-        {% endif %}
 
         <!-- 卡片信息 -->
         <div class="text-center px-2">
             <div class="flex items-center justify-center space-x-2 mb-1">
                 <h3 class="text-lg font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
-                    {% if place.english_code %}
-                    <a href="{% url 'places:detail' slug=place.english_code %}" target="_blank">{{ place.title }}</a>
-                    {% else %}
-                    {{ place.title }}
-                    {% endif %}
+                    <a href="{{ place.get_absolute_url }}" target="_blank">{{ place.title }}</a>
                 </h3>
                 {% if place.level_tag %}
                 <span class="text-[10px] border border-gray-200 text-gray-400 px-1 rounded leading-tight">{{ place.level_tag }}</span>
@@ -75,13 +65,13 @@
     <div class="relative bg-white w-[90%] max-w-[480px] p-8 md:p-12 shadow-2xl rounded-sm transform scale-95 transition-transform duration-500 pointer-events-auto" id="placesAnnoCard">
         <div class="text-center">
             <div class="inline-block p-4 bg-travel-brown/10 rounded-full mb-6 text-travel-brown">
-                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
             </div>
-            <h2 class="text-2xl font-bold text-gray-900 mb-4 tracking-[0.2em]">城镇·街巷公告</h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 tracking-[0.2em]">会员功能暂未上线</h2>
             <div class="text-gray-500 leading-relaxed mb-10 text-[15px]">
-                欢迎来到“城镇 · 街巷”专题板块。在这里，我们将为您呈现最真实的在地风光与人文故事。
+                提示：当前站点的会员登录与注册功能正在建设维护中，暂未对外开放。
                 <br>
-                <span class="text-travel-brown mt-3 block font-medium">本专栏现已全面升级，支持多维度地区筛选。</span>
+                <span class="text-travel-brown mt-3 block font-medium">您可以继续以游客身份浏览全站所有目的地与攻略信息。</span>
             </div>
             <button id="closeAnnoBtn" class="w-full bg-travel-brown text-white py-4 font-bold tracking-[0.3em] hover:bg-opacity-90 transition-all shadow-lg active:scale-[0.98]">
                 我知道了

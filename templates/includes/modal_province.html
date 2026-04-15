@@ -1,0 +1,42 @@
+<div id="provinceModal" class="fixed inset-0 z-[200] flex items-center justify-center opacity-0 invisible transition-all duration-300">
+    <!-- 背景遮罩 -->
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeProvinceModal()"></div>
+    
+    <!-- 内容容器 -->
+    <div class="relative bg-white w-full max-w-lg p-10 md:p-12 shadow-2xl rounded-sm transform scale-95 transition-transform duration-300" id="provinceContent">
+        <button onclick="closeProvinceModal()" class="absolute top-6 right-6 text-gray-400 hover:text-travel-dark transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+
+        <div class="text-center">
+            <h3 id="modalProvinceName" class="text-3xl font-bold text-gray-900 mb-8 tracking-[0.3em]">--</h3>
+            <div class="h-1 w-12 bg-travel-brown mx-auto mb-10"></div>
+            <div id="modalProvinceDescription" class="text-gray-600 leading-loose text-left text-lg whitespace-pre-line">
+                <!-- 内容动态填充 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openProvinceModal(name, description) {
+        document.getElementById('modalProvinceName').innerText = name;
+        document.getElementById('modalProvinceDescription').innerText = description;
+        
+        const modal = document.getElementById('provinceModal');
+        const content = document.getElementById('provinceContent');
+        
+        modal.classList.remove('opacity-0', 'invisible');
+        content.classList.remove('scale-95');
+        content.classList.add('scale-100');
+    }
+
+    function closeProvinceModal() {
+        const modal = document.getElementById('provinceModal');
+        const content = document.getElementById('provinceContent');
+        
+        modal.classList.add('opacity-0', 'invisible');
+        content.classList.remove('scale-100');
+        content.classList.add('scale-95');
+    }
+</script>

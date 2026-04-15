@@ -13,6 +13,7 @@ urlpatterns = [
     path('service/', views.InfoPageView.as_view(), {'page_type': 'service'}, name='service'),
     path('cooperation/', views.InfoPageView.as_view(), {'page_type': 'cooperation'}, name='cooperation'),
     path('contact/', views.InfoPageView.as_view(), {'page_type': 'contact'}, name='contact'),
+    path('membership/', views.TemplateView.as_view(template_name='pages/login_placeholder.html'), name='login_placeholder'),
     
     # 互动反馈
     path('feedback/add/', views.FeedbackView.as_view(), name='feedback_add'),

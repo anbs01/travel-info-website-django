@@ -30,7 +30,7 @@
         <div class="grid grid-cols-3 gap-6">
             {% for place in results.places %}
             <div class="group border border-gray-100 rounded p-3 hover:shadow-md transition-shadow">
-                <a href="{% url 'places:detail' slug=place.english_code %}" target="_blank" class="block aspect-video overflow-hidden rounded mb-3">
+                <a href="{{ place.get_absolute_url }}" target="_blank" class="block aspect-video overflow-hidden rounded mb-3">
                     {% if place.image %}
                     <img src="{{ place.image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
                     {% else %}
@@ -38,7 +38,7 @@
                     {% endif %}
                 </a>
                 <h4 class="font-bold text-gray-800 group-hover:text-travel-brown text-sm line-clamp-1">
-                    <a href="{% url 'places:detail' slug=place.english_code %}" target="_blank">{{ place.title }}</a>
+                    <a href="{{ place.get_absolute_url }}" target="_blank">{{ place.title }}</a>
                 </h4>
             </div>
             {% endfor %}
@@ -56,7 +56,7 @@
         <div class="space-y-4">
             {% for item in results.travelogues %}
             <div class="flex items-center justify-between border-b border-gray-50 pb-4">
-                <a href="{% url 'travelogue:detail' slug=item.slug %}" target="_blank" class="text-gray-700 hover:text-travel-brown font-medium">
+                <a href="{{ item.get_absolute_url }}" target="_blank" class="text-gray-700 hover:text-travel-brown font-medium">
                     {{ item.title }}
                 </a>
                 <span class="text-xs text-gray-400">{{ item.publish_date|date:"Y-m-d" }}</span>
@@ -75,7 +75,7 @@
                 {% for item in results.foods %}
                 <div class="flex items-center space-x-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-travel-brown"></span>
-                    <a href="{% url 'foods:detail' slug=item.english_code %}" target="_blank" class="text-sm text-gray-600 hover:text-travel-brown line-clamp-1">
+                    <a href="{{ item.get_absolute_url }}" target="_blank" class="text-sm text-gray-600 hover:text-travel-brown line-clamp-1">
                         {{ item.title }}
                     </a>
                 </div>
@@ -91,7 +91,7 @@
                 {% for item in results.goods %}
                 <div class="flex items-center space-x-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
-                    <a href="{% url 'goods:detail' slug=item.english_code %}" target="_blank" class="text-sm text-gray-600 hover:text-travel-brown line-clamp-1">
+                    <a href="{{ item.get_absolute_url }}" target="_blank" class="text-sm text-gray-600 hover:text-travel-brown line-clamp-1">
                         {{ item.title }}
                     </a>
                 </div>

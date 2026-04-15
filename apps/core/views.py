@@ -15,6 +15,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['is_home'] = True
         # 获取首页焦点图推荐
         context['featured_travelogues'] = Travelogue.objects.filter(is_home=True, is_hidden=False)[:3]
         # 获取首页文字推荐
@@ -38,9 +39,13 @@ class ViewCountMixin:
 class DetailRedirectMixin:
     """详情页重定向 Mixin - 检查 BaseContent.redirect_url"""
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        if hasattr(self.object, 'redirect_url') and self.object.redirect_url:
-            return HttpResponseRedirect(self.object.redirect_url)
+        # 预先获取对象以检查重定向标识，避免在 super().get 之前多次触发复杂逻辑
+        obj = self.get_object()
+        if obj and hasattr(obj, 'redirect_url') and obj.redirect_url:
+            return HttpResponseRedirect(obj.redirect_url)
+        
+        # 预存对象，减少 super().get 时的重复查询开销（Django DetailView 会重复使用 self.object）
+        self.object = obj
         return super().get(request, *args, **kwargs)
 
 class DetailSampleView(TemplateView):

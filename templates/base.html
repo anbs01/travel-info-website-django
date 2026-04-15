@@ -32,25 +32,40 @@
                 </nav>
                 <div class="flex items-center space-x-6">
                     <div class="flex space-x-4">
-                        <a href="#" class="hover:text-travel-brown">登录</a>
-                        <a href="#" class="hover:text-travel-brown">注册</a>
+                        <a href="{% url 'core:login_placeholder' %}" class="hover:text-travel-brown">登录</a>
+                        <a href="{% url 'core:login_placeholder' %}" class="hover:text-travel-brown">注册</a>
                     </div>
-                    <!-- 二维码入口 -->
-                    <div class="cursor-pointer text-gray-400 hover:text-travel-brown">
+                    <!-- 二维码入口 (需求149条) -->
+                    <div class="relative group cursor-pointer text-gray-400 hover:text-travel-brown py-1">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h2M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" /></svg>
+                        
+                        <!-- 悬浮二维码面板: 112x112px -->
+                        <div class="absolute top-full right-0 mt-2 p-2 bg-white shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-[100] transform translate-y-2 group-hover:translate-y-0">
+                            <img src="{% static 'images/qrcode.png' %}" alt="QR Code" class="w-[112px] h-[112px] block">
+                            <div class="text-[10px] text-center mt-1 text-gray-400">手机扫码访问</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 2. Logo 行 (缩小间距与字号) -->
-        <div class="py-8 text-center">
-            <div class="inline-block border-[3px] border-travel-brown p-3">
-                <span class="text-4xl font-bold tracking-[0.2em] text-travel-dark leading-none">网站LOGO</span>
-            </div>
+        <!-- 2. Logo 行 (根据需求150条规格化) -->
+        <div class="py-10 text-center">
+            <a href="/" class="inline-block">
+                {% if is_home %}
+                <div class="border-[3px] border-travel-brown flex items-center justify-center" style="width: 338px; height: 98px;">
+                    <span class="text-4xl font-bold tracking-[0.2em] text-travel-dark leading-none">网站LOGO</span>
+                </div>
+                {% else %}
+                <div class="border-[2px] border-travel-brown flex items-center justify-center" style="width: 170px; height: 50px;">
+                    <span class="text-xl font-bold tracking-[0.1em] text-travel-dark leading-none">网站LOGO</span>
+                </div>
+                {% endif %}
+            </a>
         </div>
 
         <!-- 3. 核心搜索区 (支持分类搜索分发) -->
+        <!-- ... (保持搜索区代码不变) ... -->
         <div class="pb-8">
             <form action="/search/" method="get" class="container-wide max-w-3xl flex items-center shadow-sm border border-gray-200 rounded overflow-hidden">
                 <input type="text" name="q" class="flex-1 py-3 px-5 outline-none text-base" placeholder="搜索目的地、纪行、美食..." required>
@@ -60,7 +75,6 @@
                     <input type="hidden" name="type" id="search-type-input" value="travelogue">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     
-                    <!-- 下拉选项面板 -->
                     <div class="absolute top-full left-[-1px] right-[-1px] bg-white border border-gray-200 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                         <div class="py-1">
                             <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('travelogue', '纪行·攻略')">纪行·攻略</div>
@@ -76,17 +90,9 @@
                     搜索
                 </button>
             </form>
-            <!-- 热搜标签云 -->
-             <div class="container-wide mt-3 flex justify-center space-x-4 text-[12px] text-gray-400">
-                {% for kw in search_keywords %}
-                <a href="#" class="hover:text-travel-brown">{{ kw.keyword }}</a>
-                {% empty %}
-                <span class="opacity-0">placeholder</span>
-                {% endfor %}
-             </div>
         </div>
 
-        <!-- 4. 详情页专用通栏面包屑 (占位，由子页面填充内容) -->
+        <!-- 4. 详情页专用通栏面包屑 -->
         {% block breadcrumbs_bar %}{% endblock %}
     </header>
 
@@ -94,25 +100,20 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer: 1:1 还原 -->
+    <!-- Footer: 区分首页与内页 (需求第60条) -->
     <footer class="bg-white border-t border-gray-100 py-12 mt-20">
-        <div class="container-wide text-center">
-            <div class="flex justify-center space-x-6 text-gray-500 mb-4 text-sm">
-                <a href="{% url 'core:about' %}" class="hover:underline">关于我们</a>
-                <a href="{% url 'core:service' %}" class="hover:underline">服务协议</a>
-                <a href="{% url 'core:cooperation' %}" class="hover:underline">合作事宜</a>
-                <a href="javascript:void(0)" onclick="openFeedbackModal('suggestion')" class="hover:underline">意见建议</a>
-                <a href="{% url 'core:contact' %}" class="hover:underline">联系我们</a>
-            </div>
-            <div class="text-xs text-gray-300 space-y-2">
-                <p>Copyright © 2026-2027 NAME.COM All Rights Reserved</p>
-                <p>版权所有：网站名称 鲁ICP备123456789号</p>
-            </div>
-        </div>
+        {% if is_home %}
+            {% include "includes/footer_home.html" %}
+        {% else %}
+            {% include "includes/footer_inner.html" %}
+        {% endif %}
     </footer>
 
     <!-- 全局反馈弹窗组件 -->
     {% include "includes/modal_feedback.html" %}
+    
+    <!-- 省份详情弹窗 (需求91条) -->
+    {% include "includes/modal_province.html" %}
 
     <script>
         function setSearchType(type, label) {
