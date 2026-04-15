@@ -40,8 +40,10 @@ docker-compose up -d
 
 ### 2. 环境准备
 ```powershell
-# 创建并激活虚拟环境
+# 创建虚拟环境
 python -m venv venv
+
+# 激活环境 (Windows PowerShell)
 .\venv\Scripts\activate
 
 # 安装依赖项
@@ -64,8 +66,12 @@ python manage.py createsuperuser
 ```
 
 ### 5. 运行开发服务器
+
+> [!TIP]
+> **Windows 运行建议**：如果在激活环境下执行报错，请直接使用以下显式路径指令：
+> `.\venv\Scripts\python.exe manage.py runserver`
+
 ```powershell
-# 启动 Django 开发服务器
 python manage.py runserver
 ```
 访问地址：[http://127.0.0.1:8000](http://127.0.0.1:8000)

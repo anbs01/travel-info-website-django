@@ -1,0 +1,845 @@
+{
+  "filename": "503.psd",
+  "canvas": [
+    1920,
+    1244
+  ],
+  "structure": [
+    {
+      "name": "背景色，白",
+      "type": "layer",
+      "rect": [
+        0,
+        0,
+        1920,
+        3500
+      ],
+      "raw_rect": [
+        0,
+        0,
+        1920,
+        3500
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "底部",
+      "type": "group",
+      "rect": [
+        0,
+        772,
+        1920,
+        84
+      ],
+      "raw_rect": [
+        -1,
+        773,
+        1922,
+        84
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "底部 背景色",
+          "type": "layer",
+          "rect": [
+            0,
+            776,
+            1920,
+            84
+          ],
+          "raw_rect": [
+            -1,
+            774,
+            1922,
+            83
+          ],
+          "visible": true,
+          "opacity": 0.8
+        },
+        {
+          "name": "底部背景线",
+          "type": "layer",
+          "rect": [
+            0,
+            772,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            773,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "Copyright © 2024-2026 NAME.COM All Rights Reserved 版权所有：网站名称",
+          "type": "layer",
+          "rect": [
+            804,
+            810,
+            310,
+            32
+          ],
+          "raw_rect": [
+            805,
+            811,
+            311,
+            34
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "Copyright © 2024-2026 NAME.COM All Rights Reserved\r版权所有：网站名称",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "503",
+      "type": "group",
+      "rect": [
+        756,
+        220,
+        410,
+        420
+      ],
+      "raw_rect": [
+        756,
+        222,
+        409,
+        421
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "星空图",
+          "type": "layer",
+          "rect": [
+            756,
+            220,
+            350,
+            308
+          ],
+          "raw_rect": [
+            756,
+            222,
+            350,
+            307
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": " 您所寻找的页面不存在。你可以点击下面的",
+          "type": "layer",
+          "rect": [
+            816,
+            560,
+            244,
+            16
+          ],
+          "raw_rect": [
+            816,
+            562,
+            245,
+            16
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "你可以点击下面的按钮，返回首页。",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": " UH OH!  页面丢失",
+          "type": "layer",
+          "rect": [
+            816,
+            524,
+            300,
+            24
+          ],
+          "raw_rect": [
+            814,
+            524,
+            302,
+            25
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "你访问的页面暂时出现问题！",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "503",
+          "type": "layer",
+          "rect": [
+            1028,
+            408,
+            140,
+            64
+          ],
+          "raw_rect": [
+            1027,
+            407,
+            138,
+            65
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "503",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "返回首页背景框",
+          "type": "layer",
+          "rect": [
+            812,
+            608,
+            116,
+            36
+          ],
+          "raw_rect": [
+            813,
+            606,
+            116,
+            37
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "返回首页",
+          "type": "layer",
+          "rect": [
+            840,
+            616,
+            70,
+            16
+          ],
+          "raw_rect": [
+            840,
+            616,
+            68,
+            17
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "返回首页",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "顶部 渐变",
+      "type": "group",
+      "rect": [
+        0,
+        -4,
+        1920,
+        150
+      ],
+      "raw_rect": [
+        -1,
+        -5,
+        1922,
+        152
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "渐变背景",
+          "type": "layer",
+          "rect": [
+            0,
+            -4,
+            1920,
+            150
+          ],
+          "raw_rect": [
+            -1,
+            -5,
+            1922,
+            152
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "渐变",
+          "type": "layer",
+          "rect": [
+            0,
+            0,
+            1920,
+            3500
+          ],
+          "raw_rect": [
+            0,
+            0,
+            1920,
+            3500
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "细长线",
+          "type": "layer",
+          "rect": [
+            0,
+            140,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            142,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "顶部搜索",
+      "type": "group",
+      "rect": [
+        570,
+        64,
+        990,
+        50
+      ],
+      "raw_rect": [
+        571,
+        66,
+        989,
+        48
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "搜索框",
+          "type": "layer",
+          "rect": [
+            570,
+            64,
+            772,
+            50
+          ],
+          "raw_rect": [
+            571,
+            66,
+            773,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "选择小框",
+          "type": "layer",
+          "rect": [
+            1350,
+            64,
+            110,
+            50
+          ],
+          "raw_rect": [
+            1349,
+            66,
+            111,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "▼",
+          "type": "layer",
+          "rect": [
+            1432,
+            88,
+            10,
+            10
+          ],
+          "raw_rect": [
+            1434,
+            86,
+            11,
+            10
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "▼",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "目的地",
+          "type": "layer",
+          "rect": [
+            1380,
+            84,
+            44,
+            16
+          ],
+          "raw_rect": [
+            1378,
+            83,
+            43,
+            15
+          ],
+          "visible": false,
+          "opacity": 1.0,
+          "text_content": "目的地",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "纪行·攻略",
+          "type": "layer",
+          "rect": [
+            1368,
+            84,
+            64,
+            16
+          ],
+          "raw_rect": [
+            1367,
+            83,
+            63,
+            15
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "纪行·攻略",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "搜索小框",
+          "type": "layer",
+          "rect": [
+            1464,
+            68,
+            96,
+            48
+          ],
+          "raw_rect": [
+            1465,
+            67,
+            95,
+            46
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "搜 索",
+          "type": "layer",
+          "rect": [
+            1492,
+            80,
+            48,
+            20
+          ],
+          "raw_rect": [
+            1493,
+            80,
+            46,
+            20
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "搜 索",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "登录  注册",
+      "type": "layer",
+      "rect": [
+        1450,
+        16,
+        64,
+        10
+      ],
+      "raw_rect": [
+        1448,
+        15,
+        64,
+        12
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "登录  注册",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "二维码",
+      "type": "layer",
+      "rect": [
+        1540,
+        16,
+        16,
+        16
+      ],
+      "raw_rect": [
+        1542,
+        15,
+        15,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "揪错弹窗",
+      "type": "group",
+      "rect": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "raw_rect": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible": false,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "灰背景",
+          "type": "layer",
+          "rect": [
+            -4,
+            -4,
+            1928,
+            3020
+          ],
+          "raw_rect": [
+            -3,
+            -3,
+            1926,
+            3018
+          ],
+          "visible": true,
+          "opacity": 0.30196078431372547
+        },
+        {
+          "name": "白框",
+          "type": "layer",
+          "rect": [
+            660,
+            1580,
+            584,
+            360
+          ],
+          "raw_rect": [
+            661,
+            1580,
+            585,
+            358
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "我要揪错",
+          "type": "layer",
+          "rect": [
+            710,
+            1610,
+            60,
+            12
+          ],
+          "raw_rect": [
+            710,
+            1608,
+            59,
+            13
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "我要揪错",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "标题",
+          "type": "layer",
+          "rect": [
+            710,
+            1650,
+            28,
+            16
+          ],
+          "raw_rect": [
+            711,
+            1650,
+            27,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "标题",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "标题框",
+          "type": "layer",
+          "rect": [
+            750,
+            1650,
+            444,
+            30
+          ],
+          "raw_rect": [
+            750,
+            1648,
+            443,
+            28
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "提交背景",
+          "type": "layer",
+          "rect": [
+            870,
+            1880,
+            70,
+            30
+          ],
+          "raw_rect": [
+            869,
+            1878,
+            68,
+            28
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "确定提交",
+          "type": "layer",
+          "rect": [
+            880,
+            1888,
+            50,
+            10
+          ],
+          "raw_rect": [
+            878,
+            1886,
+            51,
+            12
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "确定提交",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "取消背景",
+          "type": "layer",
+          "rect": [
+            970,
+            1880,
+            70,
+            30
+          ],
+          "raw_rect": [
+            972,
+            1878,
+            68,
+            28
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "取消提交",
+          "type": "layer",
+          "rect": [
+            980,
+            1888,
+            50,
+            10
+          ],
+          "raw_rect": [
+            981,
+            1886,
+            51,
+            12
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "取消提交",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "内容",
+          "type": "layer",
+          "rect": [
+            710,
+            1704,
+            24,
+            16
+          ],
+          "raw_rect": [
+            711,
+            1703,
+            26,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "内容",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "内容框",
+          "type": "layer",
+          "rect": [
+            750,
+            1700,
+            444,
+            152
+          ],
+          "raw_rect": [
+            750,
+            1702,
+            443,
+            153
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "╳",
+          "type": "layer",
+          "rect": [
+            1216,
+            1604,
+            10,
+            10
+          ],
+          "raw_rect": [
+            1214,
+            1604,
+            11,
+            11
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "╳",
+          "font_family": "'SimSun'",
+          "font_size": 12,
+          "color": "#8b8b8b"
+        }
+      ]
+    },
+    {
+      "name": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "type": "layer",
+      "rect": [
+        576,
+        44,
+        580,
+        16
+      ],
+      "raw_rect": [
+        574,
+        44,
+        581,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "logo",
+      "type": "group",
+      "rect": [
+        360,
+        48,
+        170,
+        50
+      ],
+      "raw_rect": [
+        361,
+        47,
+        170,
+        50
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "logo",
+          "type": "layer",
+          "rect": [
+            360,
+            48,
+            170,
+            50
+          ],
+          "raw_rect": [
+            361,
+            47,
+            170,
+            50
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    }
+  ]
+}

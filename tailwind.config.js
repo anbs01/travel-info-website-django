@@ -10,21 +10,32 @@ module.exports = {
     extend: {
       colors: {
         'travel': {
-          'brown': '#A67C52',    /* 主强调色 - 按钮/标题 */
-          'brown-light': '#B28F5F', /* 悬停/次级色 */
-          'dark': '#333333',     /* 主文字色 */
-          'gray': '#666666',     /* 次要文字/元数据 */
-          'light-bg': '#F9F9F9', /* 灰色背景块 */
+          'brown': '#A67C52',    
+          'brown-light': '#B28F5F', 
+          'dark': '#333333',     
+          'gray': '#666666',     
+          'light-bg': '#F9F9F9', 
         }
+      },
+      spacing: {
+        '15px': '15px',
+        '112px': '112px',
+        '252px': '252px',
+      },
+      maxWidth: {
+        'design': '1202px',
       },
       container: {
         center: true,
-        padding: '1rem',
+        padding: {
+          DEFAULT: '1rem',
+          xl: '0',
+        },
         screens: {
           sm: '640px',
           md: '768px',
           lg: '1024px',
-          xl: '1200px', /* 对齐设计稿常用宽度 */
+          xl: '1202px', 
         },
       },
       fontFamily: {

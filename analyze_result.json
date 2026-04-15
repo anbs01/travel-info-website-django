@@ -1,0 +1,1043 @@
+{
+  "filename": "首页.psd",
+  "canvas": [
+    1920,
+    1069
+  ],
+  "structure": [
+    {
+      "name": "图层 0",
+      "type": "layer",
+      "rect": [
+        0,
+        -4,
+        1920,
+        1890
+      ],
+      "raw_rect": [
+        0,
+        -4,
+        1920,
+        1888
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "底部 二次版本",
+      "type": "group",
+      "rect": [
+        0,
+        936,
+        1920,
+        100
+      ],
+      "raw_rect": [
+        -1,
+        936,
+        1922,
+        98
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "底部直线",
+          "type": "layer",
+          "rect": [
+            0,
+            936,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            936,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "关于我们　服务协议 　合作事宜 　意见建议 　联系我们 Copyright © 2026-2027 NAME.COM All ",
+          "type": "layer",
+          "rect": [
+            790,
+            976,
+            340,
+            60
+          ],
+          "raw_rect": [
+            790,
+            974,
+            340,
+            60
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "关于我们　服务协议 　合作事宜 　意见建议 　联系我们\rCopyright © 2026-2027 NAME.COM All Rights Reserved\r版权所有：网站名称　鲁ICP备123456789号",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "搜索",
+      "type": "group",
+      "rect": [
+        390,
+        250,
+        1130,
+        132
+      ],
+      "raw_rect": [
+        392,
+        252,
+        1130,
+        133
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "搜索框",
+          "type": "layer",
+          "rect": [
+            490,
+            250,
+            730,
+            50
+          ],
+          "raw_rect": [
+            488,
+            252,
+            728,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "选择小框",
+          "type": "layer",
+          "rect": [
+            1220,
+            250,
+            110,
+            50
+          ],
+          "raw_rect": [
+            1220,
+            252,
+            111,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "▼",
+          "type": "layer",
+          "rect": [
+            1304,
+            270,
+            12,
+            12
+          ],
+          "raw_rect": [
+            1304,
+            270,
+            13,
+            13
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "▼",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "纪行·攻略",
+          "type": "layer",
+          "rect": [
+            1236,
+            270,
+            64,
+            16
+          ],
+          "raw_rect": [
+            1235,
+            268,
+            63,
+            15
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "纪行·攻略",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "搜索小框",
+          "type": "layer",
+          "rect": [
+            1336,
+            250,
+            96,
+            50
+          ],
+          "raw_rect": [
+            1336,
+            252,
+            95,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "搜 索",
+          "type": "layer",
+          "rect": [
+            1364,
+            268,
+            40,
+            20
+          ],
+          "raw_rect": [
+            1365,
+            267,
+            41,
+            18
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "搜 索",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "这里的搜索热词里的显示在首页的　　历史文化名城　　宜居城市　　绿色城市　　千年古镇　　千年古村　　旅游城市　　避暑城市　　滑雪",
+          "type": "layer",
+          "rect": [
+            390,
+            336,
+            1130,
+            50
+          ],
+          "raw_rect": [
+            392,
+            335,
+            1130,
+            50
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "这里的搜索热词里的显示在首页的　　历史文化名城　　宜居城市　　绿色城市　　千年古镇　　千年古村　　旅游城市　　避暑城市　　滑雪城市　　养生福地　　十大古迹\r康养胜地　　十大古城　　赏花名地避暑城市　康养绿城　　十大名迹　　文物古迹　　十大博物馆　　观鸟福地　　灯会名城",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "type": "layer",
+      "rect": [
+        360,
+        16,
+        584,
+        16
+      ],
+      "raw_rect": [
+        361,
+        15,
+        583,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "font_family": "Unknown",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "logo",
+      "type": "group",
+      "rect": [
+        790,
+        110,
+        340,
+        100
+      ],
+      "raw_rect": [
+        791,
+        112,
+        338,
+        98
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "图层 11",
+          "type": "layer",
+          "rect": [
+            790,
+            110,
+            340,
+            100
+          ],
+          "raw_rect": [
+            791,
+            112,
+            338,
+            98
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "登录  注册",
+      "type": "layer",
+      "rect": [
+        1450,
+        16,
+        64,
+        10
+      ],
+      "raw_rect": [
+        1448,
+        15,
+        64,
+        12
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "登录  注册",
+      "font_family": "Unknown",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "二维码",
+      "type": "group",
+      "rect": [
+        1448,
+        16,
+        116,
+        136
+      ],
+      "raw_rect": [
+        1446,
+        15,
+        116,
+        136
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "小二维码",
+          "type": "layer",
+          "rect": [
+            1540,
+            16,
+            16,
+            16
+          ],
+          "raw_rect": [
+            1542,
+            15,
+            15,
+            15
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "二维码背景",
+          "type": "layer",
+          "rect": [
+            1448,
+            36,
+            116,
+            116
+          ],
+          "raw_rect": [
+            1446,
+            35,
+            115,
+            115
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "二维码",
+          "type": "layer",
+          "rect": [
+            1448,
+            36,
+            116,
+            116
+          ],
+          "raw_rect": [
+            1446,
+            35,
+            116,
+            116
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "推荐目的地",
+      "type": "group",
+      "rect": [
+        360,
+        476,
+        1200,
+        384
+      ],
+      "raw_rect": [
+        359,
+        475,
+        1202,
+        383
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "换一批",
+          "type": "layer",
+          "rect": [
+            1524,
+            480,
+            36,
+            10
+          ],
+          "raw_rect": [
+            1524,
+            478,
+            36,
+            12
+          ],
+          "visible": false,
+          "opacity": 1.0,
+          "text_content": "换一批",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "大背景",
+          "type": "layer",
+          "rect": [
+            360,
+            476,
+            1200,
+            384
+          ],
+          "raw_rect": [
+            359,
+            475,
+            1202,
+            383
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "图片背景",
+          "type": "layer",
+          "rect": [
+            390,
+            504,
+            484,
+            324
+          ],
+          "raw_rect": [
+            389,
+            503,
+            483,
+            323
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "图层 12",
+          "type": "layer",
+          "rect": [
+            390,
+            504,
+            480,
+            320
+          ],
+          "raw_rect": [
+            391,
+            505,
+            480,
+            320
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "灰色背景",
+          "type": "layer",
+          "rect": [
+            390,
+            784,
+            484,
+            44
+          ],
+          "raw_rect": [
+            389,
+            783,
+            483,
+            43
+          ],
+          "visible": true,
+          "opacity": 0.7019607843137254
+        },
+        {
+          "name": "图片小点",
+          "type": "group",
+          "rect": [
+            804,
+            800,
+            56,
+            16
+          ],
+          "raw_rect": [
+            804,
+            799,
+            54,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "椭圆 1",
+              "type": "layer",
+              "rect": [
+                804,
+                800,
+                16,
+                16
+              ],
+              "raw_rect": [
+                804,
+                799,
+                14,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "椭圆2",
+              "type": "layer",
+              "rect": [
+                824,
+                800,
+                16,
+                16
+              ],
+              "raw_rect": [
+                824,
+                799,
+                14,
+                14
+              ],
+              "visible": true,
+              "opacity": 0.5019607843137255
+            },
+            {
+              "name": "椭圆3",
+              "type": "layer",
+              "rect": [
+                844,
+                800,
+                16,
+                16
+              ],
+              "raw_rect": [
+                844,
+                799,
+                14,
+                14
+              ],
+              "visible": true,
+              "opacity": 0.5019607843137255
+            }
+          ]
+        },
+        {
+          "name": "爱在烟台，难以离开",
+          "type": "layer",
+          "rect": [
+            400,
+            796,
+            150,
+            16
+          ],
+          "raw_rect": [
+            400,
+            797,
+            150,
+            17
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "爱在烟台，难以离开",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "文字边小圆点",
+          "type": "group",
+          "rect": [
+            928,
+            512,
+            10,
+            296
+          ],
+          "raw_rect": [
+            927,
+            514,
+            9,
+            297
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "小圆点1",
+              "type": "layer",
+              "rect": [
+                928,
+                512,
+                10,
+                10
+              ],
+              "raw_rect": [
+                927,
+                514,
+                9,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "小圆点2",
+              "type": "layer",
+              "rect": [
+                928,
+                548,
+                10,
+                10
+              ],
+              "raw_rect": [
+                927,
+                547,
+                9,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "小圆点3",
+              "type": "layer",
+              "rect": [
+                928,
+                580,
+                10,
+                10
+              ],
+              "raw_rect": [
+                927,
+                579,
+                9,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "小圆点4",
+              "type": "layer",
+              "rect": [
+                928,
+                610,
+                10,
+                10
+              ],
+              "raw_rect": [
+                927,
+                612,
+                9,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "小圆点5",
+              "type": "layer",
+              "rect": [
+                928,
+                644,
+                10,
+                10
+              ],
+              "raw_rect": [
+                927,
+                643,
+                9,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "小圆点6",
+              "type": "layer",
+              "rect": [
+                928,
+                676,
+                10,
+                10
+              ],
+              "raw_rect": [
+                927,
+                676,
+                9,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "小圆点7",
+              "type": "layer",
+              "rect": [
+                928,
+                708,
+                10,
+                10
+              ],
+              "raw_rect": [
+                927,
+                707,
+                9,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "小圆点8",
+              "type": "layer",
+              "rect": [
+                928,
+                740,
+                10,
+                10
+              ],
+              "raw_rect": [
+                927,
+                738,
+                9,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "小圆点9",
+              "type": "layer",
+              "rect": [
+                928,
+                770,
+                10,
+                10
+              ],
+              "raw_rect": [
+                927,
+                771,
+                9,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "小圆点10",
+              "type": "layer",
+              "rect": [
+                928,
+                800,
+                10,
+                10
+              ],
+              "raw_rect": [
+                927,
+                802,
+                9,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "设置在首页推荐的文字记录，不取消或未到期会一直显示在最上边     台湾写真:台北寻“杠子头”,咬一口“硬邦邦”的乡愁   “",
+          "type": "layer",
+          "rect": [
+            944,
+            512,
+            424,
+            300
+          ],
+          "raw_rect": [
+            945,
+            513,
+            425,
+            302
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "设置在首页推荐的文字记录，不取消或未到期会一直显示在最上边    \r台湾写真:台北寻“杠子头”,咬一口“硬邦邦”的乡愁  \r“海绵”常德,一条老街留住文化与乡愁\r打卡青岛明月山海间不夜城,全攻略带你深度游城阳\r周末,在岱山来场Citywalk!\r绮罗古镇:六百年岁月里的古村肌理与人文印记\r超600年历史!广州这条避世古村,藏得太深了!\r江西省景德镇市浮梁县瑶里村:古村白墙黛瓦 瓷韵茶香悠长\r从文化流量到消费增量 “博物馆经济圈”释放新价值\r礼泉:流量质量双突破写好假期乡村旅游新答卷",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": " [纪行] [攻略] [资讯] [纪行] [攻略] [资讯] [纪行] [攻略] [资讯]  [资讯]",
+          "type": "layer",
+          "rect": [
+            1490,
+            544,
+            40,
+            270
+          ],
+          "raw_rect": [
+            1491,
+            544,
+            38,
+            270
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "\r[纪行]\r[攻略]\r[资讯]\r[纪行]\r[攻略]\r[资讯]\r[纪行]\r[攻略]\r[资讯]\r\r[资讯]",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "推荐目的地 拷贝",
+      "type": "group",
+      "rect": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "raw_rect": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible": false,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "推荐目的地",
+          "type": "layer",
+          "rect": [
+            920,
+            480,
+            88,
+            16
+          ],
+          "raw_rect": [
+            918,
+            482,
+            86,
+            17
+          ],
+          "visible": false,
+          "opacity": 1.0,
+          "text_content": "推荐目的地",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "换一批",
+          "type": "layer",
+          "rect": [
+            1520,
+            512,
+            36,
+            10
+          ],
+          "raw_rect": [
+            1521,
+            514,
+            36,
+            12
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "换一批",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "图层 4",
+          "type": "layer",
+          "rect": [
+            360,
+            540,
+            380,
+            252
+          ],
+          "raw_rect": [
+            361,
+            541,
+            380,
+            253
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "爱在烟台，难以离开",
+          "type": "layer",
+          "rect": [
+            480,
+            824,
+            130,
+            16
+          ],
+          "raw_rect": [
+            482,
+            824,
+            131,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "爱在烟台，难以离开",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "走进天然氧吧，感受生态兴隆",
+          "type": "layer",
+          "rect": [
+            868,
+            824,
+            190,
+            16
+          ],
+          "raw_rect": [
+            867,
+            824,
+            189,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "走进天然氧吧，感受生态兴隆",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "金色三峡，银色大坝，绿色宜昌",
+          "type": "layer",
+          "rect": [
+            1284,
+            824,
+            204,
+            16
+          ],
+          "raw_rect": [
+            1285,
+            824,
+            205,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "金色三峡，银色大坝，绿色宜昌",
+          "font_family": "Unknown",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "图层 5",
+          "type": "layer",
+          "rect": [
+            770,
+            540,
+            380,
+            252
+          ],
+          "raw_rect": [
+            771,
+            542,
+            380,
+            253
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "图层 6",
+          "type": "layer",
+          "rect": [
+            1180,
+            540,
+            380,
+            252
+          ],
+          "raw_rect": [
+            1179,
+            540,
+            380,
+            253
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    }
+  ]
+}

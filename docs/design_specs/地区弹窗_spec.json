@@ -1,0 +1,547 @@
+{
+  "filename": "地区弹窗.psd",
+  "canvas": [
+    600,
+    733
+  ],
+  "structure": [
+    {
+      "name": "图层 0",
+      "type": "layer",
+      "rect": [
+        0,
+        0,
+        600,
+        850
+      ],
+      "raw_rect": [
+        0,
+        0,
+        600,
+        850
+      ],
+      "visible": false,
+      "opacity": 1.0
+    },
+    {
+      "name": "大框",
+      "type": "layer",
+      "rect": [
+        0,
+        0,
+        600,
+        736
+      ],
+      "raw_rect": [
+        -1,
+        -1,
+        602,
+        734
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "城乡背景",
+      "type": "layer",
+      "rect": [
+        24,
+        36,
+        80,
+        30
+      ],
+      "raw_rect": [
+        24,
+        35,
+        80,
+        28
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "国内城乡   海外城乡",
+      "type": "layer",
+      "rect": [
+        36,
+        44,
+        140,
+        16
+      ],
+      "raw_rect": [
+        37,
+        43,
+        140,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "国内城乡   海外城乡",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "╳",
+      "type": "layer",
+      "rect": [
+        556,
+        28,
+        12,
+        12
+      ],
+      "raw_rect": [
+        557,
+        27,
+        13,
+        13
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "╳",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "直线",
+      "type": "layer",
+      "rect": [
+        12,
+        60,
+        572,
+        4
+      ],
+      "raw_rect": [
+        13,
+        59,
+        573,
+        4
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "省份",
+      "type": "layer",
+      "rect": [
+        30,
+        90,
+        540,
+        160
+      ],
+      "raw_rect": [
+        30,
+        91,
+        541,
+        158
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "北京　　　天津　　　河北　　　山西　　　内蒙古　　辽宁　　　吉林　　　黑龙江\r上海　　　江苏　　　浙江　　　安徽　　　福建　　　江西　　　山东　　　河南\r湖北　　　湖南　　　广东　　　广西　　　海南　　　重庆　　　四川　　　贵州\r云南　　　西藏　　　陕西　　　甘肃　　　青海　　　宁夏　　　新疆　　　香港\r澳门　　　台湾　",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "地级市",
+      "type": "group",
+      "rect": [
+        24,
+        276,
+        556,
+        84
+      ],
+      "raw_rect": [
+        25,
+        276,
+        555,
+        83
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "间隔线",
+          "type": "layer",
+          "rect": [
+            24,
+            276,
+            556,
+            4
+          ],
+          "raw_rect": [
+            25,
+            276,
+            555,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "太原　　　　　大同　　　　　朔州　　　　　大同　　　　　朔州　　　　　大同",
+          "type": "layer",
+          "rect": [
+            30,
+            344,
+            528,
+            16
+          ],
+          "raw_rect": [
+            30,
+            345,
+            527,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "太原　　　　　大同　　　　　朔州　　　　　大同　　　　　朔州　　　　　大同",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "地级市 境外城乡",
+          "type": "layer",
+          "rect": [
+            32,
+            304,
+            104,
+            16
+          ],
+          "raw_rect": [
+            34,
+            305,
+            103,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "地级市 境外城乡",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "小竖线 ",
+          "type": "layer",
+          "rect": [
+            24,
+            304,
+            8,
+            20
+          ],
+          "raw_rect": [
+            25,
+            303,
+            6,
+            18
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "县级市",
+      "type": "group",
+      "rect": [
+        24,
+        384,
+        556,
+        84
+      ],
+      "raw_rect": [
+        25,
+        386,
+        555,
+        83
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "间隔线",
+          "type": "layer",
+          "rect": [
+            24,
+            384,
+            556,
+            4
+          ],
+          "raw_rect": [
+            25,
+            386,
+            555,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "小店区　　　　　杏花岭区　　　　　古交市",
+          "type": "layer",
+          "rect": [
+            30,
+            456,
+            284,
+            16
+          ],
+          "raw_rect": [
+            30,
+            455,
+            284,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "小店区　　　　　杏花岭区　　　　　古交市",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "县级市",
+          "type": "layer",
+          "rect": [
+            32,
+            416,
+            40,
+            16
+          ],
+          "raw_rect": [
+            34,
+            415,
+            41,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "县级市",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "小竖线 ",
+          "type": "layer",
+          "rect": [
+            24,
+            412,
+            8,
+            20
+          ],
+          "raw_rect": [
+            25,
+            413,
+            6,
+            18
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "乡镇",
+      "type": "group",
+      "rect": [
+        24,
+        496,
+        556,
+        84
+      ],
+      "raw_rect": [
+        25,
+        496,
+        555,
+        83
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "间隔线",
+          "type": "layer",
+          "rect": [
+            24,
+            496,
+            556,
+            4
+          ],
+          "raw_rect": [
+            25,
+            496,
+            555,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "小店区　　　　　杏花岭区　　　　　古交市",
+          "type": "layer",
+          "rect": [
+            30,
+            564,
+            284,
+            16
+          ],
+          "raw_rect": [
+            30,
+            565,
+            284,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "小店区　　　　　杏花岭区　　　　　古交市",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "乡镇",
+          "type": "layer",
+          "rect": [
+            32,
+            524,
+            28,
+            16
+          ],
+          "raw_rect": [
+            34,
+            525,
+            27,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "乡镇",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "小竖线 ",
+          "type": "layer",
+          "rect": [
+            24,
+            524,
+            8,
+            20
+          ],
+          "raw_rect": [
+            25,
+            523,
+            6,
+            18
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "村庄",
+      "type": "group",
+      "rect": [
+        24,
+        608,
+        556,
+        84
+      ],
+      "raw_rect": [
+        25,
+        606,
+        555,
+        83
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "间隔线",
+          "type": "layer",
+          "rect": [
+            24,
+            608,
+            556,
+            4
+          ],
+          "raw_rect": [
+            25,
+            606,
+            555,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "小店区　　　　　杏花岭区　　　　　古交市",
+          "type": "layer",
+          "rect": [
+            30,
+            676,
+            284,
+            16
+          ],
+          "raw_rect": [
+            30,
+            675,
+            284,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "小店区　　　　　杏花岭区　　　　　古交市",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "村庄",
+          "type": "layer",
+          "rect": [
+            32,
+            636,
+            28,
+            16
+          ],
+          "raw_rect": [
+            34,
+            635,
+            27,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "村庄",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "小竖线 ",
+          "type": "layer",
+          "rect": [
+            24,
+            632,
+            8,
+            20
+          ],
+          "raw_rect": [
+            25,
+            633,
+            6,
+            18
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    }
+  ]
+}

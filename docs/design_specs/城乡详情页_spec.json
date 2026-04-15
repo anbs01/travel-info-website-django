@@ -1,0 +1,3883 @@
+{
+  "filename": "城乡详情页.psd",
+  "canvas": [
+    1920,
+    4500
+  ],
+  "structure": [
+    {
+      "name": "背景色，白",
+      "type": "layer",
+      "rect": [
+        0,
+        0,
+        1920,
+        4500
+      ],
+      "raw_rect": [
+        0,
+        0,
+        1920,
+        4500
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "底部",
+      "type": "group",
+      "rect": [
+        0,
+        3860,
+        1920,
+        84
+      ],
+      "raw_rect": [
+        -1,
+        3858,
+        1922,
+        85
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "底部 背景色",
+          "type": "layer",
+          "rect": [
+            0,
+            3860,
+            1920,
+            84
+          ],
+          "raw_rect": [
+            -1,
+            3860,
+            1922,
+            83
+          ],
+          "visible": true,
+          "opacity": 0.8
+        },
+        {
+          "name": "底部背景线",
+          "type": "layer",
+          "rect": [
+            0,
+            3860,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            3858,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "Copyright © 2026-2027 NAME.COM All Rights Reserved 版权所有：网站名称",
+          "type": "layer",
+          "rect": [
+            804,
+            3896,
+            310,
+            32
+          ],
+          "raw_rect": [
+            805,
+            3896,
+            311,
+            34
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "Copyright © 2026-2027 NAME.COM All Rights Reserved\r版权所有：网站名称",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "顶部 渐变",
+      "type": "group",
+      "rect": [
+        0,
+        -4,
+        1920,
+        200
+      ],
+      "raw_rect": [
+        -1,
+        -5,
+        1922,
+        202
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "渐变背景",
+          "type": "layer",
+          "rect": [
+            0,
+            -4,
+            1920,
+            200
+          ],
+          "raw_rect": [
+            -1,
+            -5,
+            1922,
+            202
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "渐变",
+          "type": "layer",
+          "rect": [
+            0,
+            0,
+            1920,
+            3500
+          ],
+          "raw_rect": [
+            0,
+            0,
+            1920,
+            3500
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "顶部banner",
+      "type": "group",
+      "rect": [
+        0,
+        140,
+        1920,
+        56
+      ],
+      "raw_rect": [
+        -1,
+        142,
+        1922,
+        54
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "图层 699",
+          "type": "layer",
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "白背景",
+          "type": "layer",
+          "rect": [
+            0,
+            144,
+            1920,
+            52
+          ],
+          "raw_rect": [
+            -1,
+            143,
+            1921,
+            53
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "细长线",
+          "type": "layer",
+          "rect": [
+            0,
+            140,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            142,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "你的位置：城乡·街巷 > 国家名称/省份名称/地级市/县级市/乡镇名称 > 城乡全称(如果是海外城乡，括号内显示一下英文名称)",
+          "type": "layer",
+          "rect": [
+            360,
+            164,
+            680,
+            10
+          ],
+          "raw_rect": [
+            361,
+            164,
+            682,
+            12
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "你的位置：城乡·街巷 > 国家名称/省份名称/地级市/县级市/乡镇名称 > 城乡全称(如果是海外城乡，括号内显示一下英文名称)",
+          "font_family": "'SimSun'",
+          "font_size": 12,
+          "color": "#676767"
+        }
+      ]
+    },
+    {
+      "name": "正文",
+      "type": "group",
+      "rect": [
+        360,
+        236,
+        1200,
+        3524
+      ],
+      "raw_rect": [
+        359,
+        236,
+        1202,
+        3523
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "正文白背景",
+          "type": "layer",
+          "rect": [
+            360,
+            236,
+            1200,
+            3524
+          ],
+          "raw_rect": [
+            359,
+            236,
+            1202,
+            3523
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "图层 711",
+          "type": "layer",
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "揪错关闭窗口",
+          "type": "group",
+          "rect": [
+            1370,
+            2176,
+            140,
+            24
+          ],
+          "raw_rect": [
+            1368,
+            2174,
+            141,
+            25
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                1370,
+                2176,
+                64,
+                24
+              ],
+              "raw_rect": [
+                1368,
+                2174,
+                63,
+                25
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "我要揪错",
+              "type": "layer",
+              "rect": [
+                1376,
+                2180,
+                50,
+                10
+              ],
+              "raw_rect": [
+                1376,
+                2180,
+                48,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "我要揪错",
+              "font_family": "'SimSun'",
+              "font_size": 12,
+              "color": "#ffffff"
+            },
+            {
+              "name": "背景 拷贝",
+              "type": "layer",
+              "rect": [
+                1448,
+                2176,
+                64,
+                24
+              ],
+              "raw_rect": [
+                1446,
+                2174,
+                63,
+                25
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "关闭窗口",
+              "type": "layer",
+              "rect": [
+                1456,
+                2180,
+                48,
+                10
+              ],
+              "raw_rect": [
+                1454,
+                2180,
+                47,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "关闭窗口",
+              "font_family": "'SimSun'",
+              "font_size": 12,
+              "color": "#ffffff"
+            }
+          ]
+        },
+        {
+          "name": "版权声明",
+          "type": "group",
+          "rect": [
+            410,
+            2016,
+            1100,
+            112
+          ],
+          "raw_rect": [
+            409,
+            2014,
+            1102,
+            113
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "版权声明 框框",
+              "type": "layer",
+              "rect": [
+                410,
+                2016,
+                1100,
+                112
+              ],
+              "raw_rect": [
+                409,
+                2014,
+                1102,
+                113
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图层 700",
+              "type": "layer",
+              "rect": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "raw_rect": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "",
+              "font_family": "'AdobeInvisFont'",
+              "font_size": 12,
+              "color": "#0000ff"
+            },
+            {
+              "name": "版权声明  热门景区和博物馆暂时不具备完全取消预约的条件，主要因为旺季的时候供给跟不上需求，必须对需求进行适当的管理才能保证合",
+              "type": "layer",
+              "rect": [
+                430,
+                2036,
+                1056,
+                70
+              ],
+              "raw_rect": [
+                432,
+                2035,
+                1057,
+                69
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "版权声明  热门景区和博物馆暂时不具备完全取消预约的条件，主要因为旺季的时候供给跟不上需求，必须对需求进行适当的管理才能保证合理的市场秩序。”中国旅游研究院总统计师马仪亮说。在他看来，“热门景区和博物馆如果取消预约，一定程度上也会造成不公平”。因为有的游客可以花钱找人帮自己排队购票，有钱的人或者愿意花更多钱的人，参观的机会更多。",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "概述",
+          "type": "group",
+          "rect": [
+            416,
+            500,
+            1090,
+            1456
+          ],
+          "raw_rect": [
+            414,
+            502,
+            1092,
+            1454
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "此次惠游措施惠及所有从浙江出发到贵州游玩",
+              "type": "layer",
+              "rect": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "raw_rect": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "图层 698",
+              "type": "layer",
+              "rect": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "raw_rect": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "昨晚，杭州市文化广电旅游局发布《关于取消全市A级旅游景区预约的通知》，7月5日起，全市所有A级旅游景区取消预约入园要求。  通",
+              "type": "layer",
+              "rect": [
+                416,
+                500,
+                1090,
+                1456
+              ],
+              "raw_rect": [
+                414,
+                502,
+                1092,
+                1454
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "昨晚，杭州市文化广电旅游局发布《关于取消全市A级旅游景区预约的通知》，7月5日起，全市所有A级旅游景区取消预约入园要求。\r\r通知指出，全市A级旅游景区(除文博场馆外)取消预约要求。法定节假日游客量大的景区应加强流量管控，采取流量提示、错峰分流等措施，确保游客较为舒适地游览体验。\r\r同时，文博场馆类A级景区和A级景区内的文博场馆在非周末、非法定节假日取消预约入馆(团队游客除外)。周末、法定节假日游客量大的文博场馆经评估确需预约的，应结合实际优化预约机制，简化预约程序，并保留人工窗口、电话预约等方式。\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r图片来源：旅游网\r\r多地宣布取消景区实名预约\r\r7月1日起，连云港市所有A级旅游景区和公共文博场馆全面取消实名预约。\r\r7月5日晚，据广州市文化广电旅游局消息，从7月8日(星期一)起，除广州塔、陈家祠、南越王博物院、广州市文化馆、黄埔军校旧址纪念馆等热门旅游景区，以及白云山摩星岭每日晚上20:00-次日早上8:00时段外，全市不再统一要求A级旅游景区执行实名预约，可根据实际情况保留团队预约制度。其他文博场馆和公共游览场所可参照执行。\r\r7月4日，湖南长沙市文化旅游广电局宣布，为迎接暑期旅游消费旺季的到来，进一步提升游客体验感和便利度，自7月6日起，长沙市除岳麓山·橘子洲旅游区(含岳麓山、橘子洲、岳麓书院、新民学会旧址四个子景区)、宁乡市花明楼景区、湖南博物院、湖南省科学技术馆、湖南省植物园等5个景区需实名预约外，其余77家A级旅游景区全面取消实名预约。\r\r此前，北京、上海、苏州等地在6月已宣布“取消景区预约”。景区取消预约制的消息发布后，引发了网友广泛关注。不少网友点赞：“早就该取消了”，也有部分网友担忧：“取消预约后，会不会到现场人太多，出现白跑一趟的情况?”\r\r北京市第二外国语学院中国旅游市场研究中心主任马爱萍分析称，是否取消预约，各地景区需要因地制宜。在她看来，旅游产品的一个重要特征是在地域空间上的非均衡性，即不同的景点对游客吸引力不同，标志性的景点必然吸引更多的客流，这对管理提出更高要求。因此，热门景点的提前预约对于避免人群拥挤、保障游客体验质量和保护文物安全十分必要。\r“热门景区和博物馆暂时不具备完全取消预约的条件，主要因为旺季的时候供给跟不上需求，必须对需求进行适当的管理才能保证合理的市场秩序。”中国旅游研究院总统计师马仪亮说。在他看来，“热门景区和博物馆如果取消预约，一定程度上也会造成不公平”。因为有的游客可以花钱找人帮自己排队购票，有钱的人或者愿意花更多钱的人，参观的机会更多。\r\r\r(综合央视网、上观新闻、中国旅游报等)\r",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "图片",
+              "type": "layer",
+              "rect": [
+                548,
+                776,
+                800,
+                450
+              ],
+              "raw_rect": [
+                547,
+                777,
+                800,
+                450
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "景区景点",
+          "type": "group",
+          "rect": [
+            410,
+            2300,
+            1100,
+            192
+          ],
+          "raw_rect": [
+            410,
+            2300,
+            1101,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "间隔线",
+              "type": "layer",
+              "rect": [
+                410,
+                2490,
+                1100,
+                4
+              ],
+              "raw_rect": [
+                410,
+                2489,
+                1101,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "矩形 16",
+              "type": "layer",
+              "rect": [
+                410,
+                2300,
+                212,
+                144
+              ],
+              "raw_rect": [
+                410,
+                2300,
+                213,
+                143
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "烟台山",
+              "type": "layer",
+              "rect": [
+                384,
+                2296,
+                250,
+                160
+              ],
+              "raw_rect": [
+                386,
+                2297,
+                250,
+                159
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "游玩特色：后端没选 ，前端就不显示这一行  农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等5",
+              "type": "layer",
+              "rect": [
+                648,
+                2344,
+                836,
+                64
+              ],
+              "raw_rect": [
+                647,
+                2345,
+                837,
+                66
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "游玩特色：后端没选 ，前端就不显示这一行\r\r农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，以及山东潍坊小麦峪村等144个精品景点。",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "景区标签 背景框",
+              "type": "layer",
+              "rect": [
+                810,
+                2304,
+                68,
+                24
+              ],
+              "raw_rect": [
+                809,
+                2304,
+                67,
+                24
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "  名气级别",
+              "type": "layer",
+              "rect": [
+                816,
+                2310,
+                56,
+                16
+              ],
+              "raw_rect": [
+                816,
+                2309,
+                55,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "  名气级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "景区名称",
+              "type": "layer",
+              "rect": [
+                644,
+                2310,
+                70,
+                16
+              ],
+              "raw_rect": [
+                645,
+                2308,
+                68,
+                16
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "景区名称",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "  景区级别",
+              "type": "layer",
+              "rect": [
+                732,
+                2310,
+                56,
+                16
+              ],
+              "raw_rect": [
+                733,
+                2309,
+                55,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "  景区级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "特产美食",
+          "type": "group",
+          "rect": [
+            410,
+            2540,
+            1100,
+            504
+          ],
+          "raw_rect": [
+            410,
+            2540,
+            1101,
+            503
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "间隔线",
+              "type": "layer",
+              "rect": [
+                410,
+                2730,
+                1100,
+                4
+              ],
+              "raw_rect": [
+                410,
+                2729,
+                1101,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "矩形 16",
+              "type": "layer",
+              "rect": [
+                410,
+                2540,
+                212,
+                144
+              ],
+              "raw_rect": [
+                410,
+                2540,
+                213,
+                143
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图层 708",
+              "type": "layer",
+              "rect": [
+                360,
+                2540,
+                300,
+                300
+              ],
+              "raw_rect": [
+                361,
+                2540,
+                300,
+                300
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "产品特色：  农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，",
+              "type": "layer",
+              "rect": [
+                648,
+                2584,
+                850,
+                64
+              ],
+              "raw_rect": [
+                647,
+                2585,
+                850,
+                66
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品特色：\r\r农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，以及山东潍坊小麦峪村等144个精品景点。",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "  菜系类别　特产级别　非遗级别",
+              "type": "layer",
+              "rect": [
+                776,
+                2550,
+                200,
+                16
+              ],
+              "raw_rect": [
+                777,
+                2549,
+                198,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "  菜系类别　特产级别　非遗级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "非遗级别",
+              "type": "layer",
+              "rect": [
+                776,
+                3030,
+                56,
+                16
+              ],
+              "raw_rect": [
+                777,
+                3029,
+                56,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "非遗级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "美食特产/名称",
+              "type": "layer",
+              "rect": [
+                644,
+                2550,
+                110,
+                16
+              ],
+              "raw_rect": [
+                645,
+                2548,
+                112,
+                16
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "美食特产/名称",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "热门打卡地",
+          "type": "group",
+          "rect": [
+            410,
+            2780,
+            1100,
+            676
+          ],
+          "raw_rect": [
+            410,
+            2780,
+            1100,
+            677
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "间隔线",
+              "type": "layer",
+              "rect": [
+                410,
+                2970,
+                1100,
+                4
+              ],
+              "raw_rect": [
+                410,
+                2969,
+                1100,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "矩形 16",
+              "type": "layer",
+              "rect": [
+                410,
+                2780,
+                212,
+                144
+              ],
+              "raw_rect": [
+                410,
+                2780,
+                213,
+                143
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "风情街图片",
+              "type": "layer",
+              "rect": [
+                390,
+                2780,
+                250,
+                168
+              ],
+              "raw_rect": [
+                391,
+                2778,
+                250,
+                167
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "游玩特色：  农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，",
+              "type": "layer",
+              "rect": [
+                648,
+                2824,
+                860,
+                64
+              ],
+              "raw_rect": [
+                647,
+                2825,
+                862,
+                66
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "游玩特色：\r\r农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，以及山东潍坊小麦峪村等144个精品景点。",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "打卡点背景框 ",
+              "type": "layer",
+              "rect": [
+                784,
+                2784,
+                70,
+                24
+              ],
+              "raw_rect": [
+                783,
+                2784,
+                69,
+                24
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "  名气级别",
+              "type": "layer",
+              "rect": [
+                790,
+                2790,
+                56,
+                16
+              ],
+              "raw_rect": [
+                789,
+                2789,
+                56,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "  名气级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "交通背景框",
+              "type": "layer",
+              "rect": [
+                768,
+                3432,
+                70,
+                24
+              ],
+              "raw_rect": [
+                766,
+                3433,
+                69,
+                24
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "交通标签",
+              "type": "layer",
+              "rect": [
+                772,
+                3440,
+                56,
+                16
+              ],
+              "raw_rect": [
+                773,
+                3438,
+                55,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "  名气级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热门打卡点名称",
+              "type": "layer",
+              "rect": [
+                644,
+                2790,
+                120,
+                16
+              ],
+              "raw_rect": [
+                645,
+                2788,
+                120,
+                16
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热门打卡点名称",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "文创用品",
+          "type": "group",
+          "rect": [
+            410,
+            3020,
+            1100,
+            192
+          ],
+          "raw_rect": [
+            410,
+            3021,
+            1101,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "间隔线",
+              "type": "layer",
+              "rect": [
+                410,
+                3210,
+                1100,
+                4
+              ],
+              "raw_rect": [
+                410,
+                3210,
+                1101,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "矩形 16",
+              "type": "layer",
+              "rect": [
+                410,
+                3020,
+                212,
+                144
+              ],
+              "raw_rect": [
+                410,
+                3021,
+                213,
+                143
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "剪纸图片",
+              "type": "layer",
+              "rect": [
+                390,
+                3020,
+                250,
+                290
+              ],
+              "raw_rect": [
+                391,
+                3019,
+                250,
+                291
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "产品特色：  农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，",
+              "type": "layer",
+              "rect": [
+                648,
+                3064,
+                850,
+                64
+              ],
+              "raw_rect": [
+                647,
+                3066,
+                850,
+                66
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品特色：\r\r农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，以及山东潍坊小麦峪村等144个精品景点。",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "矩形 17",
+              "type": "layer",
+              "rect": [
+                780,
+                3028,
+                80,
+                24
+              ],
+              "raw_rect": [
+                779,
+                3027,
+                78,
+                24
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "文创/商品名称",
+              "type": "layer",
+              "rect": [
+                644,
+                3030,
+                110,
+                16
+              ],
+              "raw_rect": [
+                645,
+                3029,
+                112,
+                16
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "文创/商品名称",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "攻略",
+          "type": "group",
+          "rect": [
+            410,
+            3264,
+            1100,
+            120
+          ],
+          "raw_rect": [
+            410,
+            3263,
+            1101,
+            119
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "间隔线",
+              "type": "layer",
+              "rect": [
+                410,
+                3380,
+                1100,
+                4
+              ],
+              "raw_rect": [
+                410,
+                3378,
+                1101,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "背景框",
+              "type": "layer",
+              "rect": [
+                410,
+                3256,
+                212,
+                144
+              ],
+              "raw_rect": [
+                410,
+                3255,
+                213,
+                143
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "无图片",
+              "type": "layer",
+              "rect": [
+                404,
+                3252,
+                224,
+                150
+              ],
+              "raw_rect": [
+                404,
+                3253,
+                225,
+                150
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，以及山东潍坊小",
+              "type": "layer",
+              "rect": [
+                412,
+                3300,
+                1096,
+                30
+              ],
+              "raw_rect": [
+                413,
+                3300,
+                1094,
+                30
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，以及山东潍坊小麦峪村等144个精品景点。农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，以及山东潍坊小麦峪村等144个精品景点。",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "矩形 17",
+              "type": "layer",
+              "rect": [
+                780,
+                3260,
+                80,
+                24
+              ],
+              "raw_rect": [
+                779,
+                3261,
+                78,
+                24
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "故事/攻略标题 （无图片版，有图片如以上显示）",
+              "type": "layer",
+              "rect": [
+                410,
+                3264,
+                370,
+                16
+              ],
+              "raw_rect": [
+                411,
+                3263,
+                372,
+                16
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "故事/攻略标题 （无图片版，有图片如以上显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "交通",
+          "type": "group",
+          "rect": [
+            410,
+            3430,
+            1088,
+            144
+          ],
+          "raw_rect": [
+            410,
+            3429,
+            1087,
+            143
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "间隔线",
+              "type": "layer",
+              "rect": [
+                410,
+                3620,
+                1100,
+                4
+              ],
+              "raw_rect": [
+                408,
+                3618,
+                1101,
+                4
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "矩形 16",
+              "type": "layer",
+              "rect": [
+                410,
+                3430,
+                212,
+                144
+              ],
+              "raw_rect": [
+                410,
+                3429,
+                213,
+                143
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图层 710",
+              "type": "layer",
+              "rect": [
+                376,
+                3430,
+                250,
+                140
+              ],
+              "raw_rect": [
+                375,
+                3432,
+                249,
+                140
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，以及山东潍坊小",
+              "type": "layer",
+              "rect": [
+                648,
+                3472,
+                850,
+                30
+              ],
+              "raw_rect": [
+                647,
+                3474,
+                850,
+                30
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "农业农村部以“乡约中国年”为主题，发布天津运河烟火之旅、江苏镇江醋文化休闲之旅等53条冬季乡村休闲旅游精品线路，以及山东潍坊小麦峪村等144个精品景点。",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "矩形 17",
+              "type": "layer",
+              "rect": [
+                780,
+                3436,
+                80,
+                24
+              ],
+              "raw_rect": [
+                779,
+                3435,
+                78,
+                24
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "交通出行标题",
+              "type": "layer",
+              "rect": [
+                644,
+                3436,
+                104,
+                16
+              ],
+              "raw_rect": [
+                645,
+                3437,
+                103,
+                16
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "交通出行标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "栏目",
+          "type": "group",
+          "rect": [
+            404,
+            410,
+            1100,
+            32
+          ],
+          "raw_rect": [
+            405,
+            409,
+            1100,
+            34
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "基本资料背景",
+              "type": "layer",
+              "rect": [
+                410,
+                410,
+                80,
+                32
+              ],
+              "raw_rect": [
+                409,
+                409,
+                78,
+                33
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "基本资料",
+              "type": "layer",
+              "rect": [
+                420,
+                420,
+                56,
+                16
+              ],
+              "raw_rect": [
+                421,
+                421,
+                55,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "基本资料",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "打卡地背景",
+              "type": "layer",
+              "rect": [
+                496,
+                410,
+                90,
+                32
+              ],
+              "raw_rect": [
+                495,
+                410,
+                88,
+                33
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "热门打卡地",
+              "type": "layer",
+              "rect": [
+                504,
+                420,
+                70,
+                16
+              ],
+              "raw_rect": [
+                506,
+                421,
+                69,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热门打卡地",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "文创背景",
+              "type": "layer",
+              "rect": [
+                690,
+                410,
+                90,
+                32
+              ],
+              "raw_rect": [
+                689,
+                410,
+                88,
+                33
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "文创·商品",
+              "type": "layer",
+              "rect": [
+                700,
+                420,
+                70,
+                16
+              ],
+              "raw_rect": [
+                699,
+                421,
+                70,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "文创·商品",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "攻略背景",
+              "type": "layer",
+              "rect": [
+                784,
+                410,
+                90,
+                32
+              ],
+              "raw_rect": [
+                785,
+                410,
+                88,
+                33
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "线路攻略",
+              "type": "layer",
+              "rect": [
+                796,
+                420,
+                70,
+                16
+              ],
+              "raw_rect": [
+                795,
+                421,
+                70,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "交通·出行",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "攻略背景 拷贝",
+              "type": "layer",
+              "rect": [
+                880,
+                410,
+                90,
+                32
+              ],
+              "raw_rect": [
+                881,
+                410,
+                88,
+                33
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "线路攻略 拷贝",
+              "type": "layer",
+              "rect": [
+                890,
+                420,
+                70,
+                16
+              ],
+              "raw_rect": [
+                891,
+                421,
+                70,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "纪行·攻略",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "美食背景",
+              "type": "layer",
+              "rect": [
+                590,
+                410,
+                90,
+                32
+              ],
+              "raw_rect": [
+                592,
+                410,
+                88,
+                33
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "特产·美食",
+              "type": "layer",
+              "rect": [
+                600,
+                420,
+                70,
+                16
+              ],
+              "raw_rect": [
+                602,
+                420,
+                70,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "特产·美食",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                404,
+                440,
+                1100,
+                4
+              ],
+              "raw_rect": [
+                405,
+                439,
+                1100,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "主题",
+          "type": "group",
+          "rect": [
+            410,
+            280,
+            670,
+            80
+          ],
+          "raw_rect": [
+            411,
+            282,
+            671,
+            79
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "城乡全称",
+              "type": "layer",
+              "rect": [
+                410,
+                280,
+                104,
+                24
+              ],
+              "raw_rect": [
+                411,
+                282,
+                104,
+                26
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "城乡全称",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "游玩特色：赏花、观海、海鲜大餐、免税购物、亲水、建筑风情、明清园林、古墓陵园、曲艺文化、多样水果",
+              "type": "layer",
+              "rect": [
+                410,
+                348,
+                670,
+                16
+              ],
+              "raw_rect": [
+                411,
+                347,
+                671,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "游玩特色：赏花、观海、海鲜大餐、免税购物、亲水、建筑风情、明清园林、古墓陵园、曲艺文化、多样水果",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "城市标签",
+              "type": "layer",
+              "rect": [
+                536,
+                296,
+                288,
+                10
+              ],
+              "raw_rect": [
+                534,
+                295,
+                287,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "城市标签    别名：港城　　最佳旅游时间：一年四季",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "来源等 单行",
+              "type": "group",
+              "rect": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "raw_rect": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "原来源",
+                  "type": "group",
+                  "rect": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "raw_rect": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "来源：百度　　作者：张家齐 通讯员李哲 记者张三    发布日期：2022-05-22 16:08:13    浏览：355",
+                  "type": "layer",
+                  "rect": [
+                    410,
+                    340,
+                    590,
+                    10
+                  ],
+                  "raw_rect": [
+                    412,
+                    340,
+                    588,
+                    12
+                  ],
+                  "visible": false,
+                  "opacity": 1.0,
+                  "text_content": "来源：百度　　作者：张家齐 通讯员李哲 记者张三    发布日期：2022-05-22 16:08:13    浏览：355",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "翻页",
+          "type": "group",
+          "rect": [
+            670,
+            3650,
+            576,
+            30
+          ],
+          "raw_rect": [
+            671,
+            3649,
+            574,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "向右三角",
+              "type": "layer",
+              "rect": [
+                860,
+                3660,
+                8,
+                10
+              ],
+              "raw_rect": [
+                858,
+                3660,
+                7,
+                11
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "向下三角",
+              "type": "layer",
+              "rect": [
+                968,
+                3664,
+                10,
+                8
+              ],
+              "raw_rect": [
+                967,
+                3663,
+                11,
+                7
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "向左三角",
+              "type": "layer",
+              "rect": [
+                740,
+                3660,
+                8,
+                10
+              ],
+              "raw_rect": [
+                738,
+                3660,
+                7,
+                11
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "每页条数",
+              "type": "layer",
+              "rect": [
+                904,
+                3660,
+                60,
+                16
+              ],
+              "raw_rect": [
+                903,
+                3659,
+                59,
+                15
+              ],
+              "visible": false,
+              "opacity": 1.0,
+              "text_content": "每页10条",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "矩形5",
+              "type": "layer",
+              "rect": [
+                890,
+                3650,
+                96,
+                30
+              ],
+              "raw_rect": [
+                892,
+                3651,
+                95,
+                31
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "矩形4",
+              "type": "layer",
+              "rect": [
+                844,
+                3650,
+                30,
+                30
+              ],
+              "raw_rect": [
+                843,
+                3651,
+                32,
+                29
+              ],
+              "visible": false,
+              "opacity": 0.6901960784313725
+            },
+            {
+              "name": "上一页",
+              "type": "group",
+              "rect": [
+                670,
+                3650,
+                72,
+                30
+              ],
+              "raw_rect": [
+                671,
+                3649,
+                73,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "上一页背景框",
+                  "type": "layer",
+                  "rect": [
+                    670,
+                    3650,
+                    72,
+                    30
+                  ],
+                  "raw_rect": [
+                    671,
+                    3649,
+                    73,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "上一页",
+                  "type": "layer",
+                  "rect": [
+                    696,
+                    3660,
+                    36,
+                    10
+                  ],
+                  "raw_rect": [
+                    695,
+                    3659,
+                    35,
+                    12
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "上一页",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                },
+                {
+                  "name": "<",
+                  "type": "layer",
+                  "rect": [
+                    684,
+                    3660,
+                    4,
+                    10
+                  ],
+                  "raw_rect": [
+                    685,
+                    3661,
+                    5,
+                    9
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "<",
+                  "font_family": "'SimSun'",
+                  "font_size": 12,
+                  "color": "#656565"
+                }
+              ]
+            },
+            {
+              "name": "下一页",
+              "type": "group",
+              "rect": [
+                1170,
+                3650,
+                72,
+                30
+              ],
+              "raw_rect": [
+                1172,
+                3649,
+                73,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "上一页背景框",
+                  "type": "layer",
+                  "rect": [
+                    1170,
+                    3650,
+                    72,
+                    30
+                  ],
+                  "raw_rect": [
+                    1172,
+                    3649,
+                    73,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "下一页",
+                  "type": "layer",
+                  "rect": [
+                    1184,
+                    3660,
+                    36,
+                    10
+                  ],
+                  "raw_rect": [
+                    1183,
+                    3659,
+                    35,
+                    12
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "下一页",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                },
+                {
+                  "name": ">",
+                  "type": "layer",
+                  "rect": [
+                    1228,
+                    3660,
+                    4,
+                    10
+                  ],
+                  "raw_rect": [
+                    1227,
+                    3661,
+                    5,
+                    9
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": ">",
+                  "font_family": "'SimSun'",
+                  "font_size": 12,
+                  "color": "#656565"
+                }
+              ]
+            },
+            {
+              "name": "…",
+              "type": "layer",
+              "rect": [
+                1110,
+                3664,
+                10,
+                4
+              ],
+              "raw_rect": [
+                1111,
+                3664,
+                12,
+                3
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "…",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "1",
+              "type": "group",
+              "rect": [
+                750,
+                3650,
+                30,
+                30
+              ],
+              "raw_rect": [
+                750,
+                3649,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "1 背景框",
+                  "type": "layer",
+                  "rect": [
+                    750,
+                    3650,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    750,
+                    3649,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1",
+                  "type": "layer",
+                  "rect": [
+                    764,
+                    3660,
+                    4,
+                    10
+                  ],
+                  "raw_rect": [
+                    764,
+                    3660,
+                    3,
+                    9
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "1",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "3",
+              "type": "group",
+              "rect": [
+                784,
+                3650,
+                64,
+                30
+              ],
+              "raw_rect": [
+                785,
+                3649,
+                65,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "2",
+                  "type": "group",
+                  "rect": [
+                    784,
+                    3650,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    785,
+                    3649,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1 背景框",
+                  "type": "layer",
+                  "rect": [
+                    820,
+                    3650,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    820,
+                    3649,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1",
+                  "type": "layer",
+                  "rect": [
+                    832,
+                    3660,
+                    8,
+                    10
+                  ],
+                  "raw_rect": [
+                    833,
+                    3660,
+                    6,
+                    10
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "3",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "4",
+              "type": "group",
+              "rect": [
+                856,
+                3650,
+                30,
+                30
+              ],
+              "raw_rect": [
+                855,
+                3649,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "1 背景框",
+                  "type": "layer",
+                  "rect": [
+                    856,
+                    3650,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    855,
+                    3649,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1",
+                  "type": "layer",
+                  "rect": [
+                    868,
+                    3660,
+                    10,
+                    10
+                  ],
+                  "raw_rect": [
+                    867,
+                    3660,
+                    8,
+                    9
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "4",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "5",
+              "type": "group",
+              "rect": [
+                890,
+                3650,
+                30,
+                30
+              ],
+              "raw_rect": [
+                890,
+                3649,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "1 背景框",
+                  "type": "layer",
+                  "rect": [
+                    890,
+                    3650,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    890,
+                    3649,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1",
+                  "type": "layer",
+                  "rect": [
+                    904,
+                    3660,
+                    8,
+                    10
+                  ],
+                  "raw_rect": [
+                    903,
+                    3660,
+                    6,
+                    10
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "5",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "6",
+              "type": "group",
+              "rect": [
+                924,
+                3650,
+                30,
+                30
+              ],
+              "raw_rect": [
+                925,
+                3649,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "1 背景框",
+                  "type": "layer",
+                  "rect": [
+                    924,
+                    3650,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    925,
+                    3649,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1",
+                  "type": "layer",
+                  "rect": [
+                    940,
+                    3660,
+                    8,
+                    10
+                  ],
+                  "raw_rect": [
+                    938,
+                    3660,
+                    6,
+                    10
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "6",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "7",
+              "type": "group",
+              "rect": [
+                960,
+                3650,
+                30,
+                30
+              ],
+              "raw_rect": [
+                960,
+                3649,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "1 背景框",
+                  "type": "layer",
+                  "rect": [
+                    960,
+                    3650,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    960,
+                    3649,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1",
+                  "type": "layer",
+                  "rect": [
+                    972,
+                    3660,
+                    8,
+                    10
+                  ],
+                  "raw_rect": [
+                    973,
+                    3660,
+                    6,
+                    9
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "7",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "8",
+              "type": "group",
+              "rect": [
+                996,
+                3650,
+                30,
+                30
+              ],
+              "raw_rect": [
+                995,
+                3649,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "1 背景框",
+                  "type": "layer",
+                  "rect": [
+                    996,
+                    3650,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    995,
+                    3649,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1",
+                  "type": "layer",
+                  "rect": [
+                    1010,
+                    3660,
+                    8,
+                    10
+                  ],
+                  "raw_rect": [
+                    1009,
+                    3660,
+                    6,
+                    10
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "8",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "9",
+              "type": "group",
+              "rect": [
+                1030,
+                3650,
+                30,
+                30
+              ],
+              "raw_rect": [
+                1030,
+                3649,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "1 背景框",
+                  "type": "layer",
+                  "rect": [
+                    1030,
+                    3650,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    1030,
+                    3649,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1",
+                  "type": "layer",
+                  "rect": [
+                    1044,
+                    3660,
+                    8,
+                    10
+                  ],
+                  "raw_rect": [
+                    1044,
+                    3660,
+                    6,
+                    10
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "9",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "10",
+              "type": "group",
+              "rect": [
+                1064,
+                3650,
+                36,
+                30
+              ],
+              "raw_rect": [
+                1065,
+                3649,
+                37,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "1 背景框",
+                  "type": "layer",
+                  "rect": [
+                    1064,
+                    3650,
+                    36,
+                    30
+                  ],
+                  "raw_rect": [
+                    1065,
+                    3649,
+                    37,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1",
+                  "type": "layer",
+                  "rect": [
+                    1080,
+                    3660,
+                    10,
+                    10
+                  ],
+                  "raw_rect": [
+                    1079,
+                    3660,
+                    12,
+                    10
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "10",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "最后一页",
+              "type": "group",
+              "rect": [
+                1130,
+                3650,
+                36,
+                30
+              ],
+              "raw_rect": [
+                1130,
+                3649,
+                37,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "1 背景框",
+                  "type": "layer",
+                  "rect": [
+                    1130,
+                    3650,
+                    36,
+                    30
+                  ],
+                  "raw_rect": [
+                    1130,
+                    3649,
+                    37,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "1",
+                  "type": "layer",
+                  "rect": [
+                    1144,
+                    3660,
+                    12,
+                    10
+                  ],
+                  "raw_rect": [
+                    1143,
+                    3660,
+                    13,
+                    10
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "35",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "补充资料",
+          "type": "group",
+          "rect": [
+            1390,
+            284,
+            124,
+            32
+          ],
+          "raw_rect": [
+            1388,
+            285,
+            123,
+            33
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "矩形 18",
+              "type": "layer",
+              "rect": [
+                1390,
+                284,
+                124,
+                32
+              ],
+              "raw_rect": [
+                1388,
+                285,
+                123,
+                33
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "我要补充资料",
+              "type": "layer",
+              "rect": [
+                1408,
+                296,
+                90,
+                16
+              ],
+              "raw_rect": [
+                1407,
+                295,
+                90,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "我要补充资料",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "顶部搜索",
+      "type": "group",
+      "rect": [
+        570,
+        64,
+        990,
+        50
+      ],
+      "raw_rect": [
+        571,
+        66,
+        989,
+        48
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "搜索框",
+          "type": "layer",
+          "rect": [
+            570,
+            64,
+            772,
+            50
+          ],
+          "raw_rect": [
+            571,
+            66,
+            773,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "选择小框",
+          "type": "layer",
+          "rect": [
+            1350,
+            64,
+            110,
+            50
+          ],
+          "raw_rect": [
+            1349,
+            66,
+            111,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "▼",
+          "type": "layer",
+          "rect": [
+            1432,
+            88,
+            10,
+            10
+          ],
+          "raw_rect": [
+            1434,
+            86,
+            11,
+            10
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "▼",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "目的地",
+          "type": "layer",
+          "rect": [
+            1380,
+            84,
+            44,
+            16
+          ],
+          "raw_rect": [
+            1378,
+            83,
+            43,
+            15
+          ],
+          "visible": false,
+          "opacity": 1.0,
+          "text_content": "目的地",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "城乡·街巷",
+          "type": "layer",
+          "rect": [
+            1368,
+            84,
+            64,
+            16
+          ],
+          "raw_rect": [
+            1366,
+            83,
+            64,
+            15
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "城乡·街巷",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "搜索小框",
+          "type": "layer",
+          "rect": [
+            1464,
+            68,
+            96,
+            48
+          ],
+          "raw_rect": [
+            1465,
+            67,
+            95,
+            46
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "搜 索",
+          "type": "layer",
+          "rect": [
+            1492,
+            80,
+            48,
+            20
+          ],
+          "raw_rect": [
+            1493,
+            80,
+            46,
+            20
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "搜 索",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "二维码",
+      "type": "layer",
+      "rect": [
+        1540,
+        16,
+        16,
+        16
+      ],
+      "raw_rect": [
+        1542,
+        15,
+        15,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "登录  注册",
+      "type": "layer",
+      "rect": [
+        1450,
+        16,
+        64,
+        10
+      ],
+      "raw_rect": [
+        1448,
+        15,
+        64,
+        12
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "登录  注册",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "type": "layer",
+      "rect": [
+        576,
+        44,
+        580,
+        16
+      ],
+      "raw_rect": [
+        574,
+        44,
+        581,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "logo",
+      "type": "group",
+      "rect": [
+        360,
+        48,
+        170,
+        50
+      ],
+      "raw_rect": [
+        361,
+        47,
+        170,
+        50
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "logo",
+          "type": "layer",
+          "rect": [
+            360,
+            48,
+            170,
+            50
+          ],
+          "raw_rect": [
+            361,
+            47,
+            170,
+            50
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "揪错弹窗",
+      "type": "group",
+      "rect": [
+        -4,
+        -4,
+        1928,
+        4520
+      ],
+      "raw_rect": [
+        -3,
+        -3,
+        1926,
+        4518
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "灰背景",
+          "type": "layer",
+          "rect": [
+            -4,
+            -4,
+            1928,
+            4520
+          ],
+          "raw_rect": [
+            -3,
+            -3,
+            1926,
+            4518
+          ],
+          "visible": true,
+          "opacity": 0.30196078431372547
+        },
+        {
+          "name": "白框",
+          "type": "layer",
+          "rect": [
+            660,
+            1580,
+            584,
+            360
+          ],
+          "raw_rect": [
+            662,
+            1580,
+            585,
+            358
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "我要揪错",
+          "type": "layer",
+          "rect": [
+            710,
+            1610,
+            60,
+            16
+          ],
+          "raw_rect": [
+            710,
+            1608,
+            59,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "我要揪错",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "标题",
+          "type": "layer",
+          "rect": [
+            710,
+            1650,
+            28,
+            16
+          ],
+          "raw_rect": [
+            711,
+            1650,
+            27,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "标题",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "标题框",
+          "type": "layer",
+          "rect": [
+            750,
+            1650,
+            444,
+            30
+          ],
+          "raw_rect": [
+            750,
+            1648,
+            443,
+            28
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "提交背景",
+          "type": "layer",
+          "rect": [
+            880,
+            1880,
+            70,
+            30
+          ],
+          "raw_rect": [
+            880,
+            1878,
+            68,
+            28
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "确定提交",
+          "type": "layer",
+          "rect": [
+            890,
+            1888,
+            50,
+            10
+          ],
+          "raw_rect": [
+            890,
+            1886,
+            51,
+            12
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "确定提交",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "取消背景",
+          "type": "layer",
+          "rect": [
+            988,
+            1880,
+            70,
+            30
+          ],
+          "raw_rect": [
+            987,
+            1878,
+            68,
+            28
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "取消提交",
+          "type": "layer",
+          "rect": [
+            996,
+            1888,
+            50,
+            10
+          ],
+          "raw_rect": [
+            996,
+            1886,
+            51,
+            12
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "取消提交",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "内容",
+          "type": "layer",
+          "rect": [
+            710,
+            1704,
+            24,
+            16
+          ],
+          "raw_rect": [
+            711,
+            1703,
+            26,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "内容",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "内容框",
+          "type": "layer",
+          "rect": [
+            750,
+            1700,
+            444,
+            152
+          ],
+          "raw_rect": [
+            750,
+            1702,
+            443,
+            153
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "╳",
+          "type": "layer",
+          "rect": [
+            1216,
+            1604,
+            10,
+            10
+          ],
+          "raw_rect": [
+            1214,
+            1604,
+            11,
+            11
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "╳",
+          "font_family": "'SimSun'",
+          "font_size": 12,
+          "color": "#8b8b8b"
+        }
+      ]
+    },
+    {
+      "name": "补充资料",
+      "type": "group",
+      "rect": [
+        668,
+        448,
+        584,
+        532
+      ],
+      "raw_rect": [
+        667,
+        447,
+        585,
+        533
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "白框",
+          "type": "layer",
+          "rect": [
+            668,
+            448,
+            584,
+            532
+          ],
+          "raw_rect": [
+            667,
+            447,
+            585,
+            533
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "我要补充资料",
+          "type": "layer",
+          "rect": [
+            716,
+            476,
+            90,
+            16
+          ],
+          "raw_rect": [
+            715,
+            475,
+            89,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "我要补充资料",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "内容",
+          "type": "group",
+          "rect": [
+            704,
+            604,
+            492,
+            192
+          ],
+          "raw_rect": [
+            705,
+            605,
+            493,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "补充内容",
+              "type": "layer",
+              "rect": [
+                716,
+                608,
+                56,
+                16
+              ],
+              "raw_rect": [
+                716,
+                607,
+                56,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "补充内容",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "内容框",
+              "type": "layer",
+              "rect": [
+                784,
+                604,
+                412,
+                192
+              ],
+              "raw_rect": [
+                785,
+                605,
+                413,
+                193
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "请输入补充的资料名称",
+              "type": "layer",
+              "rect": [
+                800,
+                616,
+                130,
+                10
+              ],
+              "raw_rect": [
+                798,
+                616,
+                130,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "请输入补充的资料名称",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "*",
+              "type": "layer",
+              "rect": [
+                704,
+                610,
+                4,
+                8
+              ],
+              "raw_rect": [
+                705,
+                610,
+                5,
+                6
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "*",
+              "font_family": "'SimSun'",
+              "font_size": 12,
+              "color": "#ff0000"
+            }
+          ]
+        },
+        {
+          "name": "提交",
+          "type": "group",
+          "rect": [
+            884,
+            928,
+            176,
+            30
+          ],
+          "raw_rect": [
+            885,
+            926,
+            175,
+            28
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "提交背景",
+              "type": "layer",
+              "rect": [
+                884,
+                928,
+                70,
+                30
+              ],
+              "raw_rect": [
+                885,
+                926,
+                68,
+                28
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "确定提交",
+              "type": "layer",
+              "rect": [
+                892,
+                936,
+                50,
+                10
+              ],
+              "raw_rect": [
+                893,
+                934,
+                51,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "确定提交",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "取消背景",
+              "type": "layer",
+              "rect": [
+                990,
+                928,
+                70,
+                30
+              ],
+              "raw_rect": [
+                992,
+                926,
+                68,
+                28
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "取消提交",
+              "type": "layer",
+              "rect": [
+                1000,
+                936,
+                50,
+                10
+              ],
+              "raw_rect": [
+                1002,
+                934,
+                51,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "取消提交",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "联系方式",
+          "type": "group",
+          "rect": [
+            716,
+            816,
+            480,
+            84
+          ],
+          "raw_rect": [
+            715,
+            815,
+            482,
+            83
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "联系方式框",
+              "type": "layer",
+              "rect": [
+                784,
+                816,
+                412,
+                84
+              ],
+              "raw_rect": [
+                784,
+                815,
+                413,
+                83
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "请输入联系方式",
+              "type": "layer",
+              "rect": [
+                800,
+                824,
+                90,
+                10
+              ],
+              "raw_rect": [
+                798,
+                823,
+                91,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "请输入联系方式",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "联系方式",
+              "type": "layer",
+              "rect": [
+                716,
+                820,
+                56,
+                16
+              ],
+              "raw_rect": [
+                715,
+                818,
+                56,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "联系方式",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "会员功能正在完善未开启，暂时无法提供即时信息补充服务，欢迎向我们提供各地完整的文旅资源资料，感谢支持。            ",
+          "type": "layer",
+          "rect": [
+            712,
+            524,
+            480,
+            36
+          ],
+          "raw_rect": [
+            714,
+            525,
+            481,
+            36
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "会员功能正在完善未开启，暂时无法提供即时信息补充服务，欢迎向我们提供各地完整的文旅资源资料，感谢支持。                                 　联系我们",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "╳",
+          "type": "layer",
+          "rect": [
+            1220,
+            470,
+            10,
+            10
+          ],
+          "raw_rect": [
+            1219,
+            471,
+            11,
+            11
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "╳",
+          "font_family": "'SimSun'",
+          "font_size": 12,
+          "color": "#8b8b8b"
+        }
+      ]
+    }
+  ]
+}

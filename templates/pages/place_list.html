@@ -57,23 +57,20 @@
 </div>
 
 <!-- 4. 首次访问公告 Modal (需求第150条) -->
-<div id="placesAnnoModal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500 overflow-hidden">
-    <!-- 遮罩背景 -->
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-md"></div>
-    
+<div id="placesAnnoModal" class="fixed inset-0 z-[9999] items-center justify-center transition-opacity duration-500 overflow-hidden" style="display: none; opacity: 0; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(8px);">
     <!-- 内容卡片 -->
-    <div class="relative bg-white w-[90%] max-w-[480px] p-8 md:p-12 shadow-2xl rounded-sm transform scale-95 transition-transform duration-500 pointer-events-auto" id="placesAnnoCard">
+    <div class="relative bg-white w-[90%] max-w-[480px] p-8 md:p-12 shadow-2xl rounded-sm transform scale-95 transition-transform duration-500" id="placesAnnoCard" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);">
         <div class="text-center">
-            <div class="inline-block p-4 bg-travel-brown/10 rounded-full mb-6 text-travel-brown">
+            <div class="inline-block p-4 bg-orange-50 rounded-full mb-6 text-orange-600">
                 <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
             </div>
             <h2 class="text-2xl font-bold text-gray-900 mb-4 tracking-[0.2em]">会员功能暂未上线</h2>
             <div class="text-gray-500 leading-relaxed mb-10 text-[15px]">
                 提示：当前站点的会员登录与注册功能正在建设维护中，暂未对外开放。
                 <br>
-                <span class="text-travel-brown mt-3 block font-medium">您可以继续以游客身份浏览全站所有目的地与攻略信息。</span>
+                <span class="text-gray-700 mt-3 block font-medium">您可以继续以游客身份浏览全站所有目的地与攻略信息。</span>
             </div>
-            <button id="closeAnnoBtn" class="w-full bg-travel-brown text-white py-4 font-bold tracking-[0.3em] hover:bg-opacity-90 transition-all shadow-lg active:scale-[0.98]">
+            <button id="closeAnnoBtn" class="w-full bg-gray-900 text-white py-4 font-bold tracking-[0.3em] hover:bg-black transition-all shadow-lg active:scale-[0.98]">
                 我知道了
             </button>
         </div>
@@ -87,28 +84,35 @@
         const closeBtn = document.getElementById('closeAnnoBtn');
         const cookieName = 'places_announcement_seen';
 
-        // 检查 Cookie 是否存在
         const isSeen = document.cookie.split('; ').find(row => row.startsWith(cookieName));
 
         if (!isSeen) {
-            // 展示公告
             setTimeout(() => {
-                modal.classList.remove('opacity-0', 'pointer-events-none');
-                card.classList.remove('scale-95');
-                card.classList.add('scale-100');
+                modal.style.display = 'block';
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                    card.style.transform = 'translate(-50%, -50%) scale(1)';
+                }, 10);
             }, 500);
         }
 
-        // 关闭逻辑
-        closeBtn.addEventListener('click', function() {
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            card.classList.remove('scale-100');
-            card.classList.add('scale-95');
+        const closeAction = function() {
+            modal.style.opacity = '0';
+            card.style.transform = 'translate(-50%, -55%) scale(0.95)';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 500);
 
-            // 设置 7 天有效期 Cookie (需求第150条)
             const date = new Date();
             date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
             document.cookie = `${cookieName}=true; expires=${date.toUTCString()}; path=/`;
+        };
+
+        closeBtn.addEventListener('click', closeAction);
+        
+        // 增加 ESC 键紧急关闭
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'block') closeAction();
         });
     });
 </script>

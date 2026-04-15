@@ -1,0 +1,563 @@
+{
+  "filename": "会员注册登录.psd",
+  "canvas": [
+    1920,
+    1244
+  ],
+  "structure": [
+    {
+      "name": "背景色，白",
+      "type": "layer",
+      "rect": [
+        0,
+        -52,
+        1920,
+        3500
+      ],
+      "raw_rect": [
+        0,
+        -53,
+        1920,
+        3500
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "底部",
+      "type": "group",
+      "rect": [
+        0,
+        796,
+        1920,
+        116
+      ],
+      "raw_rect": [
+        -1,
+        797,
+        1922,
+        117
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "底部 背景色",
+          "type": "layer",
+          "rect": [
+            0,
+            830,
+            1920,
+            84
+          ],
+          "raw_rect": [
+            -1,
+            831,
+            1922,
+            83
+          ],
+          "visible": true,
+          "opacity": 0.8
+        },
+        {
+          "name": "底部背景线",
+          "type": "layer",
+          "rect": [
+            0,
+            796,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            797,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "Copyright © 2026-2027 NAME.COM All Rights Reserved 版权所有：网站名称",
+          "type": "layer",
+          "rect": [
+            804,
+            836,
+            310,
+            32
+          ],
+          "raw_rect": [
+            805,
+            835,
+            311,
+            34
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "Copyright © 2026-2027 NAME.COM All Rights Reserved\r版权所有：网站名称",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "功能完善中",
+      "type": "group",
+      "rect": [
+        516,
+        224,
+        880,
+        490
+      ],
+      "raw_rect": [
+        515,
+        224,
+        878,
+        490
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "图层 5",
+          "type": "layer",
+          "rect": [
+            604,
+            280,
+            460,
+            304
+          ],
+          "raw_rect": [
+            603,
+            280,
+            458,
+            303
+          ],
+          "visible": false,
+          "opacity": 1.0
+        },
+        {
+          "name": "亲爱的用户：  大家好～  目前，网站会员功能正处于紧张完善中，各项核心权益与操作细节都在逐一打磨、优化，只为给大家带来更流畅",
+          "type": "layer",
+          "rect": [
+            516,
+            328,
+            880,
+            200
+          ],
+          "raw_rect": [
+            515,
+            326,
+            878,
+            199
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "亲爱的用户：\r\r大家好～\r\r目前，网站会员功能正处于紧张完善中，各项核心权益与操作细节都在逐一打磨、优化，只为给大家带来更流畅、更贴心的使用体验。\r\r待完善完成后，会员将解锁多项专属权益。\r\r\r我们不追求速度，只愿把每一处细节都做到稳妥，不辜负大家的期待。\r\r愿每一份真诚的创作都有回响，每一次温柔的表达都被看见，期待与你一起慢慢成长!✨\r\r\r",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "　　网站运营团队",
+          "type": "layer",
+          "rect": [
+            1304,
+            600,
+            88,
+            16
+          ],
+          "raw_rect": [
+            1303,
+            598,
+            87,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "　　网站运营团队",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "功能完善中，敬请期待",
+          "type": "layer",
+          "rect": [
+            770,
+            224,
+            384,
+            36
+          ],
+          "raw_rect": [
+            768,
+            224,
+            384,
+            37
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "功能完善中，敬请期待",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "返回首页背景框",
+          "type": "layer",
+          "rect": [
+            900,
+            676,
+            116,
+            40
+          ],
+          "raw_rect": [
+            902,
+            676,
+            116,
+            38
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "返回首页",
+          "type": "layer",
+          "rect": [
+            928,
+            688,
+            70,
+            16
+          ],
+          "raw_rect": [
+            926,
+            687,
+            68,
+            17
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "返回首页",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "顶部 渐变",
+      "type": "group",
+      "rect": [
+        0,
+        -4,
+        1920,
+        150
+      ],
+      "raw_rect": [
+        -1,
+        -5,
+        1922,
+        152
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "渐变背景",
+          "type": "layer",
+          "rect": [
+            0,
+            -4,
+            1920,
+            150
+          ],
+          "raw_rect": [
+            -1,
+            -5,
+            1922,
+            152
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "渐变",
+          "type": "layer",
+          "rect": [
+            0,
+            0,
+            1920,
+            3500
+          ],
+          "raw_rect": [
+            0,
+            0,
+            1920,
+            3500
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "细长线",
+          "type": "layer",
+          "rect": [
+            0,
+            140,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            142,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "顶部搜索",
+      "type": "group",
+      "rect": [
+        570,
+        64,
+        990,
+        50
+      ],
+      "raw_rect": [
+        571,
+        66,
+        989,
+        48
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "搜索框",
+          "type": "layer",
+          "rect": [
+            570,
+            64,
+            772,
+            50
+          ],
+          "raw_rect": [
+            571,
+            66,
+            773,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "选择小框",
+          "type": "layer",
+          "rect": [
+            1350,
+            64,
+            110,
+            50
+          ],
+          "raw_rect": [
+            1349,
+            66,
+            111,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "▼",
+          "type": "layer",
+          "rect": [
+            1432,
+            88,
+            10,
+            10
+          ],
+          "raw_rect": [
+            1434,
+            86,
+            11,
+            10
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "▼",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "纪行·攻略",
+          "type": "layer",
+          "rect": [
+            1368,
+            84,
+            64,
+            16
+          ],
+          "raw_rect": [
+            1367,
+            83,
+            63,
+            15
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "纪行·攻略",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "搜索小框",
+          "type": "layer",
+          "rect": [
+            1464,
+            68,
+            96,
+            48
+          ],
+          "raw_rect": [
+            1465,
+            67,
+            95,
+            46
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "搜 索",
+          "type": "layer",
+          "rect": [
+            1492,
+            80,
+            48,
+            20
+          ],
+          "raw_rect": [
+            1493,
+            80,
+            46,
+            20
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "搜 索",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "登录  注册",
+      "type": "layer",
+      "rect": [
+        1450,
+        16,
+        64,
+        10
+      ],
+      "raw_rect": [
+        1448,
+        15,
+        64,
+        12
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "登录  注册",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "二维码",
+      "type": "layer",
+      "rect": [
+        1540,
+        16,
+        16,
+        16
+      ],
+      "raw_rect": [
+        1542,
+        15,
+        15,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "type": "layer",
+      "rect": [
+        576,
+        44,
+        580,
+        16
+      ],
+      "raw_rect": [
+        574,
+        44,
+        581,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "logo",
+      "type": "group",
+      "rect": [
+        360,
+        48,
+        170,
+        50
+      ],
+      "raw_rect": [
+        361,
+        47,
+        170,
+        50
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "logo",
+          "type": "layer",
+          "rect": [
+            360,
+            48,
+            170,
+            50
+          ],
+          "raw_rect": [
+            361,
+            47,
+            170,
+            50
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    }
+  ]
+}

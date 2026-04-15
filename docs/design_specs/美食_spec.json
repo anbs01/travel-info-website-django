@@ -1,0 +1,3349 @@
+{
+  "filename": "美食.psd",
+  "canvas": [
+    1920,
+    3084
+  ],
+  "structure": [
+    {
+      "name": "背景色，白",
+      "type": "layer",
+      "rect": [
+        -4,
+        -176,
+        1920,
+        3500
+      ],
+      "raw_rect": [
+        -3,
+        -175,
+        1920,
+        3500
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "底部",
+      "type": "group",
+      "rect": [
+        0,
+        2790,
+        1920,
+        84
+      ],
+      "raw_rect": [
+        -1,
+        2792,
+        1922,
+        84
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "底部 背景色",
+          "type": "layer",
+          "rect": [
+            0,
+            2792,
+            1920,
+            84
+          ],
+          "raw_rect": [
+            -1,
+            2793,
+            1922,
+            83
+          ],
+          "visible": true,
+          "opacity": 0.8
+        },
+        {
+          "name": "底部背景线",
+          "type": "layer",
+          "rect": [
+            0,
+            2790,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            2792,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "Copyright © 2024-2026 NAME.COM All Rights Reserved 版权所有：网站名称",
+          "type": "layer",
+          "rect": [
+            800,
+            2830,
+            310,
+            32
+          ],
+          "raw_rect": [
+            802,
+            2830,
+            311,
+            34
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "Copyright © 2024-2026 NAME.COM All Rights Reserved\r版权所有：网站名称",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "翻页",
+      "type": "group",
+      "rect": [
+        636,
+        2664,
+        648,
+        30
+      ],
+      "raw_rect": [
+        637,
+        2666,
+        647,
+        31
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "上一页",
+          "type": "group",
+          "rect": [
+            710,
+            2664,
+            72,
+            30
+          ],
+          "raw_rect": [
+            710,
+            2666,
+            73,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "上一页背景框",
+              "type": "layer",
+              "rect": [
+                710,
+                2664,
+                72,
+                30
+              ],
+              "raw_rect": [
+                710,
+                2666,
+                73,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "上一页",
+              "type": "layer",
+              "rect": [
+                736,
+                2676,
+                36,
+                10
+              ],
+              "raw_rect": [
+                734,
+                2676,
+                35,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "上一页",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "<",
+              "type": "layer",
+              "rect": [
+                724,
+                2680,
+                4,
+                10
+              ],
+              "raw_rect": [
+                724,
+                2678,
+                5,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "<",
+              "font_family": "'SimSun'",
+              "font_size": 12,
+              "color": "#656565"
+            }
+          ]
+        },
+        {
+          "name": "下一页",
+          "type": "group",
+          "rect": [
+            1210,
+            2664,
+            72,
+            30
+          ],
+          "raw_rect": [
+            1211,
+            2666,
+            73,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "上一页背景框",
+              "type": "layer",
+              "rect": [
+                1210,
+                2664,
+                72,
+                30
+              ],
+              "raw_rect": [
+                1211,
+                2666,
+                73,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "下一页",
+              "type": "layer",
+              "rect": [
+                1220,
+                2676,
+                36,
+                10
+              ],
+              "raw_rect": [
+                1222,
+                2676,
+                35,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "下一页",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": ">",
+              "type": "layer",
+              "rect": [
+                1264,
+                2680,
+                4,
+                10
+              ],
+              "raw_rect": [
+                1266,
+                2678,
+                5,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": ">",
+              "font_family": "'SimSun'",
+              "font_size": 12,
+              "color": "#656565"
+            }
+          ]
+        },
+        {
+          "name": "…",
+          "type": "layer",
+          "rect": [
+            1150,
+            2680,
+            10,
+            4
+          ],
+          "raw_rect": [
+            1150,
+            2681,
+            12,
+            3
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "…",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "1",
+          "type": "group",
+          "rect": [
+            790,
+            2664,
+            30,
+            30
+          ],
+          "raw_rect": [
+            789,
+            2666,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                790,
+                2664,
+                30,
+                30
+              ],
+              "raw_rect": [
+                789,
+                2666,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                804,
+                2676,
+                4,
+                10
+              ],
+              "raw_rect": [
+                803,
+                2677,
+                3,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "1",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "3",
+          "type": "group",
+          "rect": [
+            824,
+            2664,
+            64,
+            30
+          ],
+          "raw_rect": [
+            824,
+            2666,
+            65,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "2",
+              "type": "group",
+              "rect": [
+                824,
+                2664,
+                30,
+                30
+              ],
+              "raw_rect": [
+                824,
+                2666,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "背景框",
+                  "type": "layer",
+                  "rect": [
+                    824,
+                    2664,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    824,
+                    2666,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "2",
+                  "type": "layer",
+                  "rect": [
+                    836,
+                    2676,
+                    8,
+                    10
+                  ],
+                  "raw_rect": [
+                    836,
+                    2677,
+                    6,
+                    9
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "2",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                860,
+                2664,
+                30,
+                30
+              ],
+              "raw_rect": [
+                859,
+                2666,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                870,
+                2676,
+                8,
+                10
+              ],
+              "raw_rect": [
+                872,
+                2677,
+                6,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "3",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "4",
+          "type": "group",
+          "rect": [
+            896,
+            2664,
+            30,
+            30
+          ],
+          "raw_rect": [
+            894,
+            2666,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                896,
+                2664,
+                30,
+                30
+              ],
+              "raw_rect": [
+                894,
+                2666,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                904,
+                2676,
+                10,
+                10
+              ],
+              "raw_rect": [
+                906,
+                2677,
+                8,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "4",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "5",
+          "type": "group",
+          "rect": [
+            930,
+            2664,
+            30,
+            30
+          ],
+          "raw_rect": [
+            929,
+            2666,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                930,
+                2664,
+                30,
+                30
+              ],
+              "raw_rect": [
+                929,
+                2666,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                940,
+                2676,
+                8,
+                10
+              ],
+              "raw_rect": [
+                942,
+                2677,
+                6,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "5",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "6",
+          "type": "group",
+          "rect": [
+            964,
+            2664,
+            30,
+            30
+          ],
+          "raw_rect": [
+            964,
+            2666,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                964,
+                2664,
+                30,
+                30
+              ],
+              "raw_rect": [
+                964,
+                2666,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                976,
+                2676,
+                8,
+                10
+              ],
+              "raw_rect": [
+                977,
+                2677,
+                6,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "6",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "7",
+          "type": "group",
+          "rect": [
+            1000,
+            2664,
+            30,
+            30
+          ],
+          "raw_rect": [
+            999,
+            2666,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                1000,
+                2664,
+                30,
+                30
+              ],
+              "raw_rect": [
+                999,
+                2666,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                1010,
+                2676,
+                8,
+                10
+              ],
+              "raw_rect": [
+                1012,
+                2677,
+                6,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "7",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "8",
+          "type": "group",
+          "rect": [
+            1032,
+            2664,
+            30,
+            30
+          ],
+          "raw_rect": [
+            1034,
+            2666,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                1032,
+                2664,
+                30,
+                30
+              ],
+              "raw_rect": [
+                1034,
+                2666,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                1050,
+                2676,
+                8,
+                10
+              ],
+              "raw_rect": [
+                1048,
+                2677,
+                6,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "8",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "9",
+          "type": "group",
+          "rect": [
+            1070,
+            2664,
+            30,
+            30
+          ],
+          "raw_rect": [
+            1069,
+            2666,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                1070,
+                2664,
+                30,
+                30
+              ],
+              "raw_rect": [
+                1069,
+                2666,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                1084,
+                2676,
+                8,
+                10
+              ],
+              "raw_rect": [
+                1083,
+                2677,
+                6,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "9",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "10",
+          "type": "group",
+          "rect": [
+            1104,
+            2664,
+            36,
+            30
+          ],
+          "raw_rect": [
+            1104,
+            2666,
+            37,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                1104,
+                2664,
+                36,
+                30
+              ],
+              "raw_rect": [
+                1104,
+                2666,
+                37,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                1120,
+                2676,
+                10,
+                10
+              ],
+              "raw_rect": [
+                1118,
+                2677,
+                12,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "10",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "最后一页",
+          "type": "group",
+          "rect": [
+            1170,
+            2664,
+            36,
+            30
+          ],
+          "raw_rect": [
+            1169,
+            2666,
+            37,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                1170,
+                2664,
+                36,
+                30
+              ],
+              "raw_rect": [
+                1169,
+                2666,
+                37,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                1180,
+                2676,
+                12,
+                10
+              ],
+              "raw_rect": [
+                1182,
+                2677,
+                13,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "35",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "共356条",
+          "type": "layer",
+          "rect": [
+            636,
+            2676,
+            56,
+            16
+          ],
+          "raw_rect": [
+            637,
+            2675,
+            54,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "共356条",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "产品列表",
+      "type": "group",
+      "rect": [
+        360,
+        344,
+        1200,
+        2224
+      ],
+      "raw_rect": [
+        359,
+        346,
+        1202,
+        2223
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "数据1",
+          "type": "group",
+          "rect": [
+            360,
+            344,
+            1200,
+            192
+          ],
+          "raw_rect": [
+            359,
+            346,
+            1202,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "产品标题",
+              "type": "layer",
+              "rect": [
+                604,
+                350,
+                76,
+                20
+              ],
+              "raw_rect": [
+                605,
+                351,
+                75,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "特产级别　　非遗级别",
+              "type": "layer",
+              "rect": [
+                704,
+                356,
+                124,
+                10
+              ],
+              "raw_rect": [
+                705,
+                356,
+                124,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "特产级别　　非遗级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                350,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                350,
+                7,
+                7
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "产品特色“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I ",
+              "type": "layer",
+              "rect": [
+                604,
+                400,
+                940,
+                36
+              ],
+              "raw_rect": [
+                605,
+                399,
+                942,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品特色“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "type": "layer",
+              "rect": [
+                608,
+                480,
+                456,
+                12
+              ],
+              "raw_rect": [
+                607,
+                480,
+                457,
+                13
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                360,
+                344,
+                230,
+                152
+              ],
+              "raw_rect": [
+                359,
+                346,
+                228,
+                153
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图片",
+              "type": "layer",
+              "rect": [
+                360,
+                304,
+                236,
+                312
+              ],
+              "raw_rect": [
+                359,
+                305,
+                235,
+                313
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                536,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                535,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据2",
+          "type": "group",
+          "rect": [
+            360,
+            576,
+            1200,
+            192
+          ],
+          "raw_rect": [
+            359,
+            576,
+            1202,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "产品标题",
+              "type": "layer",
+              "rect": [
+                604,
+                580,
+                76,
+                20
+              ],
+              "raw_rect": [
+                605,
+                581,
+                75,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "特产级别　　非遗级别",
+              "type": "layer",
+              "rect": [
+                704,
+                584,
+                124,
+                10
+              ],
+              "raw_rect": [
+                705,
+                586,
+                124,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "特产级别　　非遗级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                580,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                580,
+                7,
+                7
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一",
+              "type": "layer",
+              "rect": [
+                604,
+                630,
+                948,
+                36
+              ],
+              "raw_rect": [
+                605,
+                629,
+                947,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "type": "layer",
+              "rect": [
+                608,
+                710,
+                456,
+                12
+              ],
+              "raw_rect": [
+                607,
+                710,
+                457,
+                13
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                360,
+                576,
+                230,
+                152
+              ],
+              "raw_rect": [
+                359,
+                576,
+                228,
+                153
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图层 4",
+              "type": "layer",
+              "rect": [
+                356,
+                516,
+                236,
+                252
+              ],
+              "raw_rect": [
+                355,
+                517,
+                235,
+                253
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                764,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                765,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据3",
+          "type": "group",
+          "rect": [
+            360,
+            808,
+            1200,
+            192
+          ],
+          "raw_rect": [
+            359,
+            806,
+            1202,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "产品标题",
+              "type": "layer",
+              "rect": [
+                604,
+                810,
+                76,
+                20
+              ],
+              "raw_rect": [
+                605,
+                811,
+                75,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "特产级别　　非遗级别",
+              "type": "layer",
+              "rect": [
+                704,
+                816,
+                124,
+                10
+              ],
+              "raw_rect": [
+                705,
+                816,
+                124,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "特产级别　　非遗级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                810,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                810,
+                7,
+                7
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一",
+              "type": "layer",
+              "rect": [
+                604,
+                860,
+                948,
+                36
+              ],
+              "raw_rect": [
+                605,
+                859,
+                947,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "type": "layer",
+              "rect": [
+                608,
+                940,
+                456,
+                12
+              ],
+              "raw_rect": [
+                607,
+                940,
+                457,
+                13
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                360,
+                808,
+                230,
+                152
+              ],
+              "raw_rect": [
+                359,
+                806,
+                228,
+                153
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图片",
+              "type": "layer",
+              "rect": [
+                360,
+                730,
+                236,
+                308
+              ],
+              "raw_rect": [
+                361,
+                729,
+                235,
+                307
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                996,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                995,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据4",
+          "type": "group",
+          "rect": [
+            360,
+            1036,
+            1200,
+            192
+          ],
+          "raw_rect": [
+            359,
+            1036,
+            1202,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "产品标题",
+              "type": "layer",
+              "rect": [
+                604,
+                1040,
+                76,
+                20
+              ],
+              "raw_rect": [
+                605,
+                1041,
+                75,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "非遗级别",
+              "type": "layer",
+              "rect": [
+                704,
+                1048,
+                50,
+                10
+              ],
+              "raw_rect": [
+                705,
+                1046,
+                48,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "非遗级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                1040,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                1040,
+                7,
+                7
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一",
+              "type": "layer",
+              "rect": [
+                604,
+                1090,
+                948,
+                36
+              ],
+              "raw_rect": [
+                605,
+                1089,
+                947,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "type": "layer",
+              "rect": [
+                608,
+                1170,
+                456,
+                12
+              ],
+              "raw_rect": [
+                607,
+                1170,
+                457,
+                13
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                360,
+                1036,
+                230,
+                152
+              ],
+              "raw_rect": [
+                359,
+                1036,
+                228,
+                153
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图片",
+              "type": "layer",
+              "rect": [
+                360,
+                1040,
+                236,
+                176
+              ],
+              "raw_rect": [
+                361,
+                1038,
+                235,
+                176
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                1224,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                1225,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据5",
+          "type": "group",
+          "rect": [
+            360,
+            1264,
+            1200,
+            192
+          ],
+          "raw_rect": [
+            359,
+            1266,
+            1202,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "产品标题",
+              "type": "layer",
+              "rect": [
+                604,
+                1270,
+                76,
+                20
+              ],
+              "raw_rect": [
+                605,
+                1271,
+                75,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "特产级别　　非遗级别",
+              "type": "layer",
+              "rect": [
+                704,
+                1276,
+                124,
+                10
+              ],
+              "raw_rect": [
+                705,
+                1276,
+                124,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "特产级别　　非遗级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                1270,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                1270,
+                7,
+                7
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一",
+              "type": "layer",
+              "rect": [
+                604,
+                1320,
+                948,
+                36
+              ],
+              "raw_rect": [
+                605,
+                1319,
+                947,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "type": "layer",
+              "rect": [
+                608,
+                1400,
+                456,
+                12
+              ],
+              "raw_rect": [
+                607,
+                1400,
+                457,
+                13
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                360,
+                1264,
+                230,
+                152
+              ],
+              "raw_rect": [
+                359,
+                1266,
+                228,
+                153
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图片",
+              "type": "layer",
+              "rect": [
+                352,
+                1204,
+                236,
+                312
+              ],
+              "raw_rect": [
+                353,
+                1204,
+                235,
+                313
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                1456,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                1455,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据6",
+          "type": "group",
+          "rect": [
+            360,
+            1496,
+            1200,
+            192
+          ],
+          "raw_rect": [
+            359,
+            1496,
+            1202,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "产品标题",
+              "type": "layer",
+              "rect": [
+                604,
+                1500,
+                76,
+                20
+              ],
+              "raw_rect": [
+                605,
+                1501,
+                75,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "特产级别",
+              "type": "layer",
+              "rect": [
+                704,
+                1504,
+                50,
+                10
+              ],
+              "raw_rect": [
+                705,
+                1506,
+                48,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "特产级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                1500,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                1500,
+                7,
+                7
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一",
+              "type": "layer",
+              "rect": [
+                604,
+                1550,
+                948,
+                36
+              ],
+              "raw_rect": [
+                605,
+                1549,
+                947,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "type": "layer",
+              "rect": [
+                608,
+                1630,
+                456,
+                12
+              ],
+              "raw_rect": [
+                607,
+                1630,
+                457,
+                13
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                360,
+                1496,
+                230,
+                152
+              ],
+              "raw_rect": [
+                359,
+                1496,
+                228,
+                153
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图片",
+              "type": "layer",
+              "rect": [
+                356,
+                1440,
+                236,
+                312
+              ],
+              "raw_rect": [
+                356,
+                1439,
+                235,
+                313
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                1684,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                1685,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据7",
+          "type": "group",
+          "rect": [
+            360,
+            1728,
+            1200,
+            192
+          ],
+          "raw_rect": [
+            359,
+            1726,
+            1202,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "产品标题",
+              "type": "layer",
+              "rect": [
+                604,
+                1730,
+                76,
+                20
+              ],
+              "raw_rect": [
+                605,
+                1731,
+                75,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一",
+              "type": "layer",
+              "rect": [
+                604,
+                1780,
+                948,
+                36
+              ],
+              "raw_rect": [
+                605,
+                1779,
+                947,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "type": "layer",
+              "rect": [
+                608,
+                1860,
+                456,
+                12
+              ],
+              "raw_rect": [
+                607,
+                1860,
+                457,
+                13
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                360,
+                1728,
+                230,
+                152
+              ],
+              "raw_rect": [
+                359,
+                1726,
+                228,
+                153
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图片",
+              "type": "layer",
+              "rect": [
+                352,
+                1720,
+                236,
+                300
+              ],
+              "raw_rect": [
+                354,
+                1719,
+                235,
+                299
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                1916,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                1915,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据8",
+          "type": "group",
+          "rect": [
+            360,
+            1956,
+            1200,
+            192
+          ],
+          "raw_rect": [
+            359,
+            1956,
+            1202,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "产品标题",
+              "type": "layer",
+              "rect": [
+                604,
+                1960,
+                76,
+                20
+              ],
+              "raw_rect": [
+                605,
+                1961,
+                75,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "非遗级别",
+              "type": "layer",
+              "rect": [
+                704,
+                1968,
+                50,
+                10
+              ],
+              "raw_rect": [
+                705,
+                1966,
+                48,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "非遗级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                1960,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                1960,
+                7,
+                7
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一",
+              "type": "layer",
+              "rect": [
+                604,
+                2010,
+                948,
+                36
+              ],
+              "raw_rect": [
+                605,
+                2009,
+                947,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "type": "layer",
+              "rect": [
+                608,
+                2090,
+                456,
+                12
+              ],
+              "raw_rect": [
+                607,
+                2090,
+                457,
+                13
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                360,
+                1956,
+                230,
+                152
+              ],
+              "raw_rect": [
+                359,
+                1956,
+                228,
+                153
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图片",
+              "type": "layer",
+              "rect": [
+                360,
+                1960,
+                224,
+                150
+              ],
+              "raw_rect": [
+                361,
+                1958,
+                225,
+                150
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                2144,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                2145,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据9",
+          "type": "group",
+          "rect": [
+            360,
+            2184,
+            1200,
+            192
+          ],
+          "raw_rect": [
+            359,
+            2186,
+            1202,
+            193
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "产品标题",
+              "type": "layer",
+              "rect": [
+                604,
+                2190,
+                76,
+                20
+              ],
+              "raw_rect": [
+                605,
+                2191,
+                75,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "特产级别　　非遗级别",
+              "type": "layer",
+              "rect": [
+                704,
+                2196,
+                124,
+                10
+              ],
+              "raw_rect": [
+                705,
+                2196,
+                124,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "特产级别　　非遗级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                2190,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                2190,
+                7,
+                7
+              ],
+              "visible": false,
+              "opacity": 1.0
+            },
+            {
+              "name": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一",
+              "type": "layer",
+              "rect": [
+                604,
+                2240,
+                948,
+                36
+              ],
+              "raw_rect": [
+                605,
+                2239,
+                947,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "type": "layer",
+              "rect": [
+                608,
+                2320,
+                456,
+                12
+              ],
+              "raw_rect": [
+                607,
+                2320,
+                457,
+                13
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                360,
+                2184,
+                230,
+                152
+              ],
+              "raw_rect": [
+                359,
+                2186,
+                228,
+                153
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图片",
+              "type": "layer",
+              "rect": [
+                360,
+                2096,
+                230,
+                308
+              ],
+              "raw_rect": [
+                359,
+                2095,
+                230,
+                307
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                2376,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                2375,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据10",
+          "type": "group",
+          "rect": [
+            360,
+            2416,
+            1192,
+            152
+          ],
+          "raw_rect": [
+            359,
+            2416,
+            1193,
+            153
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "产品标题",
+              "type": "layer",
+              "rect": [
+                604,
+                2420,
+                76,
+                20
+              ],
+              "raw_rect": [
+                605,
+                2421,
+                75,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "产品标题",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "特产级别　　非遗级别",
+              "type": "layer",
+              "rect": [
+                704,
+                2424,
+                124,
+                10
+              ],
+              "raw_rect": [
+                705,
+                2426,
+                124,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "特产级别　　非遗级别",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一",
+              "type": "layer",
+              "rect": [
+                604,
+                2470,
+                948,
+                36
+              ],
+              "raw_rect": [
+                605,
+                2469,
+                947,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "这里是产品简介   “谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "type": "layer",
+              "rect": [
+                608,
+                2550,
+                456,
+                12
+              ],
+              "raw_rect": [
+                607,
+                2550,
+                457,
+                13
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "热词、工艺品、剪纸、刺绣、木雕　　　 省份名称·城乡名称　　　15/12/2025",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景",
+              "type": "layer",
+              "rect": [
+                360,
+                2416,
+                230,
+                152
+              ],
+              "raw_rect": [
+                359,
+                2416,
+                228,
+                153
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图片",
+              "type": "layer",
+              "rect": [
+                360,
+                2296,
+                236,
+                352
+              ],
+              "raw_rect": [
+                359,
+                2295,
+                235,
+                353
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "关键字搜索",
+      "type": "group",
+      "rect": [
+        1048,
+        190,
+        510,
+        30
+      ],
+      "raw_rect": [
+        1047,
+        189,
+        512,
+        31
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "地区背景框",
+          "type": "layer",
+          "rect": [
+            1284,
+            190,
+            220,
+            30
+          ],
+          "raw_rect": [
+            1283,
+            189,
+            222,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "输入关键字",
+          "type": "layer",
+          "rect": [
+            1290,
+            200,
+            60,
+            10
+          ],
+          "raw_rect": [
+            1292,
+            198,
+            61,
+            12
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "输入关键字",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "放大镜背景",
+          "type": "layer",
+          "rect": [
+            1516,
+            190,
+            40,
+            30
+          ],
+          "raw_rect": [
+            1517,
+            189,
+            42,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "放大镜",
+          "type": "layer",
+          "rect": [
+            1530,
+            196,
+            24,
+            20
+          ],
+          "raw_rect": [
+            1529,
+            196,
+            24,
+            20
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "地区背景框 拷贝",
+          "type": "layer",
+          "rect": [
+            1048,
+            190,
+            224,
+            30
+          ],
+          "raw_rect": [
+            1047,
+            189,
+            223,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "选择地区",
+          "type": "layer",
+          "rect": [
+            1056,
+            200,
+            50,
+            10
+          ],
+          "raw_rect": [
+            1057,
+            198,
+            49,
+            12
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "选择地区",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "栏目标题",
+      "type": "group",
+      "rect": [
+        360,
+        190,
+        900,
+        100
+      ],
+      "raw_rect": [
+        359,
+        189,
+        901,
+        102
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "根据点击显示不同的词　　特产类别　　美食类别（点击前边特产或美食，读取这个类别下的不限类别的数据，，选择的加粗）",
+          "type": "layer",
+          "rect": [
+            480,
+            272,
+            780,
+            16
+          ],
+          "raw_rect": [
+            480,
+            273,
+            780,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "根据点击显示不同的词　　特产类别　　美食类别（点击前边特产或美食，读取这个类别下的不限类别的数据，，选择的加粗）",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "故事背景",
+          "type": "layer",
+          "rect": [
+            360,
+            270,
+            40,
+            24
+          ],
+          "raw_rect": [
+            359,
+            268,
+            41,
+            23
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "攻略背景",
+          "type": "layer",
+          "rect": [
+            410,
+            270,
+            40,
+            24
+          ],
+          "raw_rect": [
+            410,
+            268,
+            41,
+            23
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "小标题",
+          "type": "layer",
+          "rect": [
+            364,
+            270,
+            84,
+            16
+          ],
+          "raw_rect": [
+            365,
+            271,
+            83,
+            17
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "特产    美食",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "背景框",
+          "type": "layer",
+          "rect": [
+            360,
+            190,
+            130,
+            36
+          ],
+          "raw_rect": [
+            359,
+            189,
+            128,
+            36
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "特产 美食",
+          "type": "layer",
+          "rect": [
+            368,
+            196,
+            112,
+            24
+          ],
+          "raw_rect": [
+            367,
+            195,
+            114,
+            24
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "特产 美食",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "·",
+          "type": "layer",
+          "rect": [
+            420,
+            204,
+            10,
+            8
+          ],
+          "raw_rect": [
+            419,
+            205,
+            8,
+            7
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "·",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "顶部 渐变",
+      "type": "group",
+      "rect": [
+        0,
+        -4,
+        1920,
+        150
+      ],
+      "raw_rect": [
+        -1,
+        -5,
+        1922,
+        152
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "渐变背景",
+          "type": "layer",
+          "rect": [
+            0,
+            -4,
+            1920,
+            150
+          ],
+          "raw_rect": [
+            -1,
+            -5,
+            1922,
+            152
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "渐变",
+          "type": "layer",
+          "rect": [
+            0,
+            0,
+            1920,
+            3500
+          ],
+          "raw_rect": [
+            0,
+            0,
+            1920,
+            3500
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "细长线",
+          "type": "layer",
+          "rect": [
+            0,
+            140,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            142,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "顶部搜索",
+      "type": "group",
+      "rect": [
+        570,
+        64,
+        990,
+        50
+      ],
+      "raw_rect": [
+        571,
+        66,
+        989,
+        48
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "搜索框",
+          "type": "layer",
+          "rect": [
+            570,
+            64,
+            772,
+            50
+          ],
+          "raw_rect": [
+            571,
+            66,
+            773,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "选择小框",
+          "type": "layer",
+          "rect": [
+            1350,
+            64,
+            110,
+            50
+          ],
+          "raw_rect": [
+            1349,
+            66,
+            111,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "▼",
+          "type": "layer",
+          "rect": [
+            1432,
+            88,
+            10,
+            10
+          ],
+          "raw_rect": [
+            1434,
+            86,
+            11,
+            10
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "▼",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "特产·美食",
+          "type": "layer",
+          "rect": [
+            1368,
+            84,
+            64,
+            16
+          ],
+          "raw_rect": [
+            1366,
+            83,
+            64,
+            15
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "特产·美食",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "搜索小框",
+          "type": "layer",
+          "rect": [
+            1464,
+            68,
+            96,
+            48
+          ],
+          "raw_rect": [
+            1465,
+            67,
+            95,
+            46
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "搜 索",
+          "type": "layer",
+          "rect": [
+            1492,
+            80,
+            48,
+            20
+          ],
+          "raw_rect": [
+            1493,
+            80,
+            46,
+            20
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "搜 索",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "登录  注册",
+      "type": "layer",
+      "rect": [
+        1450,
+        16,
+        64,
+        10
+      ],
+      "raw_rect": [
+        1448,
+        15,
+        64,
+        12
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "登录  注册",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "二维码",
+      "type": "layer",
+      "rect": [
+        1540,
+        16,
+        16,
+        16
+      ],
+      "raw_rect": [
+        1542,
+        15,
+        15,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "type": "layer",
+      "rect": [
+        576,
+        44,
+        584,
+        16
+      ],
+      "raw_rect": [
+        574,
+        44,
+        586,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "logo",
+      "type": "group",
+      "rect": [
+        360,
+        48,
+        170,
+        50
+      ],
+      "raw_rect": [
+        361,
+        47,
+        170,
+        50
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "logo",
+          "type": "layer",
+          "rect": [
+            360,
+            48,
+            170,
+            50
+          ],
+          "raw_rect": [
+            361,
+            47,
+            170,
+            50
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    }
+  ]
+}

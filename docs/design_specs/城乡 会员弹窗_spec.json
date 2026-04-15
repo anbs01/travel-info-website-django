@@ -1,0 +1,225 @@
+{
+  "filename": "城乡 会员弹窗.psd",
+  "canvas": [
+    600,
+    400
+  ],
+  "structure": [
+    {
+      "name": "白色背景框",
+      "type": "layer",
+      "rect": [
+        0,
+        0,
+        600,
+        400
+      ],
+      "raw_rect": [
+        -1,
+        0,
+        601,
+        401
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "内容",
+      "type": "group",
+      "rect": [
+        0,
+        0,
+        600,
+        360
+      ],
+      "raw_rect": [
+        1,
+        2,
+        598,
+        359
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "背景框",
+          "type": "layer",
+          "rect": [
+            0,
+            0,
+            600,
+            60
+          ],
+          "raw_rect": [
+            1,
+            2,
+            598,
+            62
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "背景图",
+          "type": "layer",
+          "rect": [
+            0,
+            -64,
+            600,
+            400
+          ],
+          "raw_rect": [
+            -1,
+            -66,
+            600,
+            400
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "色相/饱和度 1",
+          "type": "layer",
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "阅纪行、品烟火、走城乡、记生活!",
+          "type": "layer",
+          "rect": [
+            164,
+            112,
+            272,
+            16
+          ],
+          "raw_rect": [
+            164,
+            113,
+            273,
+            17
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "阅纪行、品烟火、走城乡、记生活!",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "网站的优质内容，离不开每一位朋友的支持！ 目前会员功能正在升级优化，暂未开放，敬请谅解。 欢迎大家踊跃投稿城乡纪行、游玩攻略，",
+          "type": "layer",
+          "rect": [
+            60,
+            170,
+            470,
+            120
+          ],
+          "raw_rect": [
+            60,
+            170,
+            468,
+            122
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "网站的优质内容，离不开每一位朋友的支持！\r目前会员功能正在升级优化，暂未开放，敬请谅解。\r欢迎大家踊跃投稿城乡纪行、游玩攻略，发布后我们将第一时间通知。\r让我们一起静静等待，会员功能与更多美好相遇。\r\r\r",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "关闭窗口背景",
+          "type": "layer",
+          "rect": [
+            460,
+            336,
+            84,
+            24
+          ],
+          "raw_rect": [
+            462,
+            336,
+            83,
+            25
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "不再提示　　关闭窗口",
+          "type": "layer",
+          "rect": [
+            384,
+            340,
+            148,
+            16
+          ],
+          "raw_rect": [
+            385,
+            342,
+            147,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "不再提示　　关闭窗口",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "复选框",
+          "type": "layer",
+          "rect": [
+            368,
+            340,
+            16,
+            16
+          ],
+          "raw_rect": [
+            366,
+            341,
+            15,
+            15
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "欢迎投稿",
+          "type": "layer",
+          "rect": [
+            250,
+            24,
+            104,
+            24
+          ],
+          "raw_rect": [
+            249,
+            25,
+            103,
+            24
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "欢迎投稿",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    }
+  ]
+}

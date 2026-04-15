@@ -1,5 +1,5 @@
 <!-- 反馈弹窗组件 (需包含在 base.html 中) -->
-<div id="feedbackModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+<div id="feedbackModal" class="fixed inset-0 z-[100] items-center justify-center p-4" style="display: none; opacity: 0;">
     <!-- 背景遮罩 (需求第50条: 背景变灰) -->
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeFeedbackModal()"></div>
     
@@ -57,8 +57,13 @@
 <script>
 function openFeedbackModal(type = 'suggestion') {
     const modal = document.getElementById('feedbackModal');
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
+    modal.style.display = 'flex';
+    
+    // 微调延迟以触发动画
+    setTimeout(() => {
+        modal.style.opacity = '1';
+    }, 10);
+
     document.body.style.overflow = 'hidden'; // 禁止滚动
     document.getElementById('sourceUrl').value = window.location.href;
     switchFeedbackType(type);
@@ -66,11 +71,14 @@ function openFeedbackModal(type = 'suggestion') {
 
 function closeFeedbackModal() {
     const modal = document.getElementById('feedbackModal');
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    document.body.style.overflow = '';
-    document.getElementById('feedbackForm').reset();
-    document.getElementById('feedbackMsg').className = 'hidden text-sm py-2';
+    modal.style.opacity = '0';
+    
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        document.getElementById('feedbackForm').reset();
+        document.getElementById('feedbackMsg').className = 'hidden text-sm py-2';
+    }, 300);
 }
 
 function switchFeedbackType(type) {

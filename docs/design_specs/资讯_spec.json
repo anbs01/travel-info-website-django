@@ -1,0 +1,3003 @@
+{
+  "filename": "资讯.psd",
+  "canvas": [
+    1920,
+    3500
+  ],
+  "structure": [
+    {
+      "name": "背景色，白",
+      "type": "layer",
+      "rect": [
+        0,
+        0,
+        1920,
+        3500
+      ],
+      "raw_rect": [
+        -2,
+        0,
+        1920,
+        3500
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "底部",
+      "type": "group",
+      "rect": [
+        0,
+        2836,
+        1920,
+        84
+      ],
+      "raw_rect": [
+        -1,
+        2837,
+        1922,
+        84
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "底部 背景色",
+          "type": "layer",
+          "rect": [
+            0,
+            2840,
+            1920,
+            84
+          ],
+          "raw_rect": [
+            -1,
+            2838,
+            1922,
+            83
+          ],
+          "visible": true,
+          "opacity": 0.8
+        },
+        {
+          "name": "底部背景线",
+          "type": "layer",
+          "rect": [
+            0,
+            2836,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            2837,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "Copyright © 2026-2027 NAME.COM All Rights Reserved 版权所有：网站名称",
+          "type": "layer",
+          "rect": [
+            764,
+            2876,
+            310,
+            32
+          ],
+          "raw_rect": [
+            765,
+            2875,
+            311,
+            34
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "Copyright © 2026-2027 NAME.COM All Rights Reserved\r版权所有：网站名称",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "翻页",
+      "type": "group",
+      "rect": [
+        636,
+        2710,
+        648,
+        30
+      ],
+      "raw_rect": [
+        637,
+        2711,
+        647,
+        31
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "上一页",
+          "type": "group",
+          "rect": [
+            710,
+            2710,
+            72,
+            30
+          ],
+          "raw_rect": [
+            710,
+            2711,
+            73,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "上一页背景框",
+              "type": "layer",
+              "rect": [
+                710,
+                2710,
+                72,
+                30
+              ],
+              "raw_rect": [
+                710,
+                2711,
+                73,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "上一页",
+              "type": "layer",
+              "rect": [
+                736,
+                2720,
+                36,
+                10
+              ],
+              "raw_rect": [
+                734,
+                2721,
+                35,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "上一页",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "<",
+              "type": "layer",
+              "rect": [
+                724,
+                2724,
+                4,
+                10
+              ],
+              "raw_rect": [
+                724,
+                2723,
+                5,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "<",
+              "font_family": "'SimSun'",
+              "font_size": 12,
+              "color": "#656565"
+            }
+          ]
+        },
+        {
+          "name": "下一页",
+          "type": "group",
+          "rect": [
+            1210,
+            2710,
+            72,
+            30
+          ],
+          "raw_rect": [
+            1211,
+            2711,
+            73,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "上一页背景框",
+              "type": "layer",
+              "rect": [
+                1210,
+                2710,
+                72,
+                30
+              ],
+              "raw_rect": [
+                1211,
+                2711,
+                73,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "下一页",
+              "type": "layer",
+              "rect": [
+                1220,
+                2720,
+                36,
+                10
+              ],
+              "raw_rect": [
+                1222,
+                2721,
+                35,
+                12
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "下一页",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": ">",
+              "type": "layer",
+              "rect": [
+                1264,
+                2724,
+                4,
+                10
+              ],
+              "raw_rect": [
+                1266,
+                2723,
+                5,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": ">",
+              "font_family": "'SimSun'",
+              "font_size": 12,
+              "color": "#656565"
+            }
+          ]
+        },
+        {
+          "name": "…",
+          "type": "layer",
+          "rect": [
+            1150,
+            2728,
+            10,
+            4
+          ],
+          "raw_rect": [
+            1150,
+            2726,
+            12,
+            3
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "…",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "1",
+          "type": "group",
+          "rect": [
+            790,
+            2710,
+            30,
+            30
+          ],
+          "raw_rect": [
+            789,
+            2711,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                790,
+                2710,
+                30,
+                30
+              ],
+              "raw_rect": [
+                789,
+                2711,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                804,
+                2720,
+                4,
+                10
+              ],
+              "raw_rect": [
+                803,
+                2722,
+                3,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "1",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "3",
+          "type": "group",
+          "rect": [
+            824,
+            2710,
+            64,
+            30
+          ],
+          "raw_rect": [
+            824,
+            2711,
+            65,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "2",
+              "type": "group",
+              "rect": [
+                824,
+                2710,
+                30,
+                30
+              ],
+              "raw_rect": [
+                824,
+                2711,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "children": [
+                {
+                  "name": "背景框",
+                  "type": "layer",
+                  "rect": [
+                    824,
+                    2710,
+                    30,
+                    30
+                  ],
+                  "raw_rect": [
+                    824,
+                    2711,
+                    30,
+                    31
+                  ],
+                  "visible": true,
+                  "opacity": 1.0
+                },
+                {
+                  "name": "2",
+                  "type": "layer",
+                  "rect": [
+                    836,
+                    2720,
+                    8,
+                    10
+                  ],
+                  "raw_rect": [
+                    836,
+                    2722,
+                    6,
+                    9
+                  ],
+                  "visible": true,
+                  "opacity": 1.0,
+                  "text_content": "2",
+                  "font_family": "MicrosoftYaHei",
+                  "font_size": 12,
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                860,
+                2710,
+                30,
+                30
+              ],
+              "raw_rect": [
+                859,
+                2711,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                870,
+                2720,
+                8,
+                10
+              ],
+              "raw_rect": [
+                872,
+                2722,
+                6,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "3",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "4",
+          "type": "group",
+          "rect": [
+            896,
+            2710,
+            30,
+            30
+          ],
+          "raw_rect": [
+            894,
+            2711,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                896,
+                2710,
+                30,
+                30
+              ],
+              "raw_rect": [
+                894,
+                2711,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                904,
+                2720,
+                10,
+                10
+              ],
+              "raw_rect": [
+                906,
+                2722,
+                8,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "4",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "5",
+          "type": "group",
+          "rect": [
+            930,
+            2710,
+            30,
+            30
+          ],
+          "raw_rect": [
+            929,
+            2711,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                930,
+                2710,
+                30,
+                30
+              ],
+              "raw_rect": [
+                929,
+                2711,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                940,
+                2720,
+                8,
+                10
+              ],
+              "raw_rect": [
+                942,
+                2722,
+                6,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "5",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "6",
+          "type": "group",
+          "rect": [
+            964,
+            2710,
+            30,
+            30
+          ],
+          "raw_rect": [
+            964,
+            2711,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                964,
+                2710,
+                30,
+                30
+              ],
+              "raw_rect": [
+                964,
+                2711,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                976,
+                2720,
+                8,
+                10
+              ],
+              "raw_rect": [
+                977,
+                2722,
+                6,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "6",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "7",
+          "type": "group",
+          "rect": [
+            1000,
+            2710,
+            30,
+            30
+          ],
+          "raw_rect": [
+            999,
+            2711,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                1000,
+                2710,
+                30,
+                30
+              ],
+              "raw_rect": [
+                999,
+                2711,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                1010,
+                2720,
+                8,
+                10
+              ],
+              "raw_rect": [
+                1012,
+                2722,
+                6,
+                9
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "7",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "8",
+          "type": "group",
+          "rect": [
+            1032,
+            2710,
+            30,
+            30
+          ],
+          "raw_rect": [
+            1034,
+            2711,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                1032,
+                2710,
+                30,
+                30
+              ],
+              "raw_rect": [
+                1034,
+                2711,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                1050,
+                2720,
+                8,
+                10
+              ],
+              "raw_rect": [
+                1048,
+                2722,
+                6,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "8",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "9",
+          "type": "group",
+          "rect": [
+            1070,
+            2710,
+            30,
+            30
+          ],
+          "raw_rect": [
+            1069,
+            2711,
+            30,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                1070,
+                2710,
+                30,
+                30
+              ],
+              "raw_rect": [
+                1069,
+                2711,
+                30,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                1084,
+                2720,
+                8,
+                10
+              ],
+              "raw_rect": [
+                1083,
+                2722,
+                6,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "9",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "10",
+          "type": "group",
+          "rect": [
+            1104,
+            2710,
+            36,
+            30
+          ],
+          "raw_rect": [
+            1104,
+            2711,
+            37,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                1104,
+                2710,
+                36,
+                30
+              ],
+              "raw_rect": [
+                1104,
+                2711,
+                37,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                1120,
+                2720,
+                10,
+                10
+              ],
+              "raw_rect": [
+                1118,
+                2722,
+                12,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "10",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "最后一页",
+          "type": "group",
+          "rect": [
+            1170,
+            2710,
+            36,
+            30
+          ],
+          "raw_rect": [
+            1169,
+            2711,
+            37,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "1 背景框",
+              "type": "layer",
+              "rect": [
+                1170,
+                2710,
+                36,
+                30
+              ],
+              "raw_rect": [
+                1169,
+                2711,
+                37,
+                31
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "1",
+              "type": "layer",
+              "rect": [
+                1180,
+                2720,
+                12,
+                10
+              ],
+              "raw_rect": [
+                1182,
+                2722,
+                13,
+                10
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "35",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "name": "共356条",
+          "type": "layer",
+          "rect": [
+            636,
+            2720,
+            56,
+            16
+          ],
+          "raw_rect": [
+            637,
+            2720,
+            54,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "共356条",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "目的地",
+      "type": "group",
+      "rect": [
+        360,
+        344,
+        1200,
+        2270
+      ],
+      "raw_rect": [
+        359,
+        345,
+        1202,
+        2268
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "数据1",
+          "type": "group",
+          "rect": [
+            360,
+            344,
+            1200,
+            210
+          ],
+          "raw_rect": [
+            359,
+            345,
+            1202,
+            209
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "type": "layer",
+              "rect": [
+                370,
+                344,
+                420,
+                20
+              ],
+              "raw_rect": [
+                372,
+                345,
+                421,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                350,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                350,
+                7,
+                7
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE",
+              "type": "layer",
+              "rect": [
+                560,
+                392,
+                996,
+                36
+              ],
+              "raw_rect": [
+                559,
+                393,
+                997,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "type": "layer",
+              "rect": [
+                560,
+                500,
+                296,
+                16
+              ],
+              "raw_rect": [
+                561,
+                498,
+                295,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景1",
+              "type": "layer",
+              "rect": [
+                370,
+                390,
+                184,
+                124
+              ],
+              "raw_rect": [
+                371,
+                391,
+                183,
+                123
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图1",
+              "type": "layer",
+              "rect": [
+                372,
+                364,
+                360,
+                240
+              ],
+              "raw_rect": [
+                373,
+                363,
+                360,
+                240
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                550,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                550,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据2",
+          "type": "group",
+          "rect": [
+            360,
+            590,
+            1200,
+            170
+          ],
+          "raw_rect": [
+            359,
+            592,
+            1202,
+            168
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "兰州龙山滑雪场因停电突发缆车停运事故，导致104名游客被困滞留半空，滑雪场官号留言“挂一会儿就不装了”？监管部门介入调查",
+              "type": "layer",
+              "rect": [
+                370,
+                590,
+                1110,
+                20
+              ],
+              "raw_rect": [
+                371,
+                592,
+                1112,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "兰州龙山滑雪场因停电突发缆车停运事故，导致104名游客被困滞留半空，滑雪场官号留言“挂一会儿就不装了”？监管部门介入调查",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                596,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                597,
+                7,
+                7
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "时间回溯到1月5日10时15分，进学派出所民警张一宁接到警情：园纺路南侧翰馨阁附近，两名外国游客因手机丢失陷入困境。放下电话后",
+              "type": "layer",
+              "rect": [
+                364,
+                640,
+                1192,
+                36
+              ],
+              "raw_rect": [
+                363,
+                640,
+                1194,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "时间回溯到1月5日10时15分，进学派出所民警张一宁接到警情：园纺路南侧翰馨阁附近，两名外国游客因手机丢失陷入困境。放下电话后，张一宁即刻与辅警江泽赶到现场。没想到，出警即遇难题——求助的是两名俄罗斯游客，既不会说中文，民警也不懂俄语，双方根本无法沟通。",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "type": "layer",
+              "rect": [
+                364,
+                704,
+                296,
+                16
+              ],
+              "raw_rect": [
+                365,
+                704,
+                295,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                756,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                756,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据3",
+          "type": "group",
+          "rect": [
+            360,
+            796,
+            1200,
+            210
+          ],
+          "raw_rect": [
+            359,
+            797,
+            1202,
+            209
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "type": "layer",
+              "rect": [
+                370,
+                796,
+                420,
+                20
+              ],
+              "raw_rect": [
+                372,
+                797,
+                421,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                800,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                802,
+                7,
+                7
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE",
+              "type": "layer",
+              "rect": [
+                560,
+                844,
+                996,
+                36
+              ],
+              "raw_rect": [
+                559,
+                845,
+                997,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "type": "layer",
+              "rect": [
+                560,
+                950,
+                296,
+                16
+              ],
+              "raw_rect": [
+                561,
+                950,
+                295,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景1",
+              "type": "layer",
+              "rect": [
+                370,
+                844,
+                184,
+                124
+              ],
+              "raw_rect": [
+                371,
+                843,
+                183,
+                123
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图1",
+              "type": "layer",
+              "rect": [
+                372,
+                816,
+                360,
+                240
+              ],
+              "raw_rect": [
+                373,
+                815,
+                360,
+                240
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                1000,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                1002,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据4",
+          "type": "group",
+          "rect": [
+            360,
+            1044,
+            1200,
+            210
+          ],
+          "raw_rect": [
+            359,
+            1044,
+            1202,
+            209
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "type": "layer",
+              "rect": [
+                370,
+                1044,
+                420,
+                20
+              ],
+              "raw_rect": [
+                372,
+                1044,
+                421,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                1050,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                1049,
+                7,
+                7
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE",
+              "type": "layer",
+              "rect": [
+                560,
+                1090,
+                996,
+                36
+              ],
+              "raw_rect": [
+                559,
+                1092,
+                997,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "type": "layer",
+              "rect": [
+                560,
+                1196,
+                296,
+                16
+              ],
+              "raw_rect": [
+                561,
+                1197,
+                295,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景1",
+              "type": "layer",
+              "rect": [
+                370,
+                1090,
+                184,
+                124
+              ],
+              "raw_rect": [
+                371,
+                1090,
+                183,
+                123
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图1",
+              "type": "layer",
+              "rect": [
+                372,
+                1060,
+                360,
+                240
+              ],
+              "raw_rect": [
+                373,
+                1062,
+                360,
+                240
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                1250,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                1249,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据5",
+          "type": "group",
+          "rect": [
+            360,
+            1290,
+            1200,
+            170
+          ],
+          "raw_rect": [
+            359,
+            1291,
+            1202,
+            168
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "兰州龙山滑雪场因停电突发缆车停运事故，导致104名游客被困滞留半空，滑雪场官号留言“挂一会儿就不装了”？监管部门介入调查",
+              "type": "layer",
+              "rect": [
+                370,
+                1290,
+                1110,
+                20
+              ],
+              "raw_rect": [
+                371,
+                1291,
+                1112,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "兰州龙山滑雪场因停电突发缆车停运事故，导致104名游客被困滞留半空，滑雪场官号留言“挂一会儿就不装了”？监管部门介入调查",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                1296,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                1296,
+                7,
+                7
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "时间回溯到1月5日10时15分，进学派出所民警张一宁接到警情：园纺路南侧翰馨阁附近，两名外国游客因手机丢失陷入困境。放下电话后",
+              "type": "layer",
+              "rect": [
+                364,
+                1340,
+                1192,
+                36
+              ],
+              "raw_rect": [
+                363,
+                1339,
+                1194,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "时间回溯到1月5日10时15分，进学派出所民警张一宁接到警情：园纺路南侧翰馨阁附近，两名外国游客因手机丢失陷入困境。放下电话后，张一宁即刻与辅警江泽赶到现场。没想到，出警即遇难题——求助的是两名俄罗斯游客，既不会说中文，民警也不懂俄语，双方根本无法沟通。",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "type": "layer",
+              "rect": [
+                364,
+                1404,
+                296,
+                16
+              ],
+              "raw_rect": [
+                365,
+                1403,
+                295,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                1456,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                1455,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据6",
+          "type": "group",
+          "rect": [
+            360,
+            1496,
+            1200,
+            210
+          ],
+          "raw_rect": [
+            359,
+            1496,
+            1202,
+            209
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "type": "layer",
+              "rect": [
+                370,
+                1496,
+                420,
+                20
+              ],
+              "raw_rect": [
+                372,
+                1496,
+                421,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                1500,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                1501,
+                7,
+                7
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE",
+              "type": "layer",
+              "rect": [
+                560,
+                1544,
+                996,
+                36
+              ],
+              "raw_rect": [
+                559,
+                1544,
+                997,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "type": "layer",
+              "rect": [
+                560,
+                1650,
+                296,
+                16
+              ],
+              "raw_rect": [
+                561,
+                1649,
+                295,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景1",
+              "type": "layer",
+              "rect": [
+                370,
+                1540,
+                184,
+                124
+              ],
+              "raw_rect": [
+                371,
+                1542,
+                183,
+                123
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图1",
+              "type": "layer",
+              "rect": [
+                372,
+                1512,
+                360,
+                240
+              ],
+              "raw_rect": [
+                373,
+                1514,
+                360,
+                240
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                1700,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                1701,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据7",
+          "type": "group",
+          "rect": [
+            360,
+            1744,
+            1200,
+            210
+          ],
+          "raw_rect": [
+            359,
+            1745,
+            1202,
+            209
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "type": "layer",
+              "rect": [
+                370,
+                1744,
+                420,
+                20
+              ],
+              "raw_rect": [
+                372,
+                1745,
+                421,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                1750,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                1750,
+                7,
+                7
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE",
+              "type": "layer",
+              "rect": [
+                560,
+                1792,
+                996,
+                36
+              ],
+              "raw_rect": [
+                559,
+                1793,
+                997,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "type": "layer",
+              "rect": [
+                560,
+                1900,
+                296,
+                16
+              ],
+              "raw_rect": [
+                561,
+                1898,
+                295,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景1",
+              "type": "layer",
+              "rect": [
+                370,
+                1790,
+                184,
+                124
+              ],
+              "raw_rect": [
+                371,
+                1791,
+                183,
+                123
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图1",
+              "type": "layer",
+              "rect": [
+                372,
+                1764,
+                360,
+                240
+              ],
+              "raw_rect": [
+                373,
+                1763,
+                360,
+                240
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                1950,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                1950,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据8",
+          "type": "group",
+          "rect": [
+            360,
+            1990,
+            1200,
+            210
+          ],
+          "raw_rect": [
+            359,
+            1992,
+            1202,
+            209
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "type": "layer",
+              "rect": [
+                370,
+                1990,
+                420,
+                20
+              ],
+              "raw_rect": [
+                372,
+                1992,
+                421,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                1996,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                1997,
+                7,
+                7
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE",
+              "type": "layer",
+              "rect": [
+                560,
+                2040,
+                996,
+                36
+              ],
+              "raw_rect": [
+                559,
+                2040,
+                997,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "type": "layer",
+              "rect": [
+                560,
+                2144,
+                296,
+                16
+              ],
+              "raw_rect": [
+                561,
+                2145,
+                295,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景1",
+              "type": "layer",
+              "rect": [
+                370,
+                2040,
+                184,
+                124
+              ],
+              "raw_rect": [
+                371,
+                2038,
+                183,
+                123
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图1",
+              "type": "layer",
+              "rect": [
+                372,
+                2010,
+                360,
+                240
+              ],
+              "raw_rect": [
+                373,
+                2010,
+                360,
+                240
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                2196,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                2197,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据9",
+          "type": "group",
+          "rect": [
+            360,
+            2240,
+            1200,
+            170
+          ],
+          "raw_rect": [
+            359,
+            2239,
+            1202,
+            168
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "兰州龙山滑雪场因停电突发缆车停运事故，导致104名游客被困滞留半空，滑雪场官号留言“挂一会儿就不装了”？监管部门介入调查",
+              "type": "layer",
+              "rect": [
+                370,
+                2240,
+                1110,
+                20
+              ],
+              "raw_rect": [
+                371,
+                2239,
+                1112,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "兰州龙山滑雪场因停电突发缆车停运事故，导致104名游客被困滞留半空，滑雪场官号留言“挂一会儿就不装了”？监管部门介入调查",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                2244,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                2244,
+                7,
+                7
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "时间回溯到1月5日10时15分，进学派出所民警张一宁接到警情：园纺路南侧翰馨阁附近，两名外国游客因手机丢失陷入困境。放下电话后",
+              "type": "layer",
+              "rect": [
+                364,
+                2288,
+                1192,
+                36
+              ],
+              "raw_rect": [
+                363,
+                2287,
+                1194,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "时间回溯到1月5日10时15分，进学派出所民警张一宁接到警情：园纺路南侧翰馨阁附近，两名外国游客因手机丢失陷入困境。放下电话后，张一宁即刻与辅警江泽赶到现场。没想到，出警即遇难题——求助的是两名俄罗斯游客，既不会说中文，民警也不懂俄语，双方根本无法沟通。",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "type": "layer",
+              "rect": [
+                364,
+                2350,
+                296,
+                16
+              ],
+              "raw_rect": [
+                365,
+                2351,
+                295,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "细线",
+              "type": "layer",
+              "rect": [
+                360,
+                2404,
+                1200,
+                4
+              ],
+              "raw_rect": [
+                359,
+                2403,
+                1202,
+                4
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        },
+        {
+          "name": "数据10",
+          "type": "group",
+          "rect": [
+            360,
+            2444,
+            1196,
+            170
+          ],
+          "raw_rect": [
+            359,
+            2444,
+            1197,
+            169
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "children": [
+            {
+              "name": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "type": "layer",
+              "rect": [
+                370,
+                2444,
+                420,
+                20
+              ],
+              "raw_rect": [
+                372,
+                2444,
+                421,
+                19
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "暖心相助无国界 延吉民警帮外国游客找回遗失手机",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "小点点",
+              "type": "layer",
+              "rect": [
+                360,
+                2450,
+                8,
+                8
+              ],
+              "raw_rect": [
+                359,
+                2449,
+                7,
+                7
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE",
+              "type": "layer",
+              "rect": [
+                560,
+                2490,
+                996,
+                36
+              ],
+              "raw_rect": [
+                559,
+                2492,
+                997,
+                36
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "“谢谢，谢谢你们，我爱中国!”近日，两名俄罗斯游客专程来到延吉市公安局进学派出所，手中紧攥着手写感谢信和一张写有“I LOVE CHINA”的纸条，用不太流利的中文反复向民警道谢。    ",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "type": "layer",
+              "rect": [
+                560,
+                2596,
+                296,
+                16
+              ],
+              "raw_rect": [
+                561,
+                2597,
+                295,
+                14
+              ],
+              "visible": true,
+              "opacity": 1.0,
+              "text_content": "22小时前　一天前　 15/12/2025（时间这样显示）",
+              "font_family": "MicrosoftYaHei",
+              "font_size": 12,
+              "color": "#000000"
+            },
+            {
+              "name": "背景1",
+              "type": "layer",
+              "rect": [
+                370,
+                2490,
+                184,
+                124
+              ],
+              "raw_rect": [
+                371,
+                2490,
+                183,
+                123
+              ],
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "name": "图1",
+              "type": "layer",
+              "rect": [
+                372,
+                2460,
+                360,
+                240
+              ],
+              "raw_rect": [
+                373,
+                2462,
+                360,
+                240
+              ],
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "关键字搜索",
+      "type": "group",
+      "rect": [
+        1280,
+        190,
+        276,
+        30
+      ],
+      "raw_rect": [
+        1282,
+        189,
+        277,
+        31
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "地区背景框",
+          "type": "layer",
+          "rect": [
+            1280,
+            190,
+            224,
+            30
+          ],
+          "raw_rect": [
+            1282,
+            189,
+            223,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "输入关键字",
+          "type": "layer",
+          "rect": [
+            1290,
+            200,
+            60,
+            10
+          ],
+          "raw_rect": [
+            1292,
+            198,
+            61,
+            12
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "输入关键字",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "放大镜背景",
+          "type": "layer",
+          "rect": [
+            1516,
+            190,
+            40,
+            30
+          ],
+          "raw_rect": [
+            1517,
+            189,
+            42,
+            31
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "放大镜",
+          "type": "layer",
+          "rect": [
+            1530,
+            196,
+            24,
+            20
+          ],
+          "raw_rect": [
+            1529,
+            196,
+            24,
+            20
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "您目前搜索的是：樱花节",
+          "type": "layer",
+          "rect": [
+            360,
+            204,
+            140,
+            10
+          ],
+          "raw_rect": [
+            362,
+            205,
+            138,
+            12
+          ],
+          "visible": false,
+          "opacity": 1.0,
+          "text_content": "您目前搜索的是：樱花节",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "栏目标题",
+      "type": "group",
+      "rect": [
+        360,
+        190,
+        1010,
+        100
+      ],
+      "raw_rect": [
+        359,
+        189,
+        1008,
+        99
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "背景框",
+          "type": "layer",
+          "rect": [
+            360,
+            190,
+            130,
+            36
+          ],
+          "raw_rect": [
+            359,
+            189,
+            128,
+            36
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "类别名称　　类别名称　　类别名称　　类别名称　　类别名称　　类别名称　　类别名称（点击上边的标题，恢复到默认页面数据，就是类别",
+          "type": "layer",
+          "rect": [
+            360,
+            272,
+            1008,
+            16
+          ],
+          "raw_rect": [
+            361,
+            274,
+            1006,
+            14
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "类别名称　　类别名称　　类别名称　　类别名称　　类别名称　　类别名称　　类别名称（点击上边的标题，恢复到默认页面数据，就是类别不限，，选择的加粗）　　\r\r",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "资讯 动态",
+          "type": "layer",
+          "rect": [
+            368,
+            196,
+            112,
+            24
+          ],
+          "raw_rect": [
+            367,
+            195,
+            114,
+            24
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "资讯 动态",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "·",
+          "type": "layer",
+          "rect": [
+            420,
+            204,
+            10,
+            8
+          ],
+          "raw_rect": [
+            419,
+            205,
+            8,
+            7
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "·",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "顶部 渐变",
+      "type": "group",
+      "rect": [
+        0,
+        -4,
+        1920,
+        150
+      ],
+      "raw_rect": [
+        -1,
+        -5,
+        1922,
+        152
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "渐变背景",
+          "type": "layer",
+          "rect": [
+            0,
+            -4,
+            1920,
+            150
+          ],
+          "raw_rect": [
+            -1,
+            -5,
+            1922,
+            152
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "渐变",
+          "type": "layer",
+          "rect": [
+            0,
+            0,
+            1920,
+            3500
+          ],
+          "raw_rect": [
+            0,
+            0,
+            1920,
+            3500
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "细长线",
+          "type": "layer",
+          "rect": [
+            0,
+            140,
+            1920,
+            4
+          ],
+          "raw_rect": [
+            -1,
+            142,
+            1922,
+            4
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    },
+    {
+      "name": "顶部搜索",
+      "type": "group",
+      "rect": [
+        570,
+        64,
+        990,
+        50
+      ],
+      "raw_rect": [
+        571,
+        66,
+        989,
+        48
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "搜索框",
+          "type": "layer",
+          "rect": [
+            570,
+            64,
+            772,
+            50
+          ],
+          "raw_rect": [
+            571,
+            66,
+            773,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "选择小框",
+          "type": "layer",
+          "rect": [
+            1350,
+            64,
+            110,
+            50
+          ],
+          "raw_rect": [
+            1349,
+            66,
+            111,
+            48
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "▼",
+          "type": "layer",
+          "rect": [
+            1432,
+            88,
+            10,
+            10
+          ],
+          "raw_rect": [
+            1434,
+            86,
+            11,
+            10
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "▼",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "资讯·动态",
+          "type": "layer",
+          "rect": [
+            1368,
+            84,
+            64,
+            16
+          ],
+          "raw_rect": [
+            1366,
+            83,
+            64,
+            15
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "资讯·动态",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        },
+        {
+          "name": "搜索小框",
+          "type": "layer",
+          "rect": [
+            1464,
+            68,
+            96,
+            48
+          ],
+          "raw_rect": [
+            1465,
+            67,
+            95,
+            46
+          ],
+          "visible": true,
+          "opacity": 1.0
+        },
+        {
+          "name": "搜 索",
+          "type": "layer",
+          "rect": [
+            1492,
+            80,
+            48,
+            20
+          ],
+          "raw_rect": [
+            1493,
+            80,
+            46,
+            20
+          ],
+          "visible": true,
+          "opacity": 1.0,
+          "text_content": "搜 索",
+          "font_family": "MicrosoftYaHei",
+          "font_size": 12,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "登录  注册",
+      "type": "layer",
+      "rect": [
+        1450,
+        16,
+        64,
+        10
+      ],
+      "raw_rect": [
+        1448,
+        15,
+        64,
+        12
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "登录  注册",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "二维码",
+      "type": "layer",
+      "rect": [
+        1540,
+        16,
+        16,
+        16
+      ],
+      "raw_rect": [
+        1542,
+        15,
+        15,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0
+    },
+    {
+      "name": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "type": "layer",
+      "rect": [
+        576,
+        44,
+        584,
+        16
+      ],
+      "raw_rect": [
+        574,
+        44,
+        586,
+        14
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "text_content": "首页　　 纪行·攻略　　 城乡·街巷　　 特产·美食  　 好物·文创　　 资讯·动态",
+      "font_family": "MicrosoftYaHei",
+      "font_size": 12,
+      "color": "#000000"
+    },
+    {
+      "name": "logo",
+      "type": "group",
+      "rect": [
+        360,
+        48,
+        170,
+        50
+      ],
+      "raw_rect": [
+        361,
+        47,
+        170,
+        50
+      ],
+      "visible": true,
+      "opacity": 1.0,
+      "children": [
+        {
+          "name": "logo",
+          "type": "layer",
+          "rect": [
+            360,
+            48,
+            170,
+            50
+          ],
+          "raw_rect": [
+            361,
+            47,
+            170,
+            50
+          ],
+          "visible": true,
+          "opacity": 1.0
+        }
+      ]
+    }
+  ]
+}

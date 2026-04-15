@@ -1,4 +1,4 @@
-<div id="provinceModal" class="fixed inset-0 z-[200] flex items-center justify-center opacity-0 invisible transition-all duration-300">
+<div id="provinceModal" class="fixed inset-0 z-[200] items-center justify-center transition-all duration-300" style="display: none; opacity: 0;">
     <!-- 背景遮罩 -->
     <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeProvinceModal()"></div>
     
@@ -26,17 +26,26 @@
         const modal = document.getElementById('provinceModal');
         const content = document.getElementById('provinceContent');
         
-        modal.classList.remove('opacity-0', 'invisible');
-        content.classList.remove('scale-95');
-        content.classList.add('scale-100');
+        modal.style.display = 'flex';
+        
+        // 微调延迟以触发过渡动画
+        setTimeout(() => {
+            modal.style.opacity = '1';
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }, 10);
     }
 
     function closeProvinceModal() {
         const modal = document.getElementById('provinceModal');
         const content = document.getElementById('provinceContent');
         
-        modal.classList.add('opacity-0', 'invisible');
+        modal.style.opacity = '0';
         content.classList.remove('scale-100');
         content.classList.add('scale-95');
+        
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
     }
 </script>
