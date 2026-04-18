@@ -14,9 +14,19 @@ builder.Services.AddScoped<ISqlSugarClient>(s =>
         InitKeyType = InitKeyType.Attribute
     });
 
-    // 自动建表 (CodeFirst)
+    // 自动建库建表 (CodeFirst)
     if (builder.Environment.IsDevelopment())
     {
+        // 1. 尝试创建数据库（如果不存在）
+        db.DbMaintenance.CreateDatabase();
+
+        // 2. 尝试给普通用户授权（如果是 root 登录）
+        try {
+            db.Ado.ExecuteCommand("GRANT ALL PRIVILEGES ON TravelPortal_DB.* TO 'travel_user'@'%';");
+            db.Ado.ExecuteCommand("FLUSH PRIVILEGES;");
+        } catch { /* 如果非 root 登录或用户已存在权限，忽略报错 */ }
+
+        // 3. 初始化表
         db.CodeFirst.InitTables(
             typeof(Region), 
             typeof(Place), 

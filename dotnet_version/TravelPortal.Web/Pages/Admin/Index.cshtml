@@ -1,0 +1,38 @@
+@page "/Admin"
+@model TravelPortal.Web.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "仪表盘";
+    Layout = "Shared/_AdminLayout";
+}
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <div class="text-sm font-medium text-gray-500">目的地总数</div>
+        <div class="mt-2 text-3xl font-bold text-gray-900">0</div>
+        <div class="mt-2 text-xs text-green-600">↑ 12% 较上月</div>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <div class="text-sm font-medium text-gray-500">已发布游记</div>
+        <div class="mt-2 text-3xl font-bold text-gray-900">0</div>
+        <div class="mt-2 text-xs text-gray-400">待审核 0 篇</div>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <div class="text-sm font-medium text-gray-500">注册用户</div>
+        <div class="mt-2 text-3xl font-bold text-gray-900">1</div>
+        <div class="mt-2 text-xs text-blue-600">当前在线 1 人</div>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <div class="text-sm font-medium text-gray-500">今日访问量</div>
+        <div class="mt-2 text-3xl font-bold text-gray-900">0</div>
+        <div class="mt-2 text-xs text-gray-400">平均停留 0s</div>
+    </div>
+</div>
+
+<div class="mt-8 bg-white rounded-xl shadow-sm border border-gray-100">
+    <div class="p-6 border-b border-gray-100 font-semibold">
+        系统公告
+    </div>
+    <div class="p-6 text-gray-600 text-sm">
+        欢迎使用旅游门户管理后台。系统已迁移至 .NET 8 技术栈，当前处于初期数据录入阶段。
+    </div>
+</div>

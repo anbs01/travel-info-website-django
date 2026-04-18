@@ -1,50 +1,59 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TravelPortal.Web</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/TravelPortal.Web.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] - 旅游门户网站</title>
+    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">TravelPortal.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+<body class="font-sans bg-gray-50 text-gray-900">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-[1200px] mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center space-x-8">
+                <a href="/" class="text-2xl font-bold text-design-primary">TravelPortal</a>
+                
+                <!-- 主导航 -->
+                <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="/" class="hover:text-design-primary transition-colors">首页</a>
+                    <a href="/Places" class="hover:text-design-primary transition-colors">目的地</a>
+                    <a href="/Travelogues" class="hover:text-design-primary transition-colors">游记</a>
                 </div>
+            </div>
+
+            <!-- 右侧操作区 -->
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-4 border-r border-gray-200 pr-6">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <span class="opacity-60 text-[11px]">欢迎, @User.Identity.Name</span>
+                        <a href="/Account/Logout" class="hover:text-design-primary transition-colors text-sm">退出</a>
+                    }
+                    else
+                    {
+                        <a href="/Account/Login" class="hover:text-design-primary transition-colors text-sm">登录</a>
+                        <a href="/Account/Register" class="hover:text-design-primary transition-colors text-sm">注册</a>
+                    }
+                </div>
+                
+                <button class="bg-design-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-all shadow-md">
+                    发布游记
+                </button>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - TravelPortal.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-12 mt-20">
+        <div class="max-w-[1200px] mx-auto px-4 text-center">
+            <p>&copy; 2026 旅游门户网站 - 基于 .NET 8 / Tailwind CSS 构建</p>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)

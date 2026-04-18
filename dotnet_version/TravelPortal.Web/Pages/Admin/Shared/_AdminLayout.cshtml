@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - 旅游门户管理系统</title>
+    <!-- 引入 Tailwind CDN 确保样式立即生效 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand': '#A67C52',
+                        'sidebar': '#1e1e2d',
+                        'sidebar-hover': '#2b2b40'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'Noto Sans SC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; }
+        .active-menu { background: linear-gradient(90deg, rgba(166,124,82,0.1) 0%, rgba(166,124,82,0) 100%); border-left: 3px solid #A67C52; color: #A67C52 !important; }
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-[#f4f7f6] text-[#333]">
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- 侧边栏 -->
+        <aside class="w-64 bg-sidebar text-white flex-shrink-0 flex flex-col shadow-2xl">
+            <!-- Logo -->
+            <div class="p-8 border-b border-gray-800 flex items-center space-x-3">
+                <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand/30">T</div>
+                <div>
+                    <div class="text-sm font-bold tracking-wider uppercase">TravelPortal</div>
+                    <div class="text-[10px] text-gray-500 uppercase">Management</div>
+                </div>
+            </div>
+
+            <!-- 导航 -->
+            <nav class="flex-1 px-4 py-8 space-y-2 overflow-y-auto">
+                <div class="px-4 py-2 text-[10px] font-bold text-gray-600 uppercase tracking-widest">Main Menu</div>
+                
+                <a href="/Admin" class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-sidebar-hover group">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    控制台首页
+                </a>
+
+                <div class="pt-6 px-4 py-2 text-[10px] font-bold text-gray-600 uppercase tracking-widest">Resource</div>
+
+                <a href="/Admin/Places" class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-sidebar-hover group active-menu">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    城镇目的地
+                </a>
+
+                <a href="/Admin/ScenicSpots" class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-sidebar-hover group">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                    打卡地管理
+                </a>
+
+                <a href="/Admin/Foods" class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-sidebar-hover group">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.168.477-4.5 1.253"/></svg>
+                    特产美食
+                </a>
+
+                <a href="/Admin/Travelogues" class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-sidebar-hover group">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 group-hover:text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    纪行攻略
+                </a>
+            </nav>
+
+            <!-- 底部用户信息 -->
+            <div class="p-6 bg-[#161622] flex items-center justify-between border-t border-gray-800">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded-full bg-brand flex items-center justify-center text-xs font-bold ring-2 ring-brand/20">
+                        @User.Identity?.Name?.Substring(0, 1).ToUpper()
+                    </div>
+                    <div>
+                        <div class="text-[12px] font-bold">@User.Identity?.Name</div>
+                        <div class="text-[10px] text-gray-500">Super Admin</div>
+                    </div>
+                </div>
+                <form method="post" action="/Account/Logout">
+                    <button class="p-2 hover:bg-gray-800 rounded-lg text-gray-500 hover:text-red-400 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <div class="flex-1 flex flex-col min-w-0">
+            <!-- 顶部导航 -->
+            <header class="h-20 bg-white/80 backdrop-blur-md border-b border-gray-100 flex items-center justify-between px-10 sticky top-0 z-10">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gray-50 p-2 rounded-lg text-gray-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </div>
+                    <span class="text-sm font-semibold text-gray-800">@ViewData["Title"]</span>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="/" target="_blank" class="flex items-center text-xs font-medium text-brand bg-brand/5 px-4 py-2 rounded-full hover:bg-brand/10 transition-all border border-brand/20">
+                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        预览前台
+                    </a>
+                </div>
+            </header>
+
+            <!-- 页面内容 -->
+            <main class="flex-1 overflow-y-auto p-10">
+                <div class="max-w-6xl mx-auto">
+                    <!-- 卡片包裹层 -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-gray-50 p-8 min-h-[500px]">
+                        @RenderBody()
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
