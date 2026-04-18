@@ -16,69 +16,57 @@
 {% endblock %}
 
 {% block list_content %}
-<div class="space-y-12">
+<div class="space-y-[40px]">
     {% for travelogue in travelogues %}
-    <article class="flex group">
-        <!-- 左侧图片 -->
+    <article class="flex group relative">
+        <!-- PSD 中的装饰小圆点 (360px X) -->
+        <div class="absolute left-[-10px] top-[6px] w-[8px] h-[8px] bg-design-black/20 group-hover:bg-design-primary transition-colors"></div>
+
+        <!-- 左侧图片: 360x240px (PSD 对标) -->
         {% if travelogue.slug %}
-        <a href="{% url 'travelogue:detail' slug=travelogue.slug %}" target="_blank" class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0">
+        <a href="{% url 'travelogue:detail' slug=travelogue.slug %}" target="_blank" class="block w-[360px] h-[240px] overflow-hidden bg-gray-50 flex-shrink-0">
             {% if travelogue.image %}
-            <img src="{{ travelogue.image.url }}" alt="{{ travelogue.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <img src="{{ travelogue.image.url }}" alt="{{ travelogue.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
             {% else %}
-            <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">暂无图片</div>
+            <div class="w-full h-full flex items-center justify-center text-gray-300 text-[12px]">暂无图片</div>
             {% endif %}
         </a>
-        {% else %}
-        <div class="block w-[320px] h-[200px] overflow-hidden rounded-sm flex-shrink-0 bg-gray-50 flex items-center justify-center text-gray-300 text-xs">
-            暂无详情
-        </div>
         {% endif %}
 
-        <!-- 右侧内容 -->
-        <div class="ml-8 flex-1 flex flex-col justify-between py-1 border-b border-gray-50 border-dashed pb-8 group-last:border-b-0">
+        <!-- 右侧内容 (560px X 开始) -->
+        <div class="ml-[20px] flex-1 flex flex-col justify-between py-[2px] border-b border-design-black/5 pb-[40px] group-last:border-b-0">
             <div>
-                <div class="flex items-center space-x-3 mb-3">
+                <!-- 标题 (PSD: 12px 微软雅黑，加粗) -->
+                <div class="mb-[14px]">
                     {% if travelogue.slug %}
-                    <a href="{% url 'travelogue:detail' slug=travelogue.slug %}" target="_blank" class="text-xl font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
+                    <a href="{% url 'travelogue:detail' slug=travelogue.slug %}" target="_blank" class="text-[12px] font-bold text-design-black hover:text-design-primary transition-colors leading-relaxed">
                         {{ travelogue.title }}
                     </a>
                     {% else %}
-                    <span class="text-xl font-bold text-gray-900">{{ travelogue.title }}</span>
-                    {% endif %}
-{% if travelogue.level_tag %}
-                    <span class="text-[12px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded">{{ travelogue.level_tag }}</span>
+                    <span class="text-[12px] font-bold text-design-black">{{ travelogue.title }}</span>
                     {% endif %}
                 </div>
                 
-                <p class="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">
+                <!-- 摘要 (PSD: 12px, 36px Height, 1.5 Line-height) -->
+                <p class="text-design-black/80 text-[12px] leading-[1.5] h-[36px] overflow-hidden mb-[10px]">
                     {{ travelogue.summary|default:"点击进入详情查看完整内容..." }}
                 </p>
 
-                <!-- 标签云 -->
-                <div class="flex flex-wrap gap-2">
-                    {% for tag in travelogue.feature_tags.split %}
-                    <span class="text-[12px] text-gray-400">#{{ tag }}</span>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <div class="flex justify-between items-center text-[13px] text-gray-400 mt-4">
-                <div class="flex items-center space-x-4">
-                    {% if travelogue.place %}
-                    <span class="flex items-center">
-                        <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                        {{ travelogue.place.title }}
-                    </span>
-                    {% endif %}
+                <!-- 作者与发布信息 (PSD 560px X，底部对齐) -->
+                <div class="flex items-center text-[12px] text-design-black/60 mt-[10px]">
+                    <span class="mr-4">{{ travelogue.author.username|default:"网站名称" }}</span>
+                    <span class="mr-4">·</span>
                     <span>{{ travelogue.publish_date|date:"Y/m/d"|default:travelogue.created_at|date:"Y/m/d" }}</span>
-                </div>
-                <div class="flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                    {{ travelogue.views }}
                 </div>
             </div>
         </div>
     </article>
+    {% empty %}
+    <div class="py-20 text-center text-design-black/40 text-[12px]">
+        <p>暂无相关内容，换个关键词搜搜看？</p>
+    </div>
+    {% endfor %}
+</div>
     {% empty %}
     <div class="py-20 text-center text-gray-400">
         <p>暂无相关内容，换个关键词搜搜看？</p>

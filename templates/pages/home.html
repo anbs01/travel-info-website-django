@@ -3,71 +3,65 @@
 
 {% block content %}
 <div class="bg-white">
-    <!-- 推荐内容区 (PSD Top: 475px) -->
-    <!-- 修正计算: 475px - 搜索底部(约274px) = 约200px 间距 -->
-    <div class="max-w-design mx-auto px-4 xl:px-0 mt-32 md:mt-40 lg:mt-[200px]">
-        
-        <!-- 区块标题 (模仿设计稿韵律) -->
-        <div class="flex justify-between items-end mb-8 border-b-2 border-travel-brown pb-2">
-            <h2 class="text-2xl font-black text-travel-dark">推荐目的地</h2>
-            <a href="{% url 'places:list' %}" class="text-sm text-travel-gray hover:text-travel-brown transition-colors">探索更多 &rarr;</a>
-        </div>
+    <!-- 推荐内容区 (PSD Top: 476px, Height: 384px) -->
+    <div class="max-w-design mx-auto mt-[40px] bg-[#fbf7f1] border border-[#eee4d8] shadow-sm">
+        <div class="px-[40px] py-[30px]">
+            
+            <!-- 区块标题 (PSD Top: 480px) -->
+            <div class="flex justify-between items-end mb-[24px]">
+                <h2 class="text-[18px] font-bold text-design-black font-sans leading-none tracking-wider">推荐目的地</h2>
+                <div class="flex items-center cursor-pointer group">
+                    <span class="text-[12px] text-design-black/40 group-hover:text-design-primary transition-colors">换一批</span>
+                </div>
+            </div>
 
-        <!-- 栅格布局: 彻底解决自适应问题 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- 1. 精选大卡片 (1:1 还原设计稿视觉重心) -->
-            <div class="lg:col-span-2 relative group overflow-hidden rounded-sm shadow-sm border border-gray-100">
-                {% with featured=featured_travelogues|first %}
-                <a href="{% if featured %}{{ featured.get_absolute_url }}{% else %}#{% endif %}" class="block">
-                    <div class="aspect-[16/9] md:aspect-auto md:h-[400px] overflow-hidden">
+            <!-- 核心展示区 -->
+            <div class="flex items-start">
+                <!-- 1. 左侧 480px 精选卡片 -->
+                <div class="w-[480px] h-[320px] flex-shrink-0 relative overflow-hidden shadow-sm group bg-white">
+                    {% with featured=featured_travelogues|first %}
+                    <a href="{% if featured %}{{ featured.get_absolute_url }}{% else %}#{% endif %}" class="block w-full h-full">
                         {% if featured and featured.image %}
-                        <img src="{{ featured.image.url }}" alt="{{ featured.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <img src="{{ featured.image.url }}" alt="{{ featured.title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         {% else %}
-                        <img src="https://images.unsplash.com/photo-1513413173476-2aa2aa89a804?auto=format&fit=crop&q=80&w=1200" 
+                        <img src="https://images.unsplash.com/photo-1513413173476-2aa2aa89a804?auto=format&fit=crop&q=80&w=480&h=320" 
                              alt="默认推荐图" class="w-full h-full object-cover">
                         {% endif %}
-                    </div>
-                    <!-- 精准对标: 底部灰色半透明标题栏 (PSD Rect: 389, 783, 483, 43) -->
-                    <div class="absolute bottom-0 left-0 right-0 bg-black/50 text-white py-3 px-6 backdrop-blur-sm flex justify-between items-center">
-                        <span class="text-lg font-bold tracking-wider">
-                            {% if featured %}{{ featured.title }}{% else %}爱在烟台，难以离开{% endif %}
-                        </span>
-                        <div class="hidden sm:flex space-x-2">
-                             <div class="w-2.5 h-2.5 rounded-full bg-white"></div>
-                             <div class="w-2.5 h-2.5 rounded-full bg-white/40"></div>
-                             <div class="w-2.5 h-2.5 rounded-full bg-white/40"></div>
+                        
+                        <!-- PSD 1:1 对标: 底部灰色半透明标题栏 (Height: 44px, Opacity: 0.73) -->
+                        <div class="absolute bottom-0 left-0 right-0 bg-black/73 h-[44px] px-[15px] flex justify-between items-center backdrop-blur-sm">
+                            <span class="text-[14px] text-white font-sans truncate mr-4">
+                                {% if featured %}{{ featured.title }}{% else %}爱在烟台，难以离开{% endif %}
+                            </span>
+                            <!-- PSD 中的三个分页指示点 -->
+                            <div class="flex space-x-[8px]">
+                                <div class="w-[10px] h-[10px] rounded-full bg-white"></div>
+                                <div class="w-[10px] h-[10px] rounded-full bg-white/30"></div>
+                                <div class="w-[10px] h-[10px] rounded-full bg-white/30"></div>
+                            </div>
                         </div>
-                    </div>
-                </a>
-                {% endwith %}
-            </div>
-
-            <!-- 2. 右侧：精华文字推荐列表 (PSD Rect: 945, 513, 425, 302) -->
-            <div class="bg-travel-light-bg p-6 rounded-sm border border-gray-100">
-                <div class="flex items-center mb-6">
-                    <div class="w-4 h-4 bg-travel-brown mr-3"></div>
-                    <h3 class="font-bold text-travel-dark">本季热门推荐</h3>
+                    </a>
+                    {% endwith %}
                 </div>
-                <ul class="space-y-5">
-                    {% for item in home_recommends %}
-                    <li class="flex items-start group">
-                        <span class="text-travel-brown font-mono mr-3 mt-1">0{{ forloop.counter }}</span>
-                        <a href="{{ item.url }}" class="text-travel-gray hover:text-travel-brown leading-relaxed transition-colors border-b border-transparent hover:border-travel-brown">
-                            {{ item.title }}
-                        </a>
-                    </li>
-                    {% empty %}
-                    <li class="text-gray-400 italic text-sm">暂无推荐内容</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
 
-        <!-- 额外装饰: 小圆点垂直列表 (PSD 数字化还原) -->
-        <div class="hidden lg:flex flex-col space-y-4 fixed right-8 top-1/2 -translate-y-1/2 z-10">
-            {% for i in "12345" %}
-            <div class="w-2 h-2 rounded-full border border-travel-brown hover:bg-travel-brown transition-all cursor-pointer"></div>
-            {% endfor %}
+                <!-- 2. 右侧：精华点阵列表 (PSD: 开始于 928px X) -->
+                <div class="flex-1 ml-[58px]">
+                    <div class="grid grid-cols-2 gap-x-[40px] gap-y-[15px]">
+                        {% for item in home_recommends|slice:":10" %}
+                        <div class="flex items-center group cursor-pointer h-[32px]">
+                            <!-- PSD 1:1 点阵修饰 (10x10px) -->
+                            <div class="w-[10px] h-[10px] bg-design-primary/20 group-hover:bg-design-primary transition-colors flex-shrink-0 mr-[12px]"></div>
+                            <a href="{{ item.url }}" class="text-[14px] text-design-black/80 group-hover:text-design-black truncate transition-all">
+                                {{ item.title }}
+                            </a>
+                            <span class="ml-auto text-[11px] text-design-black/20 font-serif">[{{ item.get_type_display|default:"纪行" }}]</span>
+                        </div>
+                        {% empty %}
+                        <div class="text-[12px] text-design-black/20 italic mt-4">暂无推荐数据</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

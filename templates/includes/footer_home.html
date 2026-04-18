@@ -1,18 +1,19 @@
-<div class="container-wide text-center">
-    <!-- 首页专用链接与布局 -->
-    <div class="flex justify-center space-x-8 text-gray-600 mb-6 font-medium">
-        <a href="{% url 'core:about' %}" class="hover:text-travel-brown transition-colors">关于我们</a>
-        <a href="{% url 'core:service' %}" class="hover:underline">用户协议</a>
-        <a href="{% url 'core:cooperation' %}" class="hover:underline">商务合作</a>
-        <a href="javascript:void(0)" onclick="openFeedbackModal('suggestion')" class="text-travel-brown hover:font-bold">意见建议</a>
-        <a href="{% url 'core:contact' %}" class="hover:underline">联系我们</a>
+<div class="text-center font-sans">
+    <!-- 首页专用链接：按照 PSD 1:1 对标 (全角空格 + 12px 微软雅黑) -->
+    <div class="flex justify-center text-design-black text-[12px] leading-relaxed">
+        <a href="{% url 'core:about' %}" class="hover:text-design-primary transition-colors">关于我们</a>
+        <span class="mx-[4px]">　</span>
+        <span class="text-design-black">服务协议</span>
+        <span class="mx-[4px]">　</span>
+        <span class="text-design-black">合作事宜</span>
+        <span class="mx-[4px]">　</span>
+        <a href="javascript:void(0)" onclick="openFeedbackModal('suggestion')" class="hover:text-design-primary">意见建议</a>
+        <span class="mx-[4px]">　</span>
+        <a href="{% url 'core:contact' %}" class="hover:text-design-primary transition-colors">联系我们</a>
     </div>
-    <div class="text-[13px] text-gray-400 space-y-2 tracking-wide">
-        <p>Copyright © 2026-2027 旅游信息网(首页版) All Rights Reserved</p>
-        <p>版权所有：某某旅游文化有限公司 | 鲁ICP备123456789号-1</p>
-        <div class="flex justify-center items-center space-x-1 mt-4 grayscale opacity-60">
-            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-[10px]">政</div>
-            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-[10px]">安</div>
-        </div>
+    
+    <div class="mt-[4px] text-[12px] text-design-black leading-relaxed">
+        <p>Copyright © 2026-2027 NAME.COM All Rights Reserved</p>
+        <p>版权所有：网站名称　鲁ICP备123456789号</p>
     </div>
 </div>

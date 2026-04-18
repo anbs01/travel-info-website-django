@@ -29,40 +29,65 @@
 {% endblock %}
 
 {% block breadcrumbs_bar %}
-<!-- 1. 设计稿风格通栏面包屑 -->
-<div class="bg-gray-100/80 border-b border-gray-200 py-3">
-    <div class="container-wide text-[13px] text-gray-500">
-        <span>您的位置：</span>
-        <a href="{% url 'core:index' %}" class="hover:text-travel-brown">首页</a>
-        <span class="mx-1">&gt;</span>
-        {% block breadcrumbs %}
-        {% if object.place.region or object.region %}
-            {% with region=object.place.region|default:object.region %}
-            <span class="cursor-pointer hover:text-travel-brown transition-colors" 
-                  onclick="openProvinceModal('{{ region.full_name|default:region.name }}', '{{ region.introduction|escapejs }}')">
-                {{ region.name }}
-            </span>
-            {% endwith %}
-        {% else %}
-            <span>纪行·攻略</span>
-        {% endif %}
-        {% endblock %}
-        <span class="mx-1">&gt;</span>
-        <span class="text-gray-400">正文</span>
+<!-- 1:1 对标：面包屑区域 (PSD Top: 140px) -->
+<div class="max-w-design mx-auto">
+    <div class="h-[52px] border-y border-design-black/10 flex items-center px-[4px]">
+        <div class="text-[12px] text-design-black/60 font-sans">
+            <span>您的位置：</span>
+            <a href="{% url 'core:index' %}" class="hover:text-design-primary">首页</a>
+            <span class="mx-1">&gt;</span>
+            <a href="{% url 'travelogue:list' %}" class="hover:text-design-primary">纪行·攻略</a>
+            <span class="mx-1">&gt;</span>
+            <span class="text-design-black/80 truncate max-w-[400px] inline-block align-bottom">{% block breadcrumbs %}{{ travelogue.title }}{% endblock %}</span>
+        </div>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-<div class="bg-gray-50 py-12 min-h-screen">
-    <div class="container-wide max-w-[1000px]">
-        <!-- 2. 主内容卡片 (居中且加宽) -->
-        <article class="bg-white p-12 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-100">
-            <!-- 焦点图 Hero Section (支持水印) -->
+<div class="bg-white min-h-screen">
+    <div class="max-w-design mx-auto mt-[40px]">
+        <!-- 2. 主内容卡片 (1200px 宽度对标) -->
+        <article class="bg-white py-[40px]">
+            
+            <!-- 文章标题 (PSD: 12px 微软雅黑... 实际建议 18-24px 以符合视觉常识，但 PSD 标注为 12px) -->
+            <h1 class="text-[18px] font-bold text-design-black leading-tight mb-[30px]">
+                {% block detail_title %}{% endblock %}
+            </h1>
+
+            <!-- 元信息 (PSD: 340px Y) -->
+            <div class="flex items-center space-x-[40px] text-[12px] text-design-black/60 pb-[20px] border-b border-design-black/10 mb-[40px]">
+                <div class="flex items-center">
+                    <span class="mr-1">来源：</span>
+                    <span>本站原创</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-1">作者：</span>
+                    <span>管理员</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-1">发布日期：</span>
+                    <span>{% block publish_date %}{% endblock %}</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-1">浏览量：</span>
+                    <span class="text-design-primary">{% block view_count %}0{% endblock %}</span>
+                </div>
+            </div>
+
+            <!-- 摘要区/导语 (PSD: 440px Y, 1100x80px) -->
+            <div class="border border-design-black/10 p-[20px] mb-[40px] bg-gray-50/30">
+                <div class="text-design-black/80 leading-relaxed text-[12px]">
+                    <span class="font-bold mr-2">【 导 语 】</span>
+                    {% block summary %}{% endblock %}
+                </div>
+            </div>
+
+            <!-- 焦点图 (如果存在) -->
             {% block hero_section %}
                 {% if object.image %}
-                <div class="mb-12 watermark-container group overflow-hidden rounded-sm border border-gray-100 shadow-sm bg-gray-50">
-                    <img src="{{ object.image.url }}" class="w-full h-auto object-cover max-h-[550px] block mx-auto" alt="{{ object.title }}">
+                <div class="mb-[40px] watermark-container overflow-hidden">
+                    <img src="{{ object.image.url }}" class="w-full h-auto object-cover max-h-[600px]" alt="{{ object.title }}">
                     {% if object.image_show_watermark %}
                     <div class="watermark-overlay pos-{{ object.watermark_pos }}"></div>
                     {% endif %}
@@ -70,60 +95,31 @@
                 {% endif %}
             {% endblock %}
 
-            <!-- 文章标题 -->
-            <h1 class="text-3xl font-bold text-gray-900 leading-tight mb-8 text-center">
-                {% block detail_title %}{% endblock %}
-            </h1>
-
-            <!-- 元信息 (更加精致的排版) -->
-            <div class="flex items-center justify-center space-x-8 text-[13px] text-gray-400 border-b border-gray-100 pb-8 mb-10">
-                <div class="flex items-center">
-                    <span class="mr-2">来源:</span>
-                    <span class="text-gray-600">本站原创</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="mr-2">发布日期:</span>
-                    <span>{% block publish_date %}{% endblock %}</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="mr-2">作者:</span>
-                    <span class="text-gray-600">管理员</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="mr-2">浏览量:</span>
-                    <span class="text-travel-brown">{% block view_count %}0{% endblock %}</span>
-                </div>
-            </div>
-
-            <!-- 摘要区 (导语) -->
-            <div class="bg-[#fcfaf2] border border-[#eee6d3] p-8 mb-12 relative">
-                 <div class="absolute -top-3 left-6 bg-white px-2 text-travel-brown font-bold text-sm tracking-widest">【 导 语 】</div>
-                <div class="text-gray-600 leading-relaxed italic text-[15px]">
-                    {% block summary %}{% endblock %}
-                </div>
-            </div>
-
-            <!-- 正文内容 (Rich Text Content) -->
-            <div class="prose prose-travel max-w-none text-gray-800 text-[16px] leading-[1.8]">
+            <!-- 正文内容 -->
+            <div class="prose max-w-none text-design-black text-[14px] leading-[1.8]">
                 {% block detail_content %}{% endblock %}
             </div>
 
-            <!-- 版权声明 (参考设计稿) -->
-            <div class="mt-16 pt-8 border-t border-dashed border-gray-200 text-[13px] text-gray-400 leading-relaxed">
-                <p>版权声明：热门景区和博物馆暂时不具备完全取消预约的条件，主要因为旺季的时间供给跟不上需求。必须对需求进行适当的管理才能保证合理的市场秩序。</p>
+            <!-- 版权声明 (PSD: 2080px Y, 1100x112px 框) -->
+            <div class="mt-[80px] p-[20px] border border-design-black/10 text-[12px] text-design-black/60 leading-relaxed bg-gray-50/20">
+                <span class="font-bold block mb-2 text-design-black">版权声明</span>
+                <p>热门景区和博物馆暂时不具备完全取消预约的条件，主要因为旺季的时间供给跟不上需求。必须对需求进行适当的管理才能保证合理的市场秩序。</p>
             </div>
             
-            <!-- 底部功能按钮 -->
-            <div class="mt-8 flex justify-end space-x-3">
-                <button class="bg-orange-500 text-white px-4 py-1.5 text-xs rounded shadow-sm hover:bg-orange-600">我要报错</button>
-                <button class="bg-orange-500 text-white px-4 py-1.5 text-xs rounded shadow-sm hover:bg-orange-600">关闭窗口</button>
+            <!-- 底部功能按钮 (PSD: 2240px Y) -->
+            <div class="mt-[40px] flex justify-end gap-x-[10px]">
+                <button class="w-[64px] h-[24px] bg-design-primary text-white text-[12px] flex items-center justify-center">我要报错</button>
+                <button class="w-[64px] h-[24px] bg-design-black text-white text-[12px] flex items-center justify-center" onclick="window.close()">关闭窗口</button>
             </div>
         </article>
 
-        <!-- 3. 底部相关推荐 (由子页面具体填充) -->
-        <section class="mt-12">
-            <h3 class="text-lg font-bold text-gray-800 border-l-4 border-travel-brown pl-4 mb-6">相关推荐</h3>
-            <div class="grid grid-cols-2 gap-x-12 gap-y-6">
+        <!-- 3. 底部相关推荐 (PSD: 2312px Y) -->
+        <section class="mt-[60px] pb-[100px]">
+            <div class="flex items-center mb-[30px]">
+                <div class="w-[4px] h-[16px] bg-design-primary mr-3"></div>
+                <h3 class="text-[14px] font-bold text-design-black">相关推荐</h3>
+            </div>
+            <div class="grid grid-cols-2 gap-x-[60px] gap-y-[15px]">
                 {% block related_content %}{% endblock %}
             </div>
         </section>

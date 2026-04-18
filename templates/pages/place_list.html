@@ -7,50 +7,43 @@
 {% block filter_label %}所有地区{% endblock %}
 
 {% block list_content %}
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+<div class="grid grid-cols-3 gap-x-[60px] gap-y-[60px]">
     {% for place in places %}
-    <div class="group">
-        <!-- 卡片图片 -->
-        <a href="{{ place.get_absolute_url }}" target="_blank" class="block aspect-[4/3] overflow-hidden rounded-sm mb-4 relative">
+    <div class="group flex flex-col">
+        <!-- 卡片图片: 360x240px (PSD 对标) -->
+        <a href="{{ place.get_absolute_url }}" target="_blank" class="block w-full aspect-[360/240] overflow-hidden bg-gray-50 mb-[24px]">
             {% if place.image %}
-            <img src="{{ place.image.url }}" alt="{{ place.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <img src="{{ place.image.url }}" alt="{{ place.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
             {% else %}
-            <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">暂无图片</div>
+            <div class="w-full h-full flex items-center justify-center text-gray-300 text-[12px]">暂无图片</div>
             {% endif %}
-            
-            <!-- 悬浮层 (装饰性) -->
-            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity"></div>
         </a>
 
-        <!-- 卡片信息 -->
-        <div class="text-center px-2">
-            <div class="flex items-center justify-center space-x-2 mb-1">
-                <h3 class="text-lg font-bold text-gray-900 group-hover:text-travel-brown transition-colors">
+        <!-- 卡片信息 (PSD: 12px 微软雅黑) -->
+        <div class="flex flex-col flex-1">
+            <div class="flex items-center mb-[14px]">
+                <h3 class="text-[14px] font-bold text-design-black group-hover:text-design-primary transition-colors">
                     <a href="{{ place.get_absolute_url }}" target="_blank">{{ place.title }}</a>
                 </h3>
                 {% if place.level_tag %}
-                <span class="text-[10px] border border-gray-200 text-gray-400 px-1 rounded leading-tight">{{ place.level_tag }}</span>
+                <span class="ml-2 text-[10px] text-design-black/40 border border-design-black/10 px-1 leading-none h-[16px] flex items-center">{{ place.level_tag }}</span>
                 {% endif %}
             </div>
             
-            <div class="text-gray-500 text-sm mb-2">
-                {% if place.alias %}
-                <span class="italic">“{{ place.alias }}”</span>
-                {% endif %}
-            </div>
+            <!-- 简介 (PSD: 12px, 80px Height, 1.5 Line-height) -->
+            <p class="text-design-black/80 text-[12px] leading-[1.5] h-[60px] overflow-hidden mb-[14px]">
+                {{ place.introduction|default:place.summary|striptags|truncatechars:100 }}
+            </p>
 
-            <div class="flex justify-center items-center space-x-3 text-[12px] text-gray-400">
-                <span class="flex items-center">
-                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                    {{ place.region.name }}
-                </span>
-                <span>|</span>
+            <div class="mt-auto flex items-center text-[12px] text-design-black/40">
+                <span class="mr-3">{{ place.region.name }}</span>
+                <span class="mr-3">·</span>
                 <span>浏览 {{ place.views }}</span>
             </div>
         </div>
     </div>
     {% empty %}
-    <div class="col-span-full py-20 text-center text-gray-400">
+    <div class="col-span-full py-20 text-center text-design-black/40 text-[12px]">
         <p>暂无相关城镇信息</p>
     </div>
     {% endfor %}

@@ -4,92 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}旅游信息网{% endblock %}</title>
-    <!-- 引入设计稿常用的 Inter 字体 -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>{% block title %}旅游资讯网{% endblock %}</title>
     <!-- 引入 Tailwind 编译后的样式 -->
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="bg-design-bg-white font-sans text-[14px] text-design-black leading-relaxed">
     <!-- Header: 按照设计页-首页.png 1:1 数字化对标重构 -->
-    <header class="bg-white border-b border-gray-100">
-        <!-- 全局响应式容器：xl 锁定 1202px，低分辨率自动缩放 -->
-        <div class="max-w-design mx-auto px-4 xl:px-0 flex flex-col">
+    <header class="relative bg-white border-b border-design-black/5 shadow-[0_2px_15px_rgba(0,0,0,0.02)]">
+        <!-- 数字化背景层：模拟 PSD 中的点阵装饰或渐变 (PSD Top Section) -->
+        <div class="absolute inset-x-0 top-0 h-[380px] bg-gradient-to-b from-gray-50/50 to-transparent pointer-events-none"></div>
+        
+        <!-- 全局响应式容器：锁定 1200px (PSD 内容器宽度) -->
+        <div class="relative max-w-design mx-auto px-4 xl:px-0 flex flex-col z-10">
             
-            <!-- 1. 顶层功能区 (PSD Top: 15px) -->
-            <div class="pt-15px flex justify-between items-center text-[14px] font-medium text-travel-gray">
-                <!-- 导航菜单: 移动端折叠 -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="/" class="hover:text-travel-brown transition-colors {% if is_home %}text-travel-brown{% endif %}">首页</a>
-                    <a href="{% url 'travelogue:list' %}" class="hover:text-travel-brown transition-colors">纪行·攻略</a>
-                    <a href="{% url 'places:list' %}" class="hover:text-travel-brown transition-colors">城乡·街巷</a>
-                    <a href="{% url 'foods:list' %}" class="hover:text-travel-brown transition-colors">特产·美食</a>
-                    <a href="{% url 'goods:list' %}" class="hover:text-travel-brown transition-colors">好物·文创</a>
-                    <a href="{% url 'news:list' %}" class="hover:text-travel-brown transition-colors">资讯·动态</a>
+            <!-- 1. 顶层功能区 (PSD Y: 16px) -->
+            <div class="h-[16px] mt-[16px] flex justify-between items-center text-[12px] text-design-black font-sans leading-none">
+                <!-- 导航菜单: PSD 中使用全角空格或大间距 -->
+                <nav class="hidden md:flex items-center space-x-[28px]">
+                    <a href="/" class="hover:text-design-primary transition-colors {% if is_home %}text-design-primary font-bold{% endif %}">首页</a>
+                    <a href="{% url 'travelogue:list' %}" class="hover:text-design-primary transition-colors">纪行·攻略</a>
+                    <a href="{% url 'places:list' %}" class="hover:text-design-primary transition-colors">城乡·街巷</a>
+                    <a href="{% url 'foods:list' %}" class="hover:text-design-primary transition-colors">特产·美食</a>
+                    <a href="{% url 'goods:list' %}" class="hover:text-design-primary transition-colors">好物·文创</a>
+                    <a href="{% url 'news:list' %}" class="hover:text-design-primary transition-colors">资讯·动态</a>
                 </nav>
 
-                <!-- 移动端简易 Logo/状态 (仅 md 以下可见) -->
-                <div class="md:hidden font-bold text-travel-brown">旅游信息网</div>
-
-                <div class="flex items-center space-x-6">
-                    <div class="flex space-x-4">
-                        <a href="{% url 'core:login_placeholder' %}" class="hover:text-travel-brown">登录</a>
-                        <span class="text-gray-200">|</span>
-                        <a href="{% url 'core:login_placeholder' %}" class="hover:text-travel-brown">注册</a>
-                    </div>
-                    <!-- 二维码入口 (PSD X: 1446px) -->
-                    <div class="relative group cursor-pointer text-gray-400 hover:text-travel-brown py-1 hidden sm:block">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h2M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" /></svg>
+                <div class="flex items-center">
+                    <!-- 二维码入口 (PSD X: 1540px) -->
+                    <div class="ml-[26px] relative group cursor-pointer flex items-center">
+                        <img src="{% static 'images/qrcode.png' %}" alt="QR" width="16" height="16" class="w-[16px] h-[16px] block opacity-80 group-hover:opacity-100 transition-opacity">
                         
-                        <!-- 悬浮面板: 112x112px -->
-                        <div class="absolute top-full right-0 mt-2 p-2 bg-white shadow-xl border border-gray-100 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-[100] translate-y-2 group-hover:translate-y-0">
-                            <img src="{% static 'images/qrcode.png' %}" alt="QR Code" class="w-[112px] h-[112px] block">
-                            <div class="text-[10px] text-center mt-1 text-gray-400">手机扫码访问</div>
+                        <!-- 悬浮面板: 116x116px (PSD Qrcode Section) -->
+                        <div class="absolute top-full right-[-50px] mt-2 p-[2px] bg-white shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-[100] w-[116px]">
+                            <img src="{% static 'images/qrcode.png' %}" alt="QR Code" width="112" height="112" class="w-[112px] h-[112px] block mx-auto">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. Logo 区 (PSD Top: 112px) -->
-            <!-- 极简对焦: 通过 mt-4 (16px) 配合顶部导航，实现总高度精确归位 -->
-            <div class="mt-4 flex justify-center pb-4 md:pb-6">
-                <a href="/" class="transition-all hover:scale-[1.01] active:scale-95">
-                    {% if is_home %}
-                    <div class="border-[3px] border-travel-brown flex items-center justify-center bg-white shadow-lg" style="width: 338px; height: 98px;">
-                        <span class="text-4xl font-black tracking-[0.3em] text-travel-dark">旅游信息网</span>
+            <!-- 2. Logo 区 (PSD Top: 110px, Height: 100px) -->
+            <div class="mt-[78px] mb-[40px] flex justify-center">
+                <a href="/" class="block w-[340px] h-[100px] transition-transform hover:scale-[1.02]">
+                    <div class="w-full h-full border-[2.5px] border-design-primary flex items-center justify-center bg-white">
+                        <span class="text-[36px] font-black tracking-[0.4em] text-design-black font-sans ml-[0.4em]">旅游资讯网</span>
                     </div>
-                    {% else %}
-                    <div class="border-[2px] border-travel-brown flex items-center justify-center bg-white shadow-sm" style="width: 170px; height: 50px;">
-                        <span class="text-xl font-bold tracking-[0.2em] text-travel-dark">旅游信息网</span>
-                    </div>
-                    {% endif %}
                 </a>
             </div>
         </div>
 
-        <!-- 3. 核心搜索区 (PSD Top: 252px) -->
-        <div class="mt-2 pb-10 md:pb-16 flex justify-center px-4">
-            <form action="/search/" method="get" class="max-w-design w-full max-w-3xl flex items-center shadow-2xl border border-gray-100 rounded-sm overflow-hidden bg-white ring-2 ring-black/[0.03]">
-                <input type="text" name="q" class="flex-1 py-3 px-5 outline-none text-base" placeholder="搜索目的地、纪行、美食..." required>
-                
-                <div class="relative group bg-gray-50 border-l px-4 py-3 flex items-center cursor-pointer text-gray-500 text-sm">
-                    <span id="search-type-label" class="mr-1">纪行·攻略</span>
-                    <input type="hidden" name="type" id="search-type-input" value="travelogue">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+
+        <div class="mt-[40px] flex flex-col items-center px-4 relative z-10">
+            <div class="max-w-design w-full flex justify-center">
+                <form action="/search/" method="get" class="w-[730px] h-[50px] flex items-center border-[1.5px] border-design-primary/30 focus-within:border-design-primary bg-white shadow-[0_4px_20px_rgba(166,124,82,0.08)] overflow-hidden transition-all">
+                    <input type="text" name="q" class="flex-1 h-full px-5 outline-none text-[14px] text-design-black placeholder-design-gray-text/30" placeholder="寻找你的旅游灵感..." required>
                     
-                    <div class="absolute top-full left-[-1px] right-[-1px] bg-white border border-gray-200 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                        <div class="py-1">
-                            <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('travelogue', '纪行·攻略')">纪行·攻略</div>
-                            <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('places', '城乡·街巷')">城乡·街巷</div>
-                            <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('foods', '特产·美食')">特产·美食</div>
-                            <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('goods', '好物·文创')">好物·文创</div>
-                            <div class="px-4 py-2 hover:bg-gray-50 text-gray-700" onclick="setSearchType('news', '资讯·动态')">资讯·动态</div>
+                    <!-- 分类选择器 (PSD: 1220px X, 110px Width) -->
+                    <div class="relative group h-full border-l border-design-primary/20 w-[110px] flex items-center justify-center cursor-pointer bg-gray-50/30 hover:bg-white transition-colors">
+                        <span id="search-type-label" class="text-[12px] font-medium text-design-black">纪行·攻略</span>
+                        <input type="hidden" name="type" id="search-type-input" value="travelogue">
+                        <span class="ml-2 text-[10px] opacity-20 group-hover:opacity-100 group-hover:text-design-primary transition-all">▼</span>
+                        
+                        <div class="absolute top-full left-[-1px] right-[-1px] bg-white border border-design-primary/10 shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                            <div class="py-1">
+                                <div class="px-4 py-2 hover:bg-design-primary hover:text-white text-[12px] text-design-black transition-colors" onclick="setSearchType('travelogue', '纪行·攻略')">纪行·攻略</div>
+                                <div class="px-4 py-2 hover:bg-design-primary hover:text-white text-[12px] text-design-black transition-colors" onclick="setSearchType('places', '城乡·街巷')">城乡·街巷</div>
+                                <div class="px-4 py-2 hover:bg-design-primary hover:text-white text-[12px] text-design-black transition-colors" onclick="setSearchType('foods', '特产·美食')">特产·美食</div>
+                                <div class="px-4 py-2 hover:bg-design-primary hover:text-white text-[12px] text-design-black transition-colors" onclick="setSearchType('goods', '好物·文创')">好物·文创</div>
+                                <div class="px-4 py-2 hover:bg-design-primary hover:text-white text-[12px] text-design-black transition-colors" onclick="setSearchType('news', '资讯·动态')">资讯·动态</div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <button type="submit" class="bg-travel-brown hover:bg-travel-brown-light text-white px-8 py-3 font-bold text-base transition-colors">
-                    搜索
-                </button>
-            </form>
+                    <!-- 搜索提交按钮 (PSD: 1336px X, 96px Width) -->
+                    <button type="submit" class="w-[96px] h-full bg-design-primary text-[14px] font-bold text-white hover:bg-design-primary/90 transition-colors">
+                        搜 索
+                    </button>
+                </form>
+            </div>
+
+            <!-- 3.1 搜索热词 (PSD Top: 336px) -->
+            <div class="mt-[36px] pb-[40px] hidden md:flex text-[12px] text-design-black/40 max-w-design w-full justify-center flex-wrap">
+                <span class="hover:text-design-primary cursor-pointer transition-colors">历史文化名城</span><span class="mx-[12px]">　</span>
+                <span class="hover:text-design-primary cursor-pointer transition-colors">宜居城市</span><span class="mx-[12px]">　</span>
+                <span class="hover:text-design-primary cursor-pointer transition-colors">绿色城市</span><span class="mx-[12px]">　</span>
+                <span class="hover:text-design-primary cursor-pointer transition-colors">千年古镇</span><span class="mx-[12px]">　</span>
+                <span class="hover:text-design-primary cursor-pointer transition-colors">千年古村</span><span class="mx-[12px]">　</span>
+                <span class="hover:text-design-primary cursor-pointer transition-colors">旅游城市</span><span class="mx-[12px]">　</span>
+                <span class="hover:text-design-primary cursor-pointer transition-colors">避暑城市</span><span class="mx-[12px]">　</span>
+                <span class="hover:text-design-primary cursor-pointer transition-colors">滑雪城市</span><span class="mx-[12px]">　</span>
+                <span class="hover:text-design-primary cursor-pointer transition-colors">养生福地</span>
+            </div>
         </div>
 
         <!-- 4. 详情页专用通栏面包屑 -->
@@ -101,9 +105,11 @@
     </main>
 
     <!-- Footer: 区分首页与内页 (需求第60条) -->
-    <footer class="bg-white border-t border-gray-100 py-12 mt-20">
+    <footer class="bg-white border-t-[4px] border-design-primary/20 py-10 mt-20">
         {% if is_home %}
-            {% include "includes/footer_home.html" %}
+            <div class="max-w-design mx-auto">
+                {% include "includes/footer_home.html" %}
+            </div>
         {% else %}
             {% include "includes/footer_inner.html" %}
         {% endif %}
@@ -114,7 +120,7 @@
     
     <!-- 省份详情弹窗 (需求91条) -->
     {% include "includes/modal_province.html" %}
-
+    
     <script>
         function setSearchType(type, label) {
             document.getElementById('search-type-label').innerText = label;

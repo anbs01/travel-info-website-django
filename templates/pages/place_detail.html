@@ -3,56 +3,75 @@
 {% block title %}{{ place.title }} - 目的地指南{% endblock %}
 
 {% block breadcrumbs %}
-<a href="{% url 'places:list' %}" class="hover:text-travel-brown transition-colors">城乡/街巷</a>
+<span>城乡·街巷</span>
+<span class="mx-2 font-simsun">&gt;</span>
+<span>{{ place.region.name }}</span>
+<span class="mx-2 font-simsun">&gt;</span>
+<span class="text-design-black/60">{{ place.title }}</span>
 {% endblock %}
 
 {% block detail_title %}
-    {{ place.full_title|default:place.title }}
+<div class="flex flex-col mb-[20px]">
+    <h1 class="text-[24px] font-bold text-design-black leading-none mb-[20px]">{{ place.full_title|default:place.title }}</h1>
+    <div class="flex items-center text-[12px] text-design-black/60 space-x-8">
+        {% if place.alias %}
+        <span>别名：<span class="text-design-primary">{{ place.alias }}</span></span>
+        {% endif %}
+        {% if place.best_time %}
+        <span>最佳旅游时间：{{ place.best_time }}</span>
+        {% endif %}
+        <span class="ml-auto">浏览：{{ place.views|default:0 }}</span>
+    </div>
+</div>
+
+<!-- PSD: 标签栏 (410px offset, 32px height) -->
+<div class="flex border-b border-design-black/10 mt-[40px] mb-[60px] h-[32px]">
+    <a href="#summary" class="px-5 flex items-center bg-design-black text-white text-[12px] h-full">基本资料</a>
+    <a href="#spots" class="px-5 flex items-center hover:bg-gray-100 text-[12px] h-full transition-colors border-r border-design-black/10">热门打卡地</a>
+    <a href="#food" class="px-5 flex items-center hover:bg-gray-100 text-[12px] h-full transition-colors border-r border-design-black/10">特产·美食</a>
+    <a href="#traffic" class="px-5 flex items-center hover:bg-gray-100 text-[12px] h-full transition-colors border-r border-design-black/10">交通·出行</a>
+</div>
 {% endblock %}
 
-{% block metadata_extra %}
-    {% if place.alias %}
-    <div class="flex items-center space-x-1">
-        <span class="text-gray-400">别名：</span>
-        <span class="text-travel-brown font-medium">{{ place.alias }}</span>
-    </div>
-    {% endif %}
-    {% if place.best_time %}
-    <div class="flex items-center space-x-1">
-        <span class="text-gray-400">建议游玩：</span>
-        <span class="text-gray-600">{{ place.best_time }}</span>
-    </div>
-    {% endif %}
-{% endblock %}
+{% block metadata %}{% endblock %}
 
 {% block summary %}
 {{ place.summary }}
 {% endblock %}
 
-{% block detail_content %}
-    <article class="prose prose-sm max-w-none">
+    <!-- 正文内容 (PSD: 500px offset) -->
+    <div id="summary" class="prose prose-sm max-w-none text-design-black leading-[1.8] text-[14px]">
         {{ place.content|safe }}
-    </article>
+    </div>
 
-    <!-- 热门打卡地 -->
+    <!-- 版权声明 (PSD 1:1) -->
+    <div class="mt-[60px] mb-[80px] p-[20px] border border-design-black/10 bg-gray-50/50 text-[12px] text-design-black/80 leading-[2]">
+        <span class="font-bold text-design-black">版权声明</span>
+        热门景区和博物馆暂时不具备完全取消预约的条件，主要因为旺季的时候供给跟不上需求，必须对需求进行适当的管理才能保证合理的市场秩序。”中国旅游研究院总统计师马仪亮说。在他看来，“热门景区和博物馆如果取消预约，一定程度上也会造成不公平”。因为有的游客可以花钱找人帮自己排队购票，有钱的人或者愿意花更多钱的人，参观的机会更多。
+    </div>
+
+    <!-- 热门打卡地 (PSD: 2300px offset range) -->
     {% if scenic_spots %}
-    <section class="mt-12 border-t pt-8">
-        <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold flex items-center">
-                <span class="w-1.5 h-6 bg-travel-brown mr-3"></span>热门打卡地
-            </h3>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <section id="spots" class="mb-[60px]">
+        <h3 class="text-[14px] font-bold text-design-black mb-[30px] flex items-center">
+            <span class="w-1 h-4 bg-design-black mr-3"></span>热门打卡地
+        </h3>
+        <div class="space-y-[40px]">
             {% for spot in scenic_spots %}
-            <div class="flex space-x-4 p-4 bg-gray-50 rounded-lg group hover:bg-white hover:shadow-md transition-all">
-                <div class="w-24 h-24 flex-shrink-0 bg-gray-200 rounded overflow-hidden">
+            <div class="flex gap-[40px] pb-[40px] border-b border-design-black/5 last:border-0 last:pb-0">
+                <div class="w-[212px] h-[144px] flex-shrink-0 bg-gray-100 overflow-hidden">
                     {% if spot.image %}
                     <img src="{{ spot.image.url }}" alt="{{ spot.title }}" class="w-full h-full object-cover">
                     {% endif %}
                 </div>
-                <div class="flex-1 min-w-0">
-                    <h4 class="font-bold text-gray-800 mb-1 group-hover:text-travel-brown">{{ spot.title }}</h4>
-                    <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ spot.summary }}</p>
+                <div class="flex-1">
+                    <div class="flex items-center mb-[14px]">
+                        <h4 class="text-[14px] font-bold text-design-black">{{ spot.title }}</h4>
+                        {% if spot.level_tag %}
+                        <span class="ml-2 text-[10px] text-design-black/40 border border-design-black/10 px-1 leading-none h-[16px] flex items-center">{{ spot.level_tag }}</span>
+                        {% endif %}
+                    </div>
+                    <p class="text-[12px] text-design-black/80 leading-[1.8]">{{ spot.summary }}</p>
                 </div>
             </div>
             {% endfor %}
@@ -60,18 +79,44 @@
     </section>
     {% endif %}
 
-    <!-- 交通出行 -->
-    {% if traffic_info %}
-    <section class="mt-12 border-t pt-8">
-        <h3 class="text-xl font-bold flex items-center mb-6">
-            <span class="w-1.5 h-6 bg-travel-brown mr-3"></span>交通·出行
+    <!-- 特产美食 (PSD: 2540px offset range) -->
+    {% if foods %}
+    <section id="food" class="mb-[60px]">
+        <h3 class="text-[14px] font-bold text-design-black mb-[30px] flex items-center">
+            <span class="w-1 h-4 bg-design-black mr-3"></span>特产·美食
         </h3>
-        <div class="space-y-3">
+        <div class="space-y-[40px]">
+            {% for food in foods %}
+            <div class="flex gap-[40px] pb-[40px] border-b border-design-black/5 last:border-0 last:pb-0">
+                <div class="w-[212px] h-[144px] flex-shrink-0 bg-gray-100 overflow-hidden">
+                    {% if food.image %}
+                    <img src="{{ food.image.url }}" alt="{{ food.title }}" class="w-full h-full object-cover">
+                    {% endif %}
+                </div>
+                <div class="flex-1">
+                    <div class="flex items-center mb-[14px]">
+                        <h4 class="text-[14px] font-bold text-design-black">{{ food.title }}</h4>
+                    </div>
+                    <p class="text-[12px] text-design-black/80 leading-[1.8]">{{ food.summary }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- 交通出行 (PSD: 3430px offset range) -->
+    {% if traffic_info %}
+    <section id="traffic" class="mb-[60px]">
+        <h3 class="text-[14px] font-bold text-design-black mb-[30px] flex items-center">
+            <span class="w-1 h-4 bg-design-black mr-3"></span>交通·出行
+        </h3>
+        <div class="space-y-[12px]">
             {% for item in traffic_info %}
-            <div class="flex items-center bg-blue-50/50 px-4 py-3 rounded-lg border border-blue-100/50">
-                <span class="text-blue-600 font-bold w-20 text-sm">{{ item.traffic_type }}</span>
-                <span class="text-gray-600 text-sm italic">{{ item.duration|default:"- - -" }}</span>
-                <span class="ml-auto text-xs text-gray-400">资讯仅供参考</span>
+            <div class="bg-gray-50/50 border border-design-black/5 p-[16px] flex items-center">
+                <span class="w-[80px] font-bold text-[12px] text-design-black">{{ item.traffic_type }}</span>
+                <span class="text-[12px] text-design-black/60 italic">{{ item.duration|default:"- - -" }}</span>
+                <span class="ml-auto text-[10px] text-design-black/30">资讯仅供参考</span>
             </div>
             {% endfor %}
         </div>

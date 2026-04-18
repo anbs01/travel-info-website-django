@@ -3,53 +3,71 @@
 {% block title %}{{ food.title }} - 特产·美食{% endblock %}
 
 {% block breadcrumbs %}
-<a href="{% url 'foods:list' %}" class="hover:text-travel-brown transition-colors">特产·美食</a>
+<span>特产·美食</span>
+<span class="mx-2 font-simsun">&gt;</span>
+<span class="text-design-black/60">{{ food.title }}</span>
 {% endblock %}
 
-{% block detail_title %}{{ food.title }}{% endblock %}
+{% block detail_title %}
+<div class="flex flex-col mb-[20px]">
+    <h1 class="text-[24px] font-bold text-design-black leading-none mb-[20px]">{{ food.title }}</h1>
+    <div class="flex items-center text-[12px] text-design-black/60 space-x-8">
+        <span>发布日期：{{ food.publish_date|date:"Y-m-d"|default:food.created_at|date:"Y-m-d" }}</span>
+        <span>浏览：{{ food.views|default:0 }}</span>
+        {% if food.price %}
+        <span class="ml-auto text-design-primary font-bold">参考价：¥{{ food.price }}</span>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
 
-{% block publish_date %}{{ food.created_at|date:"Y-m-d" }}{% endblock %}
-
-{% block view_count %}{{ food.views }}{% endblock %}
+{% block metadata %}{% endblock %}
 
 {% block summary %}
-<div class="space-y-2">
-    {% if food.price %}
-    <div class="flex items-center text-sm mb-4">
-        <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full font-bold">参考价格：¥{{ food.price }} / 人均</span>
-    </div>
-    {% endif %}
-    
-    <div class="flex flex-wrap gap-2 mb-4">
+<div class="flex flex-col gap-[20px]">
+    <div class="flex flex-wrap gap-2">
         {% if food.level_tag %}
-        <span class="text-xs bg-travel-brown/10 text-travel-brown px-2 py-0.5 rounded border border-travel-brown/20">{{ food.level_tag }}</span>
+        <span class="text-[10px] text-design-black/40 border border-design-black/10 px-1 leading-none h-[16px] flex items-center">{{ food.level_tag }}</span>
         {% endif %}
         {% for tag in food.get_feature_tags_list %}
-        <span class="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded border border-gray-200">{{ tag }}</span>
+        <span class="text-[10px] text-design-black/30 bg-gray-50 px-1 leading-none h-[16px] flex items-center">#{{ tag }}</span>
         {% endfor %}
     </div>
-
-    <p>{{ food.summary }}</p>
+    <div id="summary" class="prose prose-sm max-w-none text-design-black leading-[1.8] text-[14px]">
+        {{ food.summary }}
+    </div>
 </div>
 {% endblock %}
 
 {% block detail_content %}
-{{ food.content|safe }}
+    <div class="prose prose-sm max-w-none text-design-black leading-[1.8] text-[14px]">
+        {{ food.content|safe }}
+    </div>
+
+    <!-- 版权声明 (PSD 1:1) -->
+    <div class="mt-[60px] mb-[80px] p-[20px] border border-design-black/10 bg-gray-50/50 text-[12px] text-design-black/80 leading-[2]">
+        <span class="font-bold text-design-black">版权声明</span>
+        热门景区和博物馆暂时不具备完全取消预约的条件，主要因为旺季的时候供给跟不上需求，必须对需求进行适当的管理才能保证合理的市场秩序。”中国旅游研究院总统计师马仪亮说。在他看来，“热门景区和博物馆如果取消预约，一定程度上也会造成不公平”。因为有的游客可以花钱找人帮自己排队购票，有钱的人或者愿意花更多钱的人，参观的机会更多。
+    </div>
 {% endblock %}
 
 {% block related_content %}
-{% for item in related_foods %}
-<a href="{% url 'foods:detail' slug=item.english_code %}" class="group block bg-white border border-gray-100 p-2 hover:shadow-md transition-shadow">
-    <div class="aspect-[4/3] overflow-hidden bg-gray-100 mb-3">
-        {% if item.cover_image %}
-        <img src="{{ item.cover_image.url }}" alt="{{ item.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
-        {% else %}
-        <div class="w-full h-full flex items-center justify-center text-gray-300">暂无图片</div>
-        {% endif %}
-    </div>
-    <div class="text-[14px] font-bold text-gray-800 text-center truncate group-hover:text-travel-brown">{{ item.title }}</div>
-</a>
-{% empty %}
-<div class="col-span-2 text-sm text-gray-400 italic">暂无相关推荐数据</div>
-{% endfor %}
+<div class="grid grid-cols-5 gap-[26px] w-[1100px] mx-auto px-[25px]">
+    {% for item in related_foods %}
+    <a href="{% url 'foods:detail' slug=item.english_code %}" class="group block">
+        <div class="w-[180px] h-[120px] overflow-hidden bg-gray-100 mb-[26px]">
+            {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            {% elif item.cover_image %}
+            <img src="{{ item.cover_image.url }}" alt="{{ item.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            {% else %}
+            <div class="w-full h-full flex items-center justify-center text-gray-300 text-[10px]">暂无图片</div>
+            {% endif %}
+        </div>
+        <div class="text-[12px] text-design-black text-center truncate group-hover:text-design-primary">{{ item.title }}</div>
+    </a>
+    {% empty %}
+    <div class="col-span-5 text-[12px] text-design-black/30 italic text-center py-10">暂无相关推荐数据</div>
+    {% endfor %}
+</div>
 {% endblock %}

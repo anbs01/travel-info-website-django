@@ -2,60 +2,51 @@
 {% load static %}
 
 {% block breadcrumbs_bar %}
-<div class="bg-gray-50 border-b border-gray-100 py-4">
-    <div class="container-wide flex justify-between items-center">
-        <!-- 页面大标题 (如：纪行·攻略) -->
+<div class="max-w-design mx-auto">
+    <!-- 1:1 对标：面包屑/大标题区域 (PSD Top: 190px) -->
+    <div class="flex justify-between items-end pt-[50px] pb-[10px]">
         <div class="flex items-center">
-            <div class="bg-travel-brown text-white p-1.5 rounded-sm mr-3">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                </svg>
+            <!-- PSD 风格大标题 [纪行 攻略] (370px X) -->
+            <div class="flex items-center h-[36px] px-[10px] bg-design-black/5 border border-design-black/10">
+                <h1 class="text-[14px] font-bold text-design-black font-sans leading-none flex items-center">
+                    {% block list_title %}列表内容{% endblock %}
+                </h1>
             </div>
-            <h1 class="text-xl font-bold tracking-wider text-travel-brown">
-                {% block list_title %}列表页标题{% endblock %}
-            </h1>
         </div>
 
-        <!-- 页内小搜索区 -->
-        <form method="GET" action="." class="flex items-center space-x-3 text-sm">
-            <div class="flex items-center border border-gray-200 bg-white rounded px-2 focus-within:border-travel-brown transition-colors">
-                <select name="region" class="py-1.5 outline-none bg-transparent text-gray-500 border-r border-gray-100 mr-2">
-                    <option value="">选择地区</option>
-                    {% for r in all_regions %}
-                    <option value="{{ r.id }}" {% if request.GET.region == r.id|stringformat:"s" %}selected{% endif %}>{{ r.name }}</option>
-                    {% endfor %}
-                </select>
-                <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="输入关键字" class="py-1.5 px-2 outline-none w-40">
-                <button type="submit" class="p-1 px-2 text-gray-400 hover:text-travel-brown">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                </button>
+        <!-- 页内关键字搜索 (1284px X) -->
+        <form method="GET" action="." class="flex items-center">
+            <div class="flex items-center w-[220px] h-[30px] border border-design-black px-[6px]">
+                <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="输入关键字" class="text-[12px] text-design-black outline-none w-full bg-transparent">
             </div>
+            <button type="submit" class="w-[40px] h-[30px] bg-design-black flex items-center justify-center ml-[-1px]">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </button>
         </form>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-<div class="container-wide py-8">
-    <!-- 过滤器标签云 / 搜索结果反馈 (需求第18条) -->
-    <div class="mb-10 flex items-baseline border-b border-gray-100 pb-4">
+<div class="max-w-design mx-auto mt-[40px]">
+    <!-- 过滤器标签 (PSD: 480px X) -->
+    <div class="mb-[60px] flex items-center">
         {% if request.GET.q %}
-            <span class="text-gray-400 text-sm mr-6 whitespace-nowrap">搜索反馈</span>
-            <div class="text-sm">
-                {% if paginator.count > 0 %}
-                    <span class="text-gray-900">找到关于 “<span class="text-travel-brown font-bold">{{ request.GET.q }}</span>” 的相关数据共 <span class="font-bold">{{ paginator.count }}</span> 条</span>
-                {% else %}
-                    <span class="text-gray-400 italic">找不到相关数据的文字提示</span>
-                {% endif %}
-                <a href="?" class="ml-4 text-xs text-travel-brown hover:underline">清除搜索</a>
+            <span class="text-[12px] text-design-black mr-[40px] font-bold">搜索反馈：</span>
+            <div class="text-[12px] text-design-black">
+                找到关于 “<span class="text-design-primary font-bold">{{ request.GET.q }}</span>” 的相关数据共 <span class="font-bold">{{ paginator.count }}</span> 条
+                <a href="?" class="ml-4 text-design-primary hover:underline">[清除搜索]</a>
             </div>
         {% else %}
-            <span class="text-gray-400 text-sm mr-6 whitespace-nowrap">{% block filter_label %}所有{% endblock %}</span>
-            <div class="flex flex-wrap gap-4 text-sm">
-                <a href="?" class="px-3 py-1 rounded-full {% if not request.GET.tag %}bg-travel-brown text-white{% else %}text-gray-600 hover:text-travel-brown{% endif %}">全部</a>
-                {% block filter_tags %}
-                <!-- 子页面填充具体标签 -->
-                {% endblock %}
+            <div class="flex items-center">
+                <!-- 装修背景块 (360px X) -->
+                <div class="w-[40px] h-[24px] bg-design-black/5 flex items-center justify-center mr-[10px]">
+                    <span class="text-[12px] text-design-black">分类</span>
+                </div>
+                <div class="flex flex-wrap gap-x-[30px] text-[12px] text-design-black">
+                    <a href="?" class="{% if not request.GET.tag %}font-bold underline{% endif %}">全部</a>
+                    {% block filter_tags %}{% endblock %}
+                </div>
             </div>
         {% endif %}
     </div>
@@ -67,26 +58,37 @@
         {% endblock %}
     </div>
 
-    <!-- 统一分页器 -->
+    <!-- 1:1 对标：翻页区域 (PSD Top: 2710px) -->
     {% if is_paginated %}
-    <div class="mt-16 flex justify-center items-center space-x-2 text-sm text-gray-500">
-        <span class="mr-4">共{{ paginator.count }}条</span>
+    <div class="mt-[100px] mb-[120px] flex justify-center items-center text-[12px] text-design-black font-sans">
+        <span class="mr-[20px]">共{{ paginator.count }}条</span>
         
-        {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.region %}&region={{ request.GET.region }}{% endif %}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}" class="px-3 py-1.5 border border-gray-200 hover:border-travel-brown rounded">&lt; 上一页</a>
-        {% endif %}
-
-        {% for i in paginator.page_range %}
-            {% if page_obj.number == i %}
-            <span class="px-3 py-1.5 bg-travel-brown text-white rounded">{{ i }}</span>
-            {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
-            <a href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.region %}&region={{ request.GET.region }}{% endif %}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}" class="px-3 py-1.5 border border-gray-200 hover:border-travel-brown rounded">{{ i }}</a>
+        <div class="flex items-center gap-x-[4px]">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.region %}&region={{ request.GET.region }}{% endif %}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}" 
+               class="w-[72px] h-[30px] border border-design-black flex items-center justify-center hover:bg-design-black hover:text-white transition-colors">
+               <span class="font-serif mr-1">&lt;</span>上一页
+            </a>
             {% endif %}
-        {% endfor %}
 
-        {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.region %}&region={{ request.GET.region }}{% endif %}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}" class="px-3 py-1.5 border border-gray-200 hover:border-travel-brown rounded">下一页 &gt;</a>
-        {% endif %}
+            {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                <span class="w-[30px] h-[30px] bg-design-black text-white flex items-center justify-center">{{ i }}</span>
+                {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+                <a href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.region %}&region={{ request.GET.region }}{% endif %}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}" 
+                   class="w-[30px] h-[30px] border border-design-black flex items-center justify-center hover:bg-gray-100">{{ i }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.region %}&region={{ request.GET.region }}{% endif %}{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}" 
+               class="w-[72px] h-[30px] border border-design-black flex items-center justify-center hover:bg-design-black hover:text-white transition-colors">
+               下一页<span class="font-serif ml-1">&gt;</span>
+            </a>
+            {% endif %}
+        </div>
+        
+        <span class="ml-[20px]">共{{ paginator.num_pages }}页</span>
     </div>
     {% endif %}
 </div>

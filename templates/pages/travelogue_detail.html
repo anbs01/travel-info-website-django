@@ -3,34 +3,53 @@
 {% block title %}{{ travelogue.title }} - 纪行·攻略{% endblock %}
 
 {% block breadcrumbs %}
-<a href="#" class="hover:text-travel-brown transition-colors">纪行·攻略</a>
+<span>纪行·攻略</span>
+<span class="mx-2 font-simsun">&gt;</span>
+<span class="text-design-black/60">{{ travelogue.title }}</span>
 {% endblock %}
 
-{% block detail_title %}{{ travelogue.full_title|default:travelogue.title }}{% endblock %}
+{% block detail_title %}
+<div class="flex flex-col mb-[20px]">
+    <h1 class="text-[24px] font-bold text-design-black leading-none mb-[20px]">{{ travelogue.full_title|default:travelogue.title }}</h1>
+    <div class="flex items-center text-[12px] text-design-black/60 space-x-8">
+        <span>发布日期：{{ travelogue.publish_date|date:"Y-m-d"|default:travelogue.created_at|date:"Y-m-d" }}</span>
+        <span>栏目：精华推荐</span>
+        <span class="ml-auto">浏览：{{ travelogue.views|default:0 }}</span>
+    </div>
+</div>
+{% endblock %}
 
-{% block publish_date %}{{ travelogue.publish_date|date:"Y-m-d"|default:travelogue.created_at|date:"Y-m-d" }}{% endblock %}
-
-{% block category %}精华推荐{% endblock %}
-
-{% block view_count %}{{ travelogue.views }}{% endblock %}
+{% block metadata %}{% endblock %}
 
 {% block summary %}
-{{ travelogue.summary }}
+<div id="summary" class="prose prose-sm max-w-none text-design-black leading-[1.8] text-[14px]">
+    {{ travelogue.summary }}
+</div>
 {% endblock %}
 
 {% block detail_content %}
-{{ travelogue.content|safe }}
+    <div class="prose prose-sm max-w-none text-design-black leading-[1.8] text-[14px]">
+        {{ travelogue.content|safe }}
+    </div>
+
+    <!-- 版权声明 (PSD 1:1) -->
+    <div class="mt-[60px] mb-[80px] p-[20px] border border-design-black/10 bg-gray-50/50 text-[12px] text-design-black/80 leading-[2]">
+        <span class="font-bold text-design-black">版权声明</span>
+        热门景区和博物馆暂时不具备完全取消预约的条件，主要因为旺季的时候供给跟不上需求，必须对需求进行适当的管理才能保证合理的市场秩序。”中国旅游研究院总统计师马仪亮说。在他看来，“热门景区和博物馆如果取消预约，一定程度上也会造成不公平”。因为有的游客可以花钱找人帮自己排队购票，有钱的人或者愿意花更多钱的人，参观的机会更多。
+    </div>
 {% endblock %}
 
 {% block related_content %}
-{% for related in related_travelogues %}
-<div class="group cursor-pointer flex items-start space-x-2">
-    <span class="text-travel-brown mt-1">•</span>
-    <a href="{% url 'travelogue:detail' slug=related.slug %}" class="text-[14px] text-gray-600 group-hover:text-travel-brown line-clamp-1 transition-colors">
-        {{ related.title }}
-    </a>
+<div class="grid grid-cols-2 gap-x-[160px] gap-y-[12px] w-[930px] mx-auto">
+    {% for related in related_travelogues %}
+    <div class="flex items-start">
+        <span class="text-design-black/40 mr-2 text-[12px]">•</span>
+        <a href="{% url 'travelogue:detail' slug=related.slug %}" class="text-[12px] text-design-black hover:text-design-primary truncate transition-colors">
+            {{ related.title }}
+        </a>
+    </div>
+    {% empty %}
+    <div class="col-span-2 text-[12px] text-design-black/30 italic text-center py-10">暂无相关推荐数据</div>
+    {% endfor %}
 </div>
-{% empty %}
-<div class="text-sm text-gray-400 italic">暂无相关推荐数据</div>
-{% endfor %}
 {% endblock %}
