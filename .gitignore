@@ -1,42 +1,20 @@
-# Python 字节编译/优化/DLL 文件
-__pycache__/
-*.py[cod]
-*$py.class
-
-# 虚拟环境
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Django 相关
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# 单元测试 / 覆盖率报告
-.coverage
-.coverage.*
-.pytest_cache/
-nosetests.xml
-coverage.xml
-htmlcov/
-
-# VS Code 配置
+# 通用忽略
 .vscode/
-
-# PyCharm 设置 (视情况保留)
 .idea/
+.DS_Store
+Thumbs.db
 
-# 项目特定目录
-staticfiles/
-media/
+# 系统/Agent 缓存
+.gemini/
+.agent/
+.kiro/cache/
 
-# 即使全局忽略，也允许提交 .md 文件
-# 前端依赖
-node_modules/
+# .NET 编译产物 (由于我们使用 dotnet_version/ 子目录，这里也可以作为全局备份)
+**/bin/
+**/obj/
+**/publish/
 
-!*.md
+# 环境配置文件
+.env
+*.user
+*.suo

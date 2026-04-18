@@ -1,0 +1,42 @@
+# Python 字节编译/优化/DLL 文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虚拟环境
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django 相关
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# 单元测试 / 覆盖率报告
+.coverage
+.coverage.*
+.pytest_cache/
+nosetests.xml
+coverage.xml
+htmlcov/
+
+# VS Code 配置
+.vscode/
+
+# PyCharm 设置 (视情况保留)
+.idea/
+
+# 项目特定目录
+staticfiles/
+media/
+
+# 即使全局忽略，也允许提交 .md 文件
+# 前端依赖
+node_modules/
+
+!*.md
