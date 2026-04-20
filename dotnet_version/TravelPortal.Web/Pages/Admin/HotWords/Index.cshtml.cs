@@ -14,7 +14,10 @@ namespace TravelPortal.Web.Pages.Admin.HotWords
             _db = db;
         }
 
-        public List<HotWord> HotWords { get; set; } = new();
+        public PaginatedList<HotWord> HotWords { get; set; } = null!;
+
+        [BindProperty(SupportsGet = true)]
+        public int PageIndex { get; set; } = 1;
 
         [BindProperty(SupportsGet = true)]
         public string Type { get; set; } = "Home";
@@ -24,6 +27,7 @@ namespace TravelPortal.Web.Pages.Admin.HotWords
 
         public async Task OnGetAsync()
         {
+            int pageSize = 5;
             var query = _db.Queryable<HotWord>();
 
             // 根据 Tab 类型筛选
@@ -41,7 +45,12 @@ namespace TravelPortal.Web.Pages.Admin.HotWords
                 _ => query.Where(h => h.ShowInHome)
             };
 
-            HotWords = await query.OrderBy(h => h.SortOrder).OrderByDescending(h => h.CreatedAt).ToListAsync();
+            RefAsync<int> totalCount = 0;
+            var list = await query.OrderBy(h => h.SortOrder)
+                                 .OrderByDescending(h => h.CreatedAt)
+                                 .ToPageListAsync(PageIndex, pageSize, totalCount);
+
+            HotWords = new PaginatedList<HotWord>(list, totalCount, PageIndex, pageSize);
         }
 
         public async Task<IActionResult> OnPostAddAsync()

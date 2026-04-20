@@ -16,19 +16,34 @@
     </div>
 
     <form method="post" class="p-10 space-y-10">
-        
-        <!-- 1. 输入标题 -->
-        <div class="flex items-start space-x-6">
-            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>资讯标题</label>
-            <div class="flex-1 space-y-2">
-                <textarea asp-for="News.Title" rows="2" class="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-brand/20 transition-all" placeholder="最多60个汉字" required></textarea>
-                <p class="text-[10px] text-red-400">最多60个汉字</p>
+
+        <!-- 1. 标题组 -->
+        <div class="space-y-6">
+            <!-- 主标题 -->
+            <div class="flex items-start space-x-6">
+                <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>资讯标题</label>
+                <div class="flex-1 space-y-2">
+                    <textarea asp-for="News.Title" rows="2" class="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-brand/20 transition-all font-bold text-lg" placeholder="最多60个汉字" required></textarea>
+                    <p class="text-[10px] text-red-400">最多60个汉字</p>
+                </div>
+            </div>
+
+            <!-- 引题 -->
+            <div class="flex items-center space-x-6">
+                <label class="w-24 text-sm font-bold text-gray-700 text-right">引题</label>
+                <input asp-for="News.PreTitle" class="w-full max-w-2xl px-5 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-brand/20 transition-all text-sm" placeholder="请输入引题内容（可选）" />
+            </div>
+
+            <!-- 副题 -->
+            <div class="flex items-center space-x-6">
+                <label class="w-24 text-sm font-bold text-gray-700 text-right">副题</label>
+                <input asp-for="News.SubTitle" class="w-full max-w-2xl px-5 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-brand/20 transition-all text-sm" placeholder="请输入副题内容（可选）" />
             </div>
         </div>
 
-        <!-- 2. 资讯分类 -->
+        <!-- 2. 资讯类别 -->
         <div class="flex items-center space-x-6">
-            <label class="w-24 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>资讯分类</label>
+            <label class="w-24 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>资讯类别</label>
             <div class="flex items-center space-x-6">
                 <label class="flex items-center space-x-2 cursor-pointer group">
                     <input type="radio" asp-for="News.Category" value="news" checked class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
@@ -41,7 +56,15 @@
             </div>
         </div>
 
-        <!-- 3. 正文内容 -->
+        <!-- 3. 发布日期 -->
+        <div class="flex items-center space-x-6">
+            <label class="w-24 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>发布日期</label>
+            <div class="flex-1">
+                <input asp-for="News.PublishDate" type="date" class="px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm focus:ring-1 focus:ring-brand/20 w-64" required />
+            </div>
+        </div>
+
+        <!-- 4. 资讯内容 -->
         <div class="flex items-start space-x-6">
             <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>资讯内容</label>
             <div class="flex-1 space-y-3">
@@ -50,7 +73,7 @@
             </div>
         </div>
 
-        <!-- 4. 焦点图 -->
+        <!-- 5. 焦点图 -->
         <div class="flex items-start space-x-6">
             <label class="w-24 pt-8 text-sm font-bold text-gray-700 text-right">焦点图</label>
             <div class="flex items-center space-x-6">
@@ -64,7 +87,7 @@
             </div>
         </div>
 
-        <!-- 5. 简要概述 -->
+        <!-- 6. 简要概述 -->
         <div class="flex items-start space-x-6">
             <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>简要概述</label>
             <div class="flex-1 space-y-2">
@@ -73,14 +96,24 @@
             </div>
         </div>
 
-        <!-- 6. 作者与来源 -->
+        <!-- 7. 关联目的地 -->
+        <div class="flex items-center space-x-6">
+            <label class="w-24 text-sm font-bold text-gray-700 text-right">关联目的地</label>
+            <div class="flex-1">
+                <select asp-for="News.PlaceId" asp-items="Model.PlaceList" class="w-64 px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm focus:ring-1 focus:ring-brand/20 appearance-none">
+                    <option value="">-- 请选择关联城镇 --</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 8. 作者与来源 -->
         <div class="space-y-6">
             <div class="flex items-center space-x-6">
-                <label class="w-24 text-sm font-bold text-gray-700 text-right">文章作者</label>
+                <label class="w-24 text-sm font-bold text-gray-700 text-right">资讯作者</label>
                 <input asp-for="News.Author" class="w-64 px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm" />
             </div>
             <div class="flex items-center space-x-6">
-                <label class="w-24 text-sm font-bold text-gray-700 text-right">文章来源</label>
+                <label class="w-24 text-sm font-bold text-gray-700 text-right">资讯来源</label>
                 <input asp-for="News.Source" class="w-64 px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm" />
             </div>
             <div class="flex items-center space-x-6">
@@ -97,11 +130,14 @@
             <label class="w-24 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>版权选择</label>
             <div class="flex items-center space-x-6">
                 @foreach (var cp in new[] { "原创版权", "转载声明", "风险提示", "广告提示" })
+
+
+
                 {
-                    <label class="flex items-center space-x-2 cursor-pointer group">
-                        <input type="radio" asp-for="News.CopyrightType" value="@cp" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
-                        <span class="text-sm text-gray-600 group-hover:text-brand">@cp</span>
-                    </label>
+                            <label class="flex items-center space-x-2 cursor-pointer group">
+                                <input type="radio" asp-for="News.CopyrightType" value="@cp" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
+                                <span class="text-sm text-gray-600 group-hover:text-brand">@cp</span>
+                            </label>
                 }
                 <span class="text-[10px] text-red-400">(引用在前台显示的内容，在综里有管理)</span>
             </div>
@@ -118,11 +154,14 @@
                 <div class="flex items-center space-x-4 border-l pl-8 border-gray-100">
                     <span class="text-xs text-gray-400">水印位置</span>
                     @foreach (var pos in new[] { "中正", "中下", "右下" })
+
+
+
                     {
-                        <label class="flex items-center space-x-2 cursor-pointer group">
-                            <input type="radio" asp-for="News.WatermarkPos" value="@pos" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
-                            <span class="text-sm text-gray-600 group-hover:text-brand">@pos</span>
-                        </label>
+                                <label class="flex items-center space-x-2 cursor-pointer group">
+                                    <input type="radio" asp-for="News.WatermarkPos" value="@pos" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
+                                    <span class="text-sm text-gray-600 group-hover:text-brand">@pos</span>
+                                </label>
                     }
                 </div>
                 <span class="text-[10px] text-red-400">(指详情页里的图片，在前台显示时，是否显示网的站水印)</span>

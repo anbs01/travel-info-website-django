@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SqlSugar;
 using TravelPortal.Web.Models;
 
@@ -17,8 +18,12 @@ namespace TravelPortal.Web.Pages.Admin.News
         [BindProperty]
         public Models.News News { get; set; } = new();
 
+        public SelectList PlaceList { get; set; } = null!;
+
         public void OnGet()
         {
+            var places = _db.Queryable<Place>().ToList();
+            PlaceList = new SelectList(places, "Id", "Title");
             News.PublishDate = DateTime.Now;
         }
 
@@ -26,6 +31,8 @@ namespace TravelPortal.Web.Pages.Admin.News
         {
             if (!ModelState.IsValid)
             {
+                var places = _db.Queryable<Place>().ToList();
+                PlaceList = new SelectList(places, "Id", "Title");
                 return Page();
             }
 

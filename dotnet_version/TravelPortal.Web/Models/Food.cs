@@ -9,10 +9,34 @@ namespace TravelPortal.Web.Models;
 public class Food : BaseContent
 {
     /// <summary>
-    /// 产品分类（如：地方特产, 招牌菜品）
+    /// 产品分类（美食 / 特产）
     /// </summary>
     [SugarColumn(Length = 50, IsNullable = true)]
     public string? Category { get; set; }
+
+    /// <summary>
+    /// 美食菜系（从热词中显示）
+    /// </summary>
+    [SugarColumn(Length = 100, IsNullable = true)]
+    public string? Cuisine { get; set; }
+
+    /// <summary>
+    /// 特产分类（从特产数据中显示）
+    /// </summary>
+    [SugarColumn(Length = 100, IsNullable = true)]
+    public string? SpecialtyCategory { get; set; }
+
+    /// <summary>
+    /// 特产级别（无公害产品、绿色产品、有机产品、地理标志产品）
+    /// </summary>
+    [SugarColumn(Length = 100, IsNullable = true)]
+    public string? SpecialtyLevel { get; set; }
+
+    /// <summary>
+    /// 非遗级别（国际家非遗、省级非遗、市级非遗、县级非遗）
+    /// </summary>
+    [SugarColumn(Length = 100, IsNullable = true)]
+    public string? IntangibleHeritageLevel { get; set; }
 
     /// <summary>
     /// 所属城镇 ID

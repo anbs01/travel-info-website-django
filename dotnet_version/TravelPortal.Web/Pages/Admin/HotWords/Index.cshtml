@@ -58,7 +58,7 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
-                    @foreach (var item in Model.HotWords)
+                    @foreach (var item in Model.HotWords.Items)
                     {
                         <tr class="hover:bg-gray-50/50 transition-colors group">
                             <td class="px-6 py-4"><input type="checkbox" class="rounded text-brand border-gray-200" /></td>
@@ -91,6 +91,8 @@
                 </tbody>
             </table>
         </div>
+        <!-- 分页组件 -->
+        <partial name="_Pagination" model="Model.HotWords.Metadata" />
     </div>
 
     <!-- 4. 添加弹窗 (Modal) -->

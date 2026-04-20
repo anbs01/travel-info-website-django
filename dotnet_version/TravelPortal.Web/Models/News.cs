@@ -15,6 +15,23 @@ public class News : BaseContent
     public string Category { get; set; } = "news";
 
     /// <summary>
+    /// 引题 (Over-title)
+    /// </summary>
+    [SugarColumn(Length = 200, IsNullable = true)]
+    public string? PreTitle { get; set; }
+
+    /// <summary>
+    /// 副题 (Sub-title)
+    /// </summary>
+    [SugarColumn(Length = 200, IsNullable = true)]
+    public string? SubTitle { get; set; }
+
+    /// <summary>
+    /// 关联目的地 ID
+    /// </summary>
+    public int? PlaceId { get; set; }
+
+    /// <summary>
     /// 文章摘要（如果为空则取正文前100字）
     /// </summary>
     [SugarColumn(ColumnDataType = "text", IsNullable = true)]

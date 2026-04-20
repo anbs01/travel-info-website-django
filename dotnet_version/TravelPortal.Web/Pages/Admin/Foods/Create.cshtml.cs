@@ -38,9 +38,9 @@ namespace TravelPortal.Web.Pages.Admin.Foods
 
             Food.CreatedAt = DateTime.Now;
             Food.UpdatedAt = DateTime.Now;
-            
+
             await _db.Insertable(Food).ExecuteCommandAsync();
-            
+
             return RedirectToPage("Index");
         }
     }
