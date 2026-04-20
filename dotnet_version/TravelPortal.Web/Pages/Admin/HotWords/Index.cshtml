@@ -1,0 +1,139 @@
+@page
+@model TravelPortal.Web.Pages.Admin.HotWords.IndexModel
+@{
+    ViewData["Title"] = "类别热词管理";
+}
+
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<div x-data="{ showModal: false }" class="space-y-6">
+    
+    <!-- 1. 顶部选项卡 -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="flex flex-wrap border-b border-gray-50 bg-gray-50/30">
+            @foreach (var tab in new[] { 
+                (id: "Home", name: "首页搜索词"), (id: "Place", name: "城乡搜索词"), 
+                (id: "Scenic", name: "打卡地类别"), (id: "Travelogue", name: "纪行类别"), 
+                (id: "Guide", name: "攻略类别"), (id: "Specialty", name: "特产类别"), 
+                (id: "Cuisine", name: "美食菜系"), (id: "Creative", name: "文创类别"), 
+                (id: "News", name: "资讯类别") 
+            })
+            {
+                <a asp-route-type="@tab.id" class="px-6 py-4 text-sm font-bold transition-all @(Model.Type == tab.id ? "bg-white text-brand border-t-2 border-brand" : "text-gray-400 hover:text-gray-600")">
+                    @tab.name
+                </a>
+            }
+        </div>
+
+        <!-- 2. 操作栏 -->
+        <div class="p-6 flex items-center justify-between bg-white">
+            <div class="flex space-x-2">
+                <button class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded text-xs font-bold hover:bg-gray-200 transition-all">屏蔽</button>
+                <button class="px-4 py-1.5 bg-gray-100 text-gray-600 rounded text-xs font-bold hover:bg-gray-200 transition-all">编辑</button>
+                <button class="px-4 py-1.5 bg-brand/10 text-brand rounded text-xs font-bold hover:bg-brand/20 transition-all">删除</button>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input type="text" placeholder="标题关键字" class="pl-4 pr-10 py-1.5 bg-gray-50 border-none rounded-lg text-xs w-48 focus:ring-1 focus:ring-brand/20" />
+                    <button class="absolute right-2 top-1.5 text-gray-400 hover:text-brand transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+                <button @@click="showModal = true" class="px-6 py-1.5 bg-brand text-white rounded-lg text-xs font-bold shadow-lg shadow-brand/20 hover:scale-105 active:scale-95 transition-all">
+                    添加类别热词
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. 数据列表 -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+                <thead class="bg-gray-50/50 text-gray-400 font-bold uppercase tracking-wider text-[10px]">
+                    <tr>
+                        <th class="px-6 py-4 w-12"><input type="checkbox" class="rounded text-brand border-gray-200" /></th>
+                        <th class="px-6 py-4 w-24">移动</th>
+                        <th class="px-6 py-4">热词名称</th>
+                        <th class="px-6 py-4">显示位置</th>
+                        <th class="px-6 py-4 text-right">显示状态</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    @foreach (var item in Model.HotWords)
+                    {
+                        <tr class="hover:bg-gray-50/50 transition-colors group">
+                            <td class="px-6 py-4"><input type="checkbox" class="rounded text-brand border-gray-200" /></td>
+                            <td class="px-6 py-4 flex items-center space-x-2 text-brand font-bold">
+                                <button class="hover:scale-125 transition-transform">↑</button>
+                                <button class="hover:scale-125 transition-transform">↓</button>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="font-medium text-gray-700 group-hover:text-brand transition-colors">@item.Name</span>
+                            </td>
+                            <td class="px-6 py-4 text-xs text-gray-400">
+                                @(Model.Type switch {
+                                    "Home" => "首页搜索词", "Place" => "城乡搜索词", "Scenic" => "打卡地类别",
+                                    "Travelogue" => "纪行类别", "Guide" => "攻略类别", "Specialty" => "特产类别",
+                                    "Cuisine" => "美食菜系", "Creative" => "文创类别", "News" => "资讯类别", _ => ""
+                                })
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                @if (item.IsHidden)
+                                {
+                                    <span class="px-3 py-1 bg-red-50 text-red-500 rounded-full text-[10px] font-bold">已屏蔽</span>
+                                }
+                                else
+                                {
+                                    <span class="px-3 py-1 bg-green-50 text-green-500 rounded-full text-[10px] font-bold">正常</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 4. 添加弹窗 (Modal) -->
+    <div x-show="showModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div @@click.away="showModal = false" class="bg-white rounded-[2rem] w-full max-w-xl shadow-2xl overflow-hidden transform transition-all" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+            <div class="px-8 py-6 bg-gray-50 flex items-center justify-between border-b border-gray-100">
+                <h3 class="font-bold text-gray-800">发布类别热词</h3>
+                <button @@click="showModal = false" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <form method="post" asp-page-handler="Add" class="p-8 space-y-8">
+                <input type="hidden" name="Type" value="@Model.Type" />
+                
+                <div class="flex items-center space-x-6">
+                    <label class="w-20 text-sm font-bold text-gray-700 text-right">热词名称</label>
+                    <input asp-for="NewHotWord.Name" class="flex-1 px-4 py-2.5 bg-gray-50 border-none rounded-xl focus:ring-2 focus:ring-brand/20 transition-all text-sm" placeholder="请输入热词..." required />
+                </div>
+
+                <div class="flex items-start space-x-6">
+                    <label class="w-20 pt-1 text-sm font-bold text-gray-700 text-right">显示位置</label>
+                    <div class="flex-1 grid grid-cols-2 gap-4">
+                        <label class="flex items-center space-x-2 text-xs text-gray-500 cursor-pointer hover:text-brand transition-colors"><input type="checkbox" asp-for="NewHotWord.ShowInHome" class="rounded text-brand border-gray-200" /> <span>首页搜索词</span></label>
+                        <label class="flex items-center space-x-2 text-xs text-gray-500 cursor-pointer hover:text-brand transition-colors"><input type="checkbox" asp-for="NewHotWord.ShowInPlace" class="rounded text-brand border-gray-200" /> <span>城乡搜索词</span></label>
+                        <label class="flex items-center space-x-2 text-xs text-gray-500 cursor-pointer hover:text-brand transition-colors"><input type="checkbox" asp-for="NewHotWord.ShowInScenic" class="rounded text-brand border-gray-200" /> <span>打卡地类别</span></label>
+                        <label class="flex items-center space-x-2 text-xs text-gray-500 cursor-pointer hover:text-brand transition-colors"><input type="checkbox" asp-for="NewHotWord.ShowInTravelogue" class="rounded text-brand border-gray-200" /> <span>纪行类别</span></label>
+                        <label class="flex items-center space-x-2 text-xs text-gray-500 cursor-pointer hover:text-brand transition-colors"><input type="checkbox" asp-for="NewHotWord.ShowInGuide" class="rounded text-brand border-gray-200" /> <span>攻略类别</span></label>
+                        <label class="flex items-center space-x-2 text-xs text-gray-500 cursor-pointer hover:text-brand transition-colors"><input type="checkbox" asp-for="NewHotWord.ShowInSpecialty" class="rounded text-brand border-gray-200" /> <span>特产类别</span></label>
+                        <label class="flex items-center space-x-2 text-xs text-gray-500 cursor-pointer hover:text-brand transition-colors"><input type="checkbox" asp-for="NewHotWord.ShowInCuisine" class="rounded text-brand border-gray-200" /> <span>美食菜系</span></label>
+                        <label class="flex items-center space-x-2 text-xs text-gray-500 cursor-pointer hover:text-brand transition-colors"><input type="checkbox" asp-for="NewHotWord.ShowInCreative" class="rounded text-brand border-gray-200" /> <span>文创类别</span></label>
+                        <label class="flex items-center space-x-2 text-xs text-gray-500 cursor-pointer hover:text-brand transition-colors"><input type="checkbox" asp-for="NewHotWord.ShowInNews" class="rounded text-brand border-gray-200" /> <span>资讯类别</span></label>
+                    </div>
+                </div>
+
+                <div class="flex justify-center pt-4">
+                    <button type="submit" class="px-12 py-3 bg-brand text-white rounded-xl font-bold shadow-xl shadow-brand/20 hover:scale-105 active:scale-95 transition-all">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    [x-cloak] { display: none !important; }
+</style>

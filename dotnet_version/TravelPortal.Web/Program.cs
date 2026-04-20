@@ -38,7 +38,9 @@ if (app.Environment.IsDevelopment())
                 typeof(ScenicSpot), 
                 typeof(Food), 
                 typeof(Travelogue),
-                typeof(SiteInfo)
+                typeof(News),
+                typeof(SiteInfo),
+                typeof(HotWord)
             );
             Console.WriteLine("✅ [Root Mode] 数据库初始化成功！");
         }

@@ -1,10 +1,109 @@
-﻿@page
+@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "首页";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div style="padding-bottom: 80px;">
+    
+    <!-- 1. 搜索区域 -->
+    <div class="container-1200" style="margin-top: 50px;">
+        <div style="display: flex; justify-content: center;">
+            <!-- 总宽 942px -->
+            <div style="display: flex; height: 50px; width: 942px; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <!-- 搜索主框 -->
+                <input type="text" style="width: 730px; height: 100%; border: 1px solid #f0f0f0; border-right: none; padding: 0 24px; outline: none; font-size: 12px; box-sizing: border-box;" placeholder="请输入关键字..." />
+                <!-- 类别下拉 -->
+                <div style="width: 110px; height: 100%; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: #fff; font-size: 12px; box-sizing: border-box;">
+                    <span>纪行·攻略</span>
+                    <span style="font-size: 10px; color: #ccc;">▼</span>
+                </div>
+                <!-- 间距 6px -->
+                <div style="width: 6px;"></div>
+                <!-- 搜索按钮 -->
+                <button style="width: 96px; height: 100%; border: none; background: #b58c5e; color: #fff; font-weight: bold; font-size: 14px; cursor: pointer;">搜 索</button>
+            </div>
+        </div>
+
+        <!-- 搜索热词 -->
+        <div style="margin-top: 30px; padding: 0 30px; font-size: 12px; color: #666; line-height: 2;">
+            <div style="display: flex; flex-wrap: wrap; gap: 0 32px;">
+                <span style="color: #999;">这里的搜索热词里的显示在首页的</span>
+                <a href="#" style="color: inherit; text-decoration: none;">历史文化名城</a>
+                <a href="#" style="color: inherit; text-decoration: none;">宜居城市</a>
+                <a href="#" style="color: inherit; text-decoration: none;">绿色城市</a>
+                <a href="#" style="color: inherit; text-decoration: none;">千年古镇</a>
+                <a href="#" style="color: inherit; text-decoration: none;">千年古村</a>
+                <a href="#" style="color: inherit; text-decoration: none;">旅游城市</a>
+                <a href="#" style="color: inherit; text-decoration: none;">避暑城市</a>
+                <a href="#" style="color: inherit; text-decoration: none;">滑雪城市</a>
+                <a href="#" style="color: inherit; text-decoration: none;">养生福地</a>
+                <a href="#" style="color: inherit; text-decoration: none;">十大古迹</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0 32px; padding-left: 184px;">
+                <a href="#" style="color: inherit; text-decoration: none; font-weight: bold;">康养胜地</a>
+                <a href="#" style="color: inherit; text-decoration: none;">十大古城</a>
+                <a href="#" style="color: inherit; text-decoration: none;">赏花名地避暑城市</a>
+                <a href="#" style="color: inherit; text-decoration: none;">康养绿城</a>
+                <a href="#" style="color: inherit; text-decoration: none;">十大名迹</a>
+                <a href="#" style="color: inherit; text-decoration: none;">文物古迹</a>
+                <a href="#" style="color: inherit; text-decoration: none;">十大博物馆</a>
+                <a href="#" style="color: inherit; text-decoration: none;">观鸟福地</a>
+                <a href="#" style="color: inherit; text-decoration: none;">灯会名城</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. 故事攻略 推荐板块 -->
+    <div style="background: #f9f9f9; margin-top: 60px; padding: 40px 0; height: 384px; box-sizing: border-box;">
+        <div class="container-1200" style="position: relative;">
+            <div style="position: absolute; right: 0; top: -25px; font-size: 12px; color: #666; cursor: pointer;">换一批</div>
+
+            <div style="display: flex;">
+                <!-- 左侧焦点图 (484x324) -->
+                <div style="margin-left: 30px; width: 484px; height: 324px; background: #fff; padding: 2px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: relative; box-sizing: border-box;">
+                    <img src="/yantai_ferris_wheel_homepage_1776606495706.png" style="width: 100%; height: 100%; object-fit: cover;" alt="爱在烟台" />
+                    <div style="position: absolute; bottom: 2px; left: 2px; right: 2px; height: 44px; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: space-between; padding: 0 15px; color: #fff; font-size: 12px;">
+                        <span>爱在烟台，难以离开</span>
+                        <div style="display: flex; gap: 8px;">
+                            <span style="width: 12px; height: 12px; background: #b58c5e; border-radius: 50%;"></span>
+                            <span style="width: 12px; height: 12px; background: rgba(255,255,255,0.5); border-radius: 50%;"></span>
+                            <span style="width: 12px; height: 12px; background: rgba(255,255,255,0.5); border-radius: 50%;"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧列表 (起点 x: 944, 相对偏移 584) -->
+                <div style="margin-left: 80px; flex: 1;">
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="display: flex; align-items: center; font-size: 12px; margin-bottom: 18px;">
+                            <span style="width: 8px; height: 8px; background: #b58c5e; margin-right: 12px; border-radius: 2px;"></span>
+                            <span style="color: #000; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 440px;">设置在首页推荐的文字记录，不取消或未到期会一直显示在最上边</span>
+                        </li>
+                        @foreach (var item in new[] { 
+                            (t: "台湾写真:台北寻“杠子头”,咬一口“硬邦邦”的乡愁", c: "纪行"),
+                            (t: "“海绵”常德,一条老街留住文化与乡愁", c: "攻略"),
+                            (t: "打卡青岛明月山海间不夜城,全攻略带你深度游城阳", c: "资讯"),
+                            (t: "周末,在岱山来场Citywalk!", c: "纪行"),
+                            (t: "绮罗古镇:六百年岁月里的古村肌理与人文印记", c: "攻略"),
+                            (t: "超600年历史!广州这条避世古村,藏得太深了!", c: "资讯"),
+                            (t: "江西省景德镇市浮梁县瑶里村:古村白墙黛瓦 瓷韵茶香悠长", c: "纪行"),
+                            (t: "从文化流量到消费增量 “博物馆经济圈”释放新价值", c: "攻略"),
+                            (t: "礼泉:流量质量双突破写好假期乡村旅游新答卷", c: "资讯")
+                        })
+                        {
+                            <li style="display: flex; justify-between; align-items: center; font-size: 12px; margin-bottom: 14px; position: relative;">
+                                <div style="display: flex; align-items: center;">
+                                    <span style="width: 6px; height: 6px; background: #ddd; margin-right: 14px; border-radius: 50%;"></span>
+                                    <span style="color: #444; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 440px; cursor: pointer;">@item.t</span>
+                                </div>
+                                <span style="position: absolute; right: 40px; color: #999; font-family: monospace;">[@item.c]</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

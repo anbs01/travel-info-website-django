@@ -8,19 +8,27 @@
     <style>
         body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; margin: 0; padding: 0; }
         .container-1200 { width: 1200px; margin: 0 auto; position: relative; }
-        .text-brand { color: #b58c5e; }
-        .bg-brand { background-color: #b58c5e; }
         .nav-link { font-size: 12px; color: #000; text-decoration: none; margin-right: 48px; font-weight: bold; }
         .nav-link:last-child { margin-right: 0; }
         .nav-link:hover { color: #b58c5e; }
+        .search-input { width: 772px; height: 50px; border: 1px solid #ddd; padding: 0 15px; font-size: 14px; outline: none; }
+        .search-dropdown { width: 110px; height: 50px; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; font-size: 12px; cursor: pointer; }
+        .search-btn { width: 96px; height: 48px; background: #b58c5e; color: #fff; border: none; font-size: 14px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body class="bg-white">
 
-    <!-- 1. 顶部状态条 -->
-    <div style="height: 48px; border-bottom: 1px solid #f3f3f3; display: flex; align-items: center;">
-        <div class="container-1200" style="display: flex; justify-content: space-between; align-items: center;">
-            <nav style="display: flex;">
+    <!-- 1. 统一分页顶部 (Sub-Page Header) -->
+    <header style="height: 140px; background: #fff; border-top: 4px solid #b58c5e; border-bottom: 1px solid #f3f3f3;">
+        <div class="container-1200" style="height: 100%; position: relative;">
+            
+            <!-- Logo (x: 360, y: 48 -> relative 0, 48) -->
+            <div style="position: absolute; left: 0; top: 48px; width: 170px; height: 50px; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; background: #fff;">
+                <h1 style="font-size: 20px; font-weight: bold; color: #333; margin: 0; letter-spacing: 2px;">网站LOGO</h1>
+            </div>
+
+            <!-- 导航链接 (x: 576, y: 44 -> relative 216, 44) -->
+            <nav style="position: absolute; left: 216px; top: 44px; display: flex;">
                 <a href="/" class="nav-link">首页</a>
                 <a href="/Travelogues" class="nav-link">纪行·攻略</a>
                 <a href="/Places" class="nav-link">城乡·街巷</a>
@@ -28,28 +36,38 @@
                 <a href="/Store" class="nav-link">好物·文创</a>
                 <a href="/News" class="nav-link">资讯·动态</a>
             </nav>
-            <div style="display: flex; align-items: center; font-size: 12px;">
-                <a href="/Account/Login" style="color: #000; text-decoration: none; margin-right: 15px;">登录</a>
-                <a href="/Account/Register" style="color: #000; text-decoration: none; margin-right: 20px;">注册</a>
+
+            <!-- 登录/注册 (x: 1450, y: 16 -> relative 1090, 16) -->
+            <div style="position: absolute; right: 0; top: 16px; display: flex; align-items: center; font-size: 12px; color: #000;">
+                <a href="/Account/Login" style="color: inherit; text-decoration: none; margin-right: 15px;">登录</a>
+                <a href="/Account/Register" style="color: inherit; text-decoration: none; margin-right: 15px;">注册</a>
                 <div style="width: 16px; height: 16px; color: #999;">
                     <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM13 13h2v2h-2v-2zm2 2h2v2h-2v-2zm2-2h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2z"/></svg>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- 2. Logo 区域 -->
-    <div style="padding: 40px 0; text-align: center;">
-        <div style="width: 340px; height: 100px; border: 1px solid #eee; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
-            <h1 style="font-size: 40px; font-weight: bold; letter-spacing: 8px; color: #333; margin: 0;">网站LOGO</h1>
+            <!-- 1:1 还原的顶部搜索组 (y: 64) -->
+            <div style="position: absolute; left: 210px; top: 64px; display: flex; align-items: center;">
+                <!-- 输入框 (x: 570) -->
+                <input type="text" class="search-input" placeholder="请输入关键字" />
+                
+                <!-- 分类选择 (x: 1350 -> offset 780 from input start) -->
+                <div class="search-dropdown" style="margin-left: 8px;">
+                    <span>纪行·攻略</span>
+                    <span style="font-size: 10px; transform: scale(0.8);">▼</span>
+                </div>
+
+                <!-- 搜索按钮 (x: 1464 -> offset 4 from dropdown) -->
+                <button class="search-btn" style="margin-left: 4px;">搜 索</button>
+            </div>
         </div>
-    </div>
+    </header>
 
     <main>
         @RenderBody()
     </main>
 
-    <!-- 3. 页脚 -->
+    <!-- 页脚 -->
     <footer style="margin-top: 80px; padding: 40px 0; border-top: 1px solid #eee; background: #fff;">
         <div class="container-1200" style="text-align: center;">
             <div style="display: flex; justify-content: center; gap: 30px; font-size: 12px; color: #666; margin-bottom: 15px;">

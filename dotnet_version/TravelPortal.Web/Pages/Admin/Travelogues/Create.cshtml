@@ -1,0 +1,210 @@
+@page
+@model TravelPortal.Web.Pages.Admin.Travelogues.CreateModel
+@{
+    ViewData["Title"] = "发布作品";
+}
+
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-20" x-data="{ mainCategory: '@Model.Travelogue.Category' }">
+    <!-- 头部 -->
+    <div class="px-10 py-6 border-b border-gray-50 bg-gray-50/50">
+        <h1 class="text-xl font-bold text-gray-800">发布作品</h1>
+        <div class="flex space-x-4 mt-2 text-xs text-gray-400">
+            <span>纪行攻略</span>
+            <span>&gt;</span>
+            <span class="text-brand font-bold">发布作品</span>
+        </div>
+    </div>
+
+    <form method="post" class="p-10 space-y-10">
+        
+        <!-- 1. 输入标题 -->
+        <div class="flex items-start space-x-6">
+            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>输入标题</label>
+            <div class="flex-1 space-y-2">
+                <textarea asp-for="Travelogue.Title" rows="2" class="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-brand/20 transition-all" placeholder="最多60个汉字" required></textarea>
+                <p class="text-[10px] text-red-400">最多60个汉字</p>
+            </div>
+        </div>
+
+        <!-- 2. 作品分类 -->
+        <div class="flex items-center space-x-6">
+            <label class="w-24 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>作品分类</label>
+            <div class="flex items-center space-x-6">
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                    <input type="radio" asp-for="Travelogue.Category" value="travelogue" x-model="mainCategory" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
+                    <span class="text-sm text-gray-600 group-hover:text-brand">纪行</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                    <input type="radio" asp-for="Travelogue.Category" value="guide" x-model="mainCategory" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
+                    <span class="text-sm text-gray-600 group-hover:text-brand">攻略</span>
+                </label>
+                <span class="text-[10px] text-red-400">(当选择攻略时出来下边的选择框)</span>
+            </div>
+        </div>
+
+        <!-- 3. 动态类别选择 -->
+        <!-- 纪行类别 -->
+        <div class="flex items-start space-x-6" x-show="mainCategory === 'travelogue'" x-transition>
+            <label class="w-24 pt-1 text-sm font-bold text-gray-700 text-right">纪行类别</label>
+            <div class="flex-1 flex flex-wrap gap-4 bg-gray-50/50 p-4 rounded-xl border border-dashed border-gray-100">
+                @foreach (var item in Model.TravelogueCategories)
+                {
+                    <label class="flex items-center space-x-2 cursor-pointer group">
+                        <input type="checkbox" name="SelectedTags" value="@item.Name" class="w-4 h-4 rounded text-brand border-gray-300 focus:ring-brand" />
+                        <span class="text-sm text-gray-600 group-hover:text-brand">@item.Name</span>
+                    </label>
+                }
+                @if (!Model.TravelogueCategories.Any())
+                {
+                    <span class="text-[10px] text-gray-300">暂无类别热词，请在“类别管理”中添加并勾选“纪行类别”</span>
+                }
+            </div>
+        </div>
+
+        <!-- 攻略类别 -->
+        <div class="flex items-start space-x-6" x-show="mainCategory === 'guide'" x-transition>
+            <label class="w-24 pt-1 text-sm font-bold text-gray-700 text-right">攻略类别</label>
+            <div class="flex-1 flex flex-wrap gap-4 bg-gray-50/50 p-4 rounded-xl border border-dashed border-gray-100">
+                @foreach (var item in Model.GuideCategories)
+                {
+                    <label class="flex items-center space-x-2 cursor-pointer group">
+                        <input type="checkbox" name="SelectedTags" value="@item.Name" class="w-4 h-4 rounded text-brand border-gray-300 focus:ring-brand" />
+                        <span class="text-sm text-gray-600 group-hover:text-brand">@item.Name</span>
+                    </label>
+                }
+                @if (!Model.GuideCategories.Any())
+                {
+                    <span class="text-[10px] text-gray-300">暂无类别热词，请在“类别管理”中添加并勾选“攻略类别”</span>
+                }
+            </div>
+        </div>
+
+        <!-- 4. 正文内容 -->
+        <div class="flex items-start space-x-6">
+            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>正文内容</label>
+            <div class="flex-1 space-y-3">
+                <textarea asp-for="Travelogue.Content" rows="15" class="w-full p-6 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-brand/20 transition-all text-sm leading-relaxed" required></textarea>
+                <p class="text-[10px] text-red-400">文章编辑器，要功能全点的,支持上传视频</p>
+            </div>
+        </div>
+
+        <!-- 5. 焦点图 -->
+        <div class="flex items-start space-x-6">
+            <label class="w-24 pt-8 text-sm font-bold text-gray-700 text-right">焦点图</label>
+            <div class="flex items-center space-x-6">
+                <div class="w-32 h-32 bg-gray-50 border-2 border-dashed border-gray-100 rounded-2xl flex flex-col items-center justify-center text-gray-300 hover:border-brand/30 cursor-pointer transition-all">
+                    <span class="text-xs font-medium">焦点图</span>
+                    <span class="text-lg">+</span>
+                </div>
+                <div class="flex-1">
+                    <p class="text-[10px] text-red-400 max-w-md leading-relaxed">是指把正文里的图片显示出来选择一张适合做焦点图的，也可以另行上传，前台显示时需要，可以随时删除或者重新选择</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. 简要概述 -->
+        <div class="flex items-start space-x-6">
+            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>简要概述</label>
+            <div class="flex-1 space-y-2">
+                <textarea asp-for="Travelogue.Summary" rows="3" class="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-brand/20 transition-all" required></textarea>
+                <p class="text-[10px] text-red-400">120汉字以内</p>
+            </div>
+        </div>
+
+        <!-- 7. 选择地区 -->
+        <div class="flex items-center space-x-6">
+            <label class="w-24 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>选择地区</label>
+            <div class="flex-1 flex items-center space-x-4">
+                <select asp-for="Travelogue.PlaceId" asp-items="Model.PlaceList" class="w-64 px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm appearance-none cursor-pointer">
+                    <option value="">-- 请选择关联城镇 --</option>
+                </select>
+                <span class="text-[10px] text-red-400">弹窗单选，有做好的弹窗页面，这个支持多选</span>
+            </div>
+        </div>
+
+        <!-- 8. 作者与来源 -->
+        <div class="space-y-6">
+            <div class="flex items-center space-x-6">
+                <label class="w-24 text-sm font-bold text-gray-700 text-right">文章作者</label>
+                <input asp-for="Travelogue.Author" class="w-64 px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm" />
+            </div>
+            <div class="flex items-center space-x-6">
+                <label class="w-24 text-sm font-bold text-gray-700 text-right">文章来源</label>
+                <input asp-for="Travelogue.Source" class="w-64 px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm" />
+            </div>
+            <div class="flex items-center space-x-6">
+                <label class="w-24 text-sm font-bold text-gray-700 text-right">原文链接</label>
+                <div class="flex-1 flex items-center space-x-4">
+                    <input asp-for="Travelogue.RedirectUrl" class="w-full max-w-md px-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm" />
+                    <span class="text-[10px] text-red-400">此项不显示在前台，仅为后台记录</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. 版权选择 -->
+        <div class="flex items-center space-x-6">
+            <label class="w-24 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>版权选择</label>
+            <div class="flex items-center space-x-6">
+                @foreach (var cp in new[] { "原创版权", "转载声明", "风险提示", "广告提示" })
+                {
+                    <label class="flex items-center space-x-2 cursor-pointer group">
+                        <input type="radio" asp-for="Travelogue.CopyrightType" value="@cp" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
+                        <span class="text-sm text-gray-600 group-hover:text-brand">@cp</span>
+                    </label>
+                }
+                <span class="text-[10px] text-red-400">(引用在前台显示的内容，在综里有管理)</span>
+            </div>
+        </div>
+
+        <!-- 10. 图片水印 -->
+        <div class="flex items-center space-x-6">
+            <label class="w-24 text-sm font-bold text-gray-700 text-right">图片水印</label>
+            <div class="flex items-center space-x-8">
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                    <input type="checkbox" asp-for="Travelogue.ShowWatermark" class="w-4 h-4 rounded text-brand border-gray-300 focus:ring-brand" />
+                    <span class="text-sm text-gray-600 group-hover:text-brand">显示水印</span>
+                </label>
+                <div class="flex items-center space-x-4 border-l pl-8 border-gray-100">
+                    <span class="text-xs text-gray-400">水印位置</span>
+                    @foreach (var pos in new[] { "中正", "中下", "右下" })
+                    {
+                        <label class="flex items-center space-x-2 cursor-pointer group">
+                            <input type="radio" asp-for="Travelogue.WatermarkPos" value="@pos" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
+                            <span class="text-sm text-gray-600 group-hover:text-brand">@pos</span>
+                        </label>
+                    }
+                </div>
+                <span class="text-[10px] text-red-400">(指详情页里的图片，在前台显示时，是否显示网的站水印，列表数据里的焦点图不显示水印)</span>
+            </div>
+        </div>
+
+        <!-- 11. 显示首页 -->
+        <div class="flex items-center space-x-6">
+            <label class="w-24 text-sm font-bold text-gray-700 text-right">显示首页</label>
+            <div class="flex items-center space-x-4">
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                    <input type="checkbox" asp-for="Travelogue.IsHome" class="w-4 h-4 rounded text-brand border-gray-300 focus:ring-brand" />
+                    <span class="text-sm text-gray-600 group-hover:text-brand">显示网站首页</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- 12. 提交 -->
+        <div class="flex items-center space-x-6 pt-10 border-t border-gray-50">
+            <div class="w-24"></div>
+            <div class="flex space-x-4">
+                <button type="submit" class="px-10 py-2.5 bg-brand text-white rounded shadow-sm hover:shadow-md transition-all text-sm font-bold">提交</button>
+                <button type="reset" class="px-10 py-2.5 bg-gray-100 text-gray-600 rounded hover:bg-gray-200 transition-all text-sm font-bold">重置</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<style>
+    textarea { resize: none; }
+    input[type="text"]:focus, textarea:focus { outline: none; border-color: #f3c091; }
+    [x-cloak] { display: none !important; }
+</style>

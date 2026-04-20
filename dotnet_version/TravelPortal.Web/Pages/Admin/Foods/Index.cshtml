@@ -1,0 +1,114 @@
+@page
+@model TravelPortal.Web.Pages.Admin.Foods.IndexModel
+@{
+    ViewData["Title"] = "特色美食";
+}
+
+<div class="space-y-6">
+    <!-- 1. 标题与选项卡 -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="px-8 py-4 border-b border-gray-50 flex items-center justify-between">
+            <h1 class="text-lg font-bold text-gray-800">特色美食</h1>
+        </div>
+        <div class="flex border-b border-gray-50 bg-gray-50/30">
+            <a asp-page="Index" class="px-8 py-4 text-sm font-bold border-t-2 border-brand bg-white text-brand transition-all">美食列表</a>
+            <a asp-page="Create" class="px-8 py-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">添加美食</a>
+        </div>
+
+        <!-- 2. 操作与筛选栏 -->
+        <form method="get" class="p-6 flex flex-wrap items-center justify-between gap-4 bg-white">
+            <div class="flex items-center space-x-2">
+                <button type="submit" asp-page-handler="ToggleSticky" formmethod="post" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">置顶</button>
+                <button type="button" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">编辑</button>
+                <button type="submit" asp-page-handler="Delete" formmethod="post" onclick="return confirm('确定删除选中项吗？')" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">删除</button>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <select asp-for="PlaceId" asp-items="Model.PlaceList" class="px-3 py-1.5 bg-gray-50 border-gray-100 rounded-lg text-xs focus:ring-1 focus:ring-brand/20">
+                    <option value="">全部城镇</option>
+                </select>
+                
+                <div class="relative">
+                    <input type="text" asp-for="Keyword" placeholder="美食名称关键字" class="pl-4 pr-10 py-1.5 bg-gray-50 border-gray-100 rounded-lg text-xs w-48 focus:ring-1 focus:ring-brand/20" />
+                    <button type="submit" class="absolute right-2 top-1.5 text-gray-400 hover:text-brand transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+                
+                <button type="submit" class="px-6 py-1.5 bg-brand text-white rounded-lg text-xs font-bold shadow-lg shadow-brand/20 hover:scale-105 transition-all">查询</button>
+            </div>
+        </form>
+
+        <!-- 3. 数据列表 -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+                <thead class="bg-gray-50/50 text-gray-400 font-bold uppercase tracking-wider text-[10px]">
+                    <tr>
+                        <th class="px-8 py-4 w-12"><input type="checkbox" id="selectAll" class="rounded text-brand border-gray-200" /></th>
+                        <th class="px-6 py-4">产品名称</th>
+                        <th class="px-6 py-4 w-32">关联城镇</th>
+                        <th class="px-6 py-4 w-24 text-center">人均/价格</th>
+                        <th class="px-6 py-4 w-24 text-center">浏览量</th>
+                        <th class="px-8 py-4 w-40 text-right">添加日期</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    @if (Model.FoodList.Any())
+                    {
+                        foreach (var item in Model.FoodList)
+                        {
+                            <tr class="hover:bg-gray-50/50 transition-colors group">
+                                <td class="px-8 py-4"><input type="checkbox" name="ids" value="@item.Id" class="rounded text-brand border-gray-200" /></td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-gray-700 font-medium group-hover:text-brand transition-colors">@item.Title</span>
+                                        @if (item.IsSticky)
+                                        {
+                                            <span class="px-2 py-0.5 bg-red-50 text-red-500 text-[10px] font-bold rounded">置顶</span>
+                                        }
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-xs text-gray-500">
+                                    @Model.PlaceList.FirstOrDefault(p => p.Value == item.PlaceId?.ToString())?.Text
+                                </td>
+                                <td class="px-6 py-4 text-center text-gray-600 font-mono">
+                                    @(item.Price.HasValue ? $"¥{item.Price:F2}" : "--")
+                                </td>
+                                <td class="px-6 py-4 text-center text-gray-400 font-mono">@item.Views</td>
+                                <td class="px-8 py-4 text-right text-xs text-gray-400 font-mono">
+                                    @item.CreatedAt.ToString("yyyy-MM-dd")
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="px-8 py-20 text-center text-gray-400">
+                                <div class="flex flex-col items-center">
+                                    <svg class="w-12 h-12 mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.703 2.703 0 01-3 0 2.703 2.703 0 01-3 0 2.703 2.703 0 01-3 0 2.701 2.701 0 01-1.5-.454M9 16v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2m9-2.333a2 2 0 012-2h1.833M12 12V6a2 2 0 012-2h3.28m2.72 6.447l.32-2.133a2 2 0 00-1.28-2.18l-4.47-1.49a2 2 0 00-2.58 1.94V12"/></svg>
+                                    暂无美食数据
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 4. 分页 -->
+        <div class="p-8 flex items-center justify-center space-x-4 border-t border-gray-50 bg-gray-50/10">
+             <span class="text-xs text-gray-400">共 @Model.FoodList.Count 条记录</span>
+             <div class="flex space-x-2">
+                 <span class="w-8 h-8 flex items-center justify-center rounded bg-brand text-white text-xs font-bold shadow-md shadow-brand/20">1</span>
+             </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('input[name="ids"]');
+        checkboxes.forEach(cb => cb.checked = this.checked);
+    });
+</script>
