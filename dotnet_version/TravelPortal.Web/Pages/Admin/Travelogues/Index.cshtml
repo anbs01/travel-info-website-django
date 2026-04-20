@@ -54,8 +54,9 @@
                     <tr>
                         <th class="px-8 py-4 w-12"><input type="checkbox" id="selectAll" class="rounded text-brand border-gray-200" /></th>
                         <th class="px-6 py-4">标题</th>
-                        <th class="px-6 py-4 w-32 text-center">浏览</th>
-                        <th class="px-8 py-4 w-48 text-right">添加日期</th>
+                        <th class="px-6 py-4 w-24 text-center">浏览</th>
+                        <th class="px-8 py-4 w-40 text-center">添加日期</th>
+                        <th class="px-8 py-4 w-32 text-right">操作</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
@@ -68,17 +69,29 @@
                                     <span class="text-gray-700 font-medium group-hover:text-brand transition-colors">@item.Title</span>
                                     @if (item.IsSticky)
                                     {
-                                        <span class="text-[10px] text-red-500 font-bold">已置顶</span>
+                                        <span class="px-2 py-0.5 bg-red-50 text-[10px] text-red-500 font-bold rounded">已置顶</span>
                                     }
                                     @if (item.IsHidden)
                                     {
-                                        <span class="text-[10px] text-red-400 font-bold">已屏蔽</span>
+                                        <span class="px-2 py-0.5 bg-gray-50 text-[10px] text-gray-400 font-bold rounded">已屏蔽</span>
                                     }
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-center text-gray-400 font-mono">@item.Views</td>
-                            <td class="px-8 py-4 text-right text-xs text-gray-400 font-mono">
-                                @item.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+                            <td class="px-8 py-4 text-center text-xs text-gray-400 font-mono">
+                                @item.CreatedAt.ToString("yyyy-MM-dd")
+                            </td>
+                            <td class="px-8 py-4 text-right">
+                                <div class="flex items-center justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <a asp-page="./Edit" asp-route-id="@item.Id" class="p-1.5 text-gray-400 hover:text-brand hover:bg-brand/5 rounded-lg transition-all" title="编辑">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                    </a>
+                                    <button type="submit" asp-page-handler="Delete" asp-route-ids="@item.Id" 
+                                            onclick="return confirm('确定删除该作品吗？')"
+                                            class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all" title="删除">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     }

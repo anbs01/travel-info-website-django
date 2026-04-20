@@ -1,30 +1,40 @@
-@page
-@model TravelPortal.Web.Pages.Admin.News.CreateModel
+@page "{id:int}"
+@model TravelPortal.Web.Pages.Admin.News.EditModel
 @{
-    ViewData["Title"] = "发布资讯";
+    ViewData["Title"] = "编辑资讯";
 }
 
 <div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-20" 
-     x-data="{ imageUrl: '' }">
+     x-data="{ imageUrl: '@Model.News.MainImage' }">
     
     <partial name="_TinyMCE" model='new { Selector = "#editor", Height = 600 }' />
 
     <!-- 头部 -->
-    <div class="px-10 py-6 border-b border-gray-50 bg-gray-50/50">
-        <h1 class="text-xl font-bold text-gray-800">发布资讯</h1>
-        <div class="flex space-x-4 mt-2 text-xs text-gray-400">
-            <span>行业资讯</span>
-            <span>&gt;</span>
-            <span class="text-brand font-bold">发布文章</span>
+    <div class="px-10 py-6 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
+        <div>
+            <h1 class="text-xl font-bold text-gray-800">编辑资讯</h1>
+            <div class="flex space-x-4 mt-2 text-xs text-gray-400">
+                <span>行业资讯</span>
+                <span>&gt;</span>
+                <span class="text-brand font-bold">@Model.News.Title</span>
+            </div>
         </div>
+        <a asp-page="./Index" class="text-gray-400 hover:text-gray-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+        </a>
     </div>
 
     <form method="post" enctype="multipart/form-data" class="p-10 space-y-10">
+        <input type="hidden" asp-for="News.Id" />
+        <input type="hidden" asp-for="News.MainImage" />
+        <input type="hidden" asp-for="News.CreatedAt" />
+        <input type="hidden" asp-for="News.IsSticky" />
+        <input type="hidden" asp-for="News.IsHidden" />
         
         <!-- 1. 文章标题 -->
         <div class="flex items-start space-x-6">
             <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>文章标题</label>
-            <div class="flex-1 space-y-2">
+            <div class="flex-1">
                 <input type="text" asp-for="News.Title" placeholder="请输入资讯标题..." 
                        class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl text-lg font-bold focus:ring-2 focus:ring-brand/20 transition-all" required />
             </div>
@@ -41,16 +51,12 @@
                         <span class="text-sm text-gray-600 group-hover:text-brand">@cat.Name</span>
                     </label>
                 }
-                @if (!Model.NewsCategories.Any())
-                {
-                    <span class="text-xs text-gray-400 italic">请先在“综合管理 > 类别热词”中添加勾选了“资讯类别”的词条</span>
-                }
             </div>
         </div>
 
         <!-- 3. 上传焦点图 -->
         <div class="flex items-start space-x-6">
-            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right">焦点图</label>
+            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right">更换焦点图</label>
             <div class="flex-1">
                 <div class="relative w-full aspect-[21/9] rounded-3xl overflow-hidden bg-gray-50 border-2 border-dashed border-gray-200 group hover:border-brand/30 transition-all cursor-pointer"
                      @@click="$refs.fileInput.click()">
@@ -61,12 +67,11 @@
                     <template x-if="!imageUrl">
                         <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-300">
                             <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            <span class="text-sm font-medium">点击上传文章焦点图</span>
                         </div>
                     </template>
                     <!-- 蒙层 -->
                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <span class="px-6 py-2 bg-white rounded-full text-sm font-bold text-gray-800">选择图片</span>
+                        <span class="px-6 py-2 bg-white rounded-full text-sm font-bold text-gray-800">更换图片</span>
                     </div>
                     <input type="file" asp-for="MainImageFile" x-ref="fileInput" class="hidden" 
                            x-on:change="if($event.target.files[0]) imageUrl = URL.createObjectURL($event.target.files[0])" />
@@ -85,8 +90,8 @@
         <!-- 5. 文章概述 -->
         <div class="flex items-start space-x-6">
             <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right">文章概述</label>
-            <div class="flex-1 space-y-2">
-                <textarea asp-for="News.Excerpt" rows="3" placeholder="请输入文章概述（120字以内），若不填写将自动从正文截取..."
+            <div class="flex-1">
+                <textarea asp-for="News.Excerpt" rows="3" placeholder="请输入文章概述..."
                           class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-brand/20 transition-all"></textarea>
             </div>
         </div>
@@ -105,9 +110,9 @@
 
         <!-- 7. 提交 -->
         <div class="pt-10 border-t border-gray-50 flex items-center justify-end space-x-4">
-            <a asp-page="./Index" class="px-10 py-4 rounded-2xl text-sm font-bold text-gray-400 hover:bg-gray-50 transition-all">返回列表</a>
+            <a asp-page="./Index" class="px-10 py-4 rounded-2xl text-sm font-bold text-gray-400 hover:bg-gray-50 transition-all">取消修改</a>
             <button type="submit" class="px-12 py-4 bg-brand text-white rounded-2xl text-sm font-bold shadow-xl shadow-brand/20 hover:scale-105 active:scale-95 transition-all">
-                立即发布
+                保存修改
             </button>
         </div>
     </form>

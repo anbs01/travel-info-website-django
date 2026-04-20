@@ -22,6 +22,8 @@ namespace TravelPortal.Web.Pages.Admin.News
         [BindProperty(SupportsGet = true)]
         public string? Category { get; set; }
 
+        public List<HotWord> NewsCategories { get; set; } = new();
+
         public void OnGet()
         {
             var query = _db.Queryable<Models.News>();
@@ -39,6 +41,12 @@ namespace TravelPortal.Web.Pages.Admin.News
             NewsList = query.OrderByDescending(n => n.IsSticky)
                             .OrderByDescending(n => n.CreatedAt)
                             .ToList();
+
+            // 加载分类供筛选
+            NewsCategories = _db.Queryable<HotWord>()
+                .Where(h => h.ShowInNews && !h.IsHidden)
+                .OrderBy(h => h.SortOrder)
+                .ToList();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int[] ids)

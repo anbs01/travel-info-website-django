@@ -1,5 +1,6 @@
 using SqlSugar;
 using TravelPortal.Web.Models;
+using TravelPortal.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddScoped<ISqlSugarClient>(s =>
     });
 });
 
+builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -40,7 +42,8 @@ if (app.Environment.IsDevelopment())
                 typeof(Travelogue),
                 typeof(News),
                 typeof(SiteInfo),
-                typeof(HotWord)
+                typeof(HotWord),
+                typeof(Recommendation)
             );
             Console.WriteLine("✅ [Root Mode] 数据库初始化成功！");
         }

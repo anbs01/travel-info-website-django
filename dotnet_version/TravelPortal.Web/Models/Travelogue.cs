@@ -12,6 +12,11 @@ public class Travelogue : BaseContent
     /// 所属城镇 ID
     /// </summary>
     public int? PlaceId { get; set; }
+    
+    /// <summary>
+    /// 所属大区 ID (如：烟台)
+    /// </summary>
+    public int? RegionId { get; set; }
 
     /// <summary>
     /// 发布类型（travelogue:纪行 / guide:攻略）

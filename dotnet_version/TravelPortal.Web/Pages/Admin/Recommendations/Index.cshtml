@@ -1,0 +1,222 @@
+@page
+@model TravelPortal.Web.Pages.Admin.Recommendations.IndexModel
+@{
+    ViewData["Title"] = "首页推荐";
+}
+
+<div x-data="{ 
+    showEditModal: false, 
+    showPinModal: false,
+    editingItem: { id: 0, title: '', imageUrl: '', linkUrl: '', endDate: '' },
+    pinItem: { id: 0, isPinned: false },
+    openEdit(item) {
+        if (item) {
+            // 兼容 PascalCase 和 camelCase
+            this.editingItem = {
+                id: item.id || item.Id || 0,
+                title: item.title || item.Title || '',
+                imageUrl: item.imageUrl || item.ImageUrl || '',
+                linkUrl: item.linkUrl || item.LinkUrl || '',
+                endDate: item.endDate || item.EndDate || ''
+            };
+            // 格式化日期以适配 datetime-local (YYYY-MM-DDTHH:mm)
+            if (this.editingItem.endDate) {
+                this.editingItem.endDate = this.editingItem.endDate.substring(0, 16).replace(' ', 'T');
+            }
+        } else {
+            this.editingItem = { id: 0, title: '', imageUrl: '', linkUrl: '', endDate: '' };
+        }
+        this.showEditModal = true;
+    },
+    openPin(id, isPinned) {
+        this.pinItem = { id, isPinned };
+        this.showPinModal = true;
+    }
+}" class="space-y-6">
+
+    <!-- 1. 顶部操作区 -->
+    <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+            <button class="px-4 py-1.5 bg-[#A67C52] text-white text-xs rounded hover:opacity-90 transition-all">置顶</button>
+            <button class="px-4 py-1.5 bg-[#A67C52] text-white text-xs rounded hover:opacity-90 transition-all">编辑</button>
+            <button class="px-4 py-1.5 bg-[#A67C52] text-white text-xs rounded hover:opacity-90 transition-all">删除</button>
+            
+            <select asp-for="StatusFilter" onchange="this.form.submit()" class="ml-4 px-3 py-1.5 bg-white border border-gray-200 rounded text-xs focus:ring-1 focus:ring-brand/20 outline-none">
+                <option value="">显示状态</option>
+                <option value="Showing">正显示</option>
+                <option value="Expired">已到期</option>
+            </select>
+            <span class="text-xs text-gray-500 ml-2">设置推荐</span>
+        </div>
+        <button @@click="openEdit(null)" class="px-6 py-2 bg-brand text-white rounded-lg text-xs font-bold shadow-lg shadow-brand/20 hover:scale-105 active:scale-95 transition-all">
+            推荐设置
+        </button>
+    </div>
+
+    <!-- 2. 数据列表 -->
+    <div class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm">
+        <table class="w-full text-left text-sm border-collapse">
+            <thead class="bg-[#F3EBE3] text-gray-700 font-bold">
+                <tr>
+                    <th class="px-6 py-4 w-12 border-b border-gray-200 text-center"><input type="checkbox" class="rounded text-brand border-gray-300" /></th>
+                    <th class="px-6 py-4 border-b border-gray-200">焦点图</th>
+                    <th class="px-6 py-4 border-b border-gray-200">标题</th>
+                    <th class="px-6 py-4 border-b border-gray-200 text-center">状态</th>
+                    <th class="px-6 py-4 border-b border-gray-200 text-center">点击数</th>
+                    <th class="px-6 py-4 border-b border-gray-200">添加日期</th>
+                    <th class="px-6 py-4 border-b border-gray-200">结束日期</th>
+                    <th class="px-6 py-4 border-b border-gray-200 text-right">操作</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+                @foreach (var item in Model.Recommendations.Items)
+                {
+                    <tr class="hover:bg-gray-50/50 transition-colors group">
+                        <td class="px-6 py-4 text-center"><input type="checkbox" class="rounded text-brand border-gray-300" /></td>
+                        <td class="px-6 py-4 w-40">
+                            @if (!string.IsNullOrEmpty(item.ImageUrl))
+                            {
+                                <a href="@item.LinkUrl" target="_blank" class="block w-32 h-20 rounded-lg overflow-hidden border border-gray-100 hover:ring-2 hover:ring-brand transition-all">
+                                    <img src="@item.ImageUrl" class="w-full h-full object-cover" />
+                                </a>
+                            }
+                            else
+                            {
+                                <div class="w-32 h-20 bg-gray-50 rounded-lg border border-dashed border-gray-200 flex items-center justify-center text-[10px] text-gray-400">
+                                    纯文字推荐
+                                </div>
+                            }
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-col space-y-1">
+                                <a href="@item.LinkUrl" target="_blank" class="font-medium text-gray-800 hover:text-brand transition-colors">
+                                    @item.Title
+                                    @if (item.IsPinned)
+                                    {
+                                        <span class="text-red-500 ml-1">(已置顶)</span>
+                                    }
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            @if (item.Status == "已到期")
+                            {
+                                <span class="text-red-500 font-bold">已到期</span>
+                            }
+                            else
+                            {
+                                <span class="text-gray-700">正显示</span>
+                            }
+                        </td>
+                        <td class="px-6 py-4 text-center text-gray-500 font-mono">@item.ClickCount</td>
+                        <td class="px-6 py-4 text-xs text-gray-400 font-mono">@item.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td class="px-6 py-4 text-xs text-gray-400 font-mono text-center">
+                            @(item.EndDate?.ToString("yyyy-MM-dd HH:mm") ?? "——")
+                        </td>
+                        <td class="px-6 py-4 text-right space-x-2">
+                            <button @@click='openEdit(@Json.Serialize(item))' class="text-brand hover:underline font-bold text-xs">编辑</button>
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@item.Id" class="inline" onsubmit="return confirm('确定删除吗？')">
+                                <button type="submit" class="text-red-400 hover:text-red-600 font-bold text-xs">删除</button>
+                            </form>
+                            <button @@click="openPin(@item.Id, @item.IsPinned.ToString().ToLower())" class="text-gray-400 hover:text-gray-600 font-bold text-xs">置顶</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- 分页组件 -->
+        <partial name="_Pagination" model="Model.Recommendations.Metadata" />
+    </div>
+
+    <!-- 3. 底部规则说明 -->
+    <div class="p-6 space-y-2">
+        <p class="text-xs text-red-500">1.图片和标题都加上前台链接地址</p>
+        <p class="text-xs text-red-500">2.置顶的显示在最前，同时在前台显示在最前</p>
+        <p class="text-xs text-red-500">3.已到期的未操作删除，也不显示在前端</p>
+    </div>
+
+    <!-- 4. 置顶弹窗 (Pin Modal) -->
+    <div x-show="showPinModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-[2px]" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+        <div @@click.away="showPinModal = false" class="bg-white rounded-2xl w-full max-w-sm shadow-2xl border border-gray-100 overflow-hidden transform transition-all" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+            <div class="px-6 py-4 bg-[#F3EBE3] flex items-center justify-between">
+                <h3 class="font-bold text-gray-800">置顶</h3>
+                <button @@click="showPinModal = false" class="text-gray-400 hover:text-gray-600 transition-colors">&times;</button>
+            </div>
+            <form method="post" asp-page-handler="TogglePin" class="p-8 flex flex-col items-center space-y-6">
+                <input type="hidden" name="id" :value="pinItem.id" />
+                <label class="flex items-center space-x-3 cursor-pointer">
+                    <input type="checkbox" name="isPinned" :checked="pinItem.isPinned" value="true" class="w-5 h-5 rounded text-brand border-gray-300 focus:ring-brand" />
+                    <span class="text-sm font-bold text-gray-700">置顶</span>
+                </label>
+                <button type="submit" class="w-32 py-2 bg-[#F3EBE3] border border-[#D9C7B5] text-gray-700 rounded font-bold hover:bg-[#EBDDCF] transition-all">提交</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 5. 推荐设置弹窗 (Edit/Create Modal) -->
+    <div x-show="showEditModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-[2px]" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+        <div @@click.away="showEditModal = false" class="bg-white rounded-2xl w-full max-w-lg shadow-2xl border border-gray-100 overflow-hidden transform transition-all" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+            <div class="px-6 py-4 bg-[#F3EBE3] flex items-center justify-between">
+                <h3 class="font-bold text-gray-800 text-sm">推荐设置</h3>
+                <button @@click="showEditModal = false" class="text-gray-400 hover:text-gray-600 transition-colors">&times;</button>
+            </div>
+            <form method="post" asp-page-handler="Save" enctype="multipart/form-data" class="p-8 space-y-6">
+                <input type="hidden" asp-for="RecommendationForm.Id" :value="editingItem.id" />
+                
+                <div class="flex items-center">
+                    <label class="w-20 text-xs font-bold text-gray-700"><span class="text-red-500 mr-1">*</span>标 题</label>
+                    <input asp-for="RecommendationForm.Title" :value="editingItem.title" class="flex-1 px-4 py-2 border border-gray-200 rounded focus:ring-1 focus:ring-brand/20 outline-none text-xs" required />
+                </div>
+
+                <div class="flex items-start">
+                    <label class="w-20 pt-2 text-xs font-bold text-gray-700">焦点图</label>
+                    <div class="flex-1 space-y-2">
+                        <div @@click="$refs.fileInput.click()" class="relative w-48 h-28 bg-gray-50 border border-dashed border-gray-200 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 transition-all text-gray-400 overflow-hidden">
+                            <template x-if="editingItem.imageUrl">
+                                <img :src="editingItem.imageUrl" class="absolute inset-0 w-full h-full object-cover" />
+                            </template>
+                            <template x-if="!editingItem.imageUrl">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-xs">点击上传</span>
+                                    <span class="text-lg">+</span>
+                                </div>
+                            </template>
+                            <!-- 悬浮覆盖层 -->
+                            <div class="absolute inset-0 bg-black/0 hover:bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-all">
+                                <span class="text-white text-[10px] font-bold">更换图片</span>
+                            </div>
+                        </div>
+                        <input type="file" asp-for="ImageFile" x-ref="fileInput" class="hidden" accept="image/*" 
+                               x-on:change="const file = $event.target.files[0]; if (file) { editingItem.imageUrl = URL.createObjectURL(file); }" />
+                        
+                        <p class="text-[10px] text-red-500">不上传图片，默认为文字推荐</p>
+                        <input type="hidden" asp-for="RecommendationForm.ImageUrl" :value="editingItem.imageUrl" />
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <label class="w-20 text-xs font-bold text-gray-700"><span class="text-red-500 mr-1">*</span>链接地址</label>
+                    <input asp-for="RecommendationForm.LinkUrl" :value="editingItem.linkUrl" class="flex-1 px-4 py-2 border border-gray-200 rounded focus:ring-1 focus:ring-brand/20 outline-none text-xs" placeholder="https://" required />
+                </div>
+
+                <div class="flex items-center">
+                    <label class="w-20 text-xs font-bold text-gray-700">结束日期</label>
+                    <div class="flex-1 flex items-center space-x-4">
+                        <input type="datetime-local" asp-for="RecommendationForm.EndDate" :value="editingItem.endDate" class="px-4 py-2 border border-gray-200 rounded focus:ring-1 focus:ring-brand/20 outline-none text-xs" />
+                        <span class="text-[10px] text-gray-500">不输入表示一直有效</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-center pt-4">
+                    <button type="submit" class="w-32 py-2 bg-[#F3EBE3] border border-[#D9C7B5] text-gray-700 rounded font-bold hover:bg-[#EBDDCF] transition-all">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    [x-cloak] { display: none !important; }
+</style>

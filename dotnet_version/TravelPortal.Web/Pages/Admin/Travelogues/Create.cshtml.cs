@@ -1,24 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 using SqlSugar;
 using TravelPortal.Web.Models;
+using TravelPortal.Web.Services;
 
 namespace TravelPortal.Web.Pages.Admin.Travelogues
 {
     public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     {
         private readonly ISqlSugarClient _db;
+        private readonly IUploadService _uploadService;
 
-        public CreateModel(ISqlSugarClient db)
+        public CreateModel(ISqlSugarClient db, IUploadService uploadService)
         {
             _db = db;
+            _uploadService = uploadService;
         }
 
         [BindProperty]
         public Travelogue Travelogue { get; set; } = new();
 
         public SelectList PlaceList { get; set; } = default!;
+        public SelectList RegionList { get; set; } = default!;
 
         // 动态加载的热词列表
         public List<HotWord> TravelogueCategories { get; set; } = new();
@@ -26,6 +31,9 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
 
         [BindProperty]
         public string[] SelectedTags { get; set; } = Array.Empty<string>();
+
+        [BindProperty]
+        public IFormFile? ImageFile { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -47,6 +55,12 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
                 Travelogue.Tags = string.Join(",", SelectedTags);
             }
 
+            // 处理图片上传
+            if (ImageFile != null)
+            {
+                Travelogue.MainImage = await _uploadService.UploadFileAsync(ImageFile, "travelogues");
+            }
+
             Travelogue.Slug = DateTime.Now.ToString("yyyyMMddHHmm");
             await _db.Insertable(Travelogue).ExecuteCommandAsync();
 
@@ -54,11 +68,27 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
             return RedirectToPage("Index");
         }
 
+        /// <summary>
+        /// 编辑器媒体上传接口 (TinyMCE 专用)
+        /// </summary>
+        public async Task<JsonResult> OnPostUploadMediaAsync(IFormFile file)
+        {
+            if (file == null) return new JsonResult(new { error = "No file uploaded" });
+            
+            // 存入 media 子目录
+            var url = await _uploadService.UploadFileAsync(file, "media");
+            return new JsonResult(new { location = url });
+        }
+
         private async Task LoadDataAsync()
         {
             // 加载城镇
             var places = await _db.Queryable<Place>().OrderBy(p => p.Title).ToListAsync();
             PlaceList = new SelectList(places, "Id", "Title");
+
+            // 加载地区
+            var regions = await _db.Queryable<Region>().OrderBy(r => r.Name).ToListAsync();
+            RegionList = new SelectList(regions, "Id", "Name");
 
             // 加载热词分类
             TravelogueCategories = await _db.Queryable<HotWord>()

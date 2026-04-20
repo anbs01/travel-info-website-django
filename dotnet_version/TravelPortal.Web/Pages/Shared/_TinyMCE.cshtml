@@ -1,0 +1,95 @@
+@*
+    TinyMCE 富文本编辑器组件
+    用法: <textarea id="myEditor" name="content"></textarea>
+         <partial name="_TinyMCE" model='new { Selector = "#myEditor", Height = 500 }' />
+*@
+@model dynamic
+
+@{
+    string selector = Model?.Selector ?? "#editor";
+    int height = Model?.Height ?? 600;
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '@selector',
+        language: 'zh-Hans',
+        // 插件配置：添加了自动保存、全屏、预览、字数统计等高级功能
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount code fullscreen help autosave preview',
+        // 工具栏配置：增加了预览、全屏、源码修改等按钮
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align lineheight | ' +
+                 'numlist bullist indent outdent | link image media table | emoticons charmap | removeformat | preview fullscreen code',
+        height: @height,
+        promotion: false,
+        branding: false,
+        image_advtab: true,
+        autosave_ask_before_unload: true, // 离开页面前提示保存
+        autosave_interval: '30s', // 每30秒自动保存草稿到本地
+        // 允许视频/媒体标签
+        extended_valid_elements: 'video[controls|preload|width|height|src|type],source[src|type],iframe[src|width|height|frameborder|allowfullscreen]',
+        
+        // 语言包加载 (恢复为您指出的正确地址)
+        language_url: 'https://cdn.jsdelivr.net/npm/tinymce-i18n@23.10.9/langs6/zh-Hans.js',
+        
+        // 自动上传设置 (统一调用当前页面的 UploadMedia handler)
+        images_upload_url: '?handler=UploadMedia',
+        images_upload_credentials: true,
+        
+        // 自定义文件选择器 (支持视频和图片本地上传)
+        file_picker_callback: function (callback, value, meta) {
+            const input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            
+            // 根据点击的类型限制文件格式
+            if (meta.filetype === 'image') {
+                input.setAttribute('accept', 'image/*');
+            } else if (meta.filetype === 'media') {
+                input.setAttribute('accept', 'video/*,audio/*');
+            }
+
+            input.onchange = function () {
+                const file = this.files[0];
+                const formData = new FormData();
+                formData.append('file', file);
+
+                // 调用页面上的 UploadMedia handler
+                fetch('?handler=UploadMedia', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.location) {
+                        callback(result.location, { title: file.name });
+                    } else {
+                        alert('上传失败: ' + (result.error || '未知错误'));
+                    }
+                })
+                .catch(err => {
+                    console.error('Upload Error:', err);
+                    alert('上传过程中出现错误');
+                });
+            };
+
+            input.click();
+        },
+        
+        setup: function (editor) {
+            editor.on('change', function () {
+                editor.save(); // 自动同步到 textarea
+            });
+        },
+        
+        // 样式美化：让编辑器更贴合管理后台风格
+        content_style: 'body { font-family:Inter,Noto Sans SC,sans-serif; font-size:14px; line-height:1.6; color:#333; } img { max-width:100%; height:auto; border-radius:8px; }'
+    });
+</script>
+
+<style>
+    /* 隐藏 TinyMCE 云端版本可能的警告横幅 (如果还有的话) */
+    .tox-notification--warning, .tox-upgrade { display: none !important; }
+</style>
