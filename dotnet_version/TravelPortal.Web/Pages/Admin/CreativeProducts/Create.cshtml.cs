@@ -5,7 +5,7 @@ using SqlSugar;
 using TravelPortal.Web.Models;
 using TravelPortal.Web.Services;
 
-namespace TravelPortal.Web.Pages.Admin.Foods;
+namespace TravelPortal.Web.Pages.Admin.CreativeProducts;
 
 public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 {
@@ -19,30 +19,23 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     }
 
     [BindProperty]
-    public Food Food { get; set; } = new();
+    public CreativeProduct Product { get; set; } = new();
 
     [BindProperty]
     public IFormFile? MainImageFile { get; set; }
 
-    public List<string> CuisineCategories { get; set; } = new();
-    public List<string> SpecialtyCategories { get; set; } = new();
+    public List<string> Categories { get; set; } = new();
     public SelectList RegionList { get; set; } = null!;
 
     public void OnGet()
     {
         LoadData();
-        Food.Category = "美食"; // 默认选中美食
     }
 
     private void LoadData()
     {
-        CuisineCategories = _db.Queryable<HotWord>()
-            .Where(it => it.ShowInCuisine)
-            .Select(it => it.Name)
-            .ToList();
-
-        SpecialtyCategories = _db.Queryable<HotWord>()
-            .Where(it => it.ShowInSpecialty)
+        Categories = _db.Queryable<HotWord>()
+            .Where(it => it.ShowInCreative)
             .Select(it => it.Name)
             .ToList();
 
@@ -54,24 +47,18 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     {
         if (MainImageFile != null)
         {
-            Food.MainImage = await _uploadService.UploadFileAsync(MainImageFile, "foods");
+            Product.MainImage = await _uploadService.UploadFileAsync(MainImageFile, "creatives");
         }
 
-        // 处理根据分类清除不相关的字段
-        if (Food.Category == "美食")
+        if (Product.IsSticky)
         {
-            Food.SpecialtyCategory = null;
-            Food.SpecialtyLevel = null;
-        }
-        else
-        {
-            Food.Cuisine = null;
+            Product.StickyAt = DateTime.Now;
         }
 
-        Food.CreatedAt = DateTime.Now;
-        Food.UpdatedAt = DateTime.Now;
+        Product.CreatedAt = DateTime.Now;
+        Product.UpdatedAt = DateTime.Now;
 
-        _db.Insertable(Food).ExecuteCommand();
+        _db.Insertable(Product).ExecuteCommand();
 
         return RedirectToPage("./Index");
     }
@@ -79,7 +66,7 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     // TinyMCE 统一上传接口
     public async Task<JsonResult> OnPostUploadMediaAsync(IFormFile file)
     {
-        var url = await _uploadService.UploadFileAsync(file, "foods");
+        var url = await _uploadService.UploadFileAsync(file, "creatives");
         return new JsonResult(new { location = url });
     }
 }

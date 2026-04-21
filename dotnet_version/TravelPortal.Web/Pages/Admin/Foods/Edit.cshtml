@@ -1,18 +1,21 @@
-@page
-@model TravelPortal.Web.Pages.Admin.Foods.CreateModel
+@page "{id:int}"
+@model TravelPortal.Web.Pages.Admin.Foods.EditModel
 @{
-    ViewData["Title"] = "发布特色美食";
+    ViewData["Title"] = "编辑特色美食";
 }
 
-<div class="max-w-5xl mx-auto pb-20" x-data="foodForm()">
+<div class="max-w-5xl mx-auto pb-20" x-data="foodForm('@Model.Food.MainImage')">
     <form method="post" enctype="multipart/form-data" class="space-y-8">
+        <input type="hidden" asp-for="Food.Id" />
+        <input type="hidden" asp-for="Food.MainImage" />
+
         <!-- 1. 基本信息卡片 -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="p-8 space-y-8">
                 <div class="flex items-center justify-between border-b border-gray-50 pb-4">
                     <h1 class="text-xl font-bold text-gray-900 flex items-center">
-                        <span class="w-1.5 h-6 bg-brand rounded-full mr-3"></span>
-                        发布特色美食/特产
+                        <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-3"></span>
+                        编辑特色美食/特产
                     </h1>
                 </div>
 
@@ -21,7 +24,7 @@
                     <div class="md:col-span-2">
                         <label class="block text-sm font-bold text-gray-700 mb-2">产品名称 <span class="text-red-500">*</span></label>
                         <input type="text" asp-for="Food.Title" required placeholder="例如：鲅鱼饺子、海参、红烧狮子头..."
-                               class="w-full px-5 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-lg font-medium">
+                               class="w-full px-5 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-lg font-medium">
                     </div>
 
                     <!-- 选择类别 -->
@@ -32,8 +35,8 @@
                             {
                                 <label class="flex items-center space-x-2 cursor-pointer group">
                                     <input type="radio" asp-for="Food.Category" value="@cat" x-model="category"
-                                           class="w-5 h-5 text-brand border-gray-300 focus:ring-brand transition-all">
-                                    <span class="text-sm font-medium text-gray-600 group-hover:text-brand transition-colors">@cat</span>
+                                           class="w-5 h-5 text-indigo-600 border-gray-300 focus:ring-indigo-500 transition-all">
+                                    <span class="text-sm font-medium text-gray-600 group-hover:text-indigo-600 transition-colors">@cat</span>
                                 </label>
                             }
                             <span class="text-[10px] text-red-400 italic">只能单选，选择美食后才出来下列菜系这一项</span>
@@ -51,10 +54,6 @@
                                            class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                                     <span class="text-sm text-gray-600 group-hover:text-blue-600">@cat</span>
                                 </label>
-                            }
-                            @if (!Model.CuisineCategories.Any())
-                            {
-                                <span class="text-xs text-gray-400 italic">请在“综合管理”中添加“美食菜系”热词</span>
                             }
                         </div>
                     </div>
@@ -116,7 +115,6 @@
                 <div class="rounded-xl overflow-hidden border border-gray-100">
                     <textarea id="editor" asp-for="Food.Content"></textarea>
                 </div>
-                <p class="mt-2 text-xs text-red-400 italic">文章编辑器，要功能全点的，支持上传视频</p>
             </div>
         </div>
 
@@ -127,7 +125,7 @@
                     <!-- 焦点图 -->
                     <div class="space-y-4">
                         <label class="block text-sm font-bold text-gray-700">焦点图</label>
-                        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-50 border-2 border-dashed border-gray-200 group hover:border-brand/30 transition-all cursor-pointer"
+                        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-50 border-2 border-dashed border-gray-200 group hover:border-indigo-300 transition-all cursor-pointer"
                              @@click="$refs.fileInput.click()">
                             <template x-if="imageUrl">
                                 <img :src="imageUrl" class="w-full h-full object-cover" />
@@ -135,24 +133,19 @@
                             <template x-if="!imageUrl">
                                 <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
                                     <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-                                    <span class="text-xs font-medium">上传封面图</span>
+                                    <span class="text-xs font-medium">更换封面图</span>
                                 </div>
                             </template>
                             <input type="file" x-ref="fileInput" name="MainImageFile" class="hidden" @@change="previewImage" accept="image/*">
                         </div>
-                        <p class="text-[10px] text-red-400">是指把正文里的图片显示出来一张适合做焦点图的，也可以另行上传</p>
                     </div>
 
                     <!-- 口味特色 -->
                     <div class="space-y-4">
                         <label class="block text-sm font-bold text-gray-700">口味特色 <span class="text-red-500">*</span></label>
                         <textarea asp-for="Food.TasteFeatures" rows="6" maxlength="120"
-                                  class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm"
-                                  placeholder="请输入口味特色，建议120字以内..."></textarea>
-                        <div class="flex justify-between items-center">
-                             <span class="text-[10px] text-red-400 italic">要求120汉字以内</span>
-                             <span class="text-[10px] text-gray-400" x-text="'还剩 ' + (120 - ($refs.tasteText?.value?.length || 0)) + ' 字'"></span>
-                        </div>
+                                  class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm"
+                                  placeholder="请输入口味特色..."></textarea>
                     </div>
                 </div>
 
@@ -161,77 +154,30 @@
                     <div>
                         <label class="block text-sm font-bold text-gray-700 mb-2">选择地区 <span class="text-red-500">*</span></label>
                         <select asp-for="Food.RegionId" asp-items="Model.RegionList" required
-                                class="w-full px-4 py-2.5 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm">
+                                class="w-full px-4 py-2.5 rounded-xl border-gray-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm">
                             <option value="">-- 请选择关联城镇 --</option>
                         </select>
-                        <p class="mt-1.5 text-[10px] text-red-400 italic">弹窗单选，有做好的弹窗页面</p>
                     </div>
 
                     <!-- 作者/来源 -->
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-2">文章作者</label>
-                            <input type="text" asp-for="Food.Author" class="w-full px-4 py-2.5 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 transition-all text-sm">
+                            <input type="text" asp-for="Food.Author" class="w-full px-4 py-2.5 rounded-xl border-gray-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-2">文章来源</label>
-                            <input type="text" asp-for="Food.Source" class="w-full px-4 py-2.5 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 transition-all text-sm">
+                            <input type="text" asp-for="Food.Source" class="w-full px-4 py-2.5 rounded-xl border-gray-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm">
                         </div>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
-                    <!-- 链接 -->
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">原文链接</label>
-                        <input type="url" asp-for="Food.OriginalUrl" placeholder="https://..."
-                               class="w-full px-4 py-2.5 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 transition-all text-sm">
-                        <p class="mt-1.5 text-[10px] text-red-400 italic">此项不显示在前台，仅为转载后台记录</p>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">跳转链接</label>
-                        <input type="url" asp-for="Food.RedirectUrl" placeholder="不填写则显示默认详情页"
-                               class="w-full px-4 py-2.5 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 transition-all text-sm">
-                        <p class="mt-1.5 text-[10px] text-gray-400 italic">不填表示用默认的</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. 发布设置卡片 -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="p-8 space-y-6">
-                <div class="flex items-center space-x-12">
-                    <!-- 水印 -->
-                    <div class="flex items-center space-x-6">
-                        <label class="flex items-center space-x-2 cursor-pointer group">
-                            <input type="checkbox" asp-for="Food.ShowWatermark" class="w-5 h-5 rounded text-brand border-gray-300 focus:ring-brand transition-all">
-                            <span class="text-sm font-bold text-gray-700">显示图片水印</span>
-                        </label>
-                        <div class="flex items-center space-x-4 ml-4">
-                            @foreach (var pos in new[] { (v:"Center", n:"中正"), (v:"Bottom", n:"中下"), (v:"BottomRight", n:"右下") })
-                            {
-                                <label class="flex items-center space-x-1.5 cursor-pointer">
-                                    <input type="radio" asp-for="Food.WatermarkPos" value="@pos.v" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand">
-                                    <span class="text-xs text-gray-500">@pos.n</span>
-                                </label>
-                            }
-                        </div>
-                    </div>
-                    <!-- 首页显示 -->
-                    <label class="flex items-center space-x-2 cursor-pointer group">
-                        <input type="checkbox" asp-for="Food.IsHome" class="w-5 h-5 rounded text-brand border-gray-300 focus:ring-brand transition-all">
-                        <span class="text-sm font-bold text-gray-700">显示网站首页</span>
-                    </label>
-                </div>
-                <p class="text-[10px] text-red-400 italic">指详情页里的图片，在前台显示时，是否显示网站的水印</p>
             </div>
         </div>
 
         <!-- 5. 底部按钮 -->
         <div class="flex items-center justify-center space-x-6">
-            <button type="submit" class="px-12 py-4 bg-brand text-white rounded-2xl font-bold shadow-xl shadow-brand/30 hover:scale-105 active:scale-95 transition-all">确认发布产品</button>
-            <button type="reset" class="px-12 py-4 bg-gray-100 text-gray-400 rounded-2xl font-bold hover:bg-gray-200 transition-all">重置信息</button>
+            <button type="submit" class="px-12 py-4 bg-indigo-600 text-white rounded-2xl font-bold shadow-xl shadow-indigo-600/30 hover:scale-105 active:scale-95 transition-all">保存修改</button>
+            <a asp-page="./Index" class="px-12 py-4 bg-gray-100 text-gray-400 rounded-2xl font-bold hover:bg-gray-200 transition-all text-center">返回列表</a>
         </div>
     </form>
 </div>
@@ -240,10 +186,10 @@
 
 @section Scripts {
 <script>
-    function foodForm() {
+    function foodForm(initialImage) {
         return {
-            category: '美食',
-            imageUrl: '',
+            category: '@Model.Food.Category' || '美食',
+            imageUrl: initialImage || '',
             previewImage(e) {
                 const file = e.target.files[0];
                 if (file) {

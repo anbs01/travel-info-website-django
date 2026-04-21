@@ -43,7 +43,8 @@ if (app.Environment.IsDevelopment())
                 typeof(News),
                 typeof(SiteInfo),
                 typeof(HotWord),
-                typeof(Recommendation)
+                typeof(Recommendation),
+                typeof(CreativeProduct)
             );
             Console.WriteLine("✅ [Root Mode] 数据库初始化成功！");
         }

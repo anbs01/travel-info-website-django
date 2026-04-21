@@ -11,37 +11,49 @@ public class Food : BaseContent
     /// <summary>
     /// 产品分类（美食 / 特产）
     /// </summary>
-    [SugarColumn(Length = 50, IsNullable = true)]
-    public string? Category { get; set; }
+    [SugarColumn(Length = 50)]
+    public string Category { get; set; } = "美食";
 
     /// <summary>
-    /// 美食菜系（从热词中显示）
+    /// 美食菜系
     /// </summary>
     [SugarColumn(Length = 100, IsNullable = true)]
     public string? Cuisine { get; set; }
 
     /// <summary>
-    /// 特产分类（从特产数据中显示）
+    /// 特产分类
     /// </summary>
     [SugarColumn(Length = 100, IsNullable = true)]
     public string? SpecialtyCategory { get; set; }
 
     /// <summary>
-    /// 特产级别（无公害产品、绿色产品、有机产品、地理标志产品）
+    /// 特产级别
     /// </summary>
     [SugarColumn(Length = 100, IsNullable = true)]
     public string? SpecialtyLevel { get; set; }
 
     /// <summary>
-    /// 非遗级别（国际家非遗、省级非遗、市级非遗、县级非遗）
+    /// 非遗级别
     /// </summary>
     [SugarColumn(Length = 100, IsNullable = true)]
-    public string? IntangibleHeritageLevel { get; set; }
+    public string? HeritageLevel { get; set; }
 
     /// <summary>
-    /// 所属城镇 ID
+    /// 口味特色（120字以内）
     /// </summary>
-    public int? PlaceId { get; set; }
+    [SugarColumn(Length = 500, IsNullable = true)]
+    public string? TasteFeatures { get; set; }
+
+    /// <summary>
+    /// 关联地区 ID
+    /// </summary>
+    public int? RegionId { get; set; }
+
+    /// <summary>
+    /// 原文链接
+    /// </summary>
+    [SugarColumn(Length = 500, IsNullable = true)]
+    public string? OriginalUrl { get; set; }
 
     /// <summary>
     /// 详细介绍内容
@@ -50,8 +62,8 @@ public class Food : BaseContent
     public string Content { get; set; } = string.Empty;
 
     /// <summary>
-    /// 价格 / 参考人均
+    /// 关联地区（仅用于展示，不映射到数据库）
     /// </summary>
-    [SugarColumn(DecimalDigits = 2)]
-    public decimal? Price { get; set; }
+    [SugarColumn(IsIgnore = true)]
+    public Region? Region { get; set; }
 }

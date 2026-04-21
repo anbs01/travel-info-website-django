@@ -4,69 +4,89 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SqlSugar;
 using TravelPortal.Web.Models;
 
-namespace TravelPortal.Web.Pages.Admin.Foods
+namespace TravelPortal.Web.Pages.Admin.Foods;
+
+public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 {
-    public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
+    private readonly ISqlSugarClient _db;
+
+    public IndexModel(ISqlSugarClient db)
     {
-        private readonly ISqlSugarClient _db;
+        _db = db;
+    }
 
-        public IndexModel(ISqlSugarClient db)
-        {
-            _db = db;
-        }
+    public PaginatedList<Food> FoodList { get; set; } = null!;
+    
+    [BindProperty(SupportsGet = true)]
+    public string? Keyword { get; set; }
 
-        public List<Models.Food> FoodList { get; set; } = new();
-        public SelectList PlaceList { get; set; } = null!;
+    [BindProperty(SupportsGet = true)]
+    public string? Category { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public string? Keyword { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public string? SpecialtyCategory { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public int? PlaceId { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public int? RegionId { get; set; }
 
-        public void OnGet()
-        {
-            var places = _db.Queryable<Place>().ToList();
-            PlaceList = new SelectList(places, "Id", "Title");
+    [BindProperty(SupportsGet = true)]
+    public int PageIndex { get; set; } = 1;
 
-            var query = _db.Queryable<Models.Food>();
+    public List<string> SpecialtyCategories { get; set; } = new();
 
-            if (!string.IsNullOrEmpty(Keyword))
+    public void OnGet()
+    {
+        SpecialtyCategories = _db.Queryable<HotWord>()
+            .Where(it => it.ShowInSpecialty)
+            .Select(it => it.Name)
+            .ToList();
+
+        var query = _db.Queryable<Food>()
+            .LeftJoin<Region>((f, r) => f.RegionId == r.Id)
+            .WhereIF(!string.IsNullOrEmpty(Keyword), f => f.Title.Contains(Keyword!))
+            .WhereIF(!string.IsNullOrEmpty(Category), f => f.Category == Category)
+            .WhereIF(!string.IsNullOrEmpty(SpecialtyCategory), f => f.SpecialtyCategory == SpecialtyCategory)
+            .OrderByDescending(f => f.IsSticky)
+            .OrderByDescending(f => f.CreatedAt)
+            .Select((f, r) => new Food
             {
-                query = query.Where(f => f.Title.Contains(Keyword));
-            }
+                Id = f.Id,
+                Title = f.Title,
+                Category = f.Category,
+                Views = f.Views,
+                IsSticky = f.IsSticky,
+                IsHidden = f.IsHidden,
+                CreatedAt = f.CreatedAt,
+                Region = new Region { Name = r.Name }
+            });
 
-            if (PlaceId.HasValue)
-            {
-                query = query.Where(f => f.PlaceId == PlaceId);
-            }
+        int totalCount = 0;
+        var items = query.ToPageList(PageIndex, 10, ref totalCount);
 
-            FoodList = query.OrderByDescending(f => f.IsSticky)
-                            .OrderByDescending(f => f.CreatedAt)
-                            .ToList();
-        }
+        FoodList = new PaginatedList<Food>(items, totalCount, PageIndex, 10);
+    }
 
-        public async Task<IActionResult> OnPostDeleteAsync(int[] ids)
+    public IActionResult OnPostDelete(int[] ids)
+    {
+        if (ids != null && ids.Length > 0)
         {
-            if (ids != null && ids.Length > 0)
-            {
-                await _db.Deleteable<Models.Food>().In(ids).ExecuteCommandAsync();
-            }
-            return RedirectToPage();
+            _db.Deleteable<Food>().In(ids).ExecuteCommand();
         }
+        return RedirectToPage();
+    }
 
-        public async Task<IActionResult> OnPostToggleStickyAsync(int[] ids)
+    public IActionResult OnPostToggleSticky(int[] ids)
+    {
+        if (ids != null && ids.Length > 0)
         {
-            if (ids != null && ids.Length > 0)
+            var items = _db.Queryable<Food>().In(ids).ToList();
+            foreach (var item in items)
             {
-                var list = await _db.Queryable<Models.Food>().In(ids).ToListAsync();
-                foreach (var item in list)
-                {
-                    item.IsSticky = !item.IsSticky;
-                    await _db.Updateable(item).UpdateColumns(f => f.IsSticky).ExecuteCommandAsync();
-                }
+                item.IsSticky = !item.IsSticky;
+                item.StickyAt = item.IsSticky ? DateTime.Now : null;
+                _db.Updateable(item).UpdateColumns(it => new { it.IsSticky, it.StickyAt }).ExecuteCommand();
             }
-            return RedirectToPage();
         }
+        return RedirectToPage();
     }
 }

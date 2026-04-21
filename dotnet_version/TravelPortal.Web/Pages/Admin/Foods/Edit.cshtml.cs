@@ -7,19 +7,19 @@ using TravelPortal.Web.Services;
 
 namespace TravelPortal.Web.Pages.Admin.Foods;
 
-public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
+public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 {
     private readonly ISqlSugarClient _db;
     private readonly IUploadService _uploadService;
 
-    public CreateModel(ISqlSugarClient db, IUploadService uploadService)
+    public EditModel(ISqlSugarClient db, IUploadService uploadService)
     {
         _db = db;
         _uploadService = uploadService;
     }
 
     [BindProperty]
-    public Food Food { get; set; } = new();
+    public Food Food { get; set; } = null!;
 
     [BindProperty]
     public IFormFile? MainImageFile { get; set; }
@@ -28,10 +28,10 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     public List<string> SpecialtyCategories { get; set; } = new();
     public SelectList RegionList { get; set; } = null!;
 
-    public void OnGet()
+    public void OnGet(int id)
     {
+        Food = _db.Queryable<Food>().InSingle(id);
         LoadData();
-        Food.Category = "美食"; // 默认选中美食
     }
 
     private void LoadData()
@@ -57,7 +57,7 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             Food.MainImage = await _uploadService.UploadFileAsync(MainImageFile, "foods");
         }
 
-        // 处理根据分类清除不相关的字段
+        // 处理逻辑与 Create 一致
         if (Food.Category == "美食")
         {
             Food.SpecialtyCategory = null;
@@ -68,15 +68,13 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             Food.Cuisine = null;
         }
 
-        Food.CreatedAt = DateTime.Now;
         Food.UpdatedAt = DateTime.Now;
 
-        _db.Insertable(Food).ExecuteCommand();
+        _db.Updateable(Food).ExecuteCommand();
 
         return RedirectToPage("./Index");
     }
 
-    // TinyMCE 统一上传接口
     public async Task<JsonResult> OnPostUploadMediaAsync(IFormFile file)
     {
         var url = await _uploadService.UploadFileAsync(file, "foods");
