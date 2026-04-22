@@ -15,9 +15,15 @@ public class CreativeProduct : BaseContent
     public string Category { get; set; } = string.Empty;
 
     /// <summary>
-    /// 关联地区 ID
+    /// 关联地理节点 ID
     /// </summary>
-    public int? RegionId { get; set; }
+    public int? GeoId { get; set; }
+
+    /// <summary>
+    /// 关联地理节点
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public Geo? Geo { get; set; }
 
     /// <summary>
     /// 原文链接

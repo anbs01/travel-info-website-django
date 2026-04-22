@@ -35,8 +35,8 @@ if (app.Environment.IsDevelopment())
             
             // 2. 初始化所有业务表
             db.CodeFirst.InitTables(
-                typeof(Region), 
-                typeof(Place), 
+                typeof(Geo), 
+                typeof(Transport), 
                 typeof(ScenicSpot), 
                 typeof(Food), 
                 typeof(Travelogue),

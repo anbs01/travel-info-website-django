@@ -1,0 +1,93 @@
+@page
+@model TravelPortal.Web.Pages.Admin.Geos.EditModel
+@{
+    ViewData["Title"] = "编辑地理节点";
+}
+
+<div class="max-w-4xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="px-8 py-6 border-b border-gray-50 flex items-center justify-between bg-gray-50/30">
+            <div>
+                <h1 class="text-xl font-bold text-gray-800">编辑地理节点</h1>
+                <p class="text-xs text-gray-400 mt-1">修改节点信息：@Model.Geo.Title</p>
+            </div>
+            <a asp-page="Index" asp-route-parentId="@Model.Geo.ParentId" class="text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </a>
+        </div>
+
+        <form method="post" class="p-8 space-y-8">
+            <input type="hidden" asp-for="Geo.Id" />
+            <input type="hidden" asp-for="Geo.CreatedAt" />
+
+            <div class="grid grid-cols-2 gap-8">
+                <!-- 基本信息 -->
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">节点名称</label>
+                        <input asp-for="Geo.Title" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：山东省" required />
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">层级</label>
+                        <select asp-for="Geo.Level" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium">
+                            <option value="1">1级 - 国家</option>
+                            <option value="2">2级 - 省份</option>
+                            <option value="3">3级 - 城市</option>
+                            <option value="4">4级 - 区县</option>
+                            <option value="5">5级 - 乡镇</option>
+                            <option value="6">6级 - 村庄</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">上级节点</label>
+                        <select asp-for="Geo.ParentId" asp-items="Model.ParentOptions" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium">
+                            <option value="">-- 无 (顶级) --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 扩展信息 -->
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">性质</label>
+                        <div class="flex p-1 bg-gray-50 rounded-xl">
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" asp-for="Geo.Nature" value="Domestic" class="hidden peer" />
+                                <div class="py-2 text-center text-xs font-bold rounded-lg peer-checked:bg-white peer-checked:text-brand peer-checked:shadow-sm text-gray-400 transition-all">国内</div>
+                            </label>
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" asp-for="Geo.Nature" value="Overseas" class="hidden peer" />
+                                <div class="py-2 text-center text-xs font-bold rounded-lg peer-checked:bg-white peer-checked:text-brand peer-checked:shadow-sm text-gray-400 transition-all">海外</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">URL 别名 (Slug)</label>
+                        <input asp-for="Geo.Slug" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="yantai" />
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">排序权重</label>
+                            <input asp-for="Geo.SortOrder" type="number" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
+                        </div>
+                        <div class="flex items-end pb-3">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input asp-for="Geo.IsHidden" type="checkbox" class="w-4 h-4 rounded text-brand border-gray-200 focus:ring-brand/20" />
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">隐藏节点</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-50 flex justify-end space-x-4">
+                <a asp-page="Index" asp-route-parentId="@Model.Geo.ParentId" class="px-8 py-3 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">取消</a>
+                <button type="submit" class="px-10 py-3 bg-brand text-white rounded-xl text-sm font-bold shadow-xl shadow-brand/20 hover:scale-105 active:scale-95 transition-all">更新节点</button>
+            </div>
+        </form>
+    </div>
+</div>

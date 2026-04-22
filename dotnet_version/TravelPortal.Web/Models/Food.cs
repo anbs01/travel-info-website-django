@@ -45,9 +45,9 @@ public class Food : BaseContent
     public string? TasteFeatures { get; set; }
 
     /// <summary>
-    /// 关联地区 ID
+    /// 关联地理层级 ID
     /// </summary>
-    public int? RegionId { get; set; }
+    public int? GeoId { get; set; }
 
     /// <summary>
     /// 原文链接
@@ -62,8 +62,8 @@ public class Food : BaseContent
     public string Content { get; set; } = string.Empty;
 
     /// <summary>
-    /// 关联地区（仅用于展示，不映射到数据库）
+    /// 关联地理节点（仅用于展示，不映射到数据库）
     /// </summary>
     [SugarColumn(IsIgnore = true)]
-    public Region? Region { get; set; }
+    public Geo? Geo { get; set; }
 }

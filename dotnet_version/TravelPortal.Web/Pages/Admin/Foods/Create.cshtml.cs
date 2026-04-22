@@ -26,7 +26,7 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
     public List<string> CuisineCategories { get; set; } = new();
     public List<string> SpecialtyCategories { get; set; } = new();
-    public SelectList RegionList { get; set; } = null!;
+    public SelectList GeoList { get; set; } = null!;
 
     public void OnGet()
     {
@@ -46,8 +46,8 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             .Select(it => it.Name)
             .ToList();
 
-        var regions = _db.Queryable<Region>().ToList();
-        RegionList = new SelectList(regions, "Id", "Name");
+        var geos = _db.Queryable<Geo>().Where(it => it.Level >= 2).ToList();
+        GeoList = new SelectList(geos, "Id", "Title");
     }
 
     public async Task<IActionResult> OnPostAsync()

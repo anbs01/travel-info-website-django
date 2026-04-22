@@ -1,0 +1,68 @@
+@page
+@model TravelPortal.Web.Pages.Admin.Transports.IndexModel
+@{
+    ViewData["Title"] = "交通管理";
+}
+
+<div class="space-y-6">
+    <!-- 1. 标题与选项卡 -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="px-8 py-4 border-b border-gray-50 flex items-center justify-between">
+            <h1 class="text-lg font-bold text-gray-800">交通设施</h1>
+        </div>
+        <div class="flex border-b border-gray-50 bg-gray-50/30">
+            <a asp-page="Index" class="px-8 py-4 text-sm font-bold border-t-2 border-brand bg-white text-brand transition-all">交通设施</a>
+            <a asp-page="Create" class="px-8 py-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">发布交通点</a>
+        </div>
+
+        <div class="p-6">
+            <table class="w-full text-left text-sm">
+                <thead class="bg-gray-50/50 text-gray-400 font-bold uppercase tracking-wider text-[10px]">
+                    <tr>
+                        <th class="px-6 py-4 w-16">ID</th>
+                        <th class="px-6 py-4">交通点名称</th>
+                        <th class="px-6 py-4">类型</th>
+                        <th class="px-6 py-4">所属城镇</th>
+                        <th class="px-6 py-4 text-right">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    @foreach (var item in Model.TransportList)
+                    {
+                        <tr class="hover:bg-gray-50/50 transition-colors">
+                            <td class="px-6 py-4 font-mono text-xs text-gray-400">@item.Id</td>
+                            <td class="px-6 py-4">
+                                <span class="text-gray-700 font-bold">@item.Title</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-600">
+                                    @GetTypeName(item.TransportType)
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-xs text-gray-500">
+                                @(item.Geo?.Title ?? "未关联")
+                            </td>
+                            <td class="px-6 py-4 text-right space-x-3">
+                                <a asp-page="Edit" asp-route-id="@item.Id" class="text-xs text-brand hover:underline">编辑</a>
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@item.Id" class="inline" onsubmit="return confirm('确定删除吗？')">
+                                    <button type="submit" class="text-xs text-red-400 hover:underline">删除</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetTypeName(string type) => type switch
+    {
+        "Airport" => "机场",
+        "Railway" => "火车站",
+        "Bus" => "汽车站",
+        "Pier" => "码头",
+        _ => "其他"
+    };
+}

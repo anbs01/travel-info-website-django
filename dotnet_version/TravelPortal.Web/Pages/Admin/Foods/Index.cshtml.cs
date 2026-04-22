@@ -27,7 +27,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     public string? SpecialtyCategory { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    public int? RegionId { get; set; }
+    public int? GeoId { get; set; }
 
     [BindProperty(SupportsGet = true)]
     public int PageIndex { get; set; } = 1;
@@ -42,7 +42,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             .ToList();
 
         var query = _db.Queryable<Food>()
-            .LeftJoin<Region>((f, r) => f.RegionId == r.Id)
+            .LeftJoin<Geo>((f, r) => f.GeoId == r.Id)
             .WhereIF(!string.IsNullOrEmpty(Keyword), f => f.Title.Contains(Keyword!))
             .WhereIF(!string.IsNullOrEmpty(Category), f => f.Category == Category)
             .WhereIF(!string.IsNullOrEmpty(SpecialtyCategory), f => f.SpecialtyCategory == SpecialtyCategory)
@@ -57,7 +57,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
                 IsSticky = f.IsSticky,
                 IsHidden = f.IsHidden,
                 CreatedAt = f.CreatedAt,
-                Region = new Region { Name = r.Name }
+                Geo = new Geo { Title = r.Title }
             });
 
         int totalCount = 0;

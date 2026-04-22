@@ -9,12 +9,18 @@ namespace TravelPortal.Web.Models;
 public class ScenicSpot : BaseContent
 {
     /// <summary>
-    /// 所属城镇 ID
+    /// 关联地理节点 ID
     /// </summary>
-    public int PlaceId { get; set; }
+    public int GeoId { get; set; }
 
     /// <summary>
     /// 类型标记（scenic:景区 / checkin:打卡点）
     /// </summary>
     public string SpotType { get; set; } = "scenic";
+
+    /// <summary>
+    /// 关联地理节点
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public Geo? Geo { get; set; }
 }

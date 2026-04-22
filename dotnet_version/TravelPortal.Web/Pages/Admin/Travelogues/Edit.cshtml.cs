@@ -24,8 +24,7 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
         [BindProperty]
         public IFormFile? MainImageFile { get; set; }
 
-        public SelectList PlaceList { get; set; } = default!;
-        public SelectList RegionList { get; set; } = default!;
+        public SelectList GeoList { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -68,11 +67,12 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
 
         private async Task LoadSelectionData()
         {
-            var places = await _db.Queryable<Place>().OrderBy(p => p.Title).ToListAsync();
-            PlaceList = new SelectList(places, "Id", "Title");
-
-            var regions = await _db.Queryable<Region>().OrderBy(r => r.Name).ToListAsync();
-            RegionList = new SelectList(regions, "Id", "Name");
+            var geos = await _db.Queryable<Geo>()
+                .Where(it => it.Level >= 2)
+                .OrderBy(it => it.Level)
+                .OrderBy(it => it.SortOrder)
+                .ToListAsync();
+            GeoList = new SelectList(geos, "Id", "Title");
         }
     }
 }

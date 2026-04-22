@@ -9,14 +9,15 @@ namespace TravelPortal.Web.Models;
 public class Travelogue : BaseContent
 {
     /// <summary>
-    /// 所属城镇 ID
+    /// 关联地理节点 ID
     /// </summary>
-    public int? PlaceId { get; set; }
-    
+    public int? GeoId { get; set; }
+
     /// <summary>
-    /// 所属大区 ID (如：烟台)
+    /// 关联地理节点
     /// </summary>
-    public int? RegionId { get; set; }
+    [SugarColumn(IsIgnore = true)]
+    public Geo? Geo { get; set; }
 
     /// <summary>
     /// 发布类型（travelogue:纪行 / guide:攻略）

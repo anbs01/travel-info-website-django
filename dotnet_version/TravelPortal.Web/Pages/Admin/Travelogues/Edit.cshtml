@@ -52,14 +52,9 @@
                     <option value="Guides">实用攻略</option>
                 </select>
                 
-                <select asp-for="Travelogue.PlaceId" asp-items="Model.PlaceList"
+                <select asp-for="Travelogue.GeoId" asp-items="Model.GeoList"
                         class="px-6 py-3 bg-gray-50 border-none rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand/20 transition-all">
-                    <option value="">所属城镇/乡村</option>
-                </select>
-
-                <select asp-for="Travelogue.RegionId" asp-items="Model.RegionList"
-                        class="px-6 py-3 bg-gray-50 border-none rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand/20 transition-all">
-                    <option value="">所属地区 (如：烟台)</option>
+                    <option value="">所属地理位置</option>
                 </select>
             </div>
         </div>

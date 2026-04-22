@@ -111,11 +111,11 @@
                         <svg class="w-3 h-3 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="menu-content hidden pl-11 pr-4 py-2 space-y-1">
-                        <a href="/Admin/NotFound?module=省份管理" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">省份管理</a>
-                        <a href="/Admin/Places" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">国内城镇</a>
-                        <a href="/Admin/NotFound?module=国家管理" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">国家管理</a>
-                        <a href="/Admin/NotFound?module=海外城镇" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">海外城镇</a>
-                        <a href="/Admin/NotFound?module=交通管理" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">交通管理</a>
+                        <a href="/Admin/Geos?Level=2" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">省份管理</a>
+                        <a href="/Admin/Geos?Level=3" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">国内城镇</a>
+                        <a href="/Admin/Geos?Level=1" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">国家管理</a>
+                        <a href="/Admin/Geos?Nature=Overseas" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">海外城镇</a>
+                        <a href="/Admin/Transports" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">交通管理</a>
                     </div>
                 </div>
 
@@ -220,10 +220,10 @@
             </header>
 
             <!-- 页面内容 -->
-            <main class="flex-1 overflow-y-auto p-10 bg-[#f4f7f6]">
-                <div class="max-w-6xl mx-auto">
+            <main class="flex-1 overflow-y-auto p-6 bg-[#f4f7f6]">
+                <div class="max-w-7xl mx-auto">
                     <!-- 卡片包裹层 -->
-                    <div class="bg-white rounded-3xl shadow-sm border border-gray-50 p-8 min-h-[500px]">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 min-h-[600px]">
                         @RenderBody()
                     </div>
                 </div>
@@ -257,9 +257,10 @@
             });
 
             // 自动展开当前活动链接所在的组
-            const currentPath = window.location.pathname;
+            const currentFull = window.location.pathname + window.location.search;
             $('.menu-content a').each(function() {
-                if ($(this).attr('href') === currentPath) {
+                const linkHref = $(this).attr('href');
+                if (linkHref === currentFull || linkHref === window.location.pathname) {
                     $(this).addClass('text-brand font-bold');
                     $(this).parent().show().prev('.menu-trigger').find('svg').last().addClass('rotate-180');
                 }

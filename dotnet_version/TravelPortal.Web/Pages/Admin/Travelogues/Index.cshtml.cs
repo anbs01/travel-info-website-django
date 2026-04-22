@@ -16,13 +16,13 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
         }
 
         public List<Travelogue> Travelogues { get; set; } = new();
-        public SelectList PlaceList { get; set; } = default!;
+        public SelectList GeoList { get; set; } = default!;
 
         [BindProperty(SupportsGet = true)]
         public string? Status { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int? PlaceId { get; set; }
+        public int? GeoId { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string? Keyword { get; set; }
@@ -30,8 +30,8 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
         public async Task OnGetAsync()
         {
             // 1. 加载筛选数据
-            var places = await _db.Queryable<Place>().OrderBy(p => p.Title).ToListAsync();
-            PlaceList = new SelectList(places, "Id", "Title");
+            var geos = await _db.Queryable<Geo>().Where(it => it.Level >= 2).OrderBy(it => it.Level).OrderBy(it => it.SortOrder).ToListAsync();
+            GeoList = new SelectList(geos, "Id", "Title");
 
             // 2. 构建查询
             var query = _db.Queryable<Travelogue>();
@@ -43,9 +43,9 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
                 if (Status == "Normal") query = query.Where(t => !t.IsSticky && !t.IsHidden);
             }
 
-            if (PlaceId.HasValue)
+            if (GeoId.HasValue)
             {
-                query = query.Where(t => t.PlaceId == PlaceId);
+                query = query.Where(t => t.GeoId == GeoId);
             }
 
             if (!string.IsNullOrEmpty(Keyword))
