@@ -1,0 +1,154 @@
+@*
+    地区选择弹窗组件
+    参数：
+      FieldName   - 表单字段名，如 "Food.GeoId"
+      CurrentId   - 当前已选 ID（int? 或 null）
+      CurrentName - 当前已选名称（string 或 null）
+*@
+@model dynamic
+
+@{
+    string fieldName = (string)Model.FieldName;
+    string alpineId = fieldName.Replace(".", "_").Replace("[", "_").Replace("]", "_");
+    int? currentId = Model.CurrentId as int?;
+    string currentName = (string)(Model.CurrentName ?? "");
+}
+
+<div x-data="geoPicker('@alpineId', @(currentId.HasValue ? currentId.Value.ToString() : "null"), '@Html.Raw(currentName.Replace("'", "\\'"))')"
+     class="relative">
+
+    <!-- 触发按钮 -->
+    <button type="button" @@click="open = true"
+            class="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 hover:bg-white hover:border-brand focus:ring-2 focus:ring-brand/20 transition-all text-sm">
+        <span :class="selectedName ? 'text-gray-800 font-medium' : 'text-gray-400'"
+              x-text="selectedName || '点击选择地区'"></span>
+        <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+    </button>
+
+    <!-- 隐藏 input，提交表单用 -->
+    <input type="hidden" name="@fieldName" :value="selectedId ?? ''" />
+
+    <!-- 弹窗遮罩 -->
+    <div x-show="open"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4"
+         @@click.self="open = false"
+         style="display:none">
+
+        <!-- 弹窗主体 -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col overflow-hidden"
+             @@click.stop>
+
+            <!-- 头部 Tab -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 flex-shrink-0">
+                <div class="flex gap-1 bg-gray-100 rounded-lg p-1">
+                    <button type="button" @@click="tab = 'domestic'"
+                            :class="tab === 'domestic' ? 'bg-brand text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'"
+                            class="px-4 py-1.5 rounded-md text-sm font-bold transition-all">国内城乡</button>
+                    <button type="button" @@click="tab = 'overseas'"
+                            :class="tab === 'overseas' ? 'bg-brand text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'"
+                            class="px-4 py-1.5 rounded-md text-sm font-bold transition-all">境外城乡</button>
+                </div>
+                <button type="button" @@click="open = false"
+                        class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- 内容区 -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-5">
+
+                <!-- 加载中 -->
+                <div x-show="loading" class="flex items-center justify-center py-12 text-gray-400 text-sm">
+                    <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                    </svg>
+                    加载中...
+                </div>
+
+                <!-- 国内：省级列表 -->
+                <div x-show="!loading && tab === 'domestic'">
+                    <div class="flex flex-wrap gap-x-8 gap-y-2.5">
+                        <template x-for="p in provinces" :key="p.id">
+                            <button type="button"
+                                    @@click="selectProvince(p)"
+                                    :class="activeProvince?.id === p.id ? 'text-brand font-bold' : 'text-gray-700 hover:text-brand'"
+                                    class="text-sm transition-colors"
+                                    x-text="p.title"></button>
+                        </template>
+                        <span x-show="!loading && provinces.length === 0"
+                              class="text-xs text-gray-400 italic">暂无数据，请先在城镇管理中录入省份</span>
+                    </div>
+                </div>
+
+                <!-- 境外：直接显示城市列表 -->
+                <div x-show="!loading && tab === 'overseas'">
+                    <div class="flex flex-wrap gap-x-8 gap-y-2.5">
+                        <template x-for="c in overseasCities" :key="c.id">
+                            <button type="button"
+                                    @@click="select(c.id, c.title)"
+                                    :class="selectedId == c.id ? 'text-brand font-bold' : 'text-gray-700 hover:text-brand'"
+                                    class="text-sm transition-colors"
+                                    x-text="c.title"></button>
+                        </template>
+                        <span x-show="!loading && overseasCities.length === 0"
+                              class="text-xs text-gray-400 italic">暂无境外城市数据</span>
+                    </div>
+                </div>
+
+                <!-- 省下子节点分组 -->
+                <div x-show="tab === 'domestic' && activeProvince" class="border-t border-gray-100 pt-4 space-y-4">
+                    <div x-show="loadingSub" class="text-xs text-gray-400">加载中...</div>
+                    <template x-for="group in subGroups" :key="group.level">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-1 h-4 bg-brand rounded-full"></div>
+                                <span class="text-xs font-bold text-gray-500" x-text="group.label"></span>
+                            </div>
+                            <div class="flex flex-wrap gap-x-8 gap-y-2.5">
+                                <template x-for="item in group.items" :key="item.id">
+                                    <button type="button"
+                                            @@click="select(item.id, item.title)"
+                                            :class="selectedId == item.id ? 'text-brand font-bold' : 'text-gray-700 hover:text-brand'"
+                                            class="text-sm transition-colors"
+                                            x-text="item.title"></button>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                    <div x-show="!loadingSub && subGroups.length === 0"
+                         class="text-xs text-gray-400 italic">该省暂无下级城镇数据</div>
+                </div>
+            </div>
+
+            <!-- 底部操作栏 -->
+            <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between bg-gray-50/50 flex-shrink-0">
+                <span class="text-xs text-gray-500">
+                    <template x-if="selectedName">
+                        <span>已选：<span class="text-brand font-bold" x-text="selectedName"></span></span>
+                    </template>
+                    <template x-if="!selectedName">
+                        <span class="text-gray-400">请点击城市 / 县 / 乡镇选择</span>
+                    </template>
+                </span>
+                <div class="flex gap-3">
+                    <button type="button" @@click="clear()"
+                            class="px-4 py-2 text-xs font-bold text-gray-500 hover:bg-gray-200 rounded-lg transition-all">清除</button>
+                    <button type="button" @@click="open = false"
+                            class="px-6 py-2 text-xs font-bold bg-brand text-white rounded-lg hover:opacity-90 transition-all">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

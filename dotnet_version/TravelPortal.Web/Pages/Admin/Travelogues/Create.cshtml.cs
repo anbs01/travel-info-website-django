@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
 using SqlSugar;
 using TravelPortal.Web.Models;
@@ -21,8 +20,6 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
 
         [BindProperty]
         public Travelogue Travelogue { get; set; } = new();
-
-        public SelectList GeoList { get; set; } = default!;
 
         // 动态加载的热词列表
         public List<HotWord> TravelogueCategories { get; set; } = new();
@@ -81,14 +78,6 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
 
         private async Task LoadDataAsync()
         {
-            // 加载地理节点 (省、市、县、乡、村)
-            var geos = await _db.Queryable<Geo>()
-                .Where(it => it.Level >= 2)
-                .OrderBy(it => it.Level)
-                .OrderBy(it => it.SortOrder)
-                .ToListAsync();
-            GeoList = new SelectList(geos, "Id", "Title");
-
             // 加载热词分类
             TravelogueCategories = await _db.Queryable<HotWord>()
                 .Where(h => h.ShowInTravelogue && !h.IsHidden)

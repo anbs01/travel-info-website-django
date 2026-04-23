@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using SqlSugar;
 using TravelPortal.Web.Models;
 using TravelPortal.Web.Services;
@@ -26,7 +25,6 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
     public List<string> CuisineCategories { get; set; } = new();
     public List<string> SpecialtyCategories { get; set; } = new();
-    public SelectList GeoList { get; set; } = null!;
 
     public void OnGet()
     {
@@ -45,9 +43,6 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             .Where(it => it.ShowInSpecialty)
             .Select(it => it.Name)
             .ToList();
-
-        var geos = _db.Queryable<Geo>().Where(it => it.Level >= 2).ToList();
-        GeoList = new SelectList(geos, "Id", "Title");
     }
 
     public async Task<IActionResult> OnPostAsync()

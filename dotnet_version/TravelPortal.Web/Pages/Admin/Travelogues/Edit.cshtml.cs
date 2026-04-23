@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using SqlSugar;
 using TravelPortal.Web.Models;
 using TravelPortal.Web.Services;
@@ -24,14 +23,14 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
         [BindProperty]
         public IFormFile? MainImageFile { get; set; }
 
-        public SelectList GeoList { get; set; } = default!;
+        public string? CurrentGeoTitle { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Travelogue = await _db.Queryable<Travelogue>().InSingleAsync(id);
             if (Travelogue == null) return NotFound();
 
-            await LoadSelectionData();
+            CurrentGeoTitle = Travelogue.GeoId.HasValue ? _db.Queryable<Geo>().Where(g => g.Id == Travelogue.GeoId).Select(g => g.Title).First() : null;
             return Page();
         }
 
@@ -39,7 +38,6 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
         {
             if (!ModelState.IsValid)
             {
-                await LoadSelectionData();
                 return Page();
             }
 
@@ -63,16 +61,6 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
             if (file == null) return new JsonResult(new { error = "No file uploaded" });
             var url = await _uploadService.UploadFileAsync(file, "media");
             return new JsonResult(new { location = url });
-        }
-
-        private async Task LoadSelectionData()
-        {
-            var geos = await _db.Queryable<Geo>()
-                .Where(it => it.Level >= 2)
-                .OrderBy(it => it.Level)
-                .OrderBy(it => it.SortOrder)
-                .ToListAsync();
-            GeoList = new SelectList(geos, "Id", "Title");
         }
     }
 }
