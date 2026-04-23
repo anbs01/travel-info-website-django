@@ -35,7 +35,7 @@ namespace TravelPortal.Web.Pages.Admin.News
 
             if (!string.IsNullOrEmpty(Category))
             {
-                query = query.Where(n => n.Category == Category);
+                query = query.Where(n => n.NewsCategory == Category);
             }
 
             NewsList = query.OrderByDescending(n => n.IsSticky)

@@ -93,16 +93,16 @@
                                             {
                                                 <span class="px-1.5 py-0.5 text-[10px] font-bold bg-gray-100 text-gray-600 rounded">已屏蔽</span>
                                             }
-                                            @if (!string.IsNullOrEmpty(item.LevelTag))
+                                            @if (!string.IsNullOrEmpty(item.NonLegacyLevel))
                                             {
-                                                <span class="px-1.5 py-0.5 text-[10px] font-bold bg-indigo-50 text-indigo-500 rounded">@item.LevelTag</span>
+                                                <span class="px-1.5 py-0.5 text-[10px] font-bold bg-indigo-50 text-indigo-500 rounded">@item.NonLegacyLevel</span>
                                             }
                                         </div>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-600">
-                                <span class="px-2 py-1 bg-gray-100 rounded-md text-xs">@item.Category</span>
+                                <span class="px-2 py-1 bg-gray-100 rounded-md text-xs">@item.Classification</span>
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-600">@item.Views</td>
                             <td class="px-6 py-4 text-sm text-gray-500 font-mono">@item.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>

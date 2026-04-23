@@ -9,18 +9,19 @@ namespace TravelPortal.Web.Models;
 public class ScenicSpot : BaseContent
 {
     /// <summary>
-    /// 关联地理节点 ID
+    /// 名气级别（知名景区、热门景点、小众秘境、城市地标、网红打卡地）
     /// </summary>
-    public int GeoId { get; set; }
+    [SugarColumn(Length = 50, IsNullable = true)]
+    public string? FameLevel { get; set; }
 
     /// <summary>
-    /// 类型标记（scenic:景区 / checkin:打卡点）
+    /// 景区级别（AAAAA级、AAAA级、AAA级、AA级、A级）
     /// </summary>
-    public string SpotType { get; set; } = "scenic";
+    [SugarColumn(Length = 50, IsNullable = true)]
+    public string? ScenicGrade { get; set; }
 
-    /// <summary>
-    /// 关联地理节点
-    /// </summary>
+    // --- 导航属性 ---
+
     [SugarColumn(IsIgnore = true)]
     public Geo? Geo { get; set; }
 }

@@ -58,14 +58,9 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         }
 
         // 处理逻辑与 Create 一致
-        if (Food.Category == "美食")
+        if (Food.ProductType == "美食")
         {
-            Food.SpecialtyCategory = null;
             Food.SpecialtyLevel = null;
-        }
-        else
-        {
-            Food.Cuisine = null;
         }
 
         Food.UpdatedAt = DateTime.Now;

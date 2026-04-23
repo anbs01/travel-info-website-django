@@ -5,8 +5,17 @@
     if (Model.Level == 1) title = "国家管理";
     else if (Model.Level == 2) title = "省份管理";
     else if (Model.Level >= 3) title = "城镇管理";
-    if (Model.Nature == "Overseas") title = "境外城镇";
+    if (Model.Nature == "Overseas") title = "海外城镇";
     
+    string listTitle = "行政区划";
+    string createTitle = "发布节点";
+    
+    if (Model.Level == 1) { listTitle = "国家列表"; createTitle = "发布国家"; }
+    else if (Model.Level == 2) { listTitle = "省份列表"; createTitle = "发布省份"; }
+    else if (Model.Level >= 3) { listTitle = "城镇列表"; createTitle = "发布城镇"; }
+    
+    if (Model.Nature == "Overseas") { listTitle = "海外城镇"; createTitle = "发布海外城镇"; }
+
     ViewData["Title"] = title;
 }
 
@@ -24,9 +33,9 @@
         </div>
         <div class="flex border-b border-gray-50 bg-gray-50/30">
             <a asp-page="Index" asp-route-parentId="@Model.ParentId" asp-route-level="@Model.Level" asp-route-nature="@Model.Nature" 
-               class="px-8 py-4 text-sm font-bold border-t-2 border-brand bg-white text-brand transition-all">行政区划</a>
+               class="px-8 py-4 text-sm font-bold border-t-2 border-brand bg-white text-brand transition-all">@listTitle</a>
             <a asp-page="Create" asp-route-parentId="@Model.ParentId" asp-route-level="@(Model.Level ?? (Model.ParentGeo?.Level + 1) ?? 1)" asp-route-nature="@Model.Nature" 
-               class="px-8 py-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">发布节点</a>
+               class="px-8 py-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">@createTitle</a>
         </div>
 
         <div class="p-6">

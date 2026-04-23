@@ -1,90 +1,231 @@
 @page
 @model TravelPortal.Web.Pages.Admin.Geos.CreateModel
 @{
-    ViewData["Title"] = "添加地理节点";
+    ViewData["Title"] = Model.PageTitle;
+    
+    string listTitle = "行政列表";
+    if (Model.Geo.Nature == "Overseas") listTitle = "海外城镇";
+    else if (Model.Geo.Level == 1) listTitle = "国家列表";
+    else if (Model.Geo.Level == 2) listTitle = "省份列表";
+    else if (Model.Geo.Level >= 3) listTitle = "城镇列表";
 }
 
-<div class="max-w-4xl mx-auto">
-    <!-- 1. 标题与选项卡 -->
+<div class="pb-20">
+    <!-- 1. 顶部标题与导航 -->
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
-        <div class="px-8 py-4 border-b border-gray-50">
-            <h1 class="text-lg font-bold text-gray-800">地理管理</h1>
-        </div>
-        <div class="flex border-b border-gray-50 bg-gray-50/30">
-            <a asp-page="Index" asp-route-parentId="@Model.Geo.ParentId" class="px-8 py-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">行政区划</a>
-            <a asp-page="Create" asp-route-parentId="@Model.Geo.ParentId" class="px-8 py-4 text-sm font-bold border-t-2 border-brand bg-white text-brand transition-all">发布节点</a>
-        </div>
-
-        <form method="post" class="p-8 space-y-8">
-            <div class="grid grid-cols-2 gap-8">
-                <!-- 基本信息 -->
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">节点名称</label>
-                        <input asp-for="Geo.Title" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：山东省" required />
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">层级</label>
-                        <select asp-for="Geo.Level" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium">
-                            <option value="1">1级 - 国家</option>
-                            <option value="2">2级 - 省份</option>
-                            <option value="3">3级 - 城市</option>
-                            <option value="4">4级 - 区县</option>
-                            <option value="5">5级 - 乡镇</option>
-                            <option value="6">6级 - 村庄</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">上级节点</label>
-                        <select asp-for="Geo.ParentId" asp-items="Model.ParentOptions" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium">
-                            <option value="">-- 无 (顶级) --</option>
-                        </select>
-                        <p class="text-[10px] text-gray-400 mt-2 italic">* 请确保上级节点比当前层级小一级</p>
-                    </div>
+        <div class="px-8 py-4 border-b border-gray-50 flex items-center justify-between bg-white">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-brand/10 rounded-xl flex items-center justify-center text-brand">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 </div>
-
-                <!-- 扩展信息 -->
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">性质</label>
-                        <div class="flex p-1 bg-gray-50 rounded-xl">
-                            <label class="flex-1 cursor-pointer">
-                                <input type="radio" asp-for="Geo.Nature" value="Domestic" class="hidden peer" />
-                                <div class="py-2 text-center text-xs font-bold rounded-lg peer-checked:bg-white peer-checked:text-brand peer-checked:shadow-sm text-gray-400 transition-all">国内</div>
-                            </label>
-                            <label class="flex-1 cursor-pointer">
-                                <input type="radio" asp-for="Geo.Nature" value="Overseas" class="hidden peer" />
-                                <div class="py-2 text-center text-xs font-bold rounded-lg peer-checked:bg-white peer-checked:text-brand peer-checked:shadow-sm text-gray-400 transition-all">海外</div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">URL 别名 (Slug)</label>
-                        <input asp-for="Geo.Slug" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="yantai" />
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">排序权重</label>
-                            <input asp-for="Geo.SortOrder" type="number" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
-                        </div>
-                        <div class="flex items-end pb-3">
-                            <label class="flex items-center space-x-2 cursor-pointer">
-                                <input asp-for="Geo.IsHidden" type="checkbox" class="w-4 h-4 rounded text-brand border-gray-200 focus:ring-brand/20" />
-                                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">隐藏节点</span>
-                            </label>
-                        </div>
-                    </div>
+                <div>
+                    <h1 class="text-lg font-bold text-gray-800">@ViewData["Title"]</h1>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest">Geo-Content Management System</p>
                 </div>
             </div>
+        </div>
+        <div class="flex border-b border-gray-50 bg-gray-50/30">
+            <a asp-page="Index" asp-route-parentId="@Model.Geo.ParentId" asp-route-level="@Model.Geo.Level" asp-route-nature="@Model.Geo.Nature" 
+               class="px-8 py-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">@listTitle</a>
+            <a href="#" class="px-8 py-4 text-sm font-bold border-t-2 border-brand bg-white text-brand transition-all">@Model.PageTitle</a>
+        </div>
 
-            <div class="pt-8 border-t border-gray-50 flex justify-end space-x-4">
-                <a asp-page="Index" asp-route-parentId="@Model.Geo.ParentId" class="px-8 py-3 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">取消</a>
-                <button type="submit" class="px-10 py-3 bg-brand text-white rounded-xl text-sm font-bold shadow-xl shadow-brand/20 hover:scale-105 active:scale-95 transition-all">保存节点</button>
+        <form method="post" enctype="multipart/form-data" class="p-8 space-y-10">
+            <input type="hidden" asp-for="Geo.Level" />
+            <input type="hidden" asp-for="Geo.Nature" />
+            <input type="hidden" asp-for="Geo.ParentId" />
+
+            <!-- 第一部分：核心识别属性 -->
+            <section class="space-y-6">
+                <div class="flex items-center space-x-2 pb-2 border-b border-gray-50">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
+                    <h2 class="text-xs font-bold text-gray-800 uppercase tracking-wider">核心属性</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="md:col-span-1">
+                        <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">@(Model.Geo.Level == 2 ? "省级简称" : "中文简称") <span class="text-red-400">*</span></label>
+                        <input asp-for="Geo.Title" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：山东" required />
+                    </div>
+                    <div class="md:col-span-1">
+                        <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">@(Model.Geo.Level == 2 ? "省级全称" : "中文全称") <span class="text-red-400">*</span></label>
+                        <input asp-for="Geo.FullTitle" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：山东省" required />
+                    </div>
+                    <div class="md:col-span-1">
+                        <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">拼音别名 / Slug <span class="text-red-400">*</span></label>
+                        <input asp-for="Geo.Slug" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：shandong" required />
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二部分：地理与行政信息 -->
+            <section class="space-y-6">
+                <div class="flex items-center space-x-2 pb-2 border-b border-gray-50">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
+                    <h2 class="text-xs font-bold text-gray-800 uppercase tracking-wider">地理信息</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">城乡代码 <span class="text-red-400">*</span></label>
+                        <input asp-for="Geo.GeoCode" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="行政区划代码" required />
+                    </div>
+                    
+                    @if (Model.Geo.Level == 2)
+                    {
+                        <div class="md:col-span-2">
+                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">辖区层级 <span class="text-red-400">*</span></label>
+                            <input asp-for="Geo.JurisdictionLayers" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="多个层级用逗号隔开" required />
+                        </div>
+                    }
+                    else if (Model.Geo.Level >= 3)
+                    {
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">城乡级别 <span class="text-red-400">*</span></label>
+                            <select asp-for="Geo.GeoTag" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" required>
+                                <option value="地级市">地级市</option>
+                                <option value="县级市">县级市</option>
+                                <option value="乡镇">乡镇</option>
+                                <option value="村庄">村庄</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">城乡别名</label>
+                            <input asp-for="Geo.SubTitle" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
+                        </div>
+                    }
+                    
+                    @if (Model.Geo.Nature == "Overseas")
+                    {
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">英文名称</label>
+                            <input asp-for="Geo.EnglishName" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="English Name" />
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <!-- 第三部分：内容与多媒体 -->
+            <section class="space-y-6">
+                <div class="flex items-center space-x-2 pb-2 border-b border-gray-50">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
+                    <h2 class="text-xs font-bold text-gray-800 uppercase tracking-wider">内容配置</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- 左侧：主要文本内容 -->
+                    <div class="md:col-span-3 space-y-6">
+                        @if (Model.Geo.Level >= 2)
+                        {
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">旅游特色 / 简要介绍 <span class="text-red-400">*</span> (120字内)</label>
+                                <textarea asp-for="Geo.Summary" rows="3" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="简要描述该地区的旅游特色..." required></textarea>
+                            </div>
+                        }
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">详细介绍 <span class="text-red-400">*</span></label>
+                            <textarea asp-for="Geo.Content" id="editor" class="hidden"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- 右侧：媒体与元数据 -->
+                    <div class="md:col-span-1 space-y-6">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">焦点图片</label>
+                            <div x-data="{ photoName: null, photoPreview: null }" class="space-y-4">
+                                <input type="file" name="MainImageFile" class="hidden" x-ref="photo"
+                                       x-on:change="
+                                            photoName = $refs.photo.files[0].name;
+                                            const reader = new FileReader();
+                                            reader.onload = (e) => {
+                                                photoPreview = e.target.result;
+                                            };
+                                            reader.readAsDataURL($refs.photo.files[0]);
+                                       ">
+                                <div class="relative group aspect-[4/3] rounded-2xl bg-gray-100 overflow-hidden border-2 border-dashed border-gray-200 hover:border-brand transition-all" 
+                                     x-on:click.prevent="$refs.photo.click()">
+                                    <template x-if="!photoPreview">
+                                        <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
+                                            <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                            <span class="text-[10px] font-bold uppercase tracking-widest">点击上传</span>
+                                        </div>
+                                    </template>
+                                    <template x-if="photoPreview">
+                                        <img :src="photoPreview" class="absolute inset-0 w-full h-full object-cover">
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">最佳旅游时间</label>
+                            <select asp-for="Geo.BestTime" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium">
+                                <option value="一年四季">一年四季</option>
+                                <option value="春季">春季</option>
+                                <option value="夏季">夏季</option>
+                                <option value="秋季">秋季</option>
+                                <option value="冬季">冬季</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">搜索热词 (标签)</label>
+                            <input asp-for="Geo.Tags" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="多个用逗号隔开" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第四部分：高级与显示设置 -->
+            <section class="space-y-6">
+                <div class="flex items-center space-x-2 pb-2 border-b border-gray-50">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
+                    <h2 class="text-xs font-bold text-gray-800 uppercase tracking-wider">显示设置</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gray-50/50 p-6 rounded-2xl border border-gray-100">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-bold text-gray-700">详情页导航条</div>
+                            <div class="text-[10px] text-gray-400">是否显示顶部导航</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input asp-for="Geo.ShowNavStrip" type="checkbox" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-bold text-gray-700">显示图片水印</div>
+                            <div class="text-[10px] text-gray-400">正文图片是否带水印</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input asp-for="Geo.ShowWatermark" type="checkbox" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">水印位置</label>
+                        <select asp-for="Geo.WatermarkPos" class="w-full px-4 py-2 bg-white border-gray-200 rounded-lg text-xs font-medium focus:ring-brand/20">
+                            <option value="Center">中正</option>
+                            <option value="BottomCenter">中下</option>
+                            <option value="BottomRight">右下</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <div class="pt-10 flex justify-end space-x-4">
+                <a asp-page="Index" asp-route-parentId="@Model.Geo.ParentId" class="px-8 py-3 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">取消返回</a>
+                <button type="submit" class="px-12 py-4 bg-brand text-white rounded-2xl text-sm font-bold shadow-xl shadow-brand/30 hover:scale-105 active:scale-95 transition-all flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    立即发布
+                </button>
             </div>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_TinyMCE" model='new { Selector = "#editor", Height = 450 }' />
+}

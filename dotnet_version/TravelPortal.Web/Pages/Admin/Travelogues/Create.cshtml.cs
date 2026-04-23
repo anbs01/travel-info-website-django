@@ -37,7 +37,7 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
         public async Task OnGetAsync()
         {
             await LoadDataAsync();
-            Travelogue.Category = "travelogue";
+            Travelogue.Classification = "纪行";
         }
 
         public async Task<IActionResult> OnPostAsync()

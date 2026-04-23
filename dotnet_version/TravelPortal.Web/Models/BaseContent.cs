@@ -20,43 +20,61 @@ public abstract class BaseContent
     public string Title { get; set; } = string.Empty;
 
     /// <summary>
-    /// 全称，用于详情页及版面宽敞处
+    /// 全称，用于详情页及版面宽敞处（对应资讯引题等）
     /// </summary>
     [SugarColumn(Length = 200, IsNullable = true)]
     public string? FullTitle { get; set; }
 
     /// <summary>
-    /// 详情页顶部的导语 / 特色说明
+    /// 副题/别名（对应资讯副题、城乡别名等）
+    /// </summary>
+    [SugarColumn(Length = 200, IsNullable = true)]
+    public string? SubTitle { get; set; }
+
+    /// <summary>
+    /// 摘要/打卡特色/产品特色（120字以内）
     /// </summary>
     [SugarColumn(ColumnDataType = "text", IsNullable = true)]
     public string? Summary { get; set; }
 
     /// <summary>
-    /// 品别/级别标签（如：非遗级别、菜系、推荐指数）
+    /// 正文内容（富文本编辑器）
+    /// </summary>
+    [SugarColumn(ColumnDataType = "longtext", IsNullable = true)]
+    public string? Content { get; set; }
+
+    /// <summary>
+    /// 品别/级别标签（如：非遗级别、菜系）
     /// </summary>
     [SugarColumn(Length = 50, IsNullable = true)]
     public string? LevelTag { get; set; }
 
     /// <summary>
-    /// 特色标签云（如：亲子,观海,小火车），逗号隔开
+    /// SEO 友好链接别名
     /// </summary>
-    [SugarColumn(Length = 255, IsNullable = true)]
-    public string? FeatureTags { get; set; }
+    [SugarColumn(Length = 200, IsNullable = true)]
+    public string? Slug { get; set; }
 
     /// <summary>
-    /// 焦点图地址
+    /// 特色标签云（如：亲子,观海），逗号隔开
+    /// </summary>
+    [SugarColumn(Length = 255, IsNullable = true)]
+    public string? Tags { get; set; }
+
+    /// <summary>
+    /// 焦点图地址（支持从正文提取或手动上传）
     /// </summary>
     [SugarColumn(Length = 500, IsNullable = true)]
     public string? MainImage { get; set; }
 
     /// <summary>
-    /// 前台显示的自定义发布日期
+    /// 前台显示的自定义发布日期（默认当前）
     /// </summary>
     [SugarColumn(IsNullable = true)]
-    public DateTime? PublishDate { get; set; }
+    public DateTime? PublishDate { get; set; } = DateTime.Now;
 
     /// <summary>
-    /// 内容来源（如：官方、百度）
+    /// 内容来源
     /// </summary>
     [SugarColumn(Length = 100, IsNullable = true)]
     public string? Source { get; set; }
@@ -68,10 +86,21 @@ public abstract class BaseContent
     public string? Author { get; set; }
 
     /// <summary>
+    /// 原文链接
+    /// </summary>
+    [SugarColumn(Length = 500, IsNullable = true)]
+    public string? OriginUrl { get; set; }
+
+    /// <summary>
     /// 跳转链接，填写后直接跳转外部页
     /// </summary>
     [SugarColumn(Length = 500, IsNullable = true)]
     public string? RedirectUrl { get; set; }
+
+    /// <summary>
+    /// 关联地区 ID
+    /// </summary>
+    public int? GeoId { get; set; }
 
     /// <summary>
     /// 版权类型（如：原创、转载等）
@@ -85,10 +114,15 @@ public abstract class BaseContent
     public bool ShowWatermark { get; set; } = false;
 
     /// <summary>
-    /// 水印位置（中、左、右等）
+    /// 水印位置
     /// </summary>
     [SugarColumn(Length = 20, IsNullable = true)]
     public string? WatermarkPos { get; set; }
+
+    /// <summary>
+    /// 是否显示详情页导航条
+    /// </summary>
+    public bool ShowNavStrip { get; set; } = false;
 
     /// <summary>
     /// 阅读量
@@ -112,9 +146,14 @@ public abstract class BaseContent
     public bool IsHome { get; set; } = false;
 
     /// <summary>
-    /// 是否隐藏（数据保留但前台不显示）
+    /// 是否隐藏
     /// </summary>
     public bool IsHidden { get; set; } = false;
+
+    /// <summary>
+    /// 排序权重
+    /// </summary>
+    public int SortOrder { get; set; } = 100;
 
     /// <summary>
     /// 系统添加时间

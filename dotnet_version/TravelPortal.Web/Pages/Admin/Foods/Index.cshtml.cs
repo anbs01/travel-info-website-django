@@ -44,15 +44,15 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         var query = _db.Queryable<Food>()
             .LeftJoin<Geo>((f, r) => f.GeoId == r.Id)
             .WhereIF(!string.IsNullOrEmpty(Keyword), f => f.Title.Contains(Keyword!))
-            .WhereIF(!string.IsNullOrEmpty(Category), f => f.Category == Category)
-            .WhereIF(!string.IsNullOrEmpty(SpecialtyCategory), f => f.SpecialtyCategory == SpecialtyCategory)
+            .WhereIF(!string.IsNullOrEmpty(Category), f => f.ProductType == Category)
+            .WhereIF(!string.IsNullOrEmpty(SpecialtyCategory), f => f.Classification == SpecialtyCategory)
             .OrderByDescending(f => f.IsSticky)
             .OrderByDescending(f => f.CreatedAt)
             .Select((f, r) => new Food
             {
                 Id = f.Id,
                 Title = f.Title,
-                Category = f.Category,
+                ProductType = f.ProductType,
                 Views = f.Views,
                 IsSticky = f.IsSticky,
                 IsHidden = f.IsHidden,

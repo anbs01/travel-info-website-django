@@ -9,31 +9,19 @@ namespace TravelPortal.Web.Models;
 public class CreativeProduct : BaseContent
 {
     /// <summary>
-    /// 产品类别
+    /// 产品分类
     /// </summary>
-    [SugarColumn(Length = 50)]
-    public string Category { get; set; } = string.Empty;
+    [SugarColumn(Length = 100, IsNullable = true)]
+    public string? Classification { get; set; }
 
     /// <summary>
-    /// 关联地理节点 ID
+    /// 非遗级别（国家级、省级、市级、县级）
     /// </summary>
-    public int? GeoId { get; set; }
+    [SugarColumn(Length = 100, IsNullable = true)]
+    public string? NonLegacyLevel { get; set; }
 
-    /// <summary>
-    /// 关联地理节点
-    /// </summary>
+    // --- 导航属性 ---
+
     [SugarColumn(IsIgnore = true)]
     public Geo? Geo { get; set; }
-
-    /// <summary>
-    /// 原文链接
-    /// </summary>
-    [SugarColumn(Length = 500, IsNullable = true)]
-    public string? OriginalUrl { get; set; }
-
-    /// <summary>
-    /// 正文内容
-    /// </summary>
-    [SugarColumn(ColumnDataType = "text")]
-    public string Content { get; set; } = string.Empty;
 }

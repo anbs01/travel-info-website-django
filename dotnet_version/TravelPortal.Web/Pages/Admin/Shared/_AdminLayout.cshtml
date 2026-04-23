@@ -221,11 +221,8 @@
 
             <!-- 页面内容 -->
             <main class="flex-1 overflow-y-auto p-6 bg-[#f4f7f6]">
-                <div class="max-w-7xl mx-auto">
-                    <!-- 卡片包裹层 -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 min-h-[600px]">
-                        @RenderBody()
-                    </div>
+                <div class="max-w-[1200px] mx-auto">
+                    @RenderBody()
                 </div>
             </main>
         </div>
@@ -258,11 +255,44 @@
 
             // 自动展开当前活动链接所在的组
             const currentFull = window.location.pathname + window.location.search;
+            const currentPath = window.location.pathname;
+            const params = new URLSearchParams(window.location.search);
+
             $('.menu-content a').each(function() {
                 const linkHref = $(this).attr('href');
-                if (linkHref === currentFull || linkHref === window.location.pathname) {
-                    $(this).addClass('text-brand font-bold');
-                    $(this).parent().show().prev('.menu-trigger').find('svg').last().addClass('rotate-180');
+                const linkPath = linkHref.split('?')[0];
+                const linkParams = new URLSearchParams(linkHref.split('?')[1] || '');
+                
+                let isMatch = (linkHref === currentFull || linkHref === currentPath);
+
+                // 特殊处理地理模块 (Geos) 的联动激活
+                if (!isMatch && currentPath.includes('/Admin/Geos')) {
+                    if (linkPath === '/Admin/Geos') {
+                        const cLevel = params.get('level') || params.get('Level') || '';
+                        const cNature = params.get('nature') || params.get('Nature') || 'Domestic';
+                        
+                        const lLevel = linkParams.get('Level') || '';
+                        const lNature = linkParams.get('Nature') || 'Domestic';
+
+                        // 海外城镇逻辑：如果两者都是 Overseas，则忽略 Level 直接匹配
+                        if (cNature === 'Overseas' && lNature === 'Overseas') {
+                            isMatch = true;
+                        } else if (cLevel == lLevel && cNature == lNature) {
+                            isMatch = true;
+                        }
+                    }
+                } 
+                // 通用逻辑：如果是其他模块的 Create/Edit 页面
+                else if (!isMatch && currentPath.startsWith(linkPath) && linkPath !== '/Admin') {
+                    if (currentPath.includes('/Create') || currentPath.includes('/Edit')) {
+                        isMatch = true;
+                    }
+                }
+
+                if (isMatch) {
+                    $(this).addClass('text-brand font-bold bg-white/5 rounded-lg');
+                    const $group = $(this).parent();
+                    $group.show().prev('.menu-trigger').find('svg').last().addClass('rotate-180').parent().addClass('text-brand');
                 }
             });
         });

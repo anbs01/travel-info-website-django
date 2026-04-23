@@ -35,7 +35,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
         if (!string.IsNullOrEmpty(Category))
         {
-            query = query.Where(it => it.Category == Category);
+            query = query.Where(it => it.Classification == Category);
         }
 
         if (!string.IsNullOrEmpty(Search))

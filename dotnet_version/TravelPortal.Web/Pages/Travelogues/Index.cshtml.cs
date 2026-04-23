@@ -26,7 +26,7 @@ namespace TravelPortal.Web.Pages.Travelogues
 
             if (!string.IsNullOrEmpty(Category) && Category != "all")
             {
-                query = query.Where(t => t.Category == Category);
+                query = query.Where(t => t.Classification == Category);
             }
 
             Travelogues = query.OrderByDescending(t => t.IsSticky)

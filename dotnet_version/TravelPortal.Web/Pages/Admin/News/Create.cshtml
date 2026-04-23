@@ -37,7 +37,7 @@
                 @foreach (var cat in Model.NewsCategories)
                 {
                     <label class="flex items-center space-x-2 cursor-pointer group">
-                        <input type="radio" asp-for="News.Category" value="@cat.Name" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
+                        <input type="radio" asp-for="News.NewsCategory" value="@cat.Name" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
                         <span class="text-sm text-gray-600 group-hover:text-brand">@cat.Name</span>
                     </label>
                 }
@@ -86,7 +86,7 @@
         <div class="flex items-start space-x-6">
             <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right">文章概述</label>
             <div class="flex-1 space-y-2">
-                <textarea asp-for="News.Excerpt" rows="3" placeholder="请输入文章概述（120字以内），若不填写将自动从正文截取..."
+                <textarea asp-for="News.Summary" rows="3" placeholder="请输入文章概述（120字以内），若不填写将自动从正文截取..."
                           class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-brand/20 transition-all"></textarea>
             </div>
         </div>

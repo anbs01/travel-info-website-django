@@ -5,7 +5,7 @@
 }
 
 <div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-20" 
-     x-data="{ mainCategory: '@Model.Travelogue.Category', imageUrl: '' }">
+     x-data="{ mainCategory: '@Model.Travelogue.Classification', imageUrl: '' }">
     <partial name="_TinyMCE" model='new { Selector = "#editor", Height = 600 }' />
     <!-- 头部 -->
     <div class="px-10 py-6 border-b border-gray-50 bg-gray-50/50">
@@ -33,11 +33,11 @@
             <label class="w-24 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>作品分类</label>
             <div class="flex items-center space-x-6">
                 <label class="flex items-center space-x-2 cursor-pointer group">
-                    <input type="radio" asp-for="Travelogue.Category" value="travelogue" x-model="mainCategory" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
+                    <input type="radio" asp-for="Travelogue.Classification" value="travelogue" x-model="mainCategory" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
                     <span class="text-sm text-gray-600 group-hover:text-brand">纪行</span>
                 </label>
                 <label class="flex items-center space-x-2 cursor-pointer group">
-                    <input type="radio" asp-for="Travelogue.Category" value="guide" x-model="mainCategory" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
+                    <input type="radio" asp-for="Travelogue.Classification" value="guide" x-model="mainCategory" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
                     <span class="text-sm text-gray-600 group-hover:text-brand">攻略</span>
                 </label>
                 <span class="text-[10px] text-red-400">(当选择攻略时出来下边的选择框)</span>

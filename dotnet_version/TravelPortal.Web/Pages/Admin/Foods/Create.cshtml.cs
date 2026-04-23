@@ -31,7 +31,7 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     public void OnGet()
     {
         LoadData();
-        Food.Category = "美食"; // 默认选中美食
+        Food.ProductType = "美食"; // 默认选中美食
     }
 
     private void LoadData()
@@ -58,14 +58,9 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         }
 
         // 处理根据分类清除不相关的字段
-        if (Food.Category == "美食")
+        if (Food.ProductType == "美食")
         {
-            Food.SpecialtyCategory = null;
             Food.SpecialtyLevel = null;
-        }
-        else
-        {
-            Food.Cuisine = null;
         }
 
         Food.CreatedAt = DateTime.Now;

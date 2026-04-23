@@ -4,7 +4,7 @@
     ViewData["Title"] = "发布文创产品";
 }
 
-<div class="max-w-5xl mx-auto pb-20" x-data="creativeForm()">
+<div class="pb-20" x-data="creativeForm()">
     <!-- Breadcrumb -->
     <nav class="flex items-center gap-2 text-sm text-gray-500 mb-6">
         <a href="/Admin/CreativeProducts" class="hover:text-indigo-600 transition-colors">文创产品</a>
@@ -36,7 +36,7 @@
                                 @foreach (var cat in Model.Categories)
                                 {
                                     <label class="flex items-center space-x-2 cursor-pointer group">
-                                        <input type="radio" asp-for="Product.Category" value="@cat" required
+                                        <input type="radio" asp-for="Product.Classification" value="@cat" required
                                                class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500 transition-all">
                                         <span class="text-sm text-gray-600 group-hover:text-indigo-600 transition-colors">@cat</span>
                                     </label>
@@ -54,14 +54,14 @@
                                 @foreach (var level in new[] { "国家级", "省级", "市级", "县级" })
                                 {
                                     <label class="relative flex items-center group cursor-pointer">
-                                        <input type="radio" asp-for="Product.LevelTag" value="@level" class="peer sr-only">
+                                        <input type="radio" asp-for="Product.NonLegacyLevel" value="@level" class="peer sr-only">
                                         <div class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-600 peer-checked:bg-indigo-50 peer-checked:border-indigo-600 peer-checked:text-indigo-700 transition-all group-hover:border-indigo-300">
                                             @level
                                         </div>
                                     </label>
                                 }
                                 <label class="relative flex items-center group cursor-pointer">
-                                    <input type="radio" asp-for="Product.LevelTag" value="" class="peer sr-only">
+                                    <input type="radio" asp-for="Product.NonLegacyLevel" value="" class="peer sr-only">
                                     <div class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-600 peer-checked:bg-gray-100 peer-checked:border-gray-400 peer-checked:text-gray-900 transition-all">
                                         无级别
                                     </div>
@@ -157,7 +157,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">原文链接</label>
-                            <input type="url" asp-for="Product.OriginalUrl" placeholder="https://..."
+                            <input type="url" asp-for="Product.OriginUrl" placeholder="https://..."
                                    class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all">
                         </div>
                         <div>
