@@ -1,0 +1,72 @@
+@page "{id:int}"
+@model TravelPortal.Web.Pages.Admin.Transports.EditModel
+@{
+    ViewData["Title"] = "编辑交通点";
+}
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]">
+    <partial name="_AdminPageHeader" model='new { 
+        Title = "编辑交通点", 
+        Subtitle = "Transportation Facilities Management",
+        Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z\"/></svg>",
+        Tabs = new[] {
+            new { Name = "交通设施", Url = Url.Page("Index"), IsActive = false },
+            new { Name = "编辑交通点", Url = "#", IsActive = true }
+        }
+    }' />
+
+    <form method="post" class="p-8 space-y-8">
+        <input type="hidden" asp-for="Transport.Id" />
+        <input type="hidden" asp-for="Transport.CreatedAt" />
+
+        <div class="grid grid-cols-2 gap-8">
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">交通点名称</label>
+                    <input asp-for="Transport.Title" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：烟台蓬莱国际机场" required />
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">交通类型</label>
+                    <select asp-for="Transport.TransportType" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium">
+                        <option value="Airport">机场</option>
+                        <option value="Railway">火车站</option>
+                        <option value="Bus">汽车站</option>
+                        <option value="Pier">码头</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">关联城镇</label>
+                    <select asp-for="Transport.GeoId" asp-items="Model.GeoOptions" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium">
+                        <option value="">-- 请选择 --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">联系电话</label>
+                    <input asp-for="Transport.ContactPhone" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="0535-XXXXXXX" />
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">详细地址</label>
+                    <input asp-for="Transport.Address" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
+                </div>
+
+                <div>
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input type="checkbox" asp-for="Transport.IsHidden" class="w-4 h-4 rounded border-gray-300 text-brand" />
+                        <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">屏蔽显示</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-gray-50 flex justify-end space-x-4">
+            <a asp-page="Index" class="px-8 py-3 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">取消</a>
+            <button type="submit" class="px-10 py-3 bg-brand text-white rounded-xl text-sm font-bold shadow-xl shadow-brand/20 hover:scale-105 active:scale-95 transition-all">保存修改</button>
+        </div>
+    </form>
+</div>

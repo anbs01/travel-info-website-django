@@ -19,26 +19,19 @@
     ViewData["Title"] = title;
 }
 
-<div class="space-y-6">
-    <!-- 1. 标题与选项卡 -->
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="px-8 py-4 border-b border-gray-50 flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-                <h1 class="text-lg font-bold text-gray-800">@title</h1>
-                @if (Model.ParentGeo != null)
-                {
-                    <span class="px-3 py-1 bg-brand/10 text-brand text-xs rounded-full font-bold">上级：@Model.ParentGeo.Title</span>
-                }
-            </div>
-        </div>
-        <div class="flex border-b border-gray-50 bg-gray-50/30">
-            <a asp-page="Index" asp-route-parentId="@Model.ParentId" asp-route-level="@Model.Level" asp-route-nature="@Model.Nature" 
-               class="px-8 py-4 text-sm font-bold border-t-2 border-brand bg-white text-brand transition-all">@listTitle</a>
-            <a asp-page="Create" asp-route-parentId="@Model.ParentId" asp-route-level="@(Model.Level ?? (Model.ParentGeo?.Level + 1) ?? 1)" asp-route-nature="@Model.Nature" 
-               class="px-8 py-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">@createTitle</a>
-        </div>
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]">
+<partial name="_AdminPageHeader" model='new { 
+    Title = title, 
+    Subtitle = "Global Geographic Content Management System",
+    Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z\"/><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15 11a3 3 0 11-6 0 3 3 0 016 0z\"/></svg>",
+    Tabs = new[] {
+        new { Name = listTitle, Url = Url.Page("Index", new { parentId = Model.ParentId, level = Model.Level, nature = Model.Nature }), IsActive = true },
+        new { Name = createTitle, Url = Url.Page("Create", new { parentId = Model.ParentId, level = (Model.Level ?? (Model.ParentGeo?.Level + 1) ?? 1), nature = Model.Nature }), IsActive = false }
+    },
+    RightContent = Model.ParentGeo != null ? $"<span class=\"px-3 py-1.5 bg-brand/10 text-brand text-xs rounded-xl font-bold\">上级：{Model.ParentGeo.Title}</span>" : null
+}' />
 
-        <div class="p-6">
+<div class="p-6">
             <table class="w-full text-left text-sm">
                 <thead class="bg-gray-50/50 text-gray-400 font-bold uppercase tracking-wider text-[10px]">
                     <tr>
@@ -85,7 +78,6 @@
                     }
                 </tbody>
             </table>
-        </div>
     </div>
 </div>
 

@@ -9,6 +9,12 @@ namespace TravelPortal.Web.Models;
 public class ScenicSpot : BaseContent
 {
     /// <summary>
+    /// 打卡点类别（从热词中选取）
+    /// </summary>
+    [SugarColumn(Length = 100, IsNullable = true)]
+    public string? Classification { get; set; }
+
+    /// <summary>
     /// 名气级别（知名景区、热门景点、小众秘境、城市地标、网红打卡地）
     /// </summary>
     [SugarColumn(Length = 50, IsNullable = true)]

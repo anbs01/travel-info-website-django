@@ -10,36 +10,27 @@
     else if (Model.Geo.Level >= 3) listTitle = "城镇列表";
 }
 
-<div class="pb-20">
-    <!-- 1. 顶部标题与导航 -->
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
-        <div class="px-8 py-4 border-b border-gray-50 flex items-center justify-between bg-white">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-brand/10 rounded-xl flex items-center justify-center text-brand">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                </div>
-                <div>
-                    <h1 class="text-lg font-bold text-gray-800">@ViewData["Title"]</h1>
-                    <p class="text-[10px] text-gray-400 uppercase tracking-widest">Geo-Content Management System</p>
-                </div>
-            </div>
-        </div>
-        <div class="flex border-b border-gray-50 bg-gray-50/30">
-            <a asp-page="Index" asp-route-parentId="@Model.Geo.ParentId" asp-route-level="@Model.Geo.Level" asp-route-nature="@Model.Geo.Nature" 
-               class="px-8 py-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">@listTitle</a>
-            <a href="#" class="px-8 py-4 text-sm font-bold border-t-2 border-brand bg-white text-brand transition-all">@Model.PageTitle</a>
-        </div>
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]">
+<partial name="_AdminPageHeader" model='new { 
+    Title = Model.PageTitle, 
+    Subtitle = "Global Geographic Content Management System",
+    Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z\"/><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15 11a3 3 0 11-6 0 3 3 0 016 0z\"/></svg>",
+    Tabs = new[] {
+        new { Name = listTitle, Url = Url.Page("Index", new { parentId = Model.Geo.ParentId, level = Model.Geo.Level, nature = Model.Geo.Nature }), IsActive = false },
+        new { Name = Model.PageTitle, Url = "#", IsActive = true }
+    }
+}' />
 
-        <form method="post" enctype="multipart/form-data" class="p-8 space-y-10">
+<form method="post" enctype="multipart/form-data" class="p-8 space-y-10">
             <input type="hidden" asp-for="Geo.Level" />
             <input type="hidden" asp-for="Geo.Nature" />
             <input type="hidden" asp-for="Geo.ParentId" />
 
             <!-- 第一部分：核心识别属性 -->
             <section class="space-y-6">
-                <div class="flex items-center space-x-2 pb-2 border-b border-gray-50">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
-                    <h2 class="text-xs font-bold text-gray-800 uppercase tracking-wider">核心属性</h2>
+                <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                    <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                    <h2 class="text-lg font-bold text-gray-900">核心属性</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="md:col-span-1">
@@ -59,9 +50,9 @@
 
             <!-- 第二部分：地理与行政信息 -->
             <section class="space-y-6">
-                <div class="flex items-center space-x-2 pb-2 border-b border-gray-50">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
-                    <h2 class="text-xs font-bold text-gray-800 uppercase tracking-wider">地理信息</h2>
+                <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                    <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                    <h2 class="text-lg font-bold text-gray-900">地理信息</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
@@ -106,9 +97,9 @@
 
             <!-- 第三部分：内容与多媒体 -->
             <section class="space-y-6">
-                <div class="flex items-center space-x-2 pb-2 border-b border-gray-50">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
-                    <h2 class="text-xs font-bold text-gray-800 uppercase tracking-wider">内容配置</h2>
+                <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                    <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                    <h2 class="text-lg font-bold text-gray-900">内容配置</h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -179,9 +170,9 @@
 
             <!-- 第四部分：高级与显示设置 -->
             <section class="space-y-6">
-                <div class="flex items-center space-x-2 pb-2 border-b border-gray-50">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
-                    <h2 class="text-xs font-bold text-gray-800 uppercase tracking-wider">显示设置</h2>
+                <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                    <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                    <h2 class="text-lg font-bold text-gray-900">显示设置</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gray-50/50 p-6 rounded-2xl border border-gray-100">
                     <div class="flex items-center justify-between">
@@ -223,7 +214,6 @@
                 </button>
             </div>
         </form>
-    </div>
 </div>
 
 @section Scripts {

@@ -4,111 +4,123 @@
     ViewData["Title"] = "发布资讯";
 }
 
-<div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-20" 
-     x-data="{ imageUrl: '' }">
-    
-    <partial name="_TinyMCE" model='new { Selector = "#editor", Height = 600 }' />
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]" x-data="{ imageUrl: '' }">
+    <partial name="_AdminPageHeader" model='new { 
+        Title = "发布资讯", 
+        Subtitle = "Industry News & Information Management",
+        Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z\"/></svg>",
+        Tabs = new[] {
+            new { Name = "资讯列表", Url = Url.Page("Index"), IsActive = false },
+            new { Name = "发布资讯", Url = Url.Page("Create"), IsActive = true }
+        }
+    }' />
 
-    <!-- 头部 -->
-    <div class="px-10 py-6 border-b border-gray-50 bg-gray-50/50">
-        <h1 class="text-xl font-bold text-gray-800">发布资讯</h1>
-        <div class="flex space-x-4 mt-2 text-xs text-gray-400">
-            <span>行业资讯</span>
-            <span>&gt;</span>
-            <span class="text-brand font-bold">发布文章</span>
-        </div>
-    </div>
-
-    <form method="post" enctype="multipart/form-data" class="p-10 space-y-10">
-        
-        <!-- 1. 文章标题 -->
-        <div class="flex items-start space-x-6">
-            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>文章标题</label>
-            <div class="flex-1 space-y-2">
-                <input type="text" asp-for="News.Title" placeholder="请输入资讯标题..." 
-                       class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl text-lg font-bold focus:ring-2 focus:ring-brand/20 transition-all" required />
+    <form method="post" enctype="multipart/form-data" class="p-8 space-y-10">
+        <!-- Section 1: Core Info -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                <h2 class="text-lg font-bold text-gray-900">核心信息</h2>
             </div>
-        </div>
 
-        <!-- 2. 文章分类 -->
-        <div class="flex items-start space-x-6">
-            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>文章分类</label>
-            <div class="flex-1 flex flex-wrap gap-4">
-                @foreach (var cat in Model.NewsCategories)
-                {
-                    <label class="flex items-center space-x-2 cursor-pointer group">
-                        <input type="radio" asp-for="News.NewsCategory" value="@cat.Name" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
-                        <span class="text-sm text-gray-600 group-hover:text-brand">@cat.Name</span>
-                    </label>
-                }
-                @if (!Model.NewsCategories.Any())
-                {
-                    <span class="text-xs text-gray-400 italic">请先在“综合管理 > 类别热词”中添加勾选了“资讯类别”的词条</span>
-                }
-            </div>
-        </div>
+            <div class="space-y-8">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">文章标题 <span class="text-red-500">*</span></label>
+                    <input type="text" asp-for="News.Title" placeholder="请输入资讯标题..." 
+                           class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl text-lg font-bold focus:ring-2 focus:ring-brand/20 transition-all" required />
+                </div>
 
-        <!-- 3. 上传焦点图 -->
-        <div class="flex items-start space-x-6">
-            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right">焦点图</label>
-            <div class="flex-1">
-                <div class="relative w-full aspect-[21/9] rounded-3xl overflow-hidden bg-gray-50 border-2 border-dashed border-gray-200 group hover:border-brand/30 transition-all cursor-pointer"
-                     @@click="$refs.fileInput.click()">
-                    <!-- 预览 -->
-                    <template x-if="imageUrl">
-                        <img :src="imageUrl" class="w-full h-full object-cover" />
-                    </template>
-                    <template x-if="!imageUrl">
-                        <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-300">
-                            <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            <span class="text-sm font-medium">点击上传文章焦点图</span>
-                        </div>
-                    </template>
-                    <!-- 蒙层 -->
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <span class="px-6 py-2 bg-white rounded-full text-sm font-bold text-gray-800">选择图片</span>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-3">文章分类 <span class="text-red-500">*</span></label>
+                    <div class="flex flex-wrap gap-6 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                        @foreach (var cat in Model.NewsCategories)
+                        {
+                            <label class="flex items-center space-x-2 cursor-pointer group">
+                                <input type="radio" asp-for="News.NewsCategory" value="@cat.Name" class="w-5 h-5 text-brand border-gray-300 focus:ring-brand" />
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-brand">@cat.Name</span>
+                            </label>
+                        }
+                        @if (!Model.NewsCategories.Any())
+                        {
+                            <span class="text-xs text-gray-400 italic">请先在“综合管理 > 类别热词”中添加勾选了“资讯类别”的词条</span>
+                        }
                     </div>
-                    <input type="file" asp-for="MainImageFile" x-ref="fileInput" class="hidden" 
-                           x-on:change="if($event.target.files[0]) imageUrl = URL.createObjectURL($event.target.files[0])" />
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- 4. 正文内容 -->
-        <div class="flex items-start space-x-6">
-            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right"><span class="text-red-500">*</span>正文内容</label>
-            <div class="flex-1">
-                <textarea id="editor" asp-for="News.Content"></textarea>
+        <!-- Section 2: Content & Media -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                <h2 class="text-lg font-bold text-gray-900">内容与媒体</h2>
             </div>
-        </div>
 
-        <!-- 5. 文章概述 -->
-        <div class="flex items-start space-x-6">
-            <label class="w-24 pt-3 text-sm font-bold text-gray-700 text-right">文章概述</label>
-            <div class="flex-1 space-y-2">
-                <textarea asp-for="News.Summary" rows="3" placeholder="请输入文章概述（120字以内），若不填写将自动从正文截取..."
-                          class="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-brand/20 transition-all"></textarea>
-            </div>
-        </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="md:col-span-2 space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-3">正文内容 <span class="text-red-500">*</span></label>
+                        <textarea id="editor" asp-for="News.Content"></textarea>
+                    </div>
+                </div>
 
-        <!-- 6. 作者与来源 -->
-        <div class="grid grid-cols-2 gap-10">
-            <div class="flex items-center space-x-6">
-                <label class="w-24 text-sm font-bold text-gray-700 text-right">文章作者</label>
-                <input type="text" asp-for="News.Author" class="flex-1 px-4 py-2 bg-gray-50 border-none rounded-lg text-sm focus:ring-2 focus:ring-brand/20" />
-            </div>
-            <div class="flex items-center space-x-6">
-                <label class="w-24 text-sm font-bold text-gray-700 text-right">文章来源</label>
-                <input type="text" asp-for="News.Source" class="flex-1 px-4 py-2 bg-gray-50 border-none rounded-lg text-sm focus:ring-2 focus:ring-brand/20" />
-            </div>
-        </div>
+                <div class="md:col-span-1 space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-3">焦点图</label>
+                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-gray-50 border-2 border-dashed border-gray-200 group hover:border-brand transition-all cursor-pointer"
+                             @@click="$refs.fileInput.click()">
+                            <template x-if="imageUrl">
+                                <img :src="imageUrl" class="w-full h-full object-cover" />
+                            </template>
+                            <template x-if="!imageUrl">
+                                <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-300">
+                                    <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    <span class="text-xs font-medium text-gray-400">点击上传焦点图</span>
+                                </div>
+                            </template>
+                            <input type="file" asp-for="MainImageFile" x-ref="fileInput" class="hidden" 
+                                   x-on:change="if($event.target.files[0]) imageUrl = URL.createObjectURL($event.target.files[0])" />
+                        </div>
+                    </div>
 
-        <!-- 7. 提交 -->
-        <div class="pt-10 border-t border-gray-50 flex items-center justify-end space-x-4">
-            <a asp-page="./Index" class="px-10 py-4 rounded-2xl text-sm font-bold text-gray-400 hover:bg-gray-50 transition-all">返回列表</a>
-            <button type="submit" class="px-12 py-4 bg-brand text-white rounded-2xl text-sm font-bold shadow-xl shadow-brand/20 hover:scale-105 active:scale-95 transition-all">
-                立即发布
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">文章概述</label>
+                        <textarea asp-for="News.Summary" rows="6" placeholder="请输入文章概述（120字以内），若不填写将自动从正文截取..."
+                                  class="w-full px-4 py-3 bg-gray-50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-brand/20 transition-all"></textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Metadata -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                <h2 class="text-lg font-bold text-gray-900">发布信息</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">文章作者</label>
+                        <input type="text" asp-for="News.Author" class="w-full px-4 py-3 bg-gray-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-brand/20" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">文章来源</label>
+                        <input type="text" asp-for="News.Source" class="w-full px-4 py-3 bg-gray-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-brand/20" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actions -->
+        <div class="pt-10 flex items-center justify-end gap-4 border-t border-gray-50">
+            <a asp-page="./Index" class="px-8 py-3 rounded-xl text-sm font-bold text-gray-400 hover:bg-gray-50 transition-all">取消</a>
+            <button type="submit" class="px-12 py-3 bg-brand text-white rounded-xl font-bold shadow-xl shadow-brand/30 hover:-translate-y-0.5 active:scale-95 transition-all">
+                立即发布资讯
             </button>
         </div>
     </form>
 </div>
+
+<partial name="_TinyMCE" model='new { Selector = "#editor", Height = 600 }' />

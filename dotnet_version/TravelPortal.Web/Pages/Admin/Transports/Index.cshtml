@@ -4,16 +4,16 @@
     ViewData["Title"] = "交通管理";
 }
 
-<div class="space-y-6">
-    <!-- 1. 标题与选项卡 -->
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="px-8 py-4 border-b border-gray-50 flex items-center justify-between">
-            <h1 class="text-lg font-bold text-gray-800">交通设施</h1>
-        </div>
-        <div class="flex border-b border-gray-50 bg-gray-50/30">
-            <a asp-page="Index" class="px-8 py-4 text-sm font-bold border-t-2 border-brand bg-white text-brand transition-all">交通设施</a>
-            <a asp-page="Create" class="px-8 py-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">发布交通点</a>
-        </div>
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]">
+    <partial name="_AdminPageHeader" model='new { 
+        Title = "交通设施管理", 
+        Subtitle = "Transportation Facilities Management",
+        Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4\"></path></svg>",
+        Tabs = new[] {
+            new { Name = "交通设施", Url = Url.Page("Index"), IsActive = true },
+            new { Name = "发布交通点", Url = Url.Page("Create"), IsActive = false }
+        }
+    }' />
 
         <div class="p-6">
             <table class="w-full text-left text-sm">
@@ -53,7 +53,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
 </div>
 
 @functions {

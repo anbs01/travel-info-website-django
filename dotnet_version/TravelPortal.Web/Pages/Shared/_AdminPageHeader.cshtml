@@ -1,0 +1,70 @@
+@model dynamic
+@{
+    /*
+     * 参数预期：
+     * Model.Title: 页面大标题
+     * Model.Subtitle: 页面说明（可选）
+     * Model.Icon: SVG 图标路径或图标名称（可选）
+     * Model.Tabs: 选项卡列表，格式：new[] { new { Name = "列表", Url = "...", IsActive = true }, ... }
+     */
+    string title = Model.Title ?? "管理页面";
+    string subtitle = Model.Subtitle ?? "Content Management System";
+    var tabs = Model.Tabs as IEnumerable<dynamic> ?? Array.Empty<dynamic>();
+}
+
+<div class="bg-white border-b border-gray-100">
+    <!-- 1. 顶部标题区域 -->
+    <div class="px-8 py-5 flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+            @if (Model.Icon != null)
+            {
+                <div class="w-12 h-12 bg-brand/5 rounded-2xl flex items-center justify-center text-brand">
+                    @if (Model.Icon is string iconStr && iconStr.StartsWith("<svg"))
+                    {
+                        @Html.Raw(Model.Icon)
+                    }
+                    else
+                    {
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                        </svg>
+                    }
+                </div>
+            }
+            <div>
+                <h1 class="text-xl font-bold text-gray-900 tracking-tight">@title</h1>
+                <p class="text-[11px] text-gray-400 uppercase tracking-[0.2em] mt-0.5">@subtitle</p>
+            </div>
+        </div>
+        
+        <!-- 顶部右侧预留位 (如：快速搜索或按钮) -->
+        @try {
+            if (Model.RightContent != null)
+            {
+                <div>@Html.Raw(Model.RightContent)</div>
+            }
+        } catch { }
+    </div>
+
+    <!-- 2. 横线选项卡导航 -->
+    @if (tabs.Any())
+    {
+        <div class="flex px-8 bg-gray-50/30">
+            @foreach (var tab in tabs)
+            {
+                <a href="@tab.Url" 
+                   class="px-6 py-4 text-sm font-bold transition-all relative group @(tab.IsActive ? "text-brand" : "text-gray-400 hover:text-gray-600")">
+                    @tab.Name
+                    @if (tab.IsActive)
+                    {
+                        <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-brand rounded-full"></span>
+                    }
+                    else
+                    {
+                        <span class="absolute bottom-0 left-1/2 right-1/2 h-0.5 bg-brand/0 group-hover:left-0 group-hover:right-0 group-hover:bg-brand/20 transition-all rounded-full"></span>
+                    }
+                </a>
+            }
+        </div>
+    }
+</div>

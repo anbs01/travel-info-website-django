@@ -4,16 +4,16 @@
     ViewData["Title"] = "故事攻略";
 }
 
-<div class="space-y-6">
-    <!-- 1. 标题与选项卡 -->
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="px-8 py-4 border-b border-gray-50 flex items-center justify-between">
-            <h1 class="text-lg font-bold text-gray-800">故事攻略</h1>
-        </div>
-        <div class="flex border-b border-gray-50 bg-gray-50/30">
-            <a asp-page="Index" class="px-8 py-4 text-sm font-bold border-t-2 border-brand bg-white text-brand transition-all">纪行攻略</a>
-            <a asp-page="Create" class="px-8 py-4 text-sm font-bold text-gray-400 hover:text-gray-600 transition-all">发布作品</a>
-        </div>
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]">
+    <partial name="_AdminPageHeader" model='new { 
+        Title = "故事攻略", 
+        Subtitle = "Travel Guides & Experience Sharing",
+        Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253\"/></svg>",
+        Tabs = new[] {
+            new { Name = "纪行攻略", Url = Url.Page("Index"), IsActive = true },
+            new { Name = "发布作品", Url = Url.Page("Create"), IsActive = false }
+        }
+    }' />
 
         <!-- 2. 操作与筛选栏 -->
         <form method="get" class="p-6 flex flex-wrap items-center justify-between gap-4 bg-white">
@@ -106,7 +106,6 @@
                  <span class="w-8 h-8 flex items-center justify-center rounded bg-brand text-white text-xs font-bold">1</span>
              </div>
         </div>
-    </div>
 </div>
 
 <script>

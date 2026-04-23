@@ -14,7 +14,7 @@ namespace TravelPortal.Web.Pages.Admin.News
             _db = db;
         }
 
-        public List<Models.News> NewsList { get; set; } = new();
+        public PaginatedList<Models.News> NewsList { get; set; } = null!;
 
         [BindProperty(SupportsGet = true)]
         public string? Keyword { get; set; }
@@ -22,27 +22,23 @@ namespace TravelPortal.Web.Pages.Admin.News
         [BindProperty(SupportsGet = true)]
         public string? Category { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public int PageIndex { get; set; } = 1;
+
         public List<HotWord> NewsCategories { get; set; } = new();
 
         public void OnGet()
         {
-            var query = _db.Queryable<Models.News>();
+            var query = _db.Queryable<Models.News>()
+                .WhereIF(!string.IsNullOrEmpty(Keyword), n => n.Title.Contains(Keyword!))
+                .WhereIF(!string.IsNullOrEmpty(Category), n => n.NewsCategory == Category)
+                .OrderByDescending(n => n.IsSticky)
+                .OrderByDescending(n => n.CreatedAt);
 
-            if (!string.IsNullOrEmpty(Keyword))
-            {
-                query = query.Where(n => n.Title.Contains(Keyword));
-            }
+            int totalCount = 0;
+            var items = query.ToPageList(PageIndex, 10, ref totalCount);
+            NewsList = new PaginatedList<Models.News>(items, totalCount, PageIndex, 10);
 
-            if (!string.IsNullOrEmpty(Category))
-            {
-                query = query.Where(n => n.NewsCategory == Category);
-            }
-
-            NewsList = query.OrderByDescending(n => n.IsSticky)
-                            .OrderByDescending(n => n.CreatedAt)
-                            .ToList();
-
-            // 加载分类供筛选
             NewsCategories = _db.Queryable<HotWord>()
                 .Where(h => h.ShowInNews && !h.IsHidden)
                 .OrderBy(h => h.SortOrder)

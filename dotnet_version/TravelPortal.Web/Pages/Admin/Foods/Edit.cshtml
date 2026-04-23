@@ -4,7 +4,17 @@
     ViewData["Title"] = "编辑特色美食";
 }
 
-<div class="pb-20" x-data="foodForm('@Model.Food.MainImage')">
+<partial name="_AdminPageHeader" model='new { 
+    Title = "编辑特色美食", 
+    Subtitle = "Regional Specialty & Food Management",
+    Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z\"/></svg>",
+    Tabs = new[] {
+        new { Name = "美食列表", Url = Url.Page("Index"), IsActive = false },
+        new { Name = "编辑详情", Url = "#", IsActive = true }
+    }
+}' />
+
+<div class="mt-6" x-data="foodForm('@Model.Food.MainImage')">
     <form method="post" enctype="multipart/form-data" class="space-y-8">
         <input type="hidden" asp-for="Food.Id" />
         <input type="hidden" asp-for="Food.MainImage" />
@@ -12,12 +22,6 @@
         <!-- 1. 基本信息卡片 -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="p-8 space-y-8">
-                <div class="flex items-center justify-between border-b border-gray-50 pb-4">
-                    <h1 class="text-xl font-bold text-gray-900 flex items-center">
-                        <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-3"></span>
-                        编辑特色美食/特产
-                    </h1>
-                </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- 产品名称 -->
