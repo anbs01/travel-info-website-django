@@ -282,9 +282,11 @@
                         }
                     }
                 } 
-                // 通用逻辑：如果是其他模块的 Create/Edit 页面
+                // 通用逻辑：如果是其他模块的 Create/Edit 页面，只激活非列表链接
                 else if (!isMatch && currentPath.startsWith(linkPath) && linkPath !== '/Admin') {
-                    if (currentPath.includes('/Create') || currentPath.includes('/Edit')) {
+                    const isCreateOrEdit = currentPath.includes('/Create') || currentPath.includes('/Edit');
+                    const linkIsIndex = !linkHref.includes('/Create') && !linkHref.includes('/Edit');
+                    if (isCreateOrEdit && !linkIsIndex) {
                         isMatch = true;
                     }
                 }
