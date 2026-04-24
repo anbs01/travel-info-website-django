@@ -8,9 +8,6 @@ namespace TravelPortal.Web.Models;
 [SugarTable("tp_hot_words")]
 public class HotWord
 {
-    /// <summary>
-    /// 主键 ID
-    /// </summary>
     [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
     public int Id { get; set; }
 
@@ -21,49 +18,10 @@ public class HotWord
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// 是否显示在：首页搜索词
+    /// 所属模块：home / place / scenic / travelogue / guide / specialty / cuisine / creative / news
     /// </summary>
-    public bool ShowInHome { get; set; } = false;
-
-    /// <summary>
-    /// 是否显示在：城乡搜索词
-    /// </summary>
-    public bool ShowInPlace { get; set; } = false;
-
-    /// <summary>
-    /// 是否显示在：打卡地类别
-    /// </summary>
-    public bool ShowInScenic { get; set; } = false;
-
-    /// <summary>
-    /// 是否显示在：纪行类别
-    /// </summary>
-    public bool ShowInTravelogue { get; set; } = false;
-
-    /// <summary>
-    /// 是否显示在：攻略类别
-    /// </summary>
-    public bool ShowInGuide { get; set; } = false;
-
-    /// <summary>
-    /// 是否显示在：特产类别
-    /// </summary>
-    public bool ShowInSpecialty { get; set; } = false;
-
-    /// <summary>
-    /// 是否显示在：美食菜系
-    /// </summary>
-    public bool ShowInCuisine { get; set; } = false;
-
-    /// <summary>
-    /// 是否显示在：文创类别
-    /// </summary>
-    public bool ShowInCreative { get; set; } = false;
-
-    /// <summary>
-    /// 是否显示在：资讯类别
-    /// </summary>
-    public bool ShowInNews { get; set; } = false;
+    [SugarColumn(Length = 50)]
+    public string Module { get; set; } = string.Empty;
 
     /// <summary>
     /// 排序权重
@@ -71,7 +29,7 @@ public class HotWord
     public int SortOrder { get; set; } = 0;
 
     /// <summary>
-    /// 是否屏蔽（隐藏）
+    /// 是否屏蔽
     /// </summary>
     public bool IsHidden { get; set; } = false;
 
@@ -79,4 +37,15 @@ public class HotWord
     /// 系统创建时间
     /// </summary>
     public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+    // ── 模块常量，避免魔法字符串 ──────────────────────────
+    public const string MOD_HOME       = "home";
+    public const string MOD_PLACE      = "place";
+    public const string MOD_SCENIC     = "scenic";
+    public const string MOD_TRAVELOGUE = "travelogue";
+    public const string MOD_GUIDE      = "guide";
+    public const string MOD_SPECIALTY  = "specialty";
+    public const string MOD_CUISINE    = "cuisine";
+    public const string MOD_CREATIVE   = "creative";
+    public const string MOD_NEWS       = "news";
 }

@@ -27,7 +27,8 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     private void LoadData()
     {
         ScenicCategories = _db.Queryable<HotWord>()
-            .Where(it => it.ShowInScenic)
+            .Where(it => it.Module == HotWord.MOD_SCENIC && !it.IsHidden)
+            .OrderBy(it => it.SortOrder)
             .Select(it => it.Name)
             .ToList();
     }

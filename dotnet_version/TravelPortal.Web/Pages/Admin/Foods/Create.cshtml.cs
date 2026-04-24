@@ -35,12 +35,14 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     private void LoadData()
     {
         CuisineCategories = _db.Queryable<HotWord>()
-            .Where(it => it.ShowInCuisine)
+            .Where(it => it.Module == HotWord.MOD_CUISINE && !it.IsHidden)
+            .OrderBy(it => it.SortOrder)
             .Select(it => it.Name)
             .ToList();
 
         SpecialtyCategories = _db.Queryable<HotWord>()
-            .Where(it => it.ShowInSpecialty)
+            .Where(it => it.Module == HotWord.MOD_SPECIALTY && !it.IsHidden)
+            .OrderBy(it => it.SortOrder)
             .Select(it => it.Name)
             .ToList();
     }

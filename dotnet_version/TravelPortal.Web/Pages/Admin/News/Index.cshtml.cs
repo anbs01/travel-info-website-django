@@ -40,7 +40,7 @@ namespace TravelPortal.Web.Pages.Admin.News
             NewsList = new PaginatedList<Models.News>(items, totalCount, PageIndex, 10);
 
             NewsCategories = _db.Queryable<HotWord>()
-                .Where(h => h.ShowInNews && !h.IsHidden)
+                .Where(h => h.Module == HotWord.MOD_NEWS && !h.IsHidden)
                 .OrderBy(h => h.SortOrder)
                 .ToList();
         }

@@ -36,7 +36,8 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     private void LoadData()
     {
         Categories = _db.Queryable<HotWord>()
-            .Where(it => it.ShowInCreative)
+            .Where(it => it.Module == HotWord.MOD_CREATIVE && !it.IsHidden)
+            .OrderBy(it => it.SortOrder)
             .Select(it => it.Name)
             .ToList();
     }

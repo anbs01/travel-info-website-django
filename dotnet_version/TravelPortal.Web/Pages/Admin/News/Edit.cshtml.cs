@@ -67,7 +67,7 @@ namespace TravelPortal.Web.Pages.Admin.News
         private async Task LoadDataAsync()
         {
             NewsCategories = await _db.Queryable<HotWord>()
-                .Where(h => h.ShowInNews && !h.IsHidden)
+                .Where(h => h.Module == HotWord.MOD_NEWS && !h.IsHidden)
                 .OrderBy(h => h.SortOrder)
                 .ToListAsync();
         }

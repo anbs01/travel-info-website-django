@@ -27,7 +27,8 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     {
         // 加载分类列表 (从热词库中读取)
         Categories = _db.Queryable<HotWord>()
-            .Where(it => it.ShowInCreative)
+            .Where(it => it.Module == HotWord.MOD_CREATIVE && !it.IsHidden)
+            .OrderBy(it => it.SortOrder)
             .Select(it => it.Name)
             .ToList();
 

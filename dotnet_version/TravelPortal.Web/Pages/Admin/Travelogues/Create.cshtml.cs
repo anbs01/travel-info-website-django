@@ -80,11 +80,11 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
         {
             // 加载热词分类
             TravelogueCategories = await _db.Queryable<HotWord>()
-                .Where(h => h.ShowInTravelogue && !h.IsHidden)
+                .Where(h => h.Module == HotWord.MOD_TRAVELOGUE && !h.IsHidden)
                 .OrderBy(h => h.SortOrder).ToListAsync();
 
             GuideCategories = await _db.Queryable<HotWord>()
-                .Where(h => h.ShowInGuide && !h.IsHidden)
+                .Where(h => h.Module == HotWord.MOD_GUIDE && !h.IsHidden)
                 .OrderBy(h => h.SortOrder).ToListAsync();
         }
     }

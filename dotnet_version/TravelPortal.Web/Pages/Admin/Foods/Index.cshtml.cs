@@ -37,7 +37,8 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     public void OnGet()
     {
         SpecialtyCategories = _db.Queryable<HotWord>()
-            .Where(it => it.ShowInSpecialty)
+            .Where(it => it.Module == HotWord.MOD_SPECIALTY && !it.IsHidden)
+            .OrderBy(it => it.SortOrder)
             .Select(it => it.Name)
             .ToList();
 
