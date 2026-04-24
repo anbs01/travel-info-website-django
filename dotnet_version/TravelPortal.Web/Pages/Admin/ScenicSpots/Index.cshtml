@@ -15,14 +15,8 @@
     }
 }' />
 
-    <!-- 筛选栏 -->
-    <form method="get" class="p-6 flex flex-wrap items-center justify-between gap-4 bg-white border-b border-gray-50">
-        <div class="flex items-center space-x-2">
-            <button type="submit" asp-page-handler="ToggleSticky" formmethod="post" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">置顶</button>
-            <button type="submit" asp-page-handler="ToggleHidden" formmethod="post" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">屏蔽</button>
-            <button type="submit" asp-page-handler="Delete" formmethod="post" onclick="return confirm('确定删除选中项吗？')" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">删除</button>
-        </div>
-
+    <!-- 筛选栏 (GET form) -->
+    <form method="get" id="filterForm" class="p-6 flex flex-wrap items-center justify-between gap-4 bg-white border-b border-gray-50">
         <div class="flex items-center space-x-3">
             <select asp-for="FameLevel" class="px-3 py-1.5 bg-gray-50 border-gray-100 rounded-lg text-xs focus:ring-1 focus:ring-brand/20">
                 <option value="">全部名气</option>
@@ -51,7 +45,16 @@
         </div>
     </form>
 
-    <!-- 数据列表 -->
+    <!-- 操作按钮 + 数据列表 (POST form) -->
+    <form method="post" id="batchForm">
+        <!-- 操作按钮区 -->
+        <div class="px-6 py-3 flex items-center gap-2 border-b border-gray-50">
+            <button type="submit" asp-page-handler="ToggleSticky" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">置顶</button>
+            <button type="submit" asp-page-handler="ToggleHidden" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">屏蔽</button>
+            <button type="submit" asp-page-handler="Delete" onclick="return confirm('确定删除选中项吗？')" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">删除</button>
+        </div>
+
+        <!-- 数据列表 -->
     <div class="overflow-x-auto">
         <table class="w-full text-left text-sm">
             <thead class="bg-gray-50/50 text-gray-400 font-bold uppercase tracking-wider text-[10px]">
@@ -101,8 +104,9 @@
         </table>
     </div>
 
-    <!-- 分页 -->
-    <partial name="_Pagination" model="Model.ScenicSpots.Metadata" />
+        <!-- 分页 -->
+        <partial name="_Pagination" model="Model.ScenicSpots.Metadata" />
+    </form>
 </div>
 
 <script>
