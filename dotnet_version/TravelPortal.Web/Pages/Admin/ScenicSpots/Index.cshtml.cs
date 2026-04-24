@@ -35,8 +35,8 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             });
 
         int total = 0;
-        var items = query.ToPageList(PageIndex, 15, ref total);
-        ScenicSpots = new PaginatedList<ScenicSpot>(items, total, PageIndex, 15);
+        var items = query.ToPageList(PageIndex, 10, ref total);
+        ScenicSpots = new PaginatedList<ScenicSpot>(items, total, PageIndex, 10);
     }
 
     public IActionResult OnPostDelete(int[] ids)

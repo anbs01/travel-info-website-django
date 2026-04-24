@@ -62,7 +62,7 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
-                    @foreach (var item in Model.Travelogues)
+                    @foreach (var item in Model.Travelogues.Items)
                     {
                         <tr class="hover:bg-gray-50/50 transition-colors group">
                             <td class="px-8 py-4"><input type="checkbox" name="ids" value="@item.Id" class="rounded text-brand border-gray-200" /></td>
@@ -103,13 +103,8 @@
             </table>
         </div>
 
-            <!-- 4. 分页占位 -->
-            <div class="p-8 flex items-center justify-center space-x-4">
-                 <span class="text-xs text-gray-400">共 @Model.Travelogues.Count 条</span>
-                 <div class="flex space-x-2">
-                     <span class="w-8 h-8 flex items-center justify-center rounded bg-brand text-white text-xs font-bold">1</span>
-                 </div>
-            </div>
+            <!-- 4. 分页 -->
+            <partial name="_Pagination" model="Model.Travelogues.Metadata" />
         </form>
 </div>
 

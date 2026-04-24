@@ -15,7 +15,7 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
             _db = db;
         }
 
-        public List<Travelogue> Travelogues { get; set; } = new();
+        public PaginatedList<Travelogue> Travelogues { get; set; } = null!;
         public SelectList GeoList { get; set; } = default!;
 
         [BindProperty(SupportsGet = true)]
@@ -27,13 +27,14 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
         [BindProperty(SupportsGet = true)]
         public string? Keyword { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public int PageIndex { get; set; } = 1;
+
         public async Task OnGetAsync()
         {
-            // 1. 加载筛选数据
             var geos = await _db.Queryable<Geo>().Where(it => it.Level >= 2).OrderBy(it => it.Level).OrderBy(it => it.SortOrder).ToListAsync();
             GeoList = new SelectList(geos, "Id", "Title");
 
-            // 2. 构建查询
             var query = _db.Queryable<Travelogue>();
 
             if (!string.IsNullOrEmpty(Status))
@@ -42,23 +43,17 @@ namespace TravelPortal.Web.Pages.Admin.Travelogues
                 if (Status == "Hidden") query = query.Where(t => t.IsHidden);
                 if (Status == "Normal") query = query.Where(t => !t.IsSticky && !t.IsHidden);
             }
+            if (GeoId.HasValue) query = query.Where(t => t.GeoId == GeoId);
+            if (!string.IsNullOrEmpty(Keyword)) query = query.Where(t => t.Title.Contains(Keyword));
 
-            if (GeoId.HasValue)
-            {
-                query = query.Where(t => t.GeoId == GeoId);
-            }
-
-            if (!string.IsNullOrEmpty(Keyword))
-            {
-                query = query.Where(t => t.Title.Contains(Keyword));
-            }
-
-            // 3. 执行排序：置顶在前，其次按创建时间倒序
-            Travelogues = await query
+            RefAsync<int> total = 0;
+            var items = await query
                 .OrderByDescending(t => t.IsSticky)
                 .OrderByDescending(t => t.StickyAt)
                 .OrderByDescending(t => t.CreatedAt)
-                .ToListAsync();
+                .ToPageListAsync(PageIndex, 10, total);
+
+            Travelogues = new PaginatedList<Travelogue>(items, total, PageIndex, 10);
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int[] ids)

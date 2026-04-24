@@ -1,0 +1,64 @@
+@*
+    前端通用分页组件
+    用法：<partial name="_FrontPagination" model="Model.Travelogues.Metadata" />
+    自动读取当前请求的所有 Query 参数，只替换 pageIndex
+*@
+@model TravelPortal.Web.Models.PaginationMetadata
+@{
+    var queryData = Context.Request.Query
+        .Where(q => q.Key.ToLower() != "pageindex")
+        .ToDictionary(q => q.Key, q => q.Value.ToString());
+}
+
+@if (Model.TotalPages > 1)
+{
+    <div style="margin-top: 60px; display: flex; justify-content: center; align-items: center; gap: 0; font-size: 12px; color: #666;">
+        <span style="margin-right: 16px; color: #999;">共 @Model.TotalCount 条</span>
+
+        <div style="display: flex; border: 1px solid #ddd; border-radius: 2px; overflow: hidden;">
+            <!-- 上一页 -->
+            @if (Model.HasPreviousPage)
+            {
+                <a asp-all-route-data="queryData" asp-route-pageIndex="@(Model.PageIndex - 1)"
+                   style="padding: 6px 12px; border-right: 1px solid #ddd; text-decoration: none; color: #666; background: #fff;">上一页</a>
+            }
+            else
+            {
+                <span style="padding: 6px 12px; border-right: 1px solid #ddd; color: #ccc; background: #fafafa; cursor: not-allowed;">上一页</span>
+            }
+
+            <!-- 页码 -->
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                bool isCurrent = i == Model.PageIndex;
+                bool showPage = i == 1 || i == Model.TotalPages || Math.Abs(i - Model.PageIndex) <= 2;
+                bool showEllipsis = !showPage && (i == 2 || i == Model.TotalPages - 1);
+
+                if (isCurrent)
+                {
+                    <span style="padding: 6px 12px; border-right: 1px solid #b58c5e; background: #b58c5e; color: #fff; font-weight: bold;">@i</span>
+                }
+                else if (showPage)
+                {
+                    <a asp-all-route-data="queryData" asp-route-pageIndex="@i"
+                       style="padding: 6px 12px; border-right: 1px solid #ddd; text-decoration: none; color: #666; background: #fff;">@i</a>
+                }
+                else if (showEllipsis)
+                {
+                    <span style="padding: 6px 8px; border-right: 1px solid #ddd; color: #999; background: #fff;">...</span>
+                }
+            }
+
+            <!-- 下一页 -->
+            @if (Model.HasNextPage)
+            {
+                <a asp-all-route-data="queryData" asp-route-pageIndex="@(Model.PageIndex + 1)"
+                   style="padding: 6px 12px; text-decoration: none; color: #666; background: #fff;">下一页</a>
+            }
+            else
+            {
+                <span style="padding: 6px 12px; color: #ccc; background: #fafafa; cursor: not-allowed;">下一页</span>
+            }
+        </div>
+    </div>
+}

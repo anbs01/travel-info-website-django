@@ -45,7 +45,7 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
-                    @foreach (var item in Model.GeoList)
+                    @foreach (var item in Model.GeoList.Items)
                     {
                         <tr class="hover:bg-gray-50/50 transition-colors">
                             <td class="px-6 py-4 font-mono text-xs text-gray-400">@item.Id</td>
@@ -79,6 +79,7 @@
                 </tbody>
             </table>
     </div>
+    <partial name="_Pagination" model="Model.GeoList.Metadata" />
 </div>
 
 @functions {

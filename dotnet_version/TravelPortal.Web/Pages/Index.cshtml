@@ -5,16 +5,16 @@
 }
 
 <div style="padding-bottom: 80px;">
-    
+
     <!-- 1. 搜索区域 -->
     <div class="container-1200" style="margin-top: 50px;">
         <div style="display: flex; justify-content: center;">
-            <!-- 总宽 942px -->
-            <div style="display: flex; height: 50px; width: 942px; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <!-- 总宽 944px (725+7+110+6+96) -->
+            <div style="display: flex; height: 45px; width: 944px; align-items: center;">
                 <!-- 搜索主框 -->
-                <input type="text" style="width: 730px; height: 100%; border: 1px solid #f0f0f0; border-right: none; padding: 0 24px; outline: none; font-size: 12px; box-sizing: border-box;" placeholder="请输入关键字..." />
+                <input type="text" style="width: 725px; height: 100%; border: 1px solid #ebe2cf; padding: 0 24px; outline: none; font-size: 12px; box-sizing: border-box; margin-right: 7px;" />
                 <!-- 类别下拉 -->
-                <div style="width: 110px; height: 100%; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: #fff; font-size: 12px; box-sizing: border-box;">
+                <div style="width: 110px; height: 100%; border: 1px solid #ebe2cf; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: #fff; font-size: 12px; box-sizing: border-box;">
                     <span>纪行·攻略</span>
                     <span style="font-size: 10px; color: #ccc;">▼</span>
                 </div>
@@ -55,7 +55,7 @@
     </div>
 
     <!-- 2. 故事攻略 推荐板块 -->
-    <div style="background: #f9f9f9; margin-top: 60px; padding: 40px 0; height: 384px; box-sizing: border-box;">
+    <div style="background: #fbf7f1; margin-top: 60px; padding: 40px 0; height: 384px; box-sizing: border-box;">
         <div class="container-1200" style="position: relative;">
             <div style="position: absolute; right: 0; top: -25px; font-size: 12px; color: #666; cursor: pointer;">换一批</div>
 
@@ -80,7 +80,7 @@
                             <span style="width: 8px; height: 8px; background: #b58c5e; margin-right: 12px; border-radius: 2px;"></span>
                             <span style="color: #000; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 440px;">设置在首页推荐的文字记录，不取消或未到期会一直显示在最上边</span>
                         </li>
-                        @foreach (var item in new[] { 
+                        @foreach (var item in new[] {
                             (t: "台湾写真:台北寻“杠子头”,咬一口“硬邦邦”的乡愁", c: "纪行"),
                             (t: "“海绵”常德,一条老街留住文化与乡愁", c: "攻略"),
                             (t: "打卡青岛明月山海间不夜城,全攻略带你深度游城阳", c: "资讯"),
@@ -92,13 +92,13 @@
                             (t: "礼泉:流量质量双突破写好假期乡村旅游新答卷", c: "资讯")
                         })
                         {
-                            <li style="display: flex; justify-between; align-items: center; font-size: 12px; margin-bottom: 14px; position: relative;">
-                                <div style="display: flex; align-items: center;">
-                                    <span style="width: 6px; height: 6px; background: #ddd; margin-right: 14px; border-radius: 50%;"></span>
-                                    <span style="color: #444; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 440px; cursor: pointer;">@item.t</span>
-                                </div>
-                                <span style="position: absolute; right: 40px; color: #999; font-family: monospace;">[@item.c]</span>
-                            </li>
+                                    <li style="display: flex; justify-between; align-items: center; font-size: 12px; margin-bottom: 14px; position: relative;">
+                                        <div style="display: flex; align-items: center;">
+                                            <span style="width: 6px; height: 6px; background: #ddd; margin-right: 14px; border-radius: 50%;"></span>
+                                            <span style="color: #444; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 440px; cursor: pointer;">@item.t</span>
+                                        </div>
+                                        <span style="position: absolute; right: 40px; color: #999; font-family: monospace;">[@item.c]</span>
+                                    </li>
                         }
                     </ul>
                 </div>

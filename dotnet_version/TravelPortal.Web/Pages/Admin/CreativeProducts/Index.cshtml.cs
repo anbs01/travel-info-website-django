@@ -14,7 +14,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         _db = db;
     }
 
-    public List<CreativeProduct> Products { get; set; } = new();
+    public PaginatedList<CreativeProduct> Products { get; set; } = null!;
     public List<string> Categories { get; set; } = new();
 
     [BindProperty(SupportsGet = true)]
@@ -23,9 +23,11 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     [BindProperty(SupportsGet = true)]
     public string? Search { get; set; }
 
+    [BindProperty(SupportsGet = true)]
+    public int PageIndex { get; set; } = 1;
+
     public void OnGet()
     {
-        // 加载分类列表 (从热词库中读取)
         Categories = _db.Queryable<HotWord>()
             .Where(it => it.Module == HotWord.MOD_CREATIVE && !it.IsHidden)
             .OrderBy(it => it.SortOrder)
@@ -33,25 +35,36 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             .ToList();
 
         var query = _db.Queryable<CreativeProduct>();
+        if (!string.IsNullOrEmpty(Category)) query = query.Where(it => it.Classification == Category);
+        if (!string.IsNullOrEmpty(Search)) query = query.Where(it => it.Title.Contains(Search));
 
-        if (!string.IsNullOrEmpty(Category))
-        {
-            query = query.Where(it => it.Classification == Category);
-        }
+        int total = 0;
+        var items = query.OrderByDescending(it => it.IsSticky)
+                         .OrderByDescending(it => it.CreatedAt)
+                         .ToPageList(PageIndex, 10, ref total);
 
-        if (!string.IsNullOrEmpty(Search))
-        {
-            query = query.Where(it => it.Title.Contains(Search));
-        }
-
-        Products = query.OrderByDescending(it => it.IsSticky)
-                        .OrderByDescending(it => it.CreatedAt)
-                        .ToList();
+        Products = new PaginatedList<CreativeProduct>(items, total, PageIndex, 10);
     }
 
-    public IActionResult OnPostDelete(int id)
+    public IActionResult OnPostDelete(int[] ids)
     {
-        _db.Deleteable<CreativeProduct>().In(id).ExecuteCommand();
+        if (ids?.Length > 0)
+            _db.Deleteable<CreativeProduct>().In(ids).ExecuteCommand();
+        return RedirectToPage();
+    }
+
+    public IActionResult OnPostToggleSticky(int[] ids)
+    {
+        if (ids?.Length > 0)
+        {
+            var items = _db.Queryable<CreativeProduct>().In(ids).ToList();
+            foreach (var item in items)
+            {
+                item.IsSticky = !item.IsSticky;
+                item.StickyAt = item.IsSticky ? DateTime.Now : null;
+                _db.Updateable(item).UpdateColumns(it => new { it.IsSticky, it.StickyAt }).ExecuteCommand();
+            }
+        }
         return RedirectToPage();
     }
 }

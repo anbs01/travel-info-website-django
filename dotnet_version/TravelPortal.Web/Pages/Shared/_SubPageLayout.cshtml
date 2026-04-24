@@ -8,9 +8,10 @@
     <style>
         body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; margin: 0; padding: 0; }
         .container-1200 { width: 1200px; margin: 0 auto; position: relative; }
-        .nav-link { font-size: 12px; color: #000; text-decoration: none; margin-right: 48px; font-weight: bold; }
+        .nav-link { font-size: 12px; color: #000; text-decoration: none; margin-right: 48px; }
         .nav-link:last-child { margin-right: 0; }
         .nav-link:hover { color: #b58c5e; }
+        .nav-link.active { font-weight: bold; }
         .search-input { width: 772px; height: 50px; border: 1px solid #ddd; padding: 0 15px; font-size: 14px; outline: none; }
         .search-dropdown { width: 110px; height: 50px; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; font-size: 12px; cursor: pointer; }
         .search-btn { width: 96px; height: 48px; background: #b58c5e; color: #fff; border: none; font-size: 14px; font-weight: bold; cursor: pointer; }
@@ -23,8 +24,8 @@
         <div class="container-1200" style="height: 100%; position: relative;">
             
             <!-- Logo (x: 360, y: 48 -> relative 0, 48) -->
-            <div style="position: absolute; left: 0; top: 48px; width: 170px; height: 50px; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; background: #fff;">
-                <h1 style="font-size: 20px; font-weight: bold; color: #333; margin: 0; letter-spacing: 2px;">网站LOGO</h1>
+            <div style="position: absolute; left: 0; top: 48px; width: 170px; height: 50px; border: 1px solid #c3a277; display: flex; align-items: center; justify-content: center; background: #fff;">
+                <h1 style="font-size: 20px; font-weight: bold; color: #6f4e37; margin: 0; letter-spacing: 2px;">网站LOGO</h1>
             </div>
 
             <!-- 导航链接 (x: 576, y: 44 -> relative 216, 44) -->
@@ -83,7 +84,17 @@
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        (function() {
+            var path = window.location.pathname.toLowerCase();
+            document.querySelectorAll('.nav-link').forEach(function(a) {
+                var href = a.getAttribute('href').toLowerCase();
+                if (href === '/' ? path === '/' : path.startsWith(href)) {
+                    a.classList.add('active');
+                }
+            });
+        })();
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

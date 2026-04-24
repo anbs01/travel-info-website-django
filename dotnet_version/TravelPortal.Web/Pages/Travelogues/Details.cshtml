@@ -52,14 +52,23 @@
         </div>
 
         <!-- 6. 相关推荐 -->
-        <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid #eee;">
-            <h4 style="font-size: 16px; font-weight: bold; margin-bottom: 25px;">相关推荐</h4>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-                <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #444; line-height: 2.2;">
-                    <li><a href="#" style="color: #444; text-decoration: none;">暂无推荐内容</a></li>
-                </ul>
+        @if (Model.Related.Any())
+        {
+            <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid #eee;">
+                <h4 style="font-size: 16px; font-weight: bold; margin-bottom: 25px;">相关推荐</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px;">
+                    @foreach (var r in Model.Related)
+                    {
+                        <div style="display: flex; align-items: center; font-size: 13px; color: #444; line-height: 2.2;">
+                            <span style="width: 5px; height: 5px; background: #ccc; border-radius: 50%; margin-right: 10px; flex-shrink: 0;"></span>
+                            <a asp-page="./Details" asp-route-id="@r.Id"
+                               style="color: #444; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                               title="@r.Title">@r.Title</a>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>
 

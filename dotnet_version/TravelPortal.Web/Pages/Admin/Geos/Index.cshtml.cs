@@ -14,7 +14,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         _db = db;
     }
 
-    public List<Geo> GeoList { get; set; } = new();
+    public PaginatedList<Geo> GeoList { get; set; } = null!;
 
     [BindProperty(SupportsGet = true)]
     public int? ParentId { get; set; }
@@ -24,6 +24,9 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
     [BindProperty(SupportsGet = true)]
     public string? Nature { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    public int PageIndex { get; set; } = 1;
 
     public Geo? ParentGeo { get; set; }
 
@@ -42,14 +45,13 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         }
 
         if (!string.IsNullOrEmpty(Nature))
-        {
             query = query.Where(it => it.Nature == Nature);
-        }
 
-        GeoList = query.OrderBy(it => it.Level)
-                      .OrderBy(it => it.SortOrder)
-                      .OrderBy(it => it.Id)
-                      .ToList();
+        int total = 0;
+        var items = query.OrderBy(it => it.Level).OrderBy(it => it.SortOrder).OrderBy(it => it.Id)
+                         .ToPageList(PageIndex, 10, ref total);
+
+        GeoList = new PaginatedList<Geo>(items, total, PageIndex, 10);
     }
 
     public IActionResult OnPostDelete(int id)
