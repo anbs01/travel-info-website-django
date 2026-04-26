@@ -1,0 +1,73 @@
+@*
+    公共顶部搜索栏
+    参数：
+      CurrentModule - 当前栏目值（travelogue/foods/goods/news/scenic）
+      Keyword       - 当前关键字
+*@
+@model dynamic
+@{
+    string currentModule = (string)(Model.CurrentModule ?? "travelogue");
+    string keyword = (string)(Model.Keyword ?? "");
+    var modules = new[]
+    {
+        (val: "travelogue", label: "纪行 · 攻略", url: "/Travelogues"),
+        (val: "places",     label: "城乡 · 街巷", url: "/Places"),
+        (val: "foods",      label: "特产 · 美食", url: "/Foods"),
+        (val: "goods",      label: "好物 · 文创", url: "/Goods"),
+        (val: "news",       label: "资讯 · 动态", url: "/News"),
+    };
+    var current = modules.FirstOrDefault(m => m.val == currentModule);
+    string currentLabel = current.label ?? "纪行 · 攻略";
+}
+
+<div style="display: flex; height: 45px; border: 1px solid #ddd; border-radius: 2px; overflow: visible; position: relative;" id="searchBarWrap">
+    <input type="text" id="sbKeyword" value="@keyword"
+           style="width: 220px; border: none; outline: none; padding: 0 10px; font-size: 12px;" />
+    <div id="sbDropdown" style="width: 90px; height: 45px; border-left: 1px solid #ddd; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; font-size: 12px; cursor: pointer; background: #fff; position: relative; user-select: none;">
+        <span id="sbLabel">@currentLabel</span>
+        <span style="font-size: 9px; color: #aaa;">▼</span>
+        <div id="sbMenu" style="display:none; position:absolute; top:100%; left:-1px; right:-1px; background:#fff; border:1px solid #ddd; border-top:none; z-index:100; font-size:12px; white-space:nowrap;">
+            @foreach (var m in modules)
+            {
+                <div data-val="@m.val" data-label="@m.label" data-url="@m.url"
+                     style="padding:7px 10px; cursor:pointer; @(m.val == currentModule ? "font-weight:bold;" : "")">@m.label</div>
+            }
+        </div>
+    </div>
+    <button id="sbBtn" style="width: 50px; height: 45px; border: none; border-left: 1px solid #ddd; background: #b58c5e; color: #fff; font-size: 12px; cursor: pointer; flex-shrink: 0;">搜索</button>
+</div>
+
+<script>
+(function(){
+    var selectedVal = '@currentModule';
+    var selectedUrl = '@(current.url)';
+    var menu = document.getElementById('sbMenu');
+    var label = document.getElementById('sbLabel');
+    var dropdown = document.getElementById('sbDropdown');
+
+    dropdown.addEventListener('click', function(e){
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        e.stopPropagation();
+    });
+    menu.querySelectorAll('[data-val]').forEach(function(item){
+        item.addEventListener('mouseenter', function(){ this.style.background='#f5f0e8'; });
+        item.addEventListener('mouseleave', function(){ this.style.background=''; });
+        item.addEventListener('click', function(e){
+            selectedVal = this.dataset.val;
+            selectedUrl = this.dataset.url;
+            label.textContent = this.dataset.label;
+            menu.style.display = 'none';
+            e.stopPropagation();
+        });
+    });
+    document.addEventListener('click', function(){ menu.style.display='none'; });
+
+    document.getElementById('sbBtn').addEventListener('click', function(){
+        var kw = document.getElementById('sbKeyword').value.trim();
+        window.location.href = kw ? selectedUrl + '?keyword=' + encodeURIComponent(kw) : selectedUrl;
+    });
+    document.getElementById('sbKeyword').addEventListener('keydown', function(e){
+        if(e.key==='Enter') document.getElementById('sbBtn').click();
+    });
+})();
+</script>

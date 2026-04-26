@@ -68,7 +68,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
                 .ToList();
 
             // 资讯（IsHome=true，未屏蔽）
-            var news = _db.Queryable<News>()
+            var news = _db.Queryable<TravelPortal.Web.Models.News>()
                 .Where(n => n.IsHome && !n.IsHidden)
                 .OrderByDescending(n => n.CreatedAt)
                 .Select(n => new { n.Id, n.Title, n.CreatedAt, Type = "资讯" })

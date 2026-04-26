@@ -20,7 +20,7 @@
 <body class="bg-white">
 
     <!-- 1. 统一分页顶部 (Sub-Page Header) -->
-    <header style="height: 140px; background: #fff; border-top: 4px solid #b58c5e; border-bottom: 1px solid #f3f3f3;">
+    <header style="height: 140px; background: linear-gradient(to bottom, #f7e18d, #ffffff); border-bottom: 1px solid #c4a188;">
         <div class="container-1200" style="height: 100%; position: relative;">
             
             <!-- Logo (x: 360, y: 48 -> relative 0, 48) -->
@@ -31,11 +31,11 @@
             <!-- 导航链接 (x: 576, y: 44 -> relative 216, 44) -->
             <nav style="position: absolute; left: 216px; top: 44px; display: flex;">
                 <a href="/" class="nav-link">首页</a>
-                <a href="/Travelogues" class="nav-link">纪行·攻略</a>
-                <a href="/Places" class="nav-link">城乡·街巷</a>
-                <a href="/Food" class="nav-link">特产·美食</a>
-                <a href="/Store" class="nav-link">好物·文创</a>
-                <a href="/News" class="nav-link">资讯·动态</a>
+                <a href="/Travelogues" class="nav-link">纪行 · 攻略</a>
+                <a href="/Places" class="nav-link">城乡 · 街巷</a>
+                <a href="/Foods" class="nav-link">特产 · 美食</a>
+                <a href="/Goods" class="nav-link">好物 · 文创</a>
+                <a href="/News" class="nav-link">资讯 · 动态</a>
             </nav>
 
             <!-- 登录/注册 (x: 1450, y: 16 -> relative 1090, 16) -->
@@ -50,7 +50,7 @@
             <!-- 1:1 还原的顶部搜索组 (y: 64) -->
             <div style="position: absolute; left: 210px; top: 64px; display: flex; align-items: center;">
                 <!-- 输入框 (x: 570) -->
-                <input type="text" class="search-input" placeholder="请输入关键字" />
+                <input type="text" class="search-input" />
                 
                 <!-- 分类选择 (x: 1350 -> offset 780 from input start) -->
                 <div class="search-dropdown" style="margin-left: 8px;">

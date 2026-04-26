@@ -1,0 +1,68 @@
+@page "{id:int}"
+@model TravelPortal.Web.Pages.Goods.DetailsModel
+@{
+    ViewData["Title"] = Model.Item?.Title ?? "文创详情";
+    Layout = "_SubPageLayout";
+    var item = Model.Item!;
+}
+
+<div style="background:#f5f5f5; padding-bottom:60px;">
+    <div style="background:#fff; border-top:3px solid #b58c5e; border-bottom:1px solid #e8e8e8; margin-bottom:30px;">
+        <div class="container-1200" style="height:44px; display:flex; align-items:center; font-size:12px; color:#676767;">
+            你的位置：<a href="/" style="color:#676767;">首页</a>&nbsp;>&nbsp;<a href="/Goods" style="color:#676767;">好物·文创</a>&nbsp;>&nbsp;@item.Title
+        </div>
+    </div>
+
+    <div class="container-1200" style="background:#fff; padding:50px; box-shadow:0 0 15px rgba(0,0,0,0.04);">
+        <div style="margin-bottom:20px;">
+            <h1 style="font-size:24px; font-weight:bold; color:#000; margin:0 0 10px 0; line-height:1.5;">
+                @item.Title
+                @if (!string.IsNullOrEmpty(item.Classification))
+                {
+                    <span style="font-size:12px; font-weight:normal; color:#999; margin-left:10px;">@item.Classification</span>
+                }
+                @if (!string.IsNullOrEmpty(item.NonLegacyLevel))
+                {
+                    <span style="font-size:12px; font-weight:normal; color:#b58c5e; margin-left:8px;">@item.NonLegacyLevel</span>
+                }
+            </h1>
+            @if (!string.IsNullOrEmpty(item.Summary))
+            {
+                <p style="font-size:13px; color:#555; margin:0 0 12px 0; line-height:1.8;">
+                    <strong>产品特色：</strong>@item.Summary
+                </p>
+            }
+            <div style="font-size:12px; color:#999; display:flex; flex-wrap:wrap; gap:20px; padding-bottom:16px; border-bottom:1px solid #eee;">
+                @if (!string.IsNullOrEmpty(item.Source)) { <span>来源：@item.Source</span> }
+                @if (!string.IsNullOrEmpty(item.Author)) { <span>作者：@item.Author</span> }
+                <span>发布日期：@(item.PublishDate?.ToString("yyyy-MM-dd") ?? item.CreatedAt.ToString("yyyy-MM-dd"))</span>
+                <span>阅读：@item.Views</span>
+            </div>
+        </div>
+
+        <div style="font-size:15px; color:#333; line-height:2; letter-spacing:0.3px; margin-top:30px;">
+            @Html.Raw(item.Content)
+        </div>
+
+        <div style="border:1px dashed #ddd; padding:16px 20px; margin-top:50px; font-size:12px; color:#888; line-height:1.6;">
+            版权声明：本站内容部分来源于网络，如有侵权请联系删除。转载请注明出处。
+        </div>
+
+        @if (Model.Related.Any())
+        {
+            <div style="margin-top:60px; padding-top:30px; border-top:1px solid #eee;">
+                <h4 style="font-size:15px; font-weight:bold; margin-bottom:20px;">相关推荐</h4>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 40px;">
+                    @foreach (var r in Model.Related)
+                    {
+                        <div style="display:flex; align-items:center; font-size:13px; color:#444; line-height:2.2;">
+                            <span style="width:5px; height:5px; background:#ccc; border-radius:50%; margin-right:10px; flex-shrink:0;"></span>
+                            <a asp-page="./Details" asp-route-id="@r.Id" target="_blank" title="@r.Title"
+                               style="color:#444; text-decoration:none; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">@r.Title</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -15,13 +15,7 @@
             <div style="width: 130px; height: 36px; background: #b58c5e; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; border-radius: 2px;">
                 纪行·攻略
             </div>
-            <form method="get" style="display: flex; height: 30px; border: 1px solid #ddd; border-radius: 2px; overflow: hidden;">
-                <input type="hidden" name="category" value="@currentCategory" />
-                <input type="text" name="keyword" value="@Model.Keyword" style="width: 220px; border: none; outline: none; padding: 0 10px; font-size: 12px;" placeholder="输入关键字" />
-                <button type="submit" style="width: 40px; background: #eee; border: none; border-left: 1px solid #ddd; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-                    <svg style="width: 16px; height: 16px; color: #666;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </button>
-            </form>
+            <partial name="_SearchBar" model='new { CurrentModule = "travelogue", Keyword = Model.Keyword }' />
         </div>
 
         <!-- 2. 分类筛选条 -->
