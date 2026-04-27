@@ -5,6 +5,15 @@
     Layout = "_SubPageLayout";
 }
 
+<style>
+    @@media (max-width: 1199px) {
+        .detail-container { padding: 30px 15px !important; }
+        .detail-info { flex-direction: column !important; gap: 10px !important; }
+        .related-grid { grid-template-columns: 1fr !important; }
+        #reportModal > div { width: 90% !important; padding: 20px !important; }
+    }
+</style>
+
 <div class="bg-gray-50 pb-20">
     <!-- 1. 面包屑导航 (y: 140 - 192) -->
     <div style="background: #fff; border-top: 4px solid #b58c5e; border-bottom: 1px solid rgba(0,0,0,0.1); margin-bottom: 40px;">
@@ -13,12 +22,12 @@
         </div>
     </div>
 
-    <div class="container-1200" style="background: #fff; padding: 60px 50px; min-height: 1000px; box-shadow: 0 0 20px rgba(0,0,0,0.05);">
+    <div class="container-1200 detail-container" style="background: #fff; padding: 60px 50px; min-height: 1000px; box-shadow: 0 0 20px rgba(0,0,0,0.05);">
         
         <!-- 2. 文章头部 (y: 280) -->
         <div style="margin-bottom: 40px;">
             <h1 style="font-size: 28px; font-weight: bold; color: #000; margin: 0 0 20px 0;">@Model.Travelogue?.Title</h1>
-            <div style="font-size: 12px; color: #999; display: flex; gap: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+            <div class="detail-info" style="font-size: 12px; color: #999; display: flex; gap: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
                 <span>来源：@(Model.Travelogue?.Source ?? "原创")</span>
                 <span>作者：@(Model.Travelogue?.Author ?? "管理员")</span>
                 <span>发布日期：@(Model.Travelogue?.PublishDate?.ToString("yyyy-MM-dd HH:mm:ss") ?? Model.Travelogue?.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"))</span>
@@ -56,7 +65,7 @@
         {
             <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid #eee;">
                 <h4 style="font-size: 16px; font-weight: bold; margin-bottom: 25px;">相关推荐</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px;">
+                <div class="related-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px;">
                     @foreach (var r in Model.Related)
                     {
                         <div style="display: flex; align-items: center; font-size: 13px; color: #444; line-height: 2.2;">

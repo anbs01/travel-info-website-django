@@ -6,6 +6,14 @@
     var item = Model.Item!;
 }
 
+<style>
+    @@media (max-width: 1199px) {
+        .detail-container { padding: 30px 15px !important; }
+        .detail-info { flex-direction: column !important; gap: 10px !important; }
+        .related-grid { grid-template-columns: 1fr !important; }
+    }
+</style>
+
 <div style="background:#f5f5f5; padding-bottom:60px;">
     <div style="background:#fff; border-top:3px solid #b58c5e; border-bottom:1px solid #e8e8e8; margin-bottom:30px;">
         <div class="container-1200" style="height:44px; display:flex; align-items:center; font-size:12px; color:#676767;">
@@ -13,7 +21,7 @@
         </div>
     </div>
 
-    <div class="container-1200" style="background:#fff; padding:50px; box-shadow:0 0 15px rgba(0,0,0,0.04);">
+    <div class="container-1200 detail-container" style="background:#fff; padding:50px; box-shadow:0 0 15px rgba(0,0,0,0.04);">
         <!-- 标题区 -->
         <div style="margin-bottom:20px;">
             <h1 style="font-size:24px; font-weight:bold; color:#000; margin:0 0 12px 0; line-height:1.5;">
@@ -27,7 +35,7 @@
             {
                 <p style="font-size:13px; color:#555; margin:0 0 12px 0; line-height:1.8;">@item.Summary</p>
             }
-            <div style="font-size:12px; color:#999; display:flex; flex-wrap:wrap; gap:20px; padding-bottom:16px; border-bottom:1px solid #eee;">
+            <div class="detail-info" style="font-size:12px; color:#999; display:flex; flex-wrap:wrap; gap:20px; padding-bottom:16px; border-bottom:1px solid #eee;">
                 @if (!string.IsNullOrEmpty(item.Source)) { <span>来源：@item.Source</span> }
                 @if (!string.IsNullOrEmpty(item.Author)) { <span>作者：@item.Author</span> }
                 <span>发布日期：@(item.PublishDate?.ToString("yyyy-MM-dd") ?? item.CreatedAt.ToString("yyyy-MM-dd"))</span>
@@ -50,7 +58,7 @@
         {
             <div style="margin-top:60px; padding-top:30px; border-top:1px solid #eee;">
                 <h4 style="font-size:15px; font-weight:bold; margin-bottom:20px;">相关推荐</h4>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 40px;">
+                <div class="related-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:6px 40px;">
                     @foreach (var r in Model.Related)
                     {
                         <div style="display:flex; align-items:center; font-size:13px; color:#444; line-height:2.2;">
