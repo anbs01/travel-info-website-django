@@ -22,16 +22,24 @@
 
 <style>
     @@media (max-width: 1199px) {
-        #searchBarWrap { height: auto !important; flex-direction: column !important; border: none !important; }
-        #searchBarWrap > * { width: 100% !important; border: 1px solid #ddd !important; margin-bottom: 5px; border-radius: 2px; }
-        #sbKeyword { height: 45px !important; }
+        #searchBarWrap { width: 100% !important; height: 45px !important; margin: 0 0 20px 0 !important; flex-direction: row !important; }
+        #sbKeyword { padding: 0 10px !important; font-size: 14px !important; }
+        #sbBtn { width: 60px !important; height: 45px !important; }
     }
 </style>
 
-<div style="display: flex; height: 45px; border: 1px solid #ddd; border-radius: 2px; overflow: hidden; position: relative;" id="searchBarWrap">
-    <input type="text" id="sbKeyword" value="@keyword" placeholder="搜索本栏目内容..."
-           style="flex: 1; border: none; outline: none; padding: 0 15px; font-size: 13px;" />
-    <button id="sbBtn" style="width: 70px; height: 45px; border: none; border-left: 1px solid #ddd; background: #b58c5e; color: #fff; font-size: 14px; font-weight: bold; cursor: pointer; flex-shrink: 0;">搜索</button>
+<div style="display: flex; align-items: center; width: 274px; height: 28px; margin-left: auto; margin-right: 2px;" id="searchBarWrap">
+    <input type="text" id="sbKeyword" value="@keyword" placeholder="输入关键字..."
+           style="width: 220px; height: 28px; border: 1px solid #ddd; border-radius: 2px; outline: none; padding: 0 10px; font-size: 12px; background: #fff;" />
+    
+    <div style="width: 15px; flex-shrink: 0;"></div> @* 15px 间距 *@
+
+    <button id="sbBtn" style="width: 39px; height: 28px; border: none; border-radius: 2px; background: #b58c5e; color: #fff; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+    </button>
 </div>
 
 <script>
@@ -44,7 +52,7 @@
         var kw = input.value.trim();
         window.location.href = kw ? selectedUrl + '?keyword=' + encodeURIComponent(kw) : selectedUrl;
     });
-    
+
     input.addEventListener('keydown', function(e){
         if(e.key === 'Enter') btn.click();
     });
