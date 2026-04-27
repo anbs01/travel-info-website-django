@@ -10,7 +10,7 @@
 <style>
     @@media (max-width: 1199px) {
         .list-header { flex-direction: column !important; gap: 15px; align-items: flex-start !important; }
-        .list-header > div:first-child { width: 100% !important; }
+        .list-header > div:first-child { width: auto !important; height: 40px !important; padding: 0 15px; font-size: 20px !important; }
         .category-bar { flex-direction: column !important; align-items: flex-start !important; gap: 15px; }
         .item-row { flex-direction: column !important; }
         .item-image { width: 100% !important; height: auto !important; aspect-ratio: 360/220; margin-bottom: 15px; }
@@ -23,7 +23,7 @@
 
         <!-- 1. 标题条 + 搜索 -->
         <div class="list-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-            <div style="width: 130px; height: 36px; background: #b58c5e; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: bold; border-radius: 2px;">
+            <div style="width: 125px; height: 33px; background: #b58c5e; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 24px; font-weight: normal; font-family: 'Microsoft YaHei', sans-serif; border-radius: 2px; flex-shrink: 0; line-height: 1;">
                 纪行 · 攻略
             </div>
             <partial name="_SearchBar" model='new { CurrentModule = "travelogue", Keyword = Model.Keyword }' />
