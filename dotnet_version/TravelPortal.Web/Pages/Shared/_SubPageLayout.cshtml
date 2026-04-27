@@ -64,12 +64,12 @@
             <!-- 搜索组 (PSD x:573 -> Rel x:213) -->
             <div class="search-group" style="position: absolute; left: 213px; top: 68px; display: flex; align-items: flex-start;">
                 <!-- 输入框 (w: 770) -->
-                <input type="text" class="search-input" style="width: 770px; height: 45px; margin: 0;" />
+                <input type="text" class="search-input" style="width: 770px; height: 45px; margin: 0; border: 1px solid #ebe2cf; padding: 0 24px; outline: none; font-size: 12px; box-sizing: border-box;" />
 
                 <!-- 下拉框 (PSD x:1351 -> Rel offset 778 from group start) -->
-                <div class="search-dropdown" id="searchCategory" style="position: absolute; left: 778px; top: 0; width: 108px; height: 45px; margin: 0; display: flex; align-items: center; justify-content: center;">
+                <div class="search-dropdown" id="searchCategory" style="position: absolute; left: 778px; top: 0; width: 108px; height: 45px; margin: 0; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid #ebe2cf; border-left: none; box-sizing: border-box; cursor: pointer;">
                     <span id="selectedCategoryLabel">纪行 · 攻略</span>
-                    <span style="font-size: 10px; transform: scale(0.8); margin-left: 4px;">▼</span>
+                    <span style="font-size: 10px; transform: scale(0.8); margin-left: 4px; color: #ccc;">▼</span>
                     <input type="hidden" name="module" id="currentModule" value="travelogue" />
 
                     <div id="categoryMenu" style="display:none; position:absolute; top:100%; left:-1px; right:-1px; background:#fff; border:1px solid #ebe2cf; border-top:none; z-index:10; font-size:12px;">
@@ -82,7 +82,7 @@
                 </div>
 
                 <!-- 搜索按钮 (PSD x:1467 -> Rel offset 894 from group start) -->
-                <button class="search-btn" style="position: absolute; left: 894px; top: 1px; width: 92px; height: 43px; margin: 0;">搜 索</button>
+                <button class="search-btn" style="position: absolute; left: 894px; top: 0; width: 92px; height: 45px; margin: 0; background: #b58c5e; border: none; color: #fff; font-size: 20px; font-weight: normal; font-family: 'Microsoft YaHei', sans-serif; cursor: pointer;">搜 索</button>
             </div>
         </div>
     </header>

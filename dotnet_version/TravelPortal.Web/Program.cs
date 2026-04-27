@@ -48,6 +48,24 @@ if (app.Environment.IsDevelopment())
                 typeof(ContentCategory)
             );
             Console.WriteLine("✅ [Root Mode] 数据库初始化成功！");
+
+            // 3. 自动补全演示数据主图 (如果当前没有任何主图数据)
+            if (db.Queryable<Travelogue>().Any() && !db.Queryable<Travelogue>().Any(t => t.MainImage != null))
+            {
+                var list = db.Queryable<Travelogue>().OrderBy(t => t.Id).Take(4).ToList();
+                string[] demoImages = {
+                    "https://images.unsplash.com/photo-1540660290370-8af90a454417?w=800",
+                    "https://images.unsplash.com/photo-1527685238219-c81b3dd33021?w=800",
+                    "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800",
+                    "https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=800"
+                };
+                for (int i = 0; i < list.Count; i++)
+                {
+                    list[i].MainImage = demoImages[i];
+                }
+                db.Updateable(list).UpdateColumns(it => it.MainImage).ExecuteCommand();
+                Console.WriteLine("✨ [Data Fix] 已自动为前 4 条纪行攻略补全演示图！");
+            }
         }
         catch (Exception ex)
         {
