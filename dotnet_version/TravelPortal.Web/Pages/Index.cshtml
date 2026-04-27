@@ -5,12 +5,26 @@
     var firstCarousel = Model.CarouselItems.FirstOrDefault();
 }
 
+<style>
+    /* 首页响应式补丁 */
+    @@media (max-width: 1199px) {
+        .index-search-wrap { width: 95% !important; height: auto !important; flex-direction: column !important; gap: 10px; }
+        .index-search-wrap > * { width: 100% !important; margin: 0 !important; }
+        #categoryMenu { width: 100% !important; }
+        
+        .recommend-section .container-1200 > div { flex-direction: column !important; align-items: center; }
+        .recommend-carousel { width: 100% !important; margin: 0 !important; }
+        .recommend-carousel > div { width: 100% !important; height: auto !important; aspect-ratio: 484/324; }
+        .recommend-list { margin: 20px 0 0 0 !important; width: 90% !important; }
+    }
+</style>
+
 <div style="padding-bottom: 80px;">
 
     <!-- 1. 搜索区域 -->
     <div class="container-1200" style="margin-top: 50px;">
         <div style="display: flex; justify-content: center;">
-            <div style="display: flex; height: 45px; width: 944px; align-items: center;">
+            <div class="index-search-wrap" style="display: flex; height: 45px; width: 944px; align-items: center;">
                 <input type="text" id="searchInput" style="width: 725px; height: 100%; border: 1px solid #ebe2cf; padding: 0 24px; outline: none; font-size: 12px; box-sizing: border-box; margin-right: 7px;" />
                 <div style="width: 110px; height: 100%; border: 1px solid #ebe2cf; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: #fff; font-size: 12px; box-sizing: border-box; cursor: pointer; position: relative;" id="categoryDropdown">
                     <span id="categoryLabel">纪行·攻略</span>
@@ -44,12 +58,12 @@
     </div>
 
     <!-- 2. 推荐板块 -->
-    <div style="background: #fbf7f1; margin-top: 50px; padding: 30px 0;">
+    <div class="recommend-section" style="background: #fbf7f1; margin-top: 50px; padding: 30px 0;">
         <div class="container-1200">
             <div style="display: flex;">
 
                 <!-- 左侧轮播图 -->
-                <div style="margin-left: 30px; width: 484px; flex-shrink: 0;">
+                <div class="recommend-carousel" style="margin-left: 30px; width: 484px; flex-shrink: 0;">
                     @if (Model.CarouselItems.Any())
                     {
                         <div style="position: relative; width: 484px; height: 324px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
@@ -87,7 +101,7 @@
                 </div>
 
                 <!-- 右侧列表 -->
-                <div style="margin-left: 60px; flex: 1; padding-top: 4px;">
+                <div class="recommend-list" style="margin-left: 60px; flex: 1; padding-top: 4px;">
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         @foreach (var item in Model.ListItems)
                         {

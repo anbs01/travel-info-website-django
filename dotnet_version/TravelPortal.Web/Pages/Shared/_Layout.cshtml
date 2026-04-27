@@ -7,19 +7,33 @@
     <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
     <style>
         body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; margin: 0; padding: 0; }
-        .container-1200 { width: 1200px; margin: 0 auto; position: relative; }
+        .container-1200 { max-width: 1200px; width: 100%; margin: 0 auto; position: relative; }
         .text-brand { color: #b58c5e; }
         .bg-brand { background-color: #b58c5e; }
         .nav-link { font-size: 12px; color: #000; text-decoration: none; margin-right: 48px; }
         .nav-link:last-child { margin-right: 0; }
         .nav-link:hover { color: #b58c5e; }
         .nav-link.active { font-weight: bold; }
+
+        /* 响应式逻辑 */
+        @@media (max-width: 1199px) {
+            .container-1200 { width: 95% !important; }
+            .top-status-bar { height: auto !important; padding: 10px 0; }
+            .top-status-bar .container-1200 { flex-direction: column; gap: 10px; }
+            .top-status-bar nav { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .top-status-bar .nav-link { margin-right: 15px; }
+            .user-area { margin: 0 !important; }
+            .logo-area { padding: 40px 0 !important; }
+            .logo-box { width: 80% !important; height: auto !important; padding: 20px 0; }
+            footer .container-1200 { width: 90% !important; }
+            footer .footer-links { flex-wrap: wrap; gap: 15px !important; }
+        }
     </style>
 </head>
 <body class="bg-white">
 
     <!-- 1. 顶部状态条 -->
-    <div style="height: 48px; border-bottom: 1px solid #f3f3f3; display: flex; align-items: center;">
+    <div class="top-status-bar" style="height: 48px; border-bottom: 1px solid #f3f3f3; display: flex; align-items: center;">
         <div class="container-1200" style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px;">
             <nav style="display: flex;">
                 <a href="/" class="nav-link">首页</a>
@@ -29,7 +43,7 @@
                 <a href="/Goods" class="nav-link">好物 · 文创</a>
                 <a href="/News" class="nav-link">资讯 · 动态</a>
             </nav>
-            <div style="display: flex; align-items: center; font-size: 12px; margin-left: auto;">
+            <div class="user-area" style="display: flex; align-items: center; font-size: 12px; margin-left: auto;">
                 <a href="/Account/Login" style="color: #000; text-decoration: none; margin-right: 15px;">登录</a>
                 <a href="/Account/Register" style="color: #000; text-decoration: none; margin-right: 20px;">注册</a>
                 <div style="width: 16px; height: 16px; color: #999;">
@@ -40,8 +54,8 @@
     </div>
 
     <!-- 2. Logo 区域 -->
-    <div style="padding: 68px 0 40px; text-align: center;">
-        <div style="width: 340px; height: 100px; border: 1px solid #c3a277; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+    <div class="logo-area" style="padding: 68px 0 40px; text-align: center;">
+        <div class="logo-box" style="width: 340px; height: 100px; border: 1px solid #c3a277; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
             <h1 style="font-size: 40px; font-weight: bold; letter-spacing: 8px; color: #6f4e37; margin: 0;">网站LOGO</h1>
         </div>
     </div>
@@ -53,7 +67,7 @@
     <!-- 3. 页脚 -->
     <footer style="margin-top: 80px; padding: 40px 0; border-top: 1px solid #eee; background: #fff;">
         <div class="container-1200" style="text-align: center;">
-            <div style="display: flex; justify-content: center; gap: 30px; font-size: 12px; color: #fbf7f1; margin-bottom: 15px;">
+            <div class="footer-links" style="display: flex; justify-content: center; gap: 30px; font-size: 12px; color: #fbf7f1; margin-bottom: 15px;">
                 <a href="/About" style="color: inherit; text-decoration: none;">关于我们</a>
                 <span>服务协议</span>
                 <span>合作事宜</span>

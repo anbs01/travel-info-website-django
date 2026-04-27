@@ -20,6 +20,14 @@
     string currentLabel = current.label ?? "纪行 · 攻略";
 }
 
+<style>
+    @@media (max-width: 1199px) {
+        #searchBarWrap { height: auto !important; flex-direction: column !important; border: none !important; }
+        #searchBarWrap > * { width: 100% !important; border: 1px solid #ddd !important; margin-bottom: 5px; border-radius: 2px; }
+        #sbKeyword { height: 45px !important; }
+    }
+</style>
+
 <div style="display: flex; height: 45px; border: 1px solid #ddd; border-radius: 2px; overflow: visible; position: relative;" id="searchBarWrap">
     <input type="text" id="sbKeyword" value="@keyword"
            style="width: 220px; border: none; outline: none; padding: 0 10px; font-size: 12px;" />
