@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SqlSugar;
 using TravelPortal.Web.Models;
 
-namespace TravelPortal.Web.Pages.ScenicSpots;
+namespace TravelPortal.Web.Pages.Places;
 
 public class DetailsModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 {
