@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
     <style>
         body { font-family: 'Microsoft YaHei', '微软雅黑', sans-serif; margin: 0; padding: 0; }
-        .container-1200 { width: 1200px; margin: 0 auto; position: relative; }
+        .container-1200 { max-width: 1200px; width: 100%; margin: 0 auto; position: relative; }
         .nav-link { font-size: 12px; color: #000; text-decoration: none; margin-right: 48px; }
         .nav-link:last-child { margin-right: 0; }
         .nav-link:hover { color: #b58c5e; }
@@ -15,51 +15,65 @@
         .search-input { width: 772px; height: 50px; border: 1px solid #ddd; padding: 0 15px; font-size: 14px; outline: none; }
         .search-dropdown { width: 110px; height: 50px; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; font-size: 12px; cursor: pointer; }
         .search-btn { width: 96px; height: 48px; background: #b58c5e; color: #fff; border: none; font-size: 14px; font-weight: bold; cursor: pointer; }
+
+        /* 移动端自适应逻辑 */
+        @@media (max-width: 1199px) {
+            header { height: auto !important; padding: 20px 0; }
+            .header-container { height: auto !important; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+            .header-container > * { position: static !important; width: 90% !important; margin: 0 auto !important; height: auto !important; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px; height: auto !important; }
+            .search-group { flex-direction: column; align-items: stretch; gap: 10px; }
+            .search-input { width: 100% !important; }
+            .search-dropdown, .search-btn { width: 100% !important; position: static !important; height: 45px !important; }
+            .user-area, .qr-code { display: none; }
+        }
     </style>
 </head>
 <body class="bg-white">
 
-    <!-- 1. 统一分页顶部 (Sub-Page Header) -->
-    <header style="height: 140px; background: linear-gradient(to bottom, #f7e18d, #ffffff); border-bottom: 1px solid #c4a188;">
-        <div class="container-1200" style="height: 100%; position: relative;">
+    <!-- 1. 统一分页顶部 (Sub-Page Header) - 1200px 居中容器 -->
+    <header style="height: 150px; background: linear-gradient(to bottom, #f7e18d, #ffffff); border-bottom: 1px solid #c4a188; position: relative;">
+        <div class="header-container container-1200" style="height: 100%;">
             
-            <!-- Logo (x: 360, y: 48 -> relative 0, 48) -->
-            <div style="position: absolute; left: 0; top: 48px; width: 170px; height: 50px; border: 1px solid #c3a277; display: flex; align-items: center; justify-content: center; background: #fff;">
+            <!-- Logo (PSD x:361 -> Rel x:1) -->
+            <div style="position: absolute; left: 1px; top: 47px; width: 170px; height: 50px; border: 1px solid #c3a277; display: flex; align-items: center; justify-content: center; background: #fff;">
                 <h1 style="font-size: 20px; font-weight: bold; color: #6f4e37; margin: 0; letter-spacing: 2px;">网站LOGO</h1>
             </div>
 
-            <!-- 导航链接 (x: 576, y: 44 -> relative 216, 44) -->
-            <nav style="position: absolute; left: 216px; top: 44px; display: flex;">
-                <a href="/" class="nav-link">首页</a>
-                <a href="/Travelogues" class="nav-link">纪行 · 攻略</a>
-                <a href="/Places" class="nav-link">城乡 · 街巷</a>
-                <a href="/Foods" class="nav-link">特产 · 美食</a>
-                <a href="/Goods" class="nav-link">好物 · 文创</a>
-                <a href="/News" class="nav-link">资讯 · 动态</a>
+            <!-- 导航链接 (PSD x:574 -> Rel x:214) -->
+            <nav class="nav-links" style="position: absolute; left: 214px; top: 44px; width: 588px; height: 14px; display: flex; align-items: center; justify-content: space-between;">
+                <a href="/" class="nav-link" style="margin: 0;">首页</a>
+                <a href="/Travelogues" class="nav-link" style="margin: 0;">纪行 · 攻略</a>
+                <a href="/Places" class="nav-link" style="margin: 0;">城乡 · 街巷</a>
+                <a href="/Foods" class="nav-link" style="margin: 0;">特产 · 美食</a>
+                <a href="/Goods" class="nav-link" style="margin: 0;">好物 · 文创</a>
+                <a href="/News" class="nav-link" style="margin: 0;">资讯 · 动态</a>
             </nav>
 
-            <!-- 登录/注册 (x: 1450, y: 16 -> relative 1090, 16) -->
-            <div style="position: absolute; right: 0; top: 16px; display: flex; align-items: center; font-size: 12px; color: #000;">
+            <!-- 登录注册 (PSD x:1447 -> Rel x:1087) -->
+            <div class="user-area" style="position: absolute; left: 1087px; top: 15px; width: 66px; height: 13px; display: flex; align-items: center; font-size: 12px; color: #000;">
                 <a href="/Account/Login" style="color: inherit; text-decoration: none; margin-right: 15px;">登录</a>
-                <a href="/Account/Register" style="color: inherit; text-decoration: none; margin-right: 15px;">注册</a>
-                <div style="width: 16px; height: 16px; color: #999;">
-                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM13 13h2v2h-2v-2zm2 2h2v2h-2v-2zm2-2h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2z"/></svg>
-                </div>
+                <a href="/Account/Register" style="color: inherit; text-decoration: none;">注册</a>
             </div>
 
-            <!-- 1:1 还原的顶部搜索组 (y: 64) -->
-            <div style="position: absolute; left: 210px; top: 64px; display: flex; align-items: center;">
-                <!-- 输入框 (x: 570) -->
-                <input type="text" class="search-input" />
+            <!-- 二维码 (PSD x:1542 -> Rel x:1182) -->
+            <div class="qr-code" style="position: absolute; left: 1182px; top: 15px; width: 15px; height: 14px; color: #999;">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM13 13h2v2h-2v-2zm2 2h2v2h-2v-2zm2-2h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2z"/></svg>
+            </div>
+
+            <!-- 搜索组 (PSD x:573 -> Rel x:213) -->
+            <div class="search-group" style="position: absolute; left: 213px; top: 68px; display: flex; align-items: flex-start;">
+                <!-- 输入框 (w: 770) -->
+                <input type="text" class="search-input" style="width: 770px; height: 45px; margin: 0;" />
                 
-                <!-- 分类选择 (x: 1350 -> offset 780 from input start) -->
-                <div class="search-dropdown" style="margin-left: 8px;">
+                <!-- 下拉框 (PSD x:1351 -> Rel offset 778 from group start) -->
+                <div class="search-dropdown" style="position: absolute; left: 778px; top: 0; width: 108px; height: 45px; margin: 0; display: flex; align-items: center; justify-content: center;">
                     <span>纪行·攻略</span>
-                    <span style="font-size: 10px; transform: scale(0.8);">▼</span>
+                    <span style="font-size: 10px; transform: scale(0.8); margin-left: 4px;">▼</span>
                 </div>
 
-                <!-- 搜索按钮 (x: 1464 -> offset 4 from dropdown) -->
-                <button class="search-btn" style="margin-left: 4px;">搜 索</button>
+                <!-- 搜索按钮 (PSD x:1467 -> Rel offset 894 from group start) -->
+                <button class="search-btn" style="position: absolute; left: 894px; top: 1px; width: 92px; height: 43px; margin: 0;">搜 索</button>
             </div>
         </div>
     </header>
