@@ -28,54 +28,25 @@
     }
 </style>
 
-<div style="display: flex; height: 45px; border: 1px solid #ddd; border-radius: 2px; overflow: visible; position: relative;" id="searchBarWrap">
-    <input type="text" id="sbKeyword" value="@keyword"
-           style="width: 220px; border: none; outline: none; padding: 0 10px; font-size: 12px;" />
-    <div id="sbDropdown" style="width: 90px; height: 45px; border-left: 1px solid #ddd; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; font-size: 12px; cursor: pointer; background: #fff; position: relative; user-select: none;">
-        <span id="sbLabel">@currentLabel</span>
-        <span style="font-size: 9px; color: #aaa;">▼</span>
-        <div id="sbMenu" style="display:none; position:absolute; top:100%; left:-1px; right:-1px; background:#fff; border:1px solid #ddd; border-top:none; z-index:100; font-size:12px; white-space:nowrap;">
-            @foreach (var m in modules)
-            {
-                <div data-val="@m.val" data-label="@m.label" data-url="@m.url"
-                     style="padding:7px 10px; cursor:pointer; @(m.val == currentModule ? "font-weight:bold;" : "")">@m.label</div>
-            }
-        </div>
-    </div>
-    <button id="sbBtn" style="width: 50px; height: 45px; border: none; border-left: 1px solid #ddd; background: #b58c5e; color: #fff; font-size: 12px; cursor: pointer; flex-shrink: 0;">搜索</button>
+<div style="display: flex; height: 45px; border: 1px solid #ddd; border-radius: 2px; overflow: hidden; position: relative;" id="searchBarWrap">
+    <input type="text" id="sbKeyword" value="@keyword" placeholder="搜索本栏目内容..."
+           style="flex: 1; border: none; outline: none; padding: 0 15px; font-size: 13px;" />
+    <button id="sbBtn" style="width: 70px; height: 45px; border: none; border-left: 1px solid #ddd; background: #b58c5e; color: #fff; font-size: 14px; font-weight: bold; cursor: pointer; flex-shrink: 0;">搜索</button>
 </div>
 
 <script>
 (function(){
-    var selectedVal = '@currentModule';
     var selectedUrl = '@(current.url)';
-    var menu = document.getElementById('sbMenu');
-    var label = document.getElementById('sbLabel');
-    var dropdown = document.getElementById('sbDropdown');
+    var btn = document.getElementById('sbBtn');
+    var input = document.getElementById('sbKeyword');
 
-    dropdown.addEventListener('click', function(e){
-        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-        e.stopPropagation();
-    });
-    menu.querySelectorAll('[data-val]').forEach(function(item){
-        item.addEventListener('mouseenter', function(){ this.style.background='#f5f0e8'; });
-        item.addEventListener('mouseleave', function(){ this.style.background=''; });
-        item.addEventListener('click', function(e){
-            selectedVal = this.dataset.val;
-            selectedUrl = this.dataset.url;
-            label.textContent = this.dataset.label;
-            menu.style.display = 'none';
-            e.stopPropagation();
-        });
-    });
-    document.addEventListener('click', function(){ menu.style.display='none'; });
-
-    document.getElementById('sbBtn').addEventListener('click', function(){
-        var kw = document.getElementById('sbKeyword').value.trim();
+    btn.addEventListener('click', function(){
+        var kw = input.value.trim();
         window.location.href = kw ? selectedUrl + '?keyword=' + encodeURIComponent(kw) : selectedUrl;
     });
-    document.getElementById('sbKeyword').addEventListener('keydown', function(e){
-        if(e.key==='Enter') document.getElementById('sbBtn').click();
+    
+    input.addEventListener('keydown', function(e){
+        if(e.key === 'Enter') btn.click();
     });
 })();
 </script>

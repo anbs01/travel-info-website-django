@@ -34,7 +34,7 @@
     <!-- 1. 统一分页顶部 (Sub-Page Header) - 1200px 居中容器 -->
     <header style="height: 150px; background: linear-gradient(to bottom, #f7e18d, #ffffff); border-bottom: 1px solid #c4a188; position: relative;">
         <div class="header-container container-1200" style="height: 100%;">
-            
+
             <!-- Logo (PSD x:361 -> Rel x:1) -->
             <div style="position: absolute; left: 1px; top: 47px; width: 170px; height: 50px; border: 1px solid #c3a277; display: flex; align-items: center; justify-content: center; background: #fff;">
                 <h1 style="font-size: 20px; font-weight: bold; color: #6f4e37; margin: 0; letter-spacing: 2px;">网站LOGO</h1>
@@ -65,11 +65,20 @@
             <div class="search-group" style="position: absolute; left: 213px; top: 68px; display: flex; align-items: flex-start;">
                 <!-- 输入框 (w: 770) -->
                 <input type="text" class="search-input" style="width: 770px; height: 45px; margin: 0;" />
-                
+
                 <!-- 下拉框 (PSD x:1351 -> Rel offset 778 from group start) -->
-                <div class="search-dropdown" style="position: absolute; left: 778px; top: 0; width: 108px; height: 45px; margin: 0; display: flex; align-items: center; justify-content: center;">
-                    <span>纪行·攻略</span>
+                <div class="search-dropdown" id="searchCategory" style="position: absolute; left: 778px; top: 0; width: 108px; height: 45px; margin: 0; display: flex; align-items: center; justify-content: center;">
+                    <span id="selectedCategoryLabel">纪行·攻略</span>
                     <span style="font-size: 10px; transform: scale(0.8); margin-left: 4px;">▼</span>
+                    <input type="hidden" name="module" id="currentModule" value="travelogue" />
+
+                    <div id="categoryMenu" style="display:none; position:absolute; top:100%; left:-1px; right:-1px; background:#fff; border:1px solid #ebe2cf; border-top:none; z-index:10; font-size:12px;">
+                        <div data-val="travelogue" data-label="纪行·攻略" style="padding:8px 16px; cursor:pointer; color:#333;">纪行·攻略</div>
+                        <div data-val="places" data-label="城乡·街巷" style="padding:8px 16px; cursor:pointer; color:#333;">城乡·街巷</div>
+                        <div data-val="foods" data-label="特产·美食" style="padding:8px 16px; cursor:pointer; color:#333;">特产·美食</div>
+                        <div data-val="goods" data-label="好物·文创" style="padding:8px 16px; cursor:pointer; color:#333;">好物·文创</div>
+                        <div data-val="news" data-label="资讯·动态" style="padding:8px 16px; cursor:pointer; color:#333;">资讯·动态</div>
+                    </div>
                 </div>
 
                 <!-- 搜索按钮 (PSD x:1467 -> Rel offset 894 from group start) -->
@@ -108,6 +117,49 @@
                 }
             });
         })();
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(function() {
+            // 下拉菜单交互
+            $('#searchCategory').click(function(e) {
+                e.stopPropagation();
+                $('#categoryMenu').toggle();
+            });
+
+            $('#categoryMenu div').click(function() {
+                var val = $(this).data('val');
+                var label = $(this).data('label');
+                $('#selectedCategoryLabel').text(label);
+                $('#currentModule').val(val);
+                $('#categoryMenu').hide();
+            });
+
+            $(document).click(function() {
+                $('#categoryMenu').hide();
+            });
+
+            // 搜索跳转逻辑
+            $('.search-btn').click(function() {
+                var keyword = $('.search-input').val();
+                var module = $('#currentModule').val();
+                var baseUrl = "/" + (module.charAt(0).toUpperCase() + module.slice(1));
+                if (module === 'travelogue') baseUrl = "/Travelogues";
+                if (module === 'places') baseUrl = "/Places";
+                if (module === 'foods') baseUrl = "/Foods";
+                if (module === 'goods') baseUrl = "/Goods";
+                if (module === 'news') baseUrl = "/News";
+
+                window.location.href = baseUrl + "?keyword=" + encodeURIComponent(keyword);
+            });
+
+            // 回车搜索
+            $('.search-input').on('keypress', function(e) {
+                if (e.which === 13) {
+                    $('.search-btn').click();
+                }
+            });
+        });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
