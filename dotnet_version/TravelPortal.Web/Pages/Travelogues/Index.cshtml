@@ -13,7 +13,7 @@
         .list-header > div:first-child { width: auto !important; height: 40px !important; padding: 0 15px; font-size: 20px !important; }
         .category-bar { flex-direction: column !important; align-items: flex-start !important; gap: 15px; }
         .item-row { flex-direction: column !important; }
-        .item-image { width: 100% !important; height: auto !important; aspect-ratio: 360/220; margin-bottom: 15px; }
+        .item-image { width: 100% !important; height: auto !important; aspect-ratio: 180/120; margin-bottom: 15px; }
         .item-content { margin-left: 0 !important; }
     }
 </style>
@@ -30,26 +30,26 @@
         </div>
 
         <!-- 2. 分类筛选条 -->
-        <div class="category-bar" style="display: flex; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 40px; font-size: 12px;">
+        <div class="category-bar" style="display: flex; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 40px;">
             <!-- 主分类 -->
             <div style="display: flex; gap: 10px; margin-right: 30px; flex-shrink: 0;">
                 <a href="?category=travelogue"
-                   style="padding: 4px 10px; border-radius: 2px; cursor: pointer; text-decoration: none; @(currentCategory == "travelogue" ? "background:#b58c5e;color:#fff;" : "background:#eee;color:#666;")">纪行</a>
+                   style="width: 38px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 2px; cursor: pointer; text-decoration: none; font-size: 16px; @(currentCategory == "travelogue" ? "background:#b58c5e;color:#fff;" : "background:#eee;color:#666;")">纪行</a>
                 <a href="?category=guide"
-                   style="padding: 4px 10px; border-radius: 2px; cursor: pointer; text-decoration: none; @(currentCategory == "guide" ? "background:#b58c5e;color:#fff;" : "background:#eee;color:#666;")">攻略</a>
+                   style="width: 38px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 2px; cursor: pointer; text-decoration: none; font-size: 16px; @(currentCategory == "guide" ? "background:#b58c5e;color:#fff;" : "background:#eee;color:#666;")">攻略</a>
             </div>
             <!-- 子类别 -->
             @if (Model.SubCategories.Any())
             {
-                    <div style="display: flex; flex-wrap: wrap; gap: 0 24px; color: #666;">
-                        <a href="?category=@currentCategory"
-                           style="cursor: pointer; text-decoration: none; color: @(string.IsNullOrEmpty(Model.Tag) ? "#000" : "#666"); font-weight: @(string.IsNullOrEmpty(Model.Tag) ? "bold" : "normal");">全部</a>
+                <div style="display: flex; flex-wrap: wrap; gap: 0 24px; color: #666; font-size: 14px; line-height: 30px;">
+                    <a href="?category=@currentCategory"
+                       style="cursor: pointer; text-decoration: none; color: @(string.IsNullOrEmpty(Model.Tag) ? "#000" : "#666"); font-weight: @(string.IsNullOrEmpty(Model.Tag) ? "bold" : "normal");">全部</a>
                     @foreach (var tag in Model.SubCategories)
                     {
-                                <a href="?category=@currentCategory&tag=@Uri.EscapeDataString(tag)"
-                                   style="cursor: pointer; text-decoration: none; color: @(Model.Tag == tag ? "#000" : "#666"); font-weight: @(Model.Tag == tag ? "bold" : "normal");">@tag</a>
+                        <a href="?category=@currentCategory&tag=@Uri.EscapeDataString(tag)"
+                           style="cursor: pointer; text-decoration: none; color: @(Model.Tag == tag ? "#000" : "#666"); font-weight: @(Model.Tag == tag ? "bold" : "normal");">@tag</a>
                     }
-                    </div>
+                </div>
             }
         </div>
 
@@ -59,51 +59,57 @@
             {
                 foreach (var item in Model.Travelogues.Items)
                 {
-                            <div>
-                                <!-- 标题 -->
-                                <div style="display: flex; align-items: center; margin-bottom: 18px;">
-                                    <span style="width: 6px; height: 6px; background: #b58c5e; margin-right: 14px; flex-shrink: 0;"></span>
-                                    <h2 style="font-size: 16px; font-weight: bold; color: #333; margin: 0;">
-                                        <a asp-page="./Details" asp-route-id="@item.Id" style="color: inherit; text-decoration: none;">@item.Title</a>
-                                    </h2>
-                                </div>
+                    <div>
+                        <!-- 标题 -->
+                        <div style="display: flex; align-items: center; margin-bottom: 18px;">
+                            <span style="width: 6px; height: 6px; background: #b58c5e; margin-right: 14px; flex-shrink: 0;"></span>
+                            <h2 style="font-size: 16px; font-weight: bold; color: #333; margin: 0;">
+                                <a asp-page="./Details" asp-route-id="@item.Id" style="color: inherit; text-decoration: none;">@item.Title</a>
+                            </h2>
+                        </div>
 
-                                <div class="item-row" style="display: flex;">
+                        <div class="item-row" style="display: flex;">
                             @if (!string.IsNullOrEmpty(item.MainImage))
                             {
-                                            <div class="item-image" style="width: 360px; height: 220px; flex-shrink: 0; overflow: hidden; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                                                <a asp-page="./Details" asp-route-id="@item.Id">
-                                                    <img src="@item.MainImage" style="width: 100%; height: 100%; object-fit: cover;" alt="@item.Title" />
-                                                </a>
-                                            </div>
+                                <div class="item-image" style="width: 180px; height: 120px; flex-shrink: 0; overflow: hidden; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                                    <a asp-page="./Details" asp-route-id="@item.Id">
+                                        <img src="@item.MainImage" style="width: 100%; height: 100%; object-fit: cover;" alt="@item.Title" />
+                                    </a>
+                                </div>
                             }
-                                    <div class="item-content" style="margin-left: @(!string.IsNullOrEmpty(item.MainImage) ? "36px" : "0"); flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                                        <p style="font-size: 13px; color: #666; line-height: 2.1; margin: 0; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;">
+                            else
+                            {
+                                <div class="item-image" style="width: 180px; height: 120px; flex-shrink: 0; overflow: hidden; border-radius: 4px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                                    <img src="/images/noimage.png" style="max-width: 60%; max-height: 60%; object-fit: contain; opacity: 0.5;" alt="暂无图片" />
+                                </div>
+                            }
+                            <div class="item-content" style="margin-left: 36px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                                <p style="font-size: 13px; color: #666; line-height: 2.1; margin: 0; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;">
                                     @item.Summary
-                                        </p>
-                                        <div style="font-size: 12px; color: #999; display: flex; gap: 30px; align-items: center; margin-top: 10px;">
+                                </p>
+                                <div style="font-size: 12px; color: #999; display: flex; gap: 30px; align-items: center; margin-top: 10px;">
                                     @if (!string.IsNullOrEmpty(item.Author))
                                     {
-                                                <span style="color: #666;">@item.Author</span>
+                                        <span style="color: #666;">@item.Author</span>
                                     }
-                                            <span>@(item.PublishDate?.ToString("dd/MM/yyyy") ?? item.CreatedAt.ToString("dd/MM/yyyy"))</span>
-                                            <span>阅读 @item.Views</span>
+                                    <span>@(item.PublishDate?.ToString("dd/MM/yyyy") ?? item.CreatedAt.ToString("dd/MM/yyyy"))</span>
+                                    <span>阅读 @item.Views</span>
                                     @if (!string.IsNullOrEmpty(item.Classification))
                                     {
-                                                    <span style="color: #b58c5e; border: 1px solid #b58c5e; padding: 1px 6px; border-radius: 2px; font-size: 11px;">@(item.Classification == "guide" ? "攻略" : "纪行")</span>
+                                        <span style="color: #b58c5e; border: 1px solid #b58c5e; padding: 1px 6px; border-radius: 2px; font-size: 11px;">@(item.Classification == "guide" ? "攻略" : "纪行")</span>
                                     }
-                                        </div>
-                                    </div>
                                 </div>
-                                <div style="border-bottom: 1px dotted #dbdbdb; margin-top: 45px;"></div>
                             </div>
+                        </div>
+                        <div style="border-bottom: 1px dotted #dbdbdb; margin-top: 45px;"></div>
+                    </div>
                 }
             }
             else
             {
-                    <div style="padding: 100px 0; text-align: center; color: #999; font-size: 14px;">
-                        暂无相关@categoryLabel内容
-                    </div>
+                <div style="padding: 100px 0; text-align: center; color: #999; font-size: 14px;">
+                    暂无相关@categoryLabel内容
+                </div>
             }
         </div>
 
