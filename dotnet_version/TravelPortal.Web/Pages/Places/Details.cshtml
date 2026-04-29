@@ -1,75 +1,273 @@
 @page "{id:int}"
 @model TravelPortal.Web.Pages.Places.DetailsModel
 @{
-    ViewData["Title"] = Model.Item?.Title ?? "城乡详情";
-    Layout = "_SubPageLayout";
     var item = Model.Item!;
+    ViewData["Title"] = item.Title;
+    Layout = "_SubPageLayout";
 }
 
 <style>
+    .place-header { background: #fff; padding: 40px 0 20px 0; border-bottom: 1px solid #eee; }
+    .place-title { font-size: 32px; font-weight: bold; color: #333; display: flex; align-items: baseline; gap: 15px; }
+    .place-meta { margin-top: 15px; display: flex; gap: 30px; font-size: 14px; color: #666; }
+    .place-meta b { color: #333; font-weight: 500; }
+    .place-features { margin-top: 20px; font-size: 14px; color: #666; line-height: 1.6; }
+
+    .portal-nav { background: #fff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; margin-top: 20px; }
+    .portal-nav .container-1200 { display: flex; }
+    .portal-nav a { padding: 15px 25px; color: #666; text-decoration: none; font-size: 15px; border-bottom: 3px solid transparent; transition: all 0.3s; cursor: pointer; }
+    .portal-nav a.active { color: #b58c5e; border-bottom-color: #b58c5e; font-weight: bold; background: #fdfaf5; }
+    .portal-nav a:hover:not(.active) { color: #b58c5e; }
+
+    .tab-content { display: none; padding: 30px 0 100px 0; }
+    .tab-content.active { display: block; }
+
+    /* 基本资料样式 */
+    .basic-info { line-height: 2; font-size: 15px; color: #444; }
+    .basic-info p { margin-bottom: 20px; text-indent: 2em; }
+    .basic-info img { max-width: 100%; height: auto; border-radius: 4px; margin: 20px 0; display: block; }
+
+    /* 网格卡片样式 */
+    .content-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .content-card { background: #fff; border: 1px solid #eee; border-radius: 4px; overflow: hidden; transition: all 0.3s; text-decoration: none; color: inherit; display: block; }
+    .content-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: #b58c5e; }
+    .content-card .img-wrap { width: 100%; height: 160px; overflow: hidden; background: #f5f5f5; }
+    .content-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .content-card:hover img { transform: scale(1.05); }
+    .content-card .info { padding: 15px; }
+    .content-card h4 { margin: 0 0 8px 0; font-size: 15px; font-weight: bold; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .content-card p { margin: 0; font-size: 12px; color: #999; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 38px; }
+
+    /* 交通列表 */
+    .transport-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .transport-item { background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 6px; border-left: 4px solid #b58c5e; }
+    .transport-item h4 { margin: 0 0 10px 0; font-size: 16px; color: #333; display: flex; align-items: center; gap: 10px; }
+    .transport-item .badge { background: #b58c5e; color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 2px; font-weight: normal; }
+    .transport-item p { margin: 5px 0; font-size: 13px; color: #666; }
+
+    /* 按钮样式 */
+    .btn-supply { background: #f07d44; color: #fff; border: none; padding: 8px 20px; border-radius: 4px; font-size: 14px; cursor: pointer; transition: opacity 0.3s; }
+    .btn-supply:hover { opacity: 0.9; }
+
+    /* 模态框样式 */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; }
+    .modal-content { background: #fff; width: 500px; border-radius: 8px; padding: 30px; position: relative; }
+    .modal-close { position: absolute; top: 15px; right: 15px; font-size: 24px; color: #ccc; cursor: pointer; }
+    .modal-title { font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #333; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-size: 14px; color: #666; }
+    .form-group label span { color: #f00; margin-right: 4px; }
+    .form-group textarea, .form-group input { width: 100%; border: 1px solid #ddd; padding: 10px; border-radius: 4px; outline: none; font-size: 14px; box-sizing: border-box; }
+    .form-group textarea { height: 120px; resize: none; }
+    .modal-tips { font-size: 13px; color: #f07d44; background: #fff8f5; padding: 10px; border-radius: 4px; margin-bottom: 20px; line-height: 1.6; }
+    .modal-foot { display: flex; justify-content: center; gap: 20px; }
+    .btn-submit { background: #b58c5e; color: #fff; border: none; padding: 8px 30px; border-radius: 4px; cursor: pointer; }
+    .btn-cancel { background: #eee; color: #666; border: none; padding: 8px 30px; border-radius: 4px; cursor: pointer; }
+
     @@media (max-width: 1199px) {
-        .detail-container { padding: 30px 15px !important; }
-        .detail-info { flex-direction: column !important; gap: 10px !important; }
-        .related-grid { grid-template-columns: 1fr !important; }
+        .content-grid { grid-template-columns: repeat(2, 1fr); }
+        .transport-list { grid-template-columns: 1fr; }
+        .place-meta { flex-direction: column; gap: 10px; }
     }
 </style>
 
-<div style="background:#f5f5f5; padding-bottom:60px;">
-    <div style="background:#fff; border-top:1px solid #b58c5e; border-bottom:1px solid #e8e8e8; margin-bottom:30px;">
+<div style="background:#fcfcfc; min-height: 800px;">
+    <!-- 面包屑导航 -->
+    <div style="background:#fff; border-top:1px solid #eee; border-bottom:1px solid #eee;">
         <div class="container-1200" style="height:44px; display:flex; align-items:center; font-size:12px; color:#676767;">
-            你的位置：<a href="/" style="color:#676767;">首页</a>&nbsp;>&nbsp;<a href="/Places" style="color:#676767;">城乡 · 街巷</a>&nbsp;>&nbsp;@item.Title
+            你的位置：<a href="/" style="color:#676767;">首页</a>&nbsp;>&nbsp;<a href="/Places" style="color:#676767;">城乡 · 街巷</a>
+            @foreach(var p in Model.ParentChain)
+            {
+                <span>&nbsp;>&nbsp;</span><a href="/Places/@p.Id" style="color:#676767;">@p.Title</a>
+            }
+            &nbsp;>&nbsp;@item.FullTitle @(item.Nature == "Overseas" && !string.IsNullOrEmpty(item.EnglishName) ? $"({item.EnglishName})" : "")
         </div>
     </div>
 
-    <div class="container-1200 detail-container" style="background:#fff; padding:50px; box-shadow:0 0 15px rgba(0,0,0,0.04);">
-        <div style="margin-bottom:20px;">
-            <h1 style="font-size:24px; font-weight:bold; color:#000; margin:0 0 10px 0; line-height:1.5;">
-                @item.Title
-                @if (!string.IsNullOrEmpty(item.FameLevel))
-                {
-                    <span style="font-size:12px; font-weight:normal; color:#999; margin-left:10px;">@item.FameLevel</span>
-                }
-                @if (!string.IsNullOrEmpty(item.ScenicGrade))
-                {
-                    <span style="font-size:12px; font-weight:normal; color:#b58c5e; margin-left:8px;">@item.ScenicGrade</span>
-                }
-            </h1>
-            @if (!string.IsNullOrEmpty(item.Summary))
-            {
-                <p style="font-size:13px; color:#555; margin:0 0 12px 0; line-height:1.8;">
-                    <strong>城乡特色：</strong>@item.Summary
-                </p>
-            }
-            <div class="detail-info" style="font-size:12px; color:#999; display:flex; flex-wrap:wrap; gap:20px; padding-bottom:16px; border-bottom:1px solid #eee;">
-                @if (!string.IsNullOrEmpty(item.Author)) { <span>作者：@item.Author</span> }
-                <span>发布日期：@(item.PublishDate?.ToString("yyyy-MM-dd") ?? item.CreatedAt.ToString("yyyy-MM-dd"))</span>
-                <span>阅读：@item.Views</span>
-            </div>
-        </div>
-
-        <div style="font-size:15px; color:#333; line-height:2; letter-spacing:0.3px; margin-top:30px;">
-            @Html.Raw(item.Content)
-        </div>
-
-        <div style="border:1px dashed #ddd; padding:16px 20px; margin-top:50px; font-size:12px; color:#888; line-height:1.6;">
-            版权声明：本站内容部分来源于网络，如有侵权请联系删除。转载请注明出处。
-        </div>
-
-        @if (Model.Related.Any())
-        {
-            <div style="margin-top:60px; padding-top:30px; border-top:1px solid #eee;">
-                <h4 style="font-size:15px; font-weight:bold; margin-bottom:20px;">相关推荐</h4>
-                <div class="related-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:6px 40px;">
-                    @foreach (var r in Model.Related)
-                    {
-                        <div style="display:flex; align-items:center; font-size:13px; color:#444; line-height:2.2;">
-                            <span style="width:5px; height:5px; background:#ccc; border-radius:50%; margin-right:10px; flex-shrink:0;"></span>
-                            <a asp-page="./Details" asp-route-id="@r.Id" target="_blank" title="@r.Title"
-                               style="color:#444; text-decoration:none; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">@r.Title</a>
-                        </div>
-                    }
+    <!-- 顶部基本信息区 -->
+    <div class="place-header">
+        <div class="container-1200">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div>
+                    <h1 class="place-title">
+                        @item.Title
+                        @if(!string.IsNullOrEmpty(item.GeoTag)) {
+                            <span style="font-size:13px; font-weight:normal; color:#b58c5e; border:1px solid #b58c5e; padding:2px 8px; border-radius:2px;">@item.GeoTag</span>
+                        }
+                    </h1>
+                    <div class="place-meta">
+                        <span>别名：<b>@(string.IsNullOrEmpty(item.SubTitle) ? "暂无" : item.SubTitle)</b></span>
+                        <span>最佳旅游时间：<b>@(string.IsNullOrEmpty(item.BestTime) ? "一年四季" : item.BestTime)</b></span>
+                    </div>
+                    <div class="place-features">
+                        游玩特色：@(string.IsNullOrEmpty(item.Tags) ? "暂无" : item.Tags.Replace(",", "、"))
+                    </div>
                 </div>
+                <button class="btn-supply" onclick="openModal()">我要补充资料</button>
             </div>
-        }
+        </div>
+    </div>
+
+    <!-- Tab 导航条 -->
+    <div class="portal-nav">
+        <div class="container-1200">
+            <a onclick="showTab('basic')" id="nav-basic" class="active">基本资料</a>
+            <a onclick="showTab('scenic')" id="nav-scenic">热门打卡地</a>
+            <a onclick="showTab('food')" id="nav-food">特产 · 美食</a>
+            <a onclick="showTab('creative')" id="nav-creative">文创 · 商品</a>
+            <a onclick="showTab('transport')" id="nav-transport">交通 · 出行</a>
+            <a onclick="showTab('travelogue')" id="nav-travelogue">纪行 · 攻略</a>
+        </div>
+    </div>
+
+    <div class="container-1200">
+        <!-- 1. 基本资料 -->
+        <div id="tab-basic" class="tab-content active basic-info">
+            @if (!string.IsNullOrEmpty(item.Content))
+            {
+                @Html.Raw(item.Content)
+            }
+            else
+            {
+                <div style="text-align:center; padding:100px 0; color:#999;">
+                    <img src="/images/empty.png" style="width:120px; opacity:0.5; margin-bottom:20px;" /><br/>
+                    暂无详细资料，欢迎点击上方“我要补充资料”提供信息
+                </div>
+            }
+        </div>
+
+        <!-- 2. 打卡地 -->
+        <div id="tab-scenic" class="tab-content">
+            <div class="content-grid">
+                @foreach (var s in Model.ScenicSpots)
+                {
+                    <a href="/ScenicSpots/Details/@s.Id" class="content-card">
+                        <div class="img-wrap">
+                            <img src="@(string.IsNullOrEmpty(s.MainImage) ? "/images/noimage.png" : s.MainImage)" alt="@s.Title" />
+                        </div>
+                        <div class="info">
+                            <h4>@s.Title</h4>
+                            <p>@s.Summary</p>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+
+        <!-- 3. 美食 -->
+        <div id="tab-food" class="tab-content">
+            <div class="content-grid">
+                @foreach (var f in Model.Foods)
+                {
+                    <a href="/Foods/Details/@f.Id" class="content-card">
+                        <div class="img-wrap">
+                            <img src="@(string.IsNullOrEmpty(f.MainImage) ? "/images/noimage.png" : f.MainImage)" alt="@f.Title" />
+                        </div>
+                        <div class="info">
+                            <h4>@f.Title</h4>
+                            <p>@f.Summary</p>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+
+        <!-- 4. 文创 -->
+        <div id="tab-creative" class="tab-content">
+            <div class="content-grid">
+                @foreach (var c in Model.CreativeProducts)
+                {
+                    <a href="/Goods/Details/@c.Id" class="content-card">
+                        <div class="img-wrap">
+                            <img src="@(string.IsNullOrEmpty(c.MainImage) ? "/images/noimage.png" : c.MainImage)" alt="@c.Title" />
+                        </div>
+                        <div class="info">
+                            <h4>@c.Title</h4>
+                            <p>@c.Summary</p>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+
+        <!-- 5. 交通 -->
+        <div id="tab-transport" class="tab-content">
+            <div class="transport-list">
+                @foreach (var t in Model.Transports)
+                {
+                    <div class="transport-item">
+                        <h4>
+                            <span class="badge">@t.TransportType</span>
+                            @t.Title
+                        </h4>
+                        <p>📍 地址：@(t.Address ?? "暂无")</p>
+                        <p>📞 电话：@(t.ContactPhone ?? "暂无")</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- 6. 攻略 -->
+        <div id="tab-travelogue" class="tab-content">
+            <div class="content-grid">
+                @foreach (var t in Model.Travelogues)
+                {
+                    <a href="/Travelogues/Details/@t.Id" class="content-card">
+                        <div class="img-wrap">
+                            <img src="@(string.IsNullOrEmpty(t.MainImage) ? "/images/noimage.png" : t.MainImage)" alt="@t.Title" />
+                        </div>
+                        <div class="info">
+                            <h4>@t.Title</h4>
+                            <p>@t.Summary</p>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- 补充资料弹窗 -->
+<div class="modal-overlay" id="supplyModal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="modal-title">我要补充资料</div>
+        <div class="modal-tips">
+            会员功能正在完善未开启，暂时无法提供即时信息补充服务，欢迎向我们提供各地完整的文旅资源资料，感谢支持。
+            <a href="#" style="color:#b58c5e; float:right;">联系我们</a>
+        </div>
+        <div class="form-group">
+            <label><span>*</span>补充内容</label>
+            <textarea placeholder="请输入补充的资料名称"></textarea>
+        </div>
+        <div class="form-group">
+            <label>联系方式</label>
+            <input type="text" placeholder="请输入联系方式" />
+        </div>
+        <div class="modal-foot">
+            <button class="btn-submit" onclick="alert('提交成功，我们将尽快审核！'); closeModal();">确定提交</button>
+            <button class="btn-cancel" onclick="closeModal()">取消提交</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showTab(tabId) {
+        document.querySelectorAll('.portal-nav a').forEach(a => a.classList.remove('active'));
+        document.getElementById('nav-' + tabId).classList.add('active');
+
+        document.querySelectorAll('.tab-content').forEach(div => div.classList.remove('active'));
+        document.getElementById('tab-' + tabId).classList.add('active');
+        
+        // 滚动到 Tab 顶部
+        window.scrollTo({ top: document.querySelector('.portal-nav').offsetTop, behavior: 'smooth' });
+    }
+
+    function openModal() { document.getElementById('supplyModal').style.display = 'flex'; }
+    function closeModal() { document.getElementById('supplyModal').style.display = 'none'; }
+    
+    // 点击遮罩层关闭
+    document.getElementById('supplyModal').addEventListener('click', function(e) {
+        if(e.target === this) closeModal();
+    });
+</script>

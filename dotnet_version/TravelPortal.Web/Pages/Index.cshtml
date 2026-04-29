@@ -109,11 +109,10 @@
                                 <span style="width: @(item.SourceType == "推荐" ? "8px" : "6px"); height: @(item.SourceType == "推荐" ? "8px" : "6px"); background: @(item.SourceType == "推荐" ? "#b58c5e" : "#ccc"); margin-right: 12px; border-radius: @(item.SourceType == "推荐" ? "2px" : "50%"); flex-shrink: 0;"></span>
                                 <a href="@item.Url" target="_blank"
                                    title="@item.Title"
-                                   style="color: @(item.SourceType == "推荐" ? "#000" : "#444"); font-weight: @(item.SourceType == "推荐" ? "bold" : "normal"); text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 360px; flex: 1;">@item.Title</a>
-                                @if (item.SourceType != "推荐")
-                                {
-                                    <span style="position: absolute; right: 0; color: #999; font-size: 11px; white-space: nowrap;">[@item.SourceType]</span>
-                                }
+                                   style="color: @(item.SourceType == "推荐" ? "#000" : "#444"); font-weight: normal; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 360px; flex: 1;">@item.Title</a>
+
+                                <span style="position: absolute; right: 0; color: #999; font-size: 11px; white-space: nowrap; pointer-events: none;">[@item.SourceType]</span>
+
                             </li>
                         }
                         @if (!Model.ListItems.Any())

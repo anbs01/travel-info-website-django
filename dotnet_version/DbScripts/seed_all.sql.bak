@@ -1,4 +1,4 @@
--- ============================================================
+﻿-- ============================================================
 -- TravelPortal 全量初始化数据脚本 (增强版 - 修正)
 -- 特性：无 NULL 数据，每表 20+ 条，支持分页测试
 -- 执行顺序：热词 → 地理 → 交通 → 打卡地 → 攻略 → 资讯 → 美食 → 文创 → 推荐
@@ -212,32 +212,32 @@ INSERT INTO tp_creative_products (Id, Title, SubTitle, Classification, NonLegacy
 -- 10. 首页推荐数据 (tp_recommendations) - 20条
 -- ============================================================
 INSERT INTO tp_recommendations (Title, ImageUrl, LinkUrl, ClickCount, IsPinned, SortOrder, CreatedAt, EndDate) VALUES
-('爱在烟台，难以离开', 'https://images.unsplash.com/photo-1540660290370-8af90a454417?w=800', '/Places/Details/10', 3550, 1, 100, NOW(), '2099-12-31'),
-('蓬莱阁：人间仙境', 'https://images.unsplash.com/photo-1527685238219-c81b3dd33021?w=800', '/ScenicSpots/Details/1', 2800, 1, 99, NOW(), '2099-12-31'),
-('魅力青岛，啤酒之乡', 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800', '/Places/Details/12', 4200, 0, 98, NOW(), '2099-12-31'),
-('进淄赶烤，烧烤热潮', 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800', '/Foods/Details/8', 8900, 0, 97, NOW(), '2099-12-31'),
-('西湖美景，断桥残雪', 'https://images.unsplash.com/photo-1525640788966-69bdb028aa73?w=800', '/ScenicSpots/Details/10', 5100, 0, 96, NOW(), '2099-12-31'),
-('熊猫基地，萌翻全场', 'https://images.unsplash.com/photo-1527685238219-c81b3dd33021?w=800', '/ScenicSpots/Details/11', 7500, 0, 95, NOW(), '2099-12-31'),
-('故宫探秘，皇家风范', 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800', '/ScenicSpots/Details/8', 12000, 0, 94, NOW(), '2099-12-31'),
-('外滩夜色，摩登上海', 'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?w=800', '/ScenicSpots/Details/9', 9800, 0, 93, NOW(), '2099-12-31'),
-('广州早茶，舌尖美食', 'https://images.unsplash.com/photo-1541849546-216549ae216d?w=800', '/Foods/Details/12', 3400, 0, 92, NOW(), '2099-12-31'),
-('泰山观日，五岳之首', 'https://images.unsplash.com/photo-1544391682-178c6a583bbd?w=800', '/ScenicSpots/Details/4', 8600, 0, 91, NOW(), '2099-12-31'),
-('威海环海，浪漫之旅', 'https://images.unsplash.com/photo-1516245556?w=800', '/Places/Details/13', 2200, 0, 90, NOW(), '2099-12-31'),
-('苏州园林，江南缩影', 'https://images.unsplash.com/photo-1525640788966-69bdb028aa73?w=800', '/ScenicSpots/Details/13', 4100, 0, 89, NOW(), '2099-12-31'),
-('南京金陵，六朝风华', '', '/ScenicSpots/Details/12', 3600, 0, 88, NOW(), '2099-12-31'),
-('深圳科技，城市之光', '', '/Places/Details/9', 2800, 0, 87, NOW(), '2099-12-31'),
-('趵突泉涌，天下第一', '', '/ScenicSpots/Details/17', 5500, 0, 86, NOW(), '2099-12-31'),
-('阳澄湖蟹，秋日必吃', 'https://images.unsplash.com/photo-1525640788966-69bdb028aa73?w=800', '/Foods/Details/11', 9200, 0, 85, NOW(), '2099-12-31'),
-('德州扒鸡，五香脱骨', 'https://images.unsplash.com/photo-1544391682-178c6a583bbd?w=800', '/Foods/Details/7', 4800, 0, 84, NOW(), '2099-12-31'),
-('大明湖畔，荷花盛开', 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800', '/ScenicSpots/Details/5', 2100, 0, 83, NOW(), '2099-12-31'),
-('文创精选，非遗传承', 'https://images.unsplash.com/photo-1540660290370-8af90a454417?w=800', '/Goods', 1200, 0, 82, NOW(), '2099-12-31'),
-('最新资讯，文旅动态', 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800', '/News/Index', 800, 0, 81, NOW(), '2099-12-31');
+('爱在烟台，难以离开', 'https://images.unsplash.com/photo-1540660290370-8af90a454417?w=800', '/Places/Details?id=10', 3550, 1, 100, NOW(), '2099-12-31'),
+('蓬莱阁：人间仙境', 'https://images.unsplash.com/photo-1527685238219-c81b3dd33021?w=800', '/ScenicSpots/Details?id=1', 2800, 1, 99, NOW(), '2099-12-31'),
+('魅力青岛，啤酒之乡', 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800', '/Places/Details?id=12', 4200, 0, 98, NOW(), '2099-12-31'),
+('进淄赶烤，烧烤热潮', 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800', '/Foods/Details?id=8', 8900, 0, 97, NOW(), '2099-12-31'),
+('西湖美景，断桥残雪', 'https://images.unsplash.com/photo-1525640788966-69bdb028aa73?w=800', '/ScenicSpots/Details?id=10', 5100, 0, 96, NOW(), '2099-12-31'),
+('熊猫基地，萌翻全场', 'https://images.unsplash.com/photo-1527685238219-c81b3dd33021?w=800', '/ScenicSpots/Details?id=11', 7500, 0, 95, NOW(), '2099-12-31'),
+('故宫探秘，皇家风范', 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800', '/ScenicSpots/Details?id=8', 12000, 0, 94, NOW(), '2099-12-31'),
+('外滩夜色，摩登上海', 'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?w=800', '/ScenicSpots/Details?id=9', 9800, 0, 93, NOW(), '2099-12-31'),
+('广州早茶，舌尖美食', 'https://images.unsplash.com/photo-1541849546-216549ae216d?w=800', '/Foods/Details?id=12', 3400, 0, 92, NOW(), '2099-12-31'),
+('泰山观日，五岳之首', 'https://images.unsplash.com/photo-1544391682-178c6a583bbd?w=800', '/ScenicSpots/Details?id=4', 8600, 0, 91, NOW(), '2099-12-31'),
+('威海环海，浪漫之旅', 'https://images.unsplash.com/photo-1516245556?w=800', '/Places/Details?id=13', 2200, 0, 90, NOW(), '2099-12-31'),
+('苏州园林，江南缩影', 'https://images.unsplash.com/photo-1525640788966-69bdb028aa73?w=800', '/ScenicSpots/Details?id=13', 4100, 0, 89, NOW(), '2099-12-31'),
+('南京金陵，六朝风华', 'https://images.unsplash.com/photo-1540660290370-8af90a454417?w=800', '/ScenicSpots/Details?id=12', 3600, 0, 88, NOW(), '2099-12-31'),
+('深圳科技，城市之光', 'https://images.unsplash.com/photo-1523301343968-6a6ebf63c672?w=800', '/Places/Details?id=9', 2800, 0, 87, NOW(), '2099-12-31'),
+('趵突泉涌，天下第一', 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800', '/ScenicSpots/Details?id=17', 5500, 0, 86, NOW(), '2099-12-31'),
+('阳澄湖蟹，秋日必吃', 'https://images.unsplash.com/photo-1525640788966-69bdb028aa73?w=800', '/Foods/Details?id=11', 9200, 0, 85, NOW(), '2099-12-31'),
+('德州扒鸡，五香脱骨', 'https://images.unsplash.com/photo-1544391682-178c6a583bbd?w=800', '/Foods/Details?id=7', 4800, 0, 84, NOW(), '2099-12-31'),
+('大明湖畔，荷花盛开', 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800', '/ScenicSpots/Details?id=5', 2100, 0, 83, NOW(), '2099-12-31'),
+('文创精选，非遗传承', 'https://images.unsplash.com/photo-1540660290370-8af90a454417?w=800', '/CreativeProducts', 1200, 0, 82, NOW(), '2099-12-31'),
+('最新资讯，文旅动态', 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800', '/News', 800, 0, 81, NOW(), '2099-12-31');
 
 -- ============================================================
 -- 完成
 -- ============================================================
-SELECT 'Seed completed successfully' AS Result;
-SELECT 'HotWords' AS TableName, COUNT(*) AS 数量 FROM tp_hot_words
+SELECT '✅ 数据初始化完成！' AS 结果;
+SELECT '热词' AS 表名, COUNT(*) AS 数量 FROM tp_hot_words
 UNION ALL SELECT '地理', COUNT(*) FROM tp_geo
 UNION ALL SELECT '交通', COUNT(*) FROM tp_transports
 UNION ALL SELECT '打卡地', COUNT(*) FROM tp_scenic_spots

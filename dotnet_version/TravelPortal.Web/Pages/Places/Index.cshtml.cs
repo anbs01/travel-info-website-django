@@ -10,11 +10,10 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     private readonly ISqlSugarClient _db;
     public IndexModel(ISqlSugarClient db) => _db = db;
 
-    public PaginatedList<ScenicSpot> SpotList { get; set; } = null!;
+    public PaginatedList<Geo> SpotList { get; set; } = null!;
     public List<string> Categories { get; set; } = new();
     public List<Geo> Provinces { get; set; } = new();
 
-    [BindProperty(SupportsGet = true)] public string? FameLevel { get; set; }
     [BindProperty(SupportsGet = true)] public string? Category { get; set; }
     [BindProperty(SupportsGet = true)] public string? Keyword { get; set; }
     [BindProperty(SupportsGet = true)] public int? GeoId { get; set; }
@@ -23,7 +22,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     public void OnGet()
     {
         Categories = _db.Queryable<HotWord>()
-            .Where(h => h.Module == HotWord.MOD_SCENIC && !h.IsHidden)
+            .Where(h => h.Module == HotWord.MOD_PLACE && !h.IsHidden)
             .OrderBy(h => h.SortOrder).Select(h => h.Name).ToList();
 
         // 加载省份列表 (Level=2)
@@ -32,23 +31,32 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             .OrderBy(g => g.SortOrder)
             .ToList();
 
-        var query = _db.Queryable<ScenicSpot>().Where(s => !s.IsHidden);
+        // 仅查询城镇及以下级别的行政区 (Level >= 3)
+        var query = _db.Queryable<Geo>().Where(g => g.Level >= 3 && !g.IsHidden);
         
-        if (!string.IsNullOrEmpty(FameLevel)) query = query.Where(s => s.FameLevel == FameLevel);
-        if (!string.IsNullOrEmpty(Category)) query = query.Where(s => s.Classification == Category);
-        if (!string.IsNullOrEmpty(Keyword)) query = query.Where(s => s.Title.Contains(Keyword));
+        // 分类过滤（因为 Geo 暂无 Classification，如果选择海外则过滤海外，否则按标签匹配）
+        if (!string.IsNullOrEmpty(Category)) 
+        {
+            query = query.Where(g => (g.Tags != null && g.Tags.Contains(Category)) || (g.GeoTag != null && g.GeoTag.Contains(Category)));
+        }
+
+        if (!string.IsNullOrEmpty(Keyword)) 
+        {
+            query = query.Where(g => (g.Title != null && g.Title.Contains(Keyword)) || (g.FullTitle != null && g.FullTitle.Contains(Keyword)));
+        }
+        
         if (GeoId.HasValue) 
         {
             // 获取当前地区及其子地区的 ID 集合
             var targetIds = _db.Queryable<Geo>()
                 .Where(g => g.Id == GeoId || g.ParentId == GeoId)
                 .Select(g => g.Id).ToList();
-            query = query.Where(s => targetIds.Contains(s.GeoId ?? 0));
+            query = query.Where(g => targetIds.Contains(g.ParentId ?? 0) || targetIds.Contains(g.Id));
         }
 
         int total = 0;
-        var items = query.OrderByDescending(s => s.IsSticky).OrderByDescending(s => s.CreatedAt)
+        var items = query.OrderByDescending(g => g.IsSticky).OrderByDescending(g => g.CreatedAt)
                          .ToPageList(PageIndex, 15, ref total); 
-        SpotList = new PaginatedList<ScenicSpot>(items, total, PageIndex, 15);
+        SpotList = new PaginatedList<Geo>(items, total, PageIndex, 15);
     }
 }

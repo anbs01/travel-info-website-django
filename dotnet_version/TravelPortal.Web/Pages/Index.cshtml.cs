@@ -39,13 +39,10 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             .ToList();
 
         // 3. 右侧列表
-        // 3a. 文字推荐（无图片、未过期）
+        // 3a. 首页右侧：文字推荐（ImageUrl为空的记录）
         var textRecs = _db.Queryable<Recommendation>()
-            .Where(r => (r.ImageUrl == null || r.ImageUrl == "")
-                     && (r.EndDate == null || r.EndDate > now))
-            .OrderByDescending(r => r.IsPinned)
-            .OrderByDescending(r => r.CreatedAt)
-            .ToList()
+            .Where(r => (r.ImageUrl == null || r.ImageUrl == ""))
+            .OrderByDescending(r => r.SortOrder)
             .Select(r => new HomeListItem
             {
                 Title = r.Title,
@@ -79,7 +76,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
                 .Select(t => new HomeListItem
                 {
                     Title = t.Title,
-                    Url = $"/Travelogues/{t.Id}",
+                    Url = $"/Travelogues/Details/{t.Id}",
                     SourceType = t.Type,
                     ShowDate = true,
                     CreatedAt = t.CreatedAt
@@ -87,7 +84,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
                 .Concat(news.Select(n => new HomeListItem
                 {
                     Title = n.Title,
-                    Url = $"/News/{n.Id}",
+                    Url = $"/News/Details/{n.Id}",
                     SourceType = n.Type,
                     ShowDate = true,
                     CreatedAt = n.CreatedAt
