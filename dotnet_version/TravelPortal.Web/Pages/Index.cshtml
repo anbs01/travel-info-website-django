@@ -12,11 +12,13 @@
         .index-search-wrap > * { width: 100% !important; margin: 0 !important; }
         #categoryMenu { width: 100% !important; }
         
+        .recommend-container { height: auto !important; padding: 20px 0 !important; }
         .recommend-section .container-1200 > div { flex-direction: column !important; align-items: center; }
         .recommend-carousel { width: 100% !important; margin: 0 !important; }
-        .recommend-carousel > div { width: 100% !important; height: auto !important; aspect-ratio: 484/324; }
+        .recommend-carousel > div { width: 100% !important; height: auto !important; aspect-ratio: 480/256; }
         .recommend-list { margin: 20px 0 0 0 !important; width: 90% !important; }
     }
+    .recommend-item-link:hover { color: #b58c5e !important; }
 </style>
 
 <div style="padding-bottom: 80px;">
@@ -58,15 +60,15 @@
     </div>
 
     <!-- 2. 推荐板块 -->
-    <div class="recommend-section" style="background: #fbf7f1; margin-top: 50px; padding: 30px 0;">
-        <div class="container-1200">
-            <div style="display: flex;">
+    <div class="recommend-section" style="margin-top: 50px;">
+        <div class="container-1200 recommend-container" style="background: #fbf7f1; border: 1px solid #f2e9db; height: 312px; display: flex; align-items: flex-start; padding: 28px 0; box-sizing: border-box;">
+            <div style="display: flex; width: 100%; height: 100%; align-items: flex-start;">
 
                 <!-- 左侧轮播图 -->
-                <div class="recommend-carousel" style="margin-left: 30px; width: 484px; flex-shrink: 0;">
+                <div class="recommend-carousel" style="margin-left: 31px; width: 480px; flex-shrink: 0;">
                     @if (Model.CarouselItems.Any())
                     {
-                        <div style="position: relative; width: 484px; height: 324px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="position: relative; width: 480px; height: 256px; overflow: hidden; box-shadow: 0 4px 12px rgba(181,140,94,0.1);">
                             @for (int i = 0; i < Model.CarouselItems.Count; i++)
                             {
                                 var slide = Model.CarouselItems[i];
@@ -74,7 +76,7 @@
                                     <a href="@slide.LinkUrl" target="_blank" style="display: block; width: 100%; height: 100%;">
                                         <img src="@slide.ImageUrl" style="width: 100%; height: 100%; object-fit: cover;" alt="@slide.Title" />
                                     </a>
-                                    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 44px; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: space-between; padding: 0 14px; color: #fff; font-size: 12px;">
+                                    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 44px; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: space-between; padding: 0 14px; color: #fff; font-size: 12px; backdrop-filter: blur(4px);">
                                         <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 380px;">@slide.Title</span>
                                     </div>
                                 </div>
@@ -86,7 +88,7 @@
                                     @for (int i = 0; i < Model.CarouselItems.Count; i++)
                                     {
                                         <span class="carousel-dot" data-index="@i"
-                                              style="width: 10px; height: 10px; border-radius: 50%; cursor: pointer; background: @(i == 0 ? "#b58c5e" : "rgba(255,255,255,0.5)");"></span>
+                                              style="width: 8px; height: 8px; border-radius: 50%; cursor: pointer; background: @(i == 0 ? "#b58c5e" : "rgba(255,255,255,0.6)"); border: 1px solid rgba(0,0,0,0.1);"></span>
                                     }
                                 </div>
                             }
@@ -94,30 +96,26 @@
                     }
                     else
                     {
-                        <div style="width: 484px; height: 324px; background: #eee; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px;">
+                        <div style="width: 480px; height: 256px; background: #eee; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px;">
                             暂无推荐图片
                         </div>
                     }
                 </div>
 
                 <!-- 右侧列表 -->
-                <div class="recommend-list" style="margin-left: 60px; flex: 1; padding-top: 4px;">
-                    <ul style="list-style: none; padding: 0; margin: 0;">
+                <div class="recommend-list" style="margin-left: 60px; flex: 1; height: 256px;">
+                    <ul style="list-style: none; padding: 0; margin: 0; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                         @foreach (var item in Model.ListItems)
                         {
-                            <li style="display: flex; align-items: center; font-size: 12px; margin-bottom: @(item.SourceType == "推荐" ? "16px" : "13px"); position: relative;">
-                                <span style="width: @(item.SourceType == "推荐" ? "8px" : "6px"); height: @(item.SourceType == "推荐" ? "8px" : "6px"); background: @(item.SourceType == "推荐" ? "#b58c5e" : "#ccc"); margin-right: 12px; border-radius: @(item.SourceType == "推荐" ? "2px" : "50%"); flex-shrink: 0;"></span>
+                            <li style="display: flex; align-items: center; height: 32px; line-height: 32px; font-size: 14px; position: relative;">
+                                <span style="width: 6px; height: 6px; background: #b58c5e; margin-right: 14px; flex-shrink: 0;"></span>
                                 <a href="@item.Url" target="_blank"
                                    title="@item.Title"
-                                   style="color: @(item.SourceType == "推荐" ? "#000" : "#444"); font-weight: normal; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 360px; flex: 1;">@item.Title</a>
+                                   class="recommend-item-link"
+                                   style="color: #333; font-weight: normal; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; max-width: 480px;">@item.Title</a>
 
-                                <span style="position: absolute; right: 0; color: #999; font-size: 11px; white-space: nowrap; pointer-events: none;">[@item.SourceType]</span>
-
+                                <span style="position: absolute; right: 30px; color: #999; font-size: 14px; white-space: nowrap; pointer-events: none; opacity: 0.8;">[@item.SourceType]</span>
                             </li>
-                        }
-                        @if (!Model.ListItems.Any())
-                        {
-                            <li style="font-size: 12px; color: #999; padding-top: 20px;">暂无推荐内容</li>
                         }
                     </ul>
                 </div>
