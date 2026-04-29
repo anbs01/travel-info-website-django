@@ -127,7 +127,8 @@
                 $('#categoryMenu').toggle();
             });
 
-            $('#categoryMenu div').click(function() {
+            $('#categoryMenu div').click(function(e) {
+                e.stopPropagation();
                 var val = $(this).data('val');
                 var label = $(this).data('label');
                 $('#selectedCategoryLabel').text(label);
