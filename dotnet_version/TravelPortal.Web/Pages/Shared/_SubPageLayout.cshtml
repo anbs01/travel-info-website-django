@@ -15,12 +15,20 @@
         .search-input { width: 772px; height: 50px; border: 1px solid #ddd; padding: 0 15px; font-size: 14px; outline: none; }
         .search-dropdown { width: 110px; height: 50px; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; font-size: 12px; cursor: pointer; }
         .search-btn { width: 96px; height: 48px; background: #b58c5e; color: #fff; border: none; font-size: 14px; font-weight: bold; cursor: pointer; }
+        
+        /* 标准化列表头 */
+        .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .list-header .title-block { 
+            width: 125px; height: 33px; background: #b58c5e; display: flex; align-items: center; justify-content: center; 
+            color: #fff; font-size: 24px; font-weight: normal; border-radius: 2px; flex-shrink: 0; line-height: 1; 
+        }
 
         /* 移动端自适应逻辑 */
         .container-1200 { box-sizing: border-box; }
         @@media (max-width: 1199px) {
             .container-1200 { padding: 0 15px !important; }
             .list-header { flex-direction: column !important; gap: 15px; align-items: flex-start !important; }
+            .list-header .title-block { width: auto !important; height: 40px !important; padding: 0 15px; font-size: 20px !important; }
             header { height: auto !important; padding: 20px 0; }
             .header-container { height: auto !important; display: flex; flex-direction: column; align-items: center; gap: 20px; }
             .header-container > * { position: static !important; width: 90% !important; margin: 0 auto !important; height: auto !important; }
