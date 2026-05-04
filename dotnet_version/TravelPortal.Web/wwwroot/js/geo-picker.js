@@ -18,7 +18,7 @@ function geoPicker(fieldName, initId, initName) {
         async init() {
             this.loading = true;
             try {
-                const res = await fetch('/Admin/Api/GeoProvinces');
+                const res = await fetch('/tpco/Api/GeoProvinces');
                 const data = await res.json();
                 this.provinces = data.domestic;
                 this.overseasCities = data.overseas;
@@ -35,7 +35,7 @@ function geoPicker(fieldName, initId, initName) {
             this.subGroups = [];
             this.loadingSub = true;
             try {
-                const res = await fetch(`/Admin/Api/GeoByProvince?provinceId=${p.id}`);
+                const res = await fetch(`/tpco/Api/GeoByProvince?provinceId=${p.id}`);
                 this.subGroups = await res.json();
             } catch(e) {
                 console.error('GeoByProvince load failed', e);

@@ -1,0 +1,165 @@
+@page "{id:int}"
+@model TravelPortal.Web.Pages.tpco.Travelogues.EditModel
+@{
+    ViewData["Title"] = "编辑作品";
+}
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]"
+     x-data="travelogueForm('@Model.Travelogue.Classification', '@Model.Travelogue.MainImage')">
+    <partial name="_AdminPageHeader" model='new { 
+        Title = "编辑作品", 
+        Subtitle = "Travel Guides & Experience Sharing",
+        Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253\"/></svg>",
+        Tabs = new[] {
+            new { Name = "纪行攻略", Url = Url.Page("Index"), IsActive = false },
+            new { Name = "编辑作品", Url = "#", IsActive = true }
+        }
+    }' />
+
+    <form method="post" enctype="multipart/form-data" class="p-8 space-y-10">
+        <input type="hidden" asp-for="Travelogue.Id" />
+        <input type="hidden" asp-for="Travelogue.MainImage" />
+        <input type="hidden" asp-for="Travelogue.CreatedAt" />
+        <input type="hidden" asp-for="Travelogue.IsSticky" />
+        <input type="hidden" asp-for="Travelogue.StickyAt" />
+        <input type="hidden" asp-for="Travelogue.IsHidden" />
+
+        <!-- 基本信息 -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                <h2 class="text-lg font-bold text-gray-900">基本信息</h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">作品标题 <span class="text-red-500">*</span></label>
+                    <input type="text" asp-for="Travelogue.Title" required placeholder="给您的纪行起一个吸引人的标题吧..."
+                           class="w-full px-5 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-lg font-medium" />
+                    <span asp-validation-for="Travelogue.Title" class="text-red-500 text-xs mt-1 block"></span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">选择分类 <span class="text-red-500">*</span></label>
+                        <select asp-for="Travelogue.Classification" x-model="mainCategory"
+                                class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm">
+                            <option value="travelogue">纪行故事</option>
+                            <option value="guide">实用攻略</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">选择地区 <span class="text-red-500">*</span></label>
+                        <partial name="_GeoPicker" model='new { FieldName = "Travelogue.GeoId", CurrentId = Model.Travelogue.GeoId, CurrentName = Model.CurrentGeoTitle }' />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 焦点图与摘要 -->
+        <section class="space-y-6 pt-4">
+            <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                <h2 class="text-lg font-bold text-gray-900">焦点图与摘要</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">焦点图</label>
+                    <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-50 border-2 border-dashed border-gray-200 group hover:border-brand transition-all cursor-pointer"
+                         @@click="$refs.fileInput.click()">
+                        <template x-if="imageUrl">
+                            <img :src="imageUrl" class="w-full h-full object-cover" />
+                        </template>
+                        <template x-if="!imageUrl">
+                            <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
+                                <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                                <span class="text-xs font-medium">点击更换封面图</span>
+                            </div>
+                        </template>
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-white text-xs font-bold">更换图片</span>
+                        </div>
+                    </div>
+                    <input type="file" asp-for="MainImageFile" x-ref="fileInput" class="hidden" accept="image/*"
+                           x-on:change="if($event.target.files[0]) imageUrl = URL.createObjectURL($event.target.files[0])" />
+                    <p class="text-[10px] text-gray-400 mt-1">当前：@Model.Travelogue.MainImage</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2">文章摘要</label>
+                    <textarea asp-for="Travelogue.Summary" rows="8" placeholder="选填，若不填写将自动截取正文前100字..."
+                              class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- 正文内容 -->
+        <section class="space-y-6 pt-4">
+            <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                <h2 class="text-lg font-bold text-gray-900">正文内容</h2>
+            </div>
+            <textarea id="editor" asp-for="Travelogue.Content"></textarea>
+            <span asp-validation-for="Travelogue.Content" class="text-red-500 text-xs mt-1 block"></span>
+        </section>
+
+        <!-- 发布设置 -->
+        <section class="space-y-6 pt-4">
+            <div class="flex items-center gap-2 pb-2 border-b border-gray-50">
+                <div class="w-1.5 h-6 bg-brand rounded-full"></div>
+                <h2 class="text-lg font-bold text-gray-900">发布设置</h2>
+            </div>
+
+            <div class="flex flex-wrap gap-12 items-center bg-gray-50/50 p-8 rounded-2xl border border-gray-100">
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input type="checkbox" asp-for="Travelogue.IsSticky" class="w-6 h-6 rounded text-brand border-gray-300 focus:ring-brand" />
+                    <span class="text-sm font-bold text-gray-700">置顶</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input type="checkbox" asp-for="Travelogue.IsHidden" class="w-6 h-6 rounded text-brand border-gray-300 focus:ring-brand" />
+                    <span class="text-sm font-bold text-gray-700">屏蔽</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input type="checkbox" asp-for="Travelogue.IsHome" class="w-6 h-6 rounded text-brand border-gray-300 focus:ring-brand" />
+                    <span class="text-sm font-bold text-gray-700">推荐到首页</span>
+                </label>
+                <div class="flex items-center gap-8">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input type="checkbox" asp-for="Travelogue.ShowWatermark" class="w-6 h-6 rounded text-brand border-gray-300 focus:ring-brand" />
+                        <span class="text-sm font-bold text-gray-700">显示图片水印</span>
+                    </label>
+                    <div class="flex items-center gap-4 bg-white px-4 py-2 rounded-lg border border-gray-100">
+                        @foreach (var pos in new[] { (v:"中正", n:"中正"), (v:"中下", n:"中下"), (v:"右下", n:"右下") })
+                        {
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" asp-for="Travelogue.WatermarkPos" value="@pos.v" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
+                                <span class="text-xs text-gray-500 font-medium">@pos.n</span>
+                            </label>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 底部操作栏 -->
+        <div class="px-8 py-6 bg-gray-50 border-t border-gray-100 flex items-center justify-end gap-4">
+            <a asp-page="./Index" class="px-8 py-3 rounded-xl text-sm font-bold text-gray-500 hover:bg-gray-200 transition-all">取消修改</a>
+            <button type="submit" class="px-12 py-3 bg-brand text-white rounded-xl font-bold shadow-xl shadow-brand/30 hover:-translate-y-0.5 active:scale-95 transition-all">保存修改</button>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+<script>
+    function travelogueForm(initCategory, initImage) {
+        return {
+            mainCategory: initCategory || 'travelogue',
+            imageUrl: initImage || ''
+        }
+    }
+</script>
+<partial name="_TinyMCE" model='new { Selector = "#editor", Height = 600 }' />
+}

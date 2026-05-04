@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using SqlSugar;
 using TravelPortal.Web.Models;
 using TravelPortal.Web.Services;
@@ -18,7 +19,26 @@ builder.Services.AddScoped<ISqlSugarClient>(s =>
 });
 
 builder.Services.AddScoped<IUploadService, UploadService>();
-builder.Services.AddRazorPages();
+
+// 配置认证与授权
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/tpco/Auth"; // 登录路径
+        options.AccessDeniedPath = "/tpco/Auth"; // 拒绝访问路径
+        options.Cookie.Name = ".TravelPortal.Auth";
+        options.ExpireTimeSpan = TimeSpan.FromDays(7); // Cookie 有效期
+    });
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddRazorPages(options =>
+{
+    // 强制锁定 /tpco 文件夹，必须登录才能访问
+    options.Conventions.AuthorizeFolder("/tpco");
+    // 允许匿名访问登录页
+    options.Conventions.AllowAnonymousToPage("/tpco/Auth");
+});
 
 var app = builder.Build();
 
@@ -30,11 +50,12 @@ if (app.Environment.IsDevelopment())
         var db = scope.ServiceProvider.GetRequiredService<ISqlSugarClient>();
         try 
         {
-            // 1. 创建数据库 (SqlSugar 会自动处理连接字符串中不带库名的情况)
+            // 1. 创建数据库
             db.DbMaintenance.CreateDatabase();
             
             // 2. 初始化所有业务表
             db.CodeFirst.InitTables(
+                typeof(SysUser), // 新增系统用户表
                 typeof(Geo), 
                 typeof(Transport), 
                 typeof(ScenicSpot), 
@@ -49,7 +70,22 @@ if (app.Environment.IsDevelopment())
             );
             Console.WriteLine("✅ [Root Mode] 数据库初始化成功！");
 
-            // 3. 自动补全演示数据主图 (如果当前没有任何主图数据)
+            // 3. 初始化超级管理员账号
+            if (!db.Queryable<SysUser>().Any())
+            {
+                var adminUser = new SysUser
+                {
+                    Username = "admin",
+                    // 默认密码: admin123 (使用 BCrypt 加密)
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
+                    Nickname = "超级管理员",
+                    CreateTime = DateTime.Now
+                };
+                db.Insertable(adminUser).ExecuteCommand();
+                Console.WriteLine("🚀 [Init] 已创建默认管理员账号: admin / admin123 (请及时修改密码)");
+            }
+
+            // 4. 自动补全演示数据主图
             if (db.Queryable<Travelogue>().Any() && !db.Queryable<Travelogue>().Any(t => t.MainImage != null))
             {
                 var list = db.Queryable<Travelogue>().OrderBy(t => t.Id).Take(4).ToList();
@@ -81,7 +117,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseAuthentication(); // 必须在 UseAuthorization 之前
 app.UseAuthorization();
+
 app.MapRazorPages();
 
 app.Run();
