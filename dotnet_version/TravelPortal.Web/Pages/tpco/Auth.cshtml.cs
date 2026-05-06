@@ -36,7 +36,7 @@ namespace TravelPortal.Web.Pages.tpco
 
         public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/tpco");
+            returnUrl ??= Url.Content("~/tpco/Travelogues/Index");
 
             if (!ModelState.IsValid) return Page();
 

@@ -37,21 +37,18 @@
         <!-- 侧边栏 -->
         <aside class="w-64 bg-sidebar text-white flex-shrink-0 flex flex-col shadow-2xl">
             <!-- Logo -->
-            <div class="p-8 border-b border-gray-800 flex items-center space-x-3">
+            <a href="/tpco/Travelogues/Index" class="p-8 border-b border-gray-800 flex items-center space-x-3 hover:bg-gray-800 transition-colors">
                 <div class="w-10 h-10 bg-brand rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand/30">T</div>
                 <div class="logo-text">
-                    <div class="text-sm font-bold tracking-wider uppercase">TravelPortal</div>
+                    <div class="text-sm font-bold tracking-wider uppercase text-white">TravelPortal</div>
                     <div class="text-[10px] text-gray-500 uppercase">Management</div>
                 </div>
-            </div>
+            </a>
 
             <!-- 导航 -->
             <nav class="flex-1 px-4 py-8 space-y-2 overflow-y-auto custom-scrollbar">
                 <div class="px-4 py-2 text-[10px] font-bold text-gray-600 uppercase tracking-widest">Main Menu</div>
-                <a href="/tpco" class="flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition-all hover:bg-sidebar-hover group">
-                    <svg class="w-4 h-4 mr-3 text-gray-400 group-hover:text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                    控制台首页
-                </a>
+
 
                 <!-- 综合管理 -->
                 <div class="menu-group">
@@ -174,7 +171,7 @@
                         <svg class="w-3 h-3 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="menu-content hidden pl-11 pr-4 py-2 space-y-1">
-                        <a href="/tpco/System/Username" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">修改用户名</a>
+
                         <a href="/tpco/System/Password" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">修改密码</a>
                         <a href="/tpco/NotFound?module=数据备份" class="block py-2 text-xs text-gray-500 hover:text-white transition-all">数据备份</a>
                     </div>
