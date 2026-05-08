@@ -57,7 +57,19 @@ namespace TravelPortal.Web.Pages.tpco.Travelogues
                 Travelogue.MainImage = await _uploadService.UploadFileAsync(ImageFile, "travelogues");
             }
 
-            Travelogue.Slug = DateTime.Now.ToString("yyyyMMddHHmm");
+            // 自动填充作者：优先取 Nickname，其次取 Username
+            if (string.IsNullOrEmpty(Travelogue.Author))
+            {
+                Travelogue.Author = User.FindFirst("Nickname")?.Value ?? User.Identity?.Name ?? "管理员";
+            }
+
+            // 增强 Slug 唯一性：时间戳 + 4位随机码
+            var random = new Random();
+            Travelogue.Slug = $"{DateTime.Now:yyyyMMddHHmm}{random.Next(1000, 9999)}";
+
+            // 确保发布日期有值
+            Travelogue.PublishDate ??= DateTime.Now;
+
             await _db.Insertable(Travelogue).ExecuteCommandAsync();
 
             TempData["SuccessMessage"] = "作品已成功发布";
