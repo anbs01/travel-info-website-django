@@ -1,0 +1,59 @@
+@page
+@model TravelPortal.Web.Pages.Account.AuthModel
+@{
+    ViewData["Title"] = "会员登录 / 注册";
+    Layout = "_SubPageLayout";
+}
+
+<div class="container-1200" style="margin-top: 80px; margin-bottom: 100px;">
+    <div style="max-width: 900px; margin: 0 auto; background: #fff; border: 1px solid #f2e9db; display: flex; box-shadow: 0 10px 30px rgba(181,140,94,0.05); border-radius: 4px; overflow: hidden;">
+        
+        <!-- 左侧：登录 -->
+        <div style="flex: 1; padding: 60px 50px; border-right: 1px solid #f2e9db;">
+            <h2 style="font-size: 24px; color: #6f4e37; margin-bottom: 40px; font-weight: bold; text-align: center;">会员登录</h2>
+            
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; font-size: 16px; color: #333; margin-bottom: 10px;">用户名 / 手机号</label>
+                <input type="text" style="width: 100%; height: 50px; border: 1px solid #ebe2cf; padding: 0 15px; font-size: 16px; outline: none; box-sizing: border-box;" placeholder="请输入您的账号" />
+            </div>
+            
+            <div style="margin-bottom: 30px;">
+                <label style="display: block; font-size: 16px; color: #333; margin-bottom: 10px;">登录密码</label>
+                <input type="password" style="width: 100%; height: 50px; border: 1px solid #ebe2cf; padding: 0 15px; font-size: 16px; outline: none; box-sizing: border-box;" placeholder="请输入密码" />
+            </div>
+            
+            <button style="width: 100%; height: 55px; background: #b58c5e; color: #fff; border: none; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s;">立即登录</button>
+            
+            <div style="margin-top: 20px; text-align: right;">
+                <a href="#" style="font-size: 14px; color: #999; text-decoration: none;">忘记密码？</a>
+            </div>
+        </div>
+
+        <!-- 右侧：注册 -->
+        <div style="flex: 1; padding: 60px 50px; background: #fbfaf8;">
+            <h2 style="font-size: 24px; color: #6f4e37; margin-bottom: 40px; font-weight: bold; text-align: center;">新会员注册</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-size: 16px; color: #333; margin-bottom: 10px;">手机号码</label>
+                <input type="text" style="width: 100%; height: 50px; border: 1px solid #ebe2cf; padding: 0 15px; font-size: 16px; outline: none; box-sizing: border-box;" placeholder="作为登录账号使用" />
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-size: 16px; color: #333; margin-bottom: 10px;">设置密码</label>
+                <input type="password" style="width: 100%; height: 50px; border: 1px solid #ebe2cf; padding: 0 15px; font-size: 16px; outline: none; box-sizing: border-box;" placeholder="6-16位字母或数字" />
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <label style="display: block; font-size: 16px; color: #333; margin-bottom: 10px;">确认密码</label>
+                <input type="password" style="width: 100%; height: 50px; border: 1px solid #ebe2cf; padding: 0 15px; font-size: 16px; outline: none; box-sizing: border-box;" placeholder="请再次输入密码" />
+            </div>
+            
+            <button style="width: 100%; height: 55px; background: #fff; color: #b58c5e; border: 2px solid #b58c5e; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s;">注册新账号</button>
+            
+            <div style="margin-top: 25px; font-size: 14px; color: #999; line-height: 1.6; text-align: center;">
+                注册即代表您同意 <a href="#" style="color: #b58c5e; text-decoration: none;">《会员服务协议》</a>
+            </div>
+        </div>
+
+    </div>
+</div>

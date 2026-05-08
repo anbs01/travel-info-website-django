@@ -22,6 +22,12 @@
             width: 125px; height: 33px; background: #b58c5e; display: flex; align-items: center; justify-content: center; 
             color: #fff; font-size: 24px; font-weight: normal; border-radius: 2px; flex-shrink: 0; line-height: 1; 
         }
+        .qr-code-wrapper { position: relative; cursor: pointer; }
+        .qr-code-popup { 
+            display: none; position: absolute; top: 25px; right: 0; width: 112px; height: 112px; 
+            background: #fff; border: 1px solid #ddd; padding: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 100;
+        }
+        .qr-code-wrapper:hover .qr-code-popup { display: block; }
 
         /* 移动端自适应逻辑 */
         .container-1200 { box-sizing: border-box; }
@@ -63,13 +69,18 @@
 
             <!-- 登录注册 (PSD x:1447 -> Rel x:1087) -->
             <div class="user-area" style="position: absolute; left: 1087px; top: 15px; width: 80px; height: 13px; display: flex; align-items: center; font-size: 16px; color: #000;">
-                <a href="/Account/Login" style="color: inherit; text-decoration: none; margin-right: 15px;">登录</a>
-                <a href="/Account/Register" style="color: inherit; text-decoration: none;">注册</a>
+                <a href="/Account/Auth" style="color: inherit; text-decoration: none; margin-right: 15px;">登录</a>
+                <a href="/Account/Auth" style="color: inherit; text-decoration: none;">注册</a>
             </div>
 
             <!-- 二维码 (PSD x:1542 -> Rel x:1182) -->
-            <div class="qr-code" style="position: absolute; left: 1182px; top: 15px; width: 15px; height: 14px; color: #999;">
-                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM13 13h2v2h-2v-2zm2 2h2v2h-2v-2zm2-2h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2z"/></svg>
+            <div class="qr-code-wrapper qr-code" style="position: absolute; left: 1182px; top: 15px;">
+                <div style="width: 15px; height: 14px; color: #999;">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM13 13h2v2h-2v-2zm2 2h2v2h-2v-2zm2-2h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2z"/></svg>
+                </div>
+                <div class="qr-code-popup">
+                    <img src="/images/qrcode.png" style="width: 112px; height: 112px; display: block;" alt="二维码" />
+                </div>
             </div>
 
             <!-- 搜索组 (PSD x:573 -> Rel x:213) -->
