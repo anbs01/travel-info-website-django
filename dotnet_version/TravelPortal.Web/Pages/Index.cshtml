@@ -27,11 +27,11 @@
     <div class="container-1200" style="margin-top: 50px;">
         <div style="display: flex; justify-content: center;">
             <div class="index-search-wrap" style="display: flex; height: 45px; width: 944px; align-items: center;">
-                <input type="text" id="searchInput" style="width: 725px; height: 100%; border: 1px solid #ebe2cf; padding: 0 24px; outline: none; font-size: 12px; box-sizing: border-box; margin-right: 7px;" />
-                <div style="width: 110px; height: 100%; border: 1px solid #ebe2cf; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: #fff; font-size: 12px; box-sizing: border-box; cursor: pointer; position: relative;" id="categoryDropdown">
+                <input type="text" id="searchInput" style="width: 695px; height: 100%; border: 1px solid #ebe2cf; padding: 0 24px; outline: none; font-size: 16px; box-sizing: border-box; margin-right: 7px;" />
+                <div style="width: 140px; height: 100%; border: 1px solid #ebe2cf; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: #fff; font-size: 16px; box-sizing: border-box; cursor: pointer; position: relative;" id="categoryDropdown">
                     <span id="categoryLabel">纪行 · 攻略</span>
-                    <span style="font-size: 10px; color: #ccc;">▼</span>
-                    <div id="categoryMenu" style="display:none; position:absolute; top:100%; left:-1px; right:-1px; background:#fff; border:1px solid #ebe2cf; border-top:none; z-index:10; font-size:12px;">
+                    <span style="font-size: 12px; color: #ccc;">▼</span>
+                    <div id="categoryMenu" style="display:none; position:absolute; top:100%; left:-1px; right:-1px; background:#fff; border:1px solid #ebe2cf; border-top:none; z-index:10; font-size:16px;">
                         <div data-val="travelogue" data-label="纪行 · 攻略" style="padding:8px 16px; cursor:pointer;">纪行 · 攻略</div>
                         <div data-val="places" data-label="城乡 · 街巷" style="padding:8px 16px; cursor:pointer;">城乡 · 街巷</div>
                         <div data-val="foods" data-label="特产 · 美食" style="padding:8px 16px; cursor:pointer;">特产 · 美食</div>
@@ -40,14 +40,14 @@
                     </div>
                 </div>
                 <div style="width: 6px;"></div>
-                <button id="searchBtn" style="width: 96px; height: 100%; border: none; background: #b58c5e; color: #fff; font-weight: bold; font-size: 14px; cursor: pointer;">搜 索</button>
+                <button id="searchBtn" style="width: 96px; height: 100%; border: none; background: #b58c5e; color: #fff; font-weight: bold; font-size: 16px; cursor: pointer;">搜 索</button>
             </div>
         </div>
 
         <!-- 搜索热词 -->
         @if (Model.HomeKeywords.Any())
         {
-            <div style="margin-top: 20px; padding: 0 30px; font-size: 12px; color: #666; line-height: 2.2;">
+            <div style="margin-top: 20px; padding: 0 30px; font-size: 16px; color: #666; line-height: 2.2;">
                 <div style="display: flex; flex-wrap: wrap; gap: 0 28px;">
                     @foreach (var kw in Model.HomeKeywords)
                     {
@@ -76,7 +76,7 @@
                                     <a href="@slide.LinkUrl" target="_blank" style="display: block; width: 100%; height: 100%;">
                                         <img src="@slide.ImageUrl" style="width: 100%; height: 100%; object-fit: cover;" alt="@slide.Title" />
                                     </a>
-                                    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 44px; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: space-between; padding: 0 14px; color: #fff; font-size: 12px; backdrop-filter: blur(4px);">
+                                    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 44px; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: space-between; padding: 0 14px; color: #fff; font-size: 16px; backdrop-filter: blur(4px);">
                                         <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 380px;">@slide.Title</span>
                                     </div>
                                 </div>
@@ -107,14 +107,14 @@
                     <ul style="list-style: none; padding: 0; margin: 0; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                         @foreach (var item in Model.ListItems)
                         {
-                            <li style="display: flex; align-items: center; height: 32px; line-height: 32px; font-size: 14px; position: relative;">
+                            <li style="display: flex; align-items: center; height: 32px; line-height: 32px; font-size: 16px; position: relative;">
                                 <span style="width: 6px; height: 6px; background: #b58c5e; margin-right: 14px; flex-shrink: 0;"></span>
                                 <a href="@item.Url" target="_blank"
                                    title="@item.Title"
                                    class="recommend-item-link"
                                    style="color: #333; font-weight: normal; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; max-width: 480px;">@item.Title</a>
 
-                                <span style="position: absolute; right: 30px; color: #999; font-size: 14px; white-space: nowrap; pointer-events: none; opacity: 0.8;">[@item.SourceType]</span>
+                                <span style="position: absolute; right: 30px; color: #999; font-size: 16px; white-space: nowrap; pointer-events: none; opacity: 0.8;">[@item.SourceType]</span>
                             </li>
                         }
                     </ul>
