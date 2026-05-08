@@ -15,7 +15,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     // 左侧轮播图（有图片的推荐，最近3条有效的）
     public List<Recommendation> CarouselItems { get; set; } = new();
 
-    // 右侧列表（文字推荐 + 攻略/资讯补全，共8条）
+    // 右侧列表（文字推荐 + 攻略/资讯补全，共10条）
     public List<HomeListItem> ListItems { get; set; } = new();
 
     public void OnGet()
@@ -53,8 +53,8 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
         ListItems.AddRange(textRecs);
 
-        // 3b. 如果不足8条，从攻略和资讯里按添加时间倒序补全
-        int remaining = 8 - ListItems.Count;
+        // 3b. 如果不足10条，从攻略和资讯里按添加时间倒序补全
+        int remaining = 10 - ListItems.Count;
         if (remaining > 0)
         {
             // 攻略（guide 分类，IsHome=true，未屏蔽）
