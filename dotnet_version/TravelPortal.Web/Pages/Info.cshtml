@@ -1,0 +1,44 @@
+@page
+@model TravelPortal.Web.Pages.InfoModel
+@{
+    ViewData["Title"] = Model.PageTitle;
+    Layout = "_SubPageLayout";
+}
+
+<div class="container-1200" style="margin-top: 50px; margin-bottom: 80px; display: flex; gap: 40px;">
+    
+    <!-- 左侧菜单 -->
+    <div style="width: 220px; flex-shrink: 0;">
+        <div style="background: #fbf7f1; border: 1px solid #f2e9db; padding: 20px 0; border-radius: 4px;">
+            <div style="padding: 0 25px 15px; border-bottom: 1px solid #f2e9db; margin-bottom: 10px;">
+                <h3 style="font-size: 18px; color: #6f4e37; font-weight: bold; margin: 0;">帮助中心</h3>
+            </div>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li><a href="/Info?type=about" style="display: block; padding: 12px 25px; color: @(Model.CurrentType == "about" ? "#b58c5e" : "#666"); text-decoration: none; font-size: 16px; font-weight: @(Model.CurrentType == "about" ? "bold" : "normal"); background: @(Model.CurrentType == "about" ? "#fff" : "transparent");">关于我们</a></li>
+                <li><a href="/Info?type=service" style="display: block; padding: 12px 25px; color: @(Model.CurrentType == "service" ? "#b58c5e" : "#666"); text-decoration: none; font-size: 16px; font-weight: @(Model.CurrentType == "service" ? "bold" : "normal"); background: @(Model.CurrentType == "service" ? "#fff" : "transparent");">服务协议</a></li>
+                <li><a href="/Info?type=cooperate" style="display: block; padding: 12px 25px; color: @(Model.CurrentType == "cooperate" ? "#b58c5e" : "#666"); text-decoration: none; font-size: 16px; font-weight: @(Model.CurrentType == "cooperate" ? "bold" : "normal"); background: @(Model.CurrentType == "cooperate" ? "#fff" : "transparent");">合作事宜</a></li>
+                <li><a href="/Info?type=feedback" style="display: block; padding: 12px 25px; color: @(Model.CurrentType == "feedback" ? "#b58c5e" : "#666"); text-decoration: none; font-size: 16px; font-weight: @(Model.CurrentType == "feedback" ? "bold" : "normal"); background: @(Model.CurrentType == "feedback" ? "#fff" : "transparent");">意见建议</a></li>
+                <li><a href="/Info?type=contact" style="display: block; padding: 12px 25px; color: @(Model.CurrentType == "contact" ? "#b58c5e" : "#666"); text-decoration: none; font-size: 16px; font-weight: @(Model.CurrentType == "contact" ? "bold" : "normal"); background: @(Model.CurrentType == "contact" ? "#fff" : "transparent");">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 右侧内容区域 -->
+    <div style="flex: 1; min-height: 500px; background: #fff; border: 1px solid #eee; border-radius: 4px; padding: 40px 50px;">
+        <h1 style="font-size: 28px; color: #333; margin-top: 0; margin-bottom: 30px; border-bottom: 2px solid #b58c5e; padding-bottom: 15px; display: inline-block;">@Model.PageTitle</h1>
+        
+        <div style="font-size: 16px; color: #555; line-height: 1.8;">
+            @Html.Raw(Model.PageContent)
+            
+            @if(Model.CurrentType == "feedback")
+            {
+                <div style="margin-top: 40px; padding: 30px; background: #fbfaf8; border: 1px solid #ebe2cf;">
+                    <h3 style="margin-top: 0; color: #6f4e37;">提交您的意见建议</h3>
+                    <textarea style="width: 100%; height: 150px; margin-top: 15px; border: 1px solid #ddd; padding: 15px; font-size: 16px; outline: none;" placeholder="请写下您的宝贵意见..."></textarea>
+                    <button style="margin-top: 20px; padding: 12px 30px; background: #b58c5e; color: #fff; border: none; font-size: 16px; cursor: pointer;">提交反馈</button>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>

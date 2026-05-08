@@ -50,8 +50,8 @@
                 <a href="/News" class="nav-link">资讯 · 动态</a>
             </nav>
             <div class="user-area" style="display: flex; align-items: center; font-size: 16px; margin-left: auto;">
-                <a href="/Account/Auth" style="color: #000; text-decoration: none; margin-right: 15px;">登录</a>
-                <a href="/Account/Auth" style="color: #000; text-decoration: none; margin-right: 20px;">注册</a>
+                <a href="/Account/Notice" style="color: #000; text-decoration: none; margin-right: 15px;">登录</a>
+                <a href="/Account/Notice" style="color: #000; text-decoration: none; margin-right: 20px;">注册</a>
                 <div class="qr-code-wrapper">
                     <div style="width: 16px; height: 16px; color: #999;">
                         <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM13 13h2v2h-2v-2zm2 2h2v2h-2v-2zm2-2h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2zm0 2h2v2h-2v-2zm-2-2h2v2h-2v-2z"/></svg>
@@ -75,18 +75,17 @@
         @RenderBody()
     </main>
 
-    <!-- 3. 页脚 -->
     <footer style="margin-top: 80px; padding: 40px 0; border-top: 1px solid #eee; background: #fff;">
         <div class="container-1200" style="text-align: center;">
-            <div class="footer-links" style="display: flex; justify-content: center; gap: 30px; font-size: 12px; color: #fbf7f1; margin-bottom: 15px;">
-                <a href="/About" style="color: inherit; text-decoration: none;">关于我们</a>
-                <span>服务协议</span>
-                <span>合作事宜</span>
-                <span>意见建议</span>
-                <span>联系我们</span>
+            <div class="footer-links" style="display: flex; justify-content: center; gap: 30px; font-size: 14px; color: #666; margin-bottom: 15px;">
+                <a href="/Info?type=about" style="color: inherit; text-decoration: none;">关于我们</a>
+                <a href="/Info?type=service" style="color: inherit; text-decoration: none;">服务协议</a>
+                <a href="/Info?type=cooperate" style="color: inherit; text-decoration: none;">合作事宜</a>
+                <a href="/Info?type=feedback" style="color: inherit; text-decoration: none;">意见建议</a>
+                <a href="/Info?type=contact" style="color: inherit; text-decoration: none;">联系我们</a>
             </div>
-            <p style="font-size: 12px; color: #999; margin: 5px 0;">Copyright © 2026-2027 NAME.COM All Rights Reserved</p>
-            <p style="font-size: 12px; color: #999; margin: 5px 0;">版权所有：网站名称　鲁ICP备123456789号</p>
+            <p style="font-size: 14px; color: #999; margin: 5px 0;">Copyright © 2026-2027 NAME.COM All Rights Reserved</p>
+            <p style="font-size: 14px; color: #999; margin: 5px 0;">版权所有：网站名称　鲁ICP备123456789号</p>
         </div>
     </footer>
 
