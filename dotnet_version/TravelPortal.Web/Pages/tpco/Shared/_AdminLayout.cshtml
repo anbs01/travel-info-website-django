@@ -314,8 +314,38 @@
             updateActiveMenu();
 
             // 监听 Unpoly 导航事件
-            up.on('up:location:changed', function() {
-                updateActiveMenu();
+            // --- 全局字数统计功能 ---
+            function initCharCounter() {
+                $('input[maxlength], textarea[maxlength]').each(function() {
+                    const $input = $(this);
+                    if ($input.next('.char-counter').length) return; // 避免重复初始化
+
+                    const max = $input.attr('maxlength');
+                    const $counter = $(`<div class="char-counter text-[10px] text-gray-400 text-right mt-1 font-mono">0 / ${max}</div>`);
+                    $input.after($counter);
+
+                    const update = () => {
+                        const len = $input.val().length;
+                        $counter.text(`${len} / ${max}`);
+                        if (len >= max) {
+                            $counter.removeClass('text-gray-400').addClass('text-red-500 font-bold');
+                        } else if (len > max * 0.9) {
+                            $counter.removeClass('text-gray-400 text-red-500').addClass('text-orange-400');
+                        } else {
+                            $counter.removeClass('text-red-500 text-orange-400 font-bold').addClass('text-gray-400');
+                        }
+                    };
+
+                    $input.on('input focus', update);
+                    update(); // 初始化显示
+                });
+            }
+
+            initCharCounter();
+            // 使用 fragment:inserted 确保在新内容插入 DOM 后立即运行
+            up.on('up:fragment:inserted', function() {
+                initCharCounter();
+                updateActiveMenu(); // 顺便确保菜单高亮也在这里更新
             });
         });
 
