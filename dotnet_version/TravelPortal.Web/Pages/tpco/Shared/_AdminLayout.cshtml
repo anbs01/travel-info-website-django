@@ -52,6 +52,30 @@
         }
         .menu-content a { font-size: 13px; line-height: 40px; padding-left: 60px !important; display: block; color: white; transition: all 0.2s; }
         .menu-content a.active { background-color: rgba(255, 255, 255, 0.15); color: #ffffff !important; }
+
+        .admin-content-root {
+            font-family: "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+            font-size: 15px !important;
+            line-height: 1.7 !important;
+            color: #333333 !important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* 强制覆盖表格和内部元素的细小字号 */
+        .admin-content-root *, 
+        .admin-content-root td, 
+        .admin-content-root th, 
+        .admin-content-root span, 
+        .admin-content-root div,
+        .admin-content-root a {
+            font-size: 15px !important;
+            font-family: "Microsoft YaHei", sans-serif !important;
+        }
+
+        .admin-content-root h1, .admin-content-root h1 * { font-size: 24px !important; color: #1a1a1a !important; }
+        .admin-content-root h2, .admin-content-root h2 * { font-size: 20px !important; }
+        .admin-content-root h3, .admin-content-root h3 * { font-size: 18px !important; }
     </style>
 </head>
 <body class="bg-[#f4f7f6] text-[#333]">
@@ -217,7 +241,7 @@
                     <h1 class="text-lg font-bold text-gray-800">@ViewData["Title"]</h1>
                 </div>
             </header>
-            <div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+            <div class="flex-1 overflow-y-auto p-8 custom-scrollbar admin-content-root">
                 @RenderBody()
             </div>
         </main>
