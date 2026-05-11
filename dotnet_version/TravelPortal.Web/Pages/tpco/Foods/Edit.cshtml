@@ -181,23 +181,18 @@
             <a asp-page="./Index" class="px-12 py-4 bg-gray-100 text-gray-400 rounded-2xl font-bold hover:bg-gray-200 transition-all text-center">返回列表</a>
         </div>
     </form>
-</div>
-
-<partial name="_TinyMCE" model='new { Selector = "#editor", Height = 500 }' />
-
-@section Scripts {
-<script>
-    function foodForm(initialImage) {
-        return {
-            category: '@Model.Food.ProductType' || '美食',
-            imageUrl: initialImage || '',
-            previewImage(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    this.imageUrl = URL.createObjectURL(file);
+    <script>
+        function foodForm(initialImage) {
+            return {
+                category: '@Model.Food.ProductType' || '美食',
+                imageUrl: initialImage || '',
+                previewImage(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        this.imageUrl = URL.createObjectURL(file);
+                    }
                 }
             }
         }
-    }
-</script>
-}
+    </script>
+</div>

@@ -150,16 +150,13 @@
         </div>
 
     </form>
-</div>
-
-@section Scripts {
-<script>
-    function travelogueForm(initCategory, initImage) {
-        return {
-            mainCategory: initCategory || 'travelogue',
-            imageUrl: initImage || ''
+    <script>
+        function travelogueForm(initCategory, initImage) {
+            return {
+                mainCategory: initCategory || 'travelogue',
+                imageUrl: initImage || ''
+            }
         }
-    }
-</script>
+    </script>
+</div>
 <partial name="_TinyMCE" model='new { Selector = "#editor", Height = 600 }' />
-}

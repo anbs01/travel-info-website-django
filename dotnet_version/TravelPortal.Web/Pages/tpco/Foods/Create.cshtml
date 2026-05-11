@@ -234,21 +234,19 @@
             <button type="submit" class="px-12 py-3 bg-brand text-white rounded-xl font-bold shadow-xl shadow-brand/30 hover:-translate-y-0.5 active:scale-95 transition-all">确认发布产品</button>
         </div>
     </form>
-</div>
-
-@section Scripts {
-<script>
-    function foodForm() {
-        return {
-            category: '美食',
-            imageUrl: '',
-            previewImage(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    this.imageUrl = URL.createObjectURL(file);
+    
+    <script>
+        function foodForm() {
+            return {
+                category: '美食',
+                imageUrl: '',
+                previewImage(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        this.imageUrl = URL.createObjectURL(file);
+                    }
                 }
             }
         }
-    }
-</script>
-}
+    </script>
+</div>
