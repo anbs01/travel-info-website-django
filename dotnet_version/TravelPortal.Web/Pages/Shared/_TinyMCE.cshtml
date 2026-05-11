@@ -11,7 +11,6 @@
 }
 
 @Html.AntiForgeryToken()
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     // 统一获取 CSRF Token 的函数
     function getAdminToken() {
@@ -19,10 +18,20 @@
         return tokenInput ? tokenInput.value : '';
     }
 
-    tinymce.init({
+    // 确保在 TinyMCE 加载后再初始化
+    function initEditor() {
+        if (typeof tinymce === 'undefined') {
+            setTimeout(initEditor, 50);
+            return;
+        }
+        
+        // 如果已经初始化过，先销毁（防止 Unpoly 重复插入 DOM 导致的 ID 冲突）
+        tinymce.remove('@selector');
+
+        tinymce.init({
         selector: '@selector',
         language: 'zh-Hans',
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount code fullscreen help autosave preview',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount code fullscreen autosave preview',
         toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align lineheight | ' +
                  'numlist bullist indent outdent | link image media table | emoticons charmap | removeformat | preview fullscreen code',
         height: @height,
@@ -32,7 +41,7 @@
         autosave_ask_before_unload: true,
         autosave_interval: '30s',
         extended_valid_elements: 'video[controls|preload|width|height|src|type],source[src|type],iframe[src|width|height|frameborder|allowfullscreen]',
-        language_url: 'https://cdn.jsdelivr.net/npm/tinymce-i18n@23.10.9/langs6/zh-Hans.js',
+        language_url: '/lib/tinymce/zh-Hans.js',
         
         // 强兼容模式：返回 Promise 以满足 TinyMCE 6 的内核要求
         images_upload_handler: function (blobInfo, progress) {
@@ -103,6 +112,15 @@
             });
         },
         content_style: 'body { font-family:Inter,Noto Sans SC,sans-serif; font-size:14px; line-height:1.6; color:#333; } img { max-width:100%; height:auto; border-radius:8px; }'
+    });
+    }
+
+    // 立即运行
+    initEditor();
+
+    // 适配 Unpoly: 当新元素被插入时重新运行初始化
+    up.compiler('@selector', function(element) {
+        initEditor();
     });
 </script>
 

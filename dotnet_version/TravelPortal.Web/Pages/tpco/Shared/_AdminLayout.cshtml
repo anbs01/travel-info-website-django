@@ -7,7 +7,11 @@
     <!-- 引入 Tailwind CDN 确保样式立即生效 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- 引入 Unpoly: 使用本地文件确保加载百分之百成功 -->
+    <link href="~/lib/unpoly/unpoly.min.css" rel="stylesheet">
+    <script src="~/lib/unpoly/unpoly.min.js"></script>
+    <script defer src="~/lib/alpine.min.js"></script>
+    <script src="~/lib/tinymce/tinymce.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -214,8 +218,8 @@
                 </div>
             </header>
 
-            <!-- 页面内容 -->
-            <main class="flex-1 overflow-y-auto p-6 bg-[#f4f7f6]">
+            <!-- 页面内容: 增加 up-main 属性标识局部刷新区域 -->
+            <main id="admin-main" up-main class="flex-1 overflow-y-auto p-6 bg-[#f4f7f6]">
                 <div class="max-w-[1200px] mx-auto">
                     @RenderBody()
                 </div>
@@ -249,49 +253,79 @@
                 $('.logo-text, .menu-trigger span, .menu-group button div span, .menu-content, .text-[10px]').toggle();
             });
 
-            // 自动展开当前活动链接所在的组
-            const currentFull = window.location.pathname + window.location.search;
-            const currentPath = window.location.pathname;
-            const params = new URLSearchParams(window.location.search);
+            // 封装：自动展开并激活当前菜单项
+            function updateActiveMenu() {
+                const currentFull = window.location.pathname + window.location.search;
+                const currentPath = window.location.pathname;
+                const params = new URLSearchParams(window.location.search);
 
-            $('.menu-content a').each(function() {
-                const linkHref = $(this).attr('href');
-                const linkPath = linkHref.split('?')[0];
-                const linkParams = new URLSearchParams(linkHref.split('?')[1] || '');
-                
-                let isMatch = (linkHref === currentFull || linkHref === currentPath);
+                // 先清除所有旧的高亮
+                $('.menu-content a').removeClass('text-brand font-bold bg-white/5 rounded-lg');
+                $('.menu-trigger').removeClass('text-brand');
 
-                // 特殊处理地理模块 (Geos) 的联动激活
-                if (!isMatch && currentPath.includes('/tpco/Geos')) {
-                    if (linkPath === '/tpco/Geos') {
-                        const cLevel = params.get('level') || params.get('Level') || '';
-                        const cNature = params.get('nature') || params.get('Nature') || 'Domestic';
-                        
-                        const lLevel = linkParams.get('Level') || '';
-                        const lNature = linkParams.get('Nature') || 'Domestic';
+                let matchedLink = null;
+                const menuLinks = $('.menu-content a');
 
-                        // 海外城镇逻辑：如果两者都是 Overseas，则忽略 Level 直接匹配
-                        if (cNature === 'Overseas' && lNature === 'Overseas') {
-                            isMatch = true;
-                        } else if (cLevel == lLevel && cNature == lNature) {
-                            isMatch = true;
+                // 第一轮：寻找完全匹配（包括参数）
+                menuLinks.each(function() {
+                    const linkHref = $(this).attr('href');
+                    if (linkHref === currentFull || linkHref === currentPath) {
+                        matchedLink = $(this);
+                        return false; // 找到即跳出
+                    }
+                });
+
+                // 第二轮：如果没有完全匹配，寻找路径前缀匹配 (用于 Create/Edit 页面)
+                if (!matchedLink) {
+                    menuLinks.each(function() {
+                        const linkHref = $(this).attr('href');
+                        const linkPath = linkHref.split('?')[0];
+                        // 排除根路径和非模块路径
+                        if (linkPath !== '/tpco' && currentPath.startsWith(linkPath + '/')) {
+                            matchedLink = $(this);
+                            return false;
                         }
-                    }
-                } 
-                // 通用逻辑：如果是其他模块的 Create/Edit 页面，只激活非列表链接
-                else if (!isMatch && currentPath.startsWith(linkPath) && linkPath !== '/tpco') {
-                    const isCreateOrEdit = currentPath.includes('/Create') || currentPath.includes('/Edit');
-                    const linkIsIndex = !linkHref.includes('/Create') && !linkHref.includes('/Edit');
-                    if (isCreateOrEdit && !linkIsIndex) {
-                        isMatch = true;
-                    }
+                    });
                 }
 
-                if (isMatch) {
-                    $(this).addClass('text-brand font-bold bg-white/5 rounded-lg');
-                    const $group = $(this).parent();
+                // 第三轮：处理特殊的 Geos 模块参数匹配 (如果依然没找到)
+                if (!matchedLink && currentPath.includes('/tpco/Geos')) {
+                    // ... (保持原有的 Geos 参数逻辑) ...
+                    menuLinks.each(function() {
+                        const linkHref = $(this).attr('href');
+                        const linkPath = linkHref.split('?')[0];
+                        if (linkPath === '/tpco/Geos') {
+                            const linkParams = new URLSearchParams(linkHref.split('?')[1] || '');
+                            const cLevel = params.get('level') || params.get('Level') || '';
+                            const cNature = params.get('nature') || params.get('Nature') || 'Domestic';
+                            const lLevel = linkParams.get('Level') || '';
+                            const lNature = linkParams.get('Nature') || 'Domestic';
+
+                            if ((cNature === 'Overseas' && lNature === 'Overseas') || (cLevel == lLevel && cNature == lNature)) {
+                                matchedLink = $(this);
+                                return false;
+                            }
+                        }
+                    });
+                }
+
+                if (matchedLink) {
+                    matchedLink.addClass('text-brand font-bold bg-white/5 rounded-lg');
+                    const $group = matchedLink.parent();
                     $group.show().prev('.menu-trigger').find('svg').last().addClass('rotate-180').parent().addClass('text-brand');
                 }
+            }
+
+            // 初始运行
+            updateActiveMenu();
+
+            // Unpoly 全局配置
+            up.link.config.followSelectors.push('a[href^="/tpco"]');
+            up.form.config.submitSelectors.push('form[action^="/tpco"], form:not([action])');
+            
+            // 每次 URL 变化后同步更新菜单高亮
+            up.on('up:location:changed', function() {
+                updateActiveMenu();
             });
         });
     </script>
