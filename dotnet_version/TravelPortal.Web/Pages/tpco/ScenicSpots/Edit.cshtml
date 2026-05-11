@@ -30,7 +30,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="md:col-span-2">
                     <label class="block text-sm font-bold text-gray-700 mb-2">打卡点名称 <span class="text-red-500">*</span></label>
-                    <input type="text" asp-for="Spot.Title" required
+                    <input type="text" asp-for="Spot.Title" required placeholder="请输入打卡点名称" maxlength="60"
                            class="w-full px-5 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-lg font-medium">
                 </div>
 
@@ -112,8 +112,7 @@
                     <label class="block text-sm font-bold text-gray-700 mb-2">打卡特色 <span class="text-red-500">*</span></label>
                     <textarea asp-for="Spot.Summary" rows="8" maxlength="120" required
                               class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm"
-                              placeholder="请输入打卡特色，120字以内..."></textarea>
-                    <span class="text-[10px] text-gray-400">要求120汉字以内</span>
+                              placeholder="请输入打卡特色介绍..."></textarea>
                 </div>
             </div>
         </section>

@@ -29,9 +29,8 @@
                 <!-- 作品标题 -->
                 <div>
                     <label class="block text-sm font-bold text-gray-700 mb-2">作品标题 <span class="text-red-500">*</span></label>
-                    <textarea asp-for="Travelogue.Title" rows="2" required placeholder="最多60个汉字"
-                              class="w-full px-5 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all"></textarea>
-                    <p class="text-[10px] text-red-400 mt-1">最多60个汉字</p>
+                    <input type="text" asp-for="Travelogue.Title" required placeholder="请输入作品标题" maxlength="60"
+                           class="w-full px-5 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-lg font-medium">
                 </div>
 
                 <!-- 作品分类 -->

@@ -35,11 +35,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="md:col-span-1">
                         <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">@(Model.Geo.Level == 2 ? "省级简称" : "中文简称") <span class="text-red-400">*</span></label>
-                        <input asp-for="Geo.Title" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：山东" required />
+                        <input asp-for="Geo.Title" maxlength="60" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：山东" required />
                     </div>
                     <div class="md:col-span-1">
                         <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">@(Model.Geo.Level == 2 ? "省级全称" : "中文全称") <span class="text-red-400">*</span></label>
-                        <input asp-for="Geo.FullTitle" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：山东省" required />
+                        <input asp-for="Geo.FullTitle" maxlength="60" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：山东省" required />
                     </div>
                     <div class="md:col-span-1">
                         <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">拼音别名 / Slug <span class="text-red-400">*</span></label>
@@ -108,8 +108,8 @@
                         @if (Model.Geo.Level >= 2)
                         {
                             <div>
-                                <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">旅游特色 / 简要介绍 <span class="text-red-400">*</span> (120字内)</label>
-                                <textarea asp-for="Geo.Summary" rows="3" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="简要描述该地区的旅游特色..." required></textarea>
+                                <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">旅游特色 / 简要介绍 <span class="text-red-400">*</span></label>
+                                <textarea asp-for="Geo.Summary" rows="3" maxlength="120" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="简要描述该地区的旅游特色..." required></textarea>
                             </div>
                         }
 
