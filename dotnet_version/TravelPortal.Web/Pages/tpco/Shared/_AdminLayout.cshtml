@@ -288,25 +288,17 @@
                     });
                 }
 
-                // 第三轮：处理特殊的 Geos 模块参数匹配 (如果依然没找到)
-                if (!matchedLink && currentPath.includes('/tpco/Geos')) {
-                    // ... (保持原有的 Geos 参数逻辑) ...
-                    menuLinks.each(function() {
-                        const linkHref = $(this).attr('href');
-                        const linkPath = linkHref.split('?')[0];
-                        if (linkPath === '/tpco/Geos') {
-                            const linkParams = new URLSearchParams(linkHref.split('?')[1] || '');
-                            const cLevel = params.get('level') || params.get('Level') || '';
-                            const cNature = params.get('nature') || params.get('Nature') || 'Domestic';
-                            const lLevel = linkParams.get('Level') || '';
-                            const lNature = linkParams.get('Nature') || 'Domestic';
-
-                            if ((cNature === 'Overseas' && lNature === 'Overseas') || (cLevel == lLevel && cNature == lNature)) {
+                // 第四轮：特殊处理 NotFound 页面 (支持通过 module 参数高亮对应菜单)
+                if (!matchedLink && currentPath.includes('/tpco/NotFound')) {
+                    const moduleParam = params.get('module');
+                    if (moduleParam) {
+                        menuLinks.each(function() {
+                            if ($(this).text().trim() === moduleParam) {
                                 matchedLink = $(this);
                                 return false;
                             }
-                        }
-                    });
+                        });
+                    }
                 }
 
                 if (matchedLink) {
