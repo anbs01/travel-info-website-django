@@ -4,7 +4,8 @@
     ViewData["Title"] = "打卡地管理";
 }
 
-<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]">
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]"
+     x-data="{ selectedIds: [] }">
 <partial name="_AdminPageHeader" model='new { 
     Title = "打卡地管理", 
     Subtitle = "Scenic Spots & Check-in Places",
@@ -47,12 +48,15 @@
 
     <!-- 操作按钮 + 数据列表 (POST form) -->
     <form method="post" id="batchForm">
-        <!-- 操作按钮区 -->
-        <div class="px-6 py-3 flex items-center gap-2 border-b border-gray-50">
-            <button type="submit" asp-page-handler="ToggleSticky" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">置顶</button>
-            <button type="submit" asp-page-handler="ToggleHidden" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">屏蔽</button>
-            <button type="submit" asp-page-handler="Delete" onclick="return confirm('确定删除选中项吗？')" class="px-4 py-1.5 bg-[#d4a373] text-white rounded text-xs font-bold hover:opacity-90 transition-all">删除</button>
-        </div>
+        <partial name="_AdminTableToolbar" model='new { 
+            TotalCount = Model.ScenicSpots.Items.Count(),
+            Buttons = new List<dynamic> {
+                new { Id = "Sticky", Text = "置顶", Handler = "ToggleSticky", ActionType = "submit" },
+                new { Id = "Hide", Text = "屏蔽", Handler = "ToggleHidden", ActionType = "submit" },
+                new { Id = "Edit", Text = "编辑", ActionType = "redirect", IsSingleSelectOnly = true },
+                new { Id = "Delete", Text = "删除", Handler = "Delete", ActionType = "delete" }
+            }
+        }' />
 
         <!-- 数据列表 -->
     <div class="overflow-x-auto">
@@ -66,14 +70,24 @@
                     <th class="px-6 py-4 w-36">地区</th>
                     <th class="px-6 py-4 w-20 text-center">浏览</th>
                     <th class="px-8 py-4 w-40 text-right">添加日期</th>
-                    <th class="px-6 py-4 w-24 text-right">操作</th>
+                    <th class="px-8 py-4 w-40 text-right">添加日期</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-50">
-                @foreach (var item in Model.ScenicSpots.Items)
-                {
-                    <tr class="hover:bg-gray-50/50 transition-colors group">
-                        <td class="px-8 py-4"><input type="checkbox" name="ids" value="@item.Id" class="rounded text-brand border-gray-200" /></td>
+                    @foreach (var item in Model.ScenicSpots.Items)
+                    {
+                        <tr class="hover:bg-gray-50/50 transition-colors group cursor-pointer"
+                            :class="selectedIds.includes('@item.Id') ? 'bg-brand/5' : ''"
+                            data-url="@Url.Page("./Edit", new { id = item.Id })"
+                            @@click="if($event.target.type !== 'checkbox' && $event.target.tagName !== 'A') { 
+                                if(selectedIds.includes('@item.Id')) { selectedIds = selectedIds.filter(id => id !== '@item.Id') }
+                                else { selectedIds.push('@item.Id') }
+                            }">
+                            <td class="px-8 py-4">
+                                <input type="checkbox" name="ids" value="@item.Id" x-model="selectedIds"
+                                       class="rounded text-brand border-gray-200 focus:ring-brand" 
+                                       @@click.stop />
+                            </td>
                         <td class="px-6 py-4">
                             <div class="flex items-center space-x-2">
                                 <a asp-page="./Edit" asp-route-id="@item.Id" class="text-gray-700 font-medium group-hover:text-brand transition-colors">@item.Title</a>
@@ -91,9 +105,7 @@
                         <td class="px-6 py-4 text-xs text-gray-500">@(item.Geo?.Title ?? "未设置")</td>
                         <td class="px-6 py-4 text-center text-gray-400 font-mono">@item.Views</td>
                         <td class="px-8 py-4 text-right text-xs text-gray-400 font-mono">@item.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
-                        <td class="px-6 py-4 text-right">
-                            <a asp-page="./Edit" asp-route-id="@item.Id" class="text-xs text-brand hover:underline">编辑</a>
-                        </td>
+
                     </tr>
                 }
                 @if (!Model.ScenicSpots.Items.Any())
@@ -109,8 +121,4 @@
     </form>
 </div>
 
-<script>
-    document.getElementById('selectAll').addEventListener('change', function () {
-        document.querySelectorAll('input[name="ids"]').forEach(cb => cb.checked = this.checked);
-    });
-</script>
+

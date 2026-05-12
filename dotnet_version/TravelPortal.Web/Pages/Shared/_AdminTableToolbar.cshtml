@@ -1,0 +1,120 @@
+@model object
+
+@{
+    string selectModel = "selectedIds";
+    global::System.Collections.IEnumerable buttons = null;
+    int totalCount = 0;
+
+    if (Model != null)
+    {
+        var modelType = Model.GetType();
+        
+        var pSelect = modelType.GetProperty("SelectModel");
+        if (pSelect != null) {
+            selectModel = pSelect.GetValue(Model)?.ToString() ?? "selectedIds";
+        }
+
+        var pTotal = modelType.GetProperty("TotalCount");
+        if (pTotal != null) {
+            try { totalCount = global::System.Convert.ToInt32(pTotal.GetValue(Model)); } catch {}
+        }
+
+        var pButtons = modelType.GetProperty("Buttons");
+        if (pButtons != null) {
+            buttons = pButtons.GetValue(Model) as global::System.Collections.IEnumerable;
+        }
+    }
+
+    string toolbarId = "toolbar_" + global::System.Guid.NewGuid().ToString("N").Substring(0, 8);
+}
+
+<div id="@toolbarId" class="px-8 py-4 flex items-center justify-between bg-white border-b border-gray-100">
+    <div class="flex items-center gap-3">
+        @if (buttons != null)
+        {
+            foreach (var btn in buttons)
+            {
+                if (btn == null) continue;
+                
+                // 避开命名空间冲突和 Razor 的 Lambda 解析错误
+                var btnType = btn.GetType();
+
+                var pId = btnType.GetProperty("Id");
+                string btnId = pId != null ? (pId.GetValue(btn)?.ToString() ?? "") : "";
+
+                var pText = btnType.GetProperty("Text");
+                string btnText = pText != null ? (pText.GetValue(btn)?.ToString() ?? "") : "";
+
+                var pHandler = btnType.GetProperty("Handler");
+                string handler = pHandler != null ? (pHandler.GetValue(btn)?.ToString() ?? "") : "";
+
+                var pActionType = btnType.GetProperty("ActionType");
+                string actionType = pActionType != null ? (pActionType.GetValue(btn)?.ToString() ?? "") : "";
+                if (string.IsNullOrEmpty(actionType)) actionType = "submit";
+
+                <button type="button"
+                        data-toolbar-id="@toolbarId"
+                        data-action="@actionType"
+                        data-handler="@handler"
+                        data-select-model="@selectModel"
+                        onclick="adminToolbarClick(this)"
+                        class="bg-brand text-white border-brand/80 hover:bg-brand/90 px-4 py-1.5 rounded-sm border-b-2 text-xs font-bold tracking-widest transition-all active:translate-y-[1px] active:border-b-0">
+                    @btnText
+                </button>
+            }
+        }
+    </div>
+
+    <div class="text-[10px] text-gray-400 font-medium bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+        已选 <span id="@(toolbarId)_count" class="text-brand font-bold font-mono">0</span> / @totalCount
+    </div>
+</div>
+
+<script>
+    if (typeof adminToolbarClick === 'undefined') {
+        function adminToolbarClick(btn) {
+            var action = btn.getAttribute('data-action');
+            var handler = btn.getAttribute('data-handler');
+            var selectModel = btn.getAttribute('data-select-model');
+            var form = btn.closest('form');
+            
+            var selectedIds = [];
+            try {
+                var alpineRoot = btn.closest('[x-data]');
+                if (alpineRoot && window.Alpine) {
+                    selectedIds = Alpine.evaluate(alpineRoot, selectModel) || [];
+                }
+            } catch(e) {}
+            
+            if (selectedIds.length === 0) {
+                selectedIds = Array.from(form.querySelectorAll('input[name="ids"]:checked')).map(function(el) { return el.value; });
+            }
+
+            if (action === 'redirect') {
+                if (selectedIds.length === 0) { alert('请先勾选项目'); return; }
+                if (selectedIds.length > 1) { alert('此操作仅支持单项选择'); return; }
+                var checked = form.querySelector('input[name="ids"]:checked');
+                var row = checked ? checked.closest('tr') : null;
+                var url = row ? row.getAttribute('data-url') : null;
+                if (url) window.location.href = url; else alert('未找到跳转地址');
+                return;
+            }
+
+            if (selectedIds.length === 0) { alert('请先勾选项目'); return; }
+            if (action === 'delete' && !confirm('确定执行删除操作吗？')) return;
+
+            form.action = '?handler=' + handler;
+            form.submit();
+        }
+
+        document.addEventListener('change', function(e) {
+            if (e.target && (e.target.name === 'ids' || e.target.id === 'selectAll')) {
+                var form = e.target.closest('form');
+                if (!form) return;
+                var countEls = form.querySelectorAll('[id^="toolbar_"][id$="_count"]');
+                var n = form.querySelectorAll('input[name="ids"]:checked').length;
+                countEls.forEach(function(el) { el.textContent = n; });
+            }
+        });
+    }
+</script>
