@@ -108,10 +108,3 @@
             <partial name="_Pagination" model="Model.Travelogues.Metadata" />
         </form>
 </div>
-
-<script>
-    document.getElementById('selectAll').addEventListener('change', function() {
-        const checkboxes = document.querySelectorAll('input[name="ids"]');
-        checkboxes.forEach(cb => cb.checked = this.checked);
-    });
-</script>
