@@ -175,6 +175,23 @@
             </div>
         </div>
 
+        <!-- 4. 发布设置 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-8">
+                <div class="flex flex-wrap gap-12 items-center">
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                        <input type="checkbox" asp-for="Food.IsHome" class="w-6 h-6 rounded text-brand border-gray-300 focus:ring-brand transition-all">
+                        <span class="text-sm font-bold text-gray-700">推荐到首页</span>
+                    </label>
+                    <div class="flex items-center gap-3 ml-auto">
+                        <label class="text-sm font-bold text-gray-700">排序</label>
+                        <input type="number" asp-for="Food.SortOrder" class="w-24 px-3 py-1.5 rounded-lg border-gray-200 focus:ring-brand focus:border-brand text-sm font-mono" />
+                        <span class="text-[10px] text-gray-400">数字越小越靠前</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- 5. 底部按钮 -->
         <div class="flex items-center justify-center space-x-6">
             <button type="submit" class="px-12 py-4 bg-brand text-white rounded-2xl font-bold shadow-xl shadow-brand/30 hover:scale-105 active:scale-95 transition-all">保存修改</button>

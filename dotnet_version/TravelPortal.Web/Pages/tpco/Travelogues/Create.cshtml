@@ -214,6 +214,11 @@
                     <input type="checkbox" asp-for="Travelogue.IsHome" class="w-6 h-6 rounded text-brand border-gray-300 focus:ring-brand" />
                     <span class="text-sm font-bold text-gray-700">推荐到首页</span>
                 </label>
+                <div class="flex items-center gap-3 ml-auto">
+                    <label class="text-sm font-bold text-gray-700">排序</label>
+                    <input type="number" asp-for="Travelogue.SortOrder" class="w-24 px-3 py-1.5 rounded-lg border-gray-200 focus:ring-brand focus:border-brand text-sm font-mono" />
+                    <span class="text-[10px] text-gray-400">数字越小越靠前</span>
+                </div>
             </div>
         </section>
 

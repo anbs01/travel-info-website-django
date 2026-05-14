@@ -151,7 +151,7 @@ public abstract class BaseContent
     public bool IsHidden { get; set; } = false;
 
     /// <summary>
-    /// 排序权重
+    /// 排序
     /// </summary>
     public int SortOrder { get; set; } = 100;
 

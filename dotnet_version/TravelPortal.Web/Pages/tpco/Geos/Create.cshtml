@@ -203,6 +203,11 @@
                             <option value="BottomRight">右下</option>
                         </select>
                     </div>
+                    <div class="flex items-center gap-3">
+                        <label class="text-xs font-bold text-gray-700">排序</label>
+                        <input type="number" asp-for="Geo.SortOrder" class="w-24 px-3 py-1.5 rounded-lg border-gray-200 focus:ring-brand focus:border-brand text-xs font-mono" />
+                        <span class="text-[10px] text-gray-400">数字越小越靠前</span>
+                    </div>
                 </div>
             </section>
 
