@@ -18,7 +18,7 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     }
 
     [BindProperty]
-    public CreativeProduct Product { get; set; } = new();
+    public CreativeProduct Product { get; set; } = new() { SortOrder = 1000 };
 
     [BindProperty]
     public IFormFile? MainImageFile { get; set; }

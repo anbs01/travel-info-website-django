@@ -26,11 +26,13 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             .WhereIF(!string.IsNullOrEmpty(FameLevel), s => s.FameLevel == FameLevel)
             .WhereIF(!string.IsNullOrEmpty(ScenicGrade), s => s.ScenicGrade == ScenicGrade)
             .OrderByDescending(s => s.IsSticky)
+            .OrderBy(s => s.SortOrder)
             .OrderByDescending(s => s.CreatedAt)
             .Select((s, g) => new ScenicSpot
             {
                 Id = s.Id, Title = s.Title, FameLevel = s.FameLevel, ScenicGrade = s.ScenicGrade,
                 Views = s.Views, IsSticky = s.IsSticky, IsHidden = s.IsHidden, CreatedAt = s.CreatedAt,
+                SortOrder = s.SortOrder,
                 Geo = new Geo { Title = g.Title }
             });
 

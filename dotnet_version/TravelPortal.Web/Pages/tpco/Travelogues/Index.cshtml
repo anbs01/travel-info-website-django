@@ -69,6 +69,7 @@
                         <th class="px-6 py-4">内容信息</th>
                         <th class="px-6 py-4 w-24 text-center">浏览</th>
                         <th class="px-8 py-4 w-40 text-center">添加日期</th>
+                        <th class="px-6 py-4">排序</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
@@ -97,6 +98,9 @@
                             <td class="px-6 py-4 text-center text-gray-400 font-mono">@item.Views</td>
                             <td class="px-8 py-4 text-center text-xs text-gray-400 font-mono">
                                 @item.CreatedAt.ToString("yyyy-MM-dd")
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="text-gray-400 text-xs font-mono">@item.SortOrder</span>
                             </td>
                         </tr>
                     }

@@ -18,7 +18,7 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     }
 
     [BindProperty]
-    public Food Food { get; set; } = new();
+    public Food Food { get; set; } = new() { SortOrder = 1000 };
 
     [BindProperty]
     public IFormFile? MainImageFile { get; set; }

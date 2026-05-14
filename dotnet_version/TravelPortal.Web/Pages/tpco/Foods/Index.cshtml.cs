@@ -48,6 +48,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             .WhereIF(!string.IsNullOrEmpty(Category), f => f.ProductType == Category)
             .WhereIF(!string.IsNullOrEmpty(SpecialtyCategory), f => f.Classification == SpecialtyCategory)
             .OrderByDescending(f => f.IsSticky)
+            .OrderBy(f => f.SortOrder)
             .OrderByDescending(f => f.CreatedAt)
             .Select((f, r) => new Food
             {
@@ -58,6 +59,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
                 IsSticky = f.IsSticky,
                 IsHidden = f.IsHidden,
                 CreatedAt = f.CreatedAt,
+                SortOrder = f.SortOrder,
                 Geo = new Geo { Title = r.Title }
             });
 

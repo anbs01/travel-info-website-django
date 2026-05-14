@@ -65,7 +65,8 @@
                         <th class="px-6 py-4 w-32">类别</th>
                         <th class="px-6 py-4 w-48">地区</th>
                         <th class="px-6 py-4 w-24 text-center">浏览</th>
-                        <th class="px-8 py-4 w-40 text-right">添加日期</th>
+                        <th class="px-8 py-4 w-40 text-center">添加日期</th>
+                        <th class="px-6 py-4">排序</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
@@ -84,19 +85,12 @@
                                        @@click.stop />
                             </td>
                             <td class="px-6 py-4">
-                                <div class="flex flex-col">
-                                    <div class="flex items-center space-x-2">
-                                        <a asp-page="./Edit" asp-route-id="@item.Id" class="text-gray-700 font-medium group-hover:text-brand transition-colors">@item.Title</a>
-                                        @if (item.IsSticky)
-                                        {
-                                            <span class="text-[10px] text-red-500 font-bold">已置顶</span>
-                                        }
-                                        @if (item.IsHidden)
-                                        {
-                                            <span class="text-[10px] text-gray-400 font-bold">已屏蔽</span>
-                                        }
-                                    </div>
-                                </div>
+                                <a asp-page="./Edit" asp-route-id="@item.Id" class="flex items-center space-x-2 group/title">
+                                    <span class="text-gray-700 font-medium group-hover/title:text-brand transition-colors">@item.Title</span>
+                                    @if (item.IsSticky) { <span class="px-1.5 py-0.5 bg-orange-50 text-orange-500 text-[10px] font-bold rounded border border-orange-100">置顶</span> }
+                                    @if (item.IsHidden) { <span class="px-1.5 py-0.5 bg-gray-50 text-[10px] text-gray-400 font-bold rounded border border-gray-200">已屏蔽</span> }
+                                    <svg class="w-3 h-3 text-gray-300 opacity-0 group-hover/title:opacity-100 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                </a>
                             </td>
                             <td class="px-6 py-4">
                                 <span class="px-2 py-0.5 rounded text-[10px] font-bold @(item.ProductType == "特产" ? "bg-orange-50 text-orange-600" : "bg-blue-50 text-blue-600")">
@@ -106,11 +100,18 @@
                             <td class="px-6 py-4 text-xs text-gray-500">
                                 @(item.Geo?.Title ?? "未设置")
                             </td>
-                            <td class="px-6 py-4 text-center text-gray-400 font-mono">@item.Views</td>
-                            <td class="px-8 py-4 text-right text-xs text-gray-400 font-mono">
+                            <td class="px-6 py-4 text-center text-gray-400 font-mono text-xs">@item.Views</td>
+                            <td class="px-8 py-4 text-center text-xs text-gray-400 font-mono">
                                 @item.CreatedAt.ToString("yyyy-MM-dd HH:mm")
                             </td>
+                            <td class="px-6 py-4">
+                                <span class="text-gray-400 text-xs font-mono">@item.SortOrder</span>
+                            </td>
                         </tr>
+                    }
+                    @if (!Model.FoodList.Items.Any())
+                    {
+                        <tr><td colspan="7" class="px-8 py-16 text-center text-gray-400 text-sm">暂无数据</td></tr>
                     }
                 </tbody>
             </table>
@@ -120,5 +121,3 @@
             <partial name="_Pagination" model="Model.FoodList.Metadata" />
         </form>
 </div>
-
-

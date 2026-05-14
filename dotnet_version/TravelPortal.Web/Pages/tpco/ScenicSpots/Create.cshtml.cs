@@ -17,7 +17,7 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         _uploadService = uploadService;
     }
 
-    [BindProperty] public ScenicSpot Spot { get; set; } = new();
+    [BindProperty] public ScenicSpot Spot { get; set; } = new() { SortOrder = 1000 };
     [BindProperty] public IFormFile? MainImageFile { get; set; }
 
     public List<string> ScenicCategories { get; set; } = new();

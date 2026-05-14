@@ -40,6 +40,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
         int total = 0;
         var items = query.OrderByDescending(it => it.IsSticky)
+                         .OrderBy(it => it.SortOrder)
                          .OrderByDescending(it => it.CreatedAt)
                          .ToPageList(PageIndex, 10, ref total);
 

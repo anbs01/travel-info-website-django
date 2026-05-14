@@ -43,6 +43,7 @@
             TotalCount = Model.NewsList.Items.Count(),
             Buttons = new List<dynamic> {
                 new { Id = "Sticky", Text = "置顶", Handler = "ToggleSticky", ActionType = "submit" },
+                new { Id = "Hide", Text = "屏蔽", Handler = "ToggleHidden", ActionType = "submit" },
                 new { Id = "Edit", Text = "编辑", ActionType = "redirect", IsSingleSelectOnly = true },
                 new { Id = "Delete", Text = "删除", Handler = "Delete", ActionType = "delete" }
             }
@@ -58,7 +59,7 @@
                     <th class="px-6 py-4">类别</th>
                     <th class="px-6 py-4">状态</th>
                     <th class="px-6 py-4">发布时间</th>
-                    <th class="px-6 py-4 text-right">操作</th>
+                    <th class="px-6 py-4">排序</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-50">
@@ -94,8 +95,8 @@
                             }
                         </td>
                         <td class="px-6 py-4 text-gray-400 text-xs font-mono">@item.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="@Url.Page("Edit", new { id = item.Id })" class="text-brand hover:underline font-bold text-xs">编辑</a>
+                        <td class="px-6 py-4">
+                            <span class="text-gray-400 text-xs font-mono">@item.SortOrder</span>
                         </td>
                     </tr>
                 }

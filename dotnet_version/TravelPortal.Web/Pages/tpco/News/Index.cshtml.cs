@@ -33,6 +33,7 @@ namespace TravelPortal.Web.Pages.tpco.News
                 .WhereIF(!string.IsNullOrEmpty(Keyword), n => n.Title.Contains(Keyword!))
                 .WhereIF(!string.IsNullOrEmpty(Category), n => n.NewsCategory == Category)
                 .OrderByDescending(n => n.IsSticky)
+                .OrderBy(n => n.SortOrder)
                 .OrderByDescending(n => n.CreatedAt);
 
             int totalCount = 0;

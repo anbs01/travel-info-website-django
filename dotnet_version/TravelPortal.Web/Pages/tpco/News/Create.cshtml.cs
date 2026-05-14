@@ -19,7 +19,7 @@ namespace TravelPortal.Web.Pages.tpco.News
         }
 
         [BindProperty]
-        public Models.News News { get; set; } = new();
+        public Models.News News { get; set; } = new() { SortOrder = 1000 };
 
         [BindProperty]
         public IFormFile? MainImageFile { get; set; }

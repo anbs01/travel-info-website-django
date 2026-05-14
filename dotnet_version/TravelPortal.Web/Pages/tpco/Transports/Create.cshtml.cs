@@ -15,7 +15,7 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     }
 
     [BindProperty]
-    public Transport Transport { get; set; } = new();
+    public Transport Transport { get; set; } = new() { SortOrder = 1000 };
 
     public void OnGet(int? geoId)
     {

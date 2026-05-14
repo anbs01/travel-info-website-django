@@ -49,6 +49,7 @@ namespace TravelPortal.Web.Pages.tpco.Travelogues
             RefAsync<int> total = 0;
             var items = await query
                 .OrderByDescending(t => t.IsSticky)
+                .OrderBy(t => t.SortOrder)
                 .OrderByDescending(t => t.StickyAt)
                 .OrderByDescending(t => t.CreatedAt)
                 .ToPageListAsync(PageIndex, 10, total);

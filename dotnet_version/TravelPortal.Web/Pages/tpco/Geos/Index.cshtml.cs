@@ -48,7 +48,9 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             query = query.Where(it => it.Nature == Nature);
 
         int total = 0;
-        var items = query.OrderBy(it => it.Level).OrderBy(it => it.SortOrder).OrderBy(it => it.Id)
+        var items = query.OrderBy(it => it.SortOrder)
+                         .OrderBy(it => it.Title)
+                         .OrderBy(it => it.Id)
                          .ToPageList(PageIndex, 10, ref total);
 
         GeoList = new PaginatedList<Geo>(items, total, PageIndex, 10);
