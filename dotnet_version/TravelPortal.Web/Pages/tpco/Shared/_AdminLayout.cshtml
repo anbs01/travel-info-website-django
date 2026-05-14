@@ -12,7 +12,49 @@
     <script src="~/lib/tinymce/tinymce.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/geo-picker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        /**
+         * 全局通用确认弹窗 (基于 SweetAlert2)
+         * @@param {string} message 提示消息
+         * @@param {string} title 弹窗标题 (可选)
+         * @@param {string} icon 图标类型 (warning, success, error, info, question)
+         * @@returns {Promise<boolean>} 返回用户选择结果
+         */
+        window.tpConfirm = async (message, title = '操作确认', icon = 'question') => {
+            const result = await Swal.fire({
+                title: title,
+                text: message,
+                icon: icon,
+                showCancelButton: true,
+                confirmButtonColor: '#B97348', // 使用系统品牌色
+                cancelButtonColor: '#d33',
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                reverseButtons: false
+            });
+            return result.isConfirmed;
+        };
+
+        /**
+         * 处理带确认的表单提交 (用于图标点击)
+         * @@param {string} message 提示消息
+         * @@param {string} handler 后端 Handler 名称
+         * @@param {string} ids 记录 ID
+         */
+        window.confirmAndPost = async (message, handler, ids) => {
+            const confirmed = await tpConfirm(message);
+            if (confirmed) {
+                const form = document.getElementById('batchForm');
+                const actionUrl = new URL(window.location.href);
+                actionUrl.searchParams.set('handler', handler);
+                actionUrl.searchParams.set('ids', ids);
+                
+                // 使用 Unpoly 进行局部刷新提交，目标默认为 main
+                up.submit(form, { url: actionUrl.href });
+            }
+        };
+
         tailwind.config = {
             theme: {
                 extend: {
