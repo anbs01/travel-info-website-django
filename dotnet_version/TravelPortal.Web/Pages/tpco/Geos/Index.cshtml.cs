@@ -50,13 +50,16 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         int total = 0;
         var items = query.OrderBy(it => it.SortOrder)
                          .OrderByDescending(it => it.CreatedAt)
-                         .Mapper(it => {
+                         .Mapper(it =>
+                         {
                              // 如果是国家，统计下级（省份）数量
-                             if (it.Level == 1) {
+                             if (it.Level == 1)
+                             {
                                  it.JurisdictionLayers = _db.Queryable<Geo>().Where(g => g.ParentId == it.Id).Count().ToString();
                              }
                              // 获取父级名称（用于显示 所属省份/国家）
-                             if (it.ParentId > 0) {
+                             if (it.ParentId > 0)
+                             {
                                  it.Parent = _db.Queryable<Geo>().InSingle(it.ParentId.Value);
                              }
                          })
@@ -67,10 +70,15 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
     public IActionResult OnPostDelete(int id)
     {
+        var target = _db.Queryable<Geo>().InSingle(id);
+        if (target == null) return RedirectToPage();
+
         // 检查是否有下级
         if (_db.Queryable<Geo>().Any(it => it.ParentId == id))
         {
-            TempData["Error"] = "该节点下有子节点，无法删除！";
+            string childType = target.Level == 1 ? "省份" : "城镇/下级";
+            string parentType = target.Level == 1 ? "国家" : "省份";
+            TempData["Error"] = $"请先删除该{parentType}下的所有{childType}数据，再回来删除该{parentType}。";
             return RedirectToPage();
         }
 
