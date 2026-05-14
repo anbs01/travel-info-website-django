@@ -49,8 +49,17 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
         int total = 0;
         var items = query.OrderBy(it => it.SortOrder)
-                         .OrderBy(it => it.Title)
-                         .OrderBy(it => it.Id)
+                         .OrderByDescending(it => it.CreatedAt)
+                         .Mapper(it => {
+                             // 如果是国家，统计下级（省份）数量
+                             if (it.Level == 1) {
+                                 it.JurisdictionLayers = _db.Queryable<Geo>().Where(g => g.ParentId == it.Id).Count().ToString();
+                             }
+                             // 获取父级名称（用于显示 所属省份/国家）
+                             if (it.ParentId > 0) {
+                                 it.Parent = _db.Queryable<Geo>().InSingle(it.ParentId.Value);
+                             }
+                         })
                          .ToPageList(PageIndex, 10, ref total);
 
         GeoList = new PaginatedList<Geo>(items, total, PageIndex, 10);
