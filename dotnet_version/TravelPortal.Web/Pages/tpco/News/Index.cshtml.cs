@@ -46,24 +46,41 @@ namespace TravelPortal.Web.Pages.tpco.News
                 .ToList();
         }
 
-        public async Task<IActionResult> OnPostDeleteAsync(int[] ids)
+        public async Task<IActionResult> OnPostDeleteAsync(string ids)
         {
-            if (ids != null && ids.Length > 0)
+            if (!string.IsNullOrEmpty(ids))
             {
-                await _db.Deleteable<Models.News>().In(ids).ExecuteCommandAsync();
+                var idArray = ids.Split(',').Select(int.Parse).ToArray();
+                await _db.Deleteable<Models.News>().In(idArray).ExecuteCommandAsync();
             }
             return RedirectToPage();
         }
 
-        public async Task<IActionResult> OnPostToggleStickyAsync(int[] ids)
+        public async Task<IActionResult> OnPostToggleStickyAsync(string ids)
         {
-            if (ids != null && ids.Length > 0)
+            if (!string.IsNullOrEmpty(ids))
             {
-                var list = await _db.Queryable<Models.News>().In(ids).ToListAsync();
+                var idArray = ids.Split(',').Select(int.Parse).ToArray();
+                var list = await _db.Queryable<Models.News>().In(idArray).ToListAsync();
                 foreach (var item in list)
                 {
                     item.IsSticky = !item.IsSticky;
                     await _db.Updateable(item).UpdateColumns(n => n.IsSticky).ExecuteCommandAsync();
+                }
+            }
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostToggleHiddenAsync(string ids)
+        {
+            if (!string.IsNullOrEmpty(ids))
+            {
+                var idArray = ids.Split(',').Select(int.Parse).ToArray();
+                var list = await _db.Queryable<Models.News>().In(idArray).ToListAsync();
+                foreach (var item in list)
+                {
+                    item.IsHidden = !item.IsHidden;
+                    await _db.Updateable(item).UpdateColumns(n => n.IsHidden).ExecuteCommandAsync();
                 }
             }
             return RedirectToPage();
