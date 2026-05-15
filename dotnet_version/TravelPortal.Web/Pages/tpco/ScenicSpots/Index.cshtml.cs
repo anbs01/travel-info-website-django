@@ -41,18 +41,22 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         ScenicSpots = new PaginatedList<ScenicSpot>(items, total, PageIndex, 10);
     }
 
-    public IActionResult OnPostDelete(int[] ids)
+    public IActionResult OnPostDelete(string ids)
     {
-        if (ids?.Length > 0)
-            _db.Deleteable<ScenicSpot>().In(ids).ExecuteCommand();
+        if (!string.IsNullOrEmpty(ids))
+        {
+            var idArray = ids.Split(',').Select(int.Parse).ToArray();
+            _db.Deleteable<ScenicSpot>().In(idArray).ExecuteCommand();
+        }
         return RedirectToPage();
     }
 
-    public IActionResult OnPostToggleSticky(int[] ids)
+    public IActionResult OnPostToggleSticky(string ids)
     {
-        if (ids?.Length > 0)
+        if (!string.IsNullOrEmpty(ids))
         {
-            var items = _db.Queryable<ScenicSpot>().In(ids).ToList();
+            var idArray = ids.Split(',').Select(int.Parse).ToArray();
+            var items = _db.Queryable<ScenicSpot>().In(idArray).ToList();
             foreach (var item in items)
             {
                 item.IsSticky = !item.IsSticky;
@@ -63,11 +67,12 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         return RedirectToPage();
     }
 
-    public IActionResult OnPostToggleHidden(int[] ids)
+    public IActionResult OnPostToggleHidden(string ids)
     {
-        if (ids?.Length > 0)
+        if (!string.IsNullOrEmpty(ids))
         {
-            var items = _db.Queryable<ScenicSpot>().In(ids).ToList();
+            var idArray = ids.Split(',').Select(int.Parse).ToArray();
+            var items = _db.Queryable<ScenicSpot>().In(idArray).ToList();
             foreach (var item in items)
             {
                 item.IsHidden = !item.IsHidden;
