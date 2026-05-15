@@ -178,14 +178,3 @@
     </form>
 </div>
 
-@section Scripts {
-    <script>
-        function toggleAll(checked) {
-            const checkboxes = document.querySelectorAll('input[name=ids]');
-            const ids = Array.from(checkboxes).map(el => el.value);
-            const alpineData = document.querySelector('[x-data]').__x.$data;
-            alpineData.selectedIds = checked ? ids : [];
-        }
-    </script>
-}
-
