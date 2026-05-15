@@ -5,11 +5,17 @@
      * Model.Title: 页面大标题
      * Model.Subtitle: 页面说明（可选）
      * Model.Icon: SVG 图标路径或图标名称（可选）
-     * Model.Tabs: 选项卡列表，格式：new[] { new { Name = "列表", Url = "...", IsActive = true }, ... }
+     * Model.Tabs: 选项卡列表
      */
-    string title = Model.Title ?? "管理页面";
-    string subtitle = Model.Subtitle ?? "Content Management System";
-    var tabs = Model.Tabs as IEnumerable<dynamic> ?? Array.Empty<dynamic>();
+    
+    // 安全获取 dynamic 属性的方法
+    Func<string, dynamic> getProp = (name) => {
+        var prop = Model.GetType().GetProperty(name);
+        return prop != null ? prop.GetValue(Model, null) : null;
+    };
+
+    string title = getProp("Title") ?? "管理页面";
+    var tabs = getProp("Tabs") as IEnumerable<dynamic> ?? Array.Empty<dynamic>();
 }
 
 <div class="bg-white border-b border-gray-100">
