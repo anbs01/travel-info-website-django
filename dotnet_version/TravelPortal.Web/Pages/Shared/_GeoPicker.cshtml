@@ -47,106 +47,123 @@
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col overflow-hidden"
              @@click.stop>
 
-            <!-- 头部 Tab -->
-            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 flex-shrink-0">
-                <div class="flex gap-1 bg-gray-100 rounded-lg p-1">
-                    <button type="button" @@click="tab = 'domestic'"
-                            :class="tab === 'domestic' ? 'bg-brand text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'"
-                            class="px-4 py-1.5 rounded-md text-sm font-bold transition-all">国内城乡</button>
-                    <button type="button" @@click="tab = 'overseas'"
-                            :class="tab === 'overseas' ? 'bg-brand text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'"
-                            class="px-4 py-1.5 rounded-md text-sm font-bold transition-all">境外城乡</button>
+            <!-- 头部 Tab 与搜索 -->
+            <div class="px-6 py-4 border-b border-gray-100 flex-shrink-0 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex gap-1 bg-gray-100 rounded-lg p-1">
+                        <button type="button" @@click="tab = 'domestic'; resetPath()"
+                                :class="tab === 'domestic' ? 'bg-brand text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'"
+                                class="px-4 py-1.5 rounded-md text-sm font-bold transition-all">国内城乡</button>
+                        <button type="button" @@click="tab = 'overseas'; resetPath()"
+                                :class="tab === 'overseas' ? 'bg-brand text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'"
+                                class="px-4 py-1.5 rounded-md text-sm font-bold transition-all">境外城乡</button>
+                    </div>
+                    <button type="button" @@click="open = false"
+                            class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
                 </div>
-                <button type="button" @@click="open = false"
-                        class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+
+                <!-- 搜索框 -->
+                <div class="relative">
+                    <input type="text" x-model="searchQuery" @@input.debounce.300ms="search()"
+                           placeholder="输入名称或拼音首字母快速查找..."
+                           class="w-full pl-10 pr-4 py-2.5 bg-gray-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-brand/20 transition-all">
+                    <svg class="absolute left-3.5 top-3 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
-                </button>
+                    <button x-show="searchQuery" @@click="searchQuery = ''; search()" 
+                            class="absolute right-3 top-3 text-gray-400 hover:text-gray-600">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                    </button>
+                </div>
+
+                <!-- 面包屑路径 -->
+                <div x-show="!searchQuery" class="flex items-center gap-2 text-xs text-gray-500 overflow-x-auto whitespace-nowrap custom-scrollbar py-1">
+                    <button type="button" @@click="resetPath()" class="hover:text-brand font-medium">全部</button>
+                    <template x-for="(node, index) in path" :key="index">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-3 h-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            <button type="button" @@click="goToPath(index)" 
+                                    :class="index === path.length - 1 ? 'text-brand font-bold' : 'hover:text-brand'"
+                                    x-text="node.title"></button>
+                        </div>
+                    </template>
+                </div>
             </div>
 
             <!-- 内容区 -->
-            <div class="flex-1 overflow-y-auto p-6 space-y-5">
-
-                <!-- 加载中 -->
-                <div x-show="loading" class="flex items-center justify-center py-12 text-gray-400 text-sm">
-                    <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-                    </svg>
-                    加载中...
-                </div>
-
-                <!-- 国内：省级列表 -->
-                <div x-show="!loading && tab === 'domestic'">
-                    <div class="flex flex-wrap gap-x-8 gap-y-2.5">
-                        <template x-for="p in provinces" :key="p.id">
-                            <button type="button"
-                                    @@click="selectProvince(p)"
-                                    :class="activeProvince?.id === p.id ? 'text-brand font-bold' : 'text-gray-700 hover:text-brand'"
-                                    class="text-sm transition-colors"
-                                    x-text="p.title"></button>
-                        </template>
-                        <span x-show="!loading && provinces.length === 0"
-                              class="text-xs text-gray-400 italic">暂无数据，请先在城镇管理中录入省份</span>
-                    </div>
-                </div>
-
-                <!-- 境外：直接显示城市列表 -->
-                <div x-show="!loading && tab === 'overseas'">
-                    <div class="flex flex-wrap gap-x-8 gap-y-2.5">
-                        <template x-for="c in overseasCities" :key="c.id">
-                            <button type="button"
-                                    @@click="select(c.id, c.title)"
-                                    :class="selectedId == c.id ? 'text-brand font-bold' : 'text-gray-700 hover:text-brand'"
-                                    class="text-sm transition-colors"
-                                    x-text="c.title"></button>
-                        </template>
-                        <span x-show="!loading && overseasCities.length === 0"
-                              class="text-xs text-gray-400 italic">暂无境外城市数据</span>
-                    </div>
-                </div>
-
-                <!-- 省下子节点分组 -->
-                <div x-show="tab === 'domestic' && activeProvince" class="border-t border-gray-100 pt-4 space-y-4">
-                    <div x-show="loadingSub" class="text-xs text-gray-400">加载中...</div>
-                    <template x-for="group in subGroups" :key="group.level">
-                        <div>
-                            <div class="flex items-center gap-2 mb-2">
-                                <div class="w-1 h-4 bg-brand rounded-full"></div>
-                                <span class="text-xs font-bold text-gray-500" x-text="group.label"></span>
-                            </div>
-                            <div class="flex flex-wrap gap-x-8 gap-y-2.5">
-                                <template x-for="item in group.items" :key="item.id">
-                                    <button type="button"
-                                            @@click="select(item.id, item.title)"
-                                            :class="selectedId == item.id ? 'text-brand font-bold' : 'text-gray-700 hover:text-brand'"
-                                            class="text-sm transition-colors"
-                                            x-text="item.title"></button>
-                                </template>
-                            </div>
+            <div class="flex-1 flex overflow-hidden">
+                <!-- 地区列表主体 -->
+                <div class="flex-1 overflow-y-auto p-6 custom-scrollbar relative" id="geoListContainer">
+                    <!-- 加载中 -->
+                    <div x-show="loading" class="absolute inset-0 bg-white/80 flex items-center justify-center z-10">
+                        <div class="flex flex-col items-center gap-2">
+                            <svg class="animate-spin w-6 h-6 text-brand" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                            </svg>
+                            <span class="text-xs text-gray-400 font-medium">加载数据中...</span>
                         </div>
+                    </div>
+
+                    <!-- 列表内容 -->
+                    <div class="space-y-6">
+                        <template x-for="group in groupedItems" :key="group.letter">
+                            <div :id="'group-' + group.letter">
+                                <div class="text-brand font-bold text-sm mb-3 border-b border-brand/10 pb-1" x-text="group.letter"></div>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                                    <template x-for="item in group.items" :key="item.id">
+                                        <div class="relative group">
+                                            <button type="button" 
+                                                    @@click="item.hasChildren ? drillDown(item) : select(item.id, item.title)"
+                                                    :class="selectedId == item.id ? 'bg-brand text-white border-brand' : 'bg-gray-50 text-gray-700 border-gray-100 hover:border-brand hover:text-brand hover:bg-brand/5'"
+                                                    class="w-full px-3 py-2 text-left rounded-lg border text-sm transition-all flex items-center justify-between">
+                                                <span class="truncate" x-text="item.title"></span>
+                                                <svg x-show="item.hasChildren" class="w-3 h-3 opacity-40 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                        
+                        <div x-show="!loading && groupedItems.length === 0" class="flex flex-col items-center justify-center py-12 text-gray-400">
+                            <svg class="w-12 h-12 mb-2 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                            <p class="text-xs">未找到匹配的地区</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- A-Z 索引条 -->
+                <div class="w-8 flex flex-col items-center justify-center bg-gray-50 border-l border-gray-100 py-4 flex-shrink-0">
+                    <template x-for="letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')" :key="letter">
+                        <button type="button" 
+                                @@click="scrollToGroup(letter)"
+                                :class="hasGroup(letter) ? 'text-brand font-bold cursor-pointer hover:scale-125' : 'text-gray-300 cursor-default'"
+                                class="w-full text-[10px] leading-tight transition-all py-0.5 text-center"
+                                x-text="letter"></button>
                     </template>
-                    <div x-show="!loadingSub && subGroups.length === 0"
-                         class="text-xs text-gray-400 italic">该省暂无下级城镇数据</div>
                 </div>
             </div>
 
             <!-- 底部操作栏 -->
             <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between bg-gray-50/50 flex-shrink-0">
-                <span class="text-xs text-gray-500">
-                    <template x-if="selectedName">
-                        <span>已选：<span class="text-brand font-bold" x-text="selectedName"></span></span>
-                    </template>
-                    <template x-if="!selectedName">
-                        <span class="text-gray-400">请点击城市 / 县 / 乡镇选择</span>
-                    </template>
-                </span>
+                <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">当前选择</span>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full" :class="selectedName ? 'bg-green-500' : 'bg-gray-300'"></div>
+                        <span class="text-sm font-bold" :class="selectedName ? 'text-gray-900' : 'text-gray-400'"
+                              x-text="selectedName || '未选择任何地区'"></span>
+                    </div>
+                </div>
                 <div class="flex gap-3">
                     <button type="button" @@click="clear()"
-                            class="px-4 py-2 text-xs font-bold text-gray-500 hover:bg-gray-200 rounded-lg transition-all">清除</button>
+                            class="px-5 py-2 text-sm font-bold text-gray-500 hover:bg-gray-200 rounded-xl transition-all">清除</button>
                     <button type="button" @@click="open = false"
-                            class="px-6 py-2 text-xs font-bold bg-brand text-white rounded-lg hover:opacity-90 transition-all">确认</button>
+                            class="px-8 py-2 text-sm font-bold bg-brand text-white rounded-xl shadow-lg shadow-brand/20 hover:-translate-y-0.5 active:scale-95 transition-all">确认</button>
                 </div>
             </div>
         </div>
