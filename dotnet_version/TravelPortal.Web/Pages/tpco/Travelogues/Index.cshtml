@@ -48,12 +48,20 @@
 
         <!-- 3. 操作按钮 + 数据列表 (POST form) -->
         <form method="post" id="batchForm">
-            <partial name="_AdminTableToolbar" model='new { 
-                TotalCount = Model.Travelogues.Items.Count(),
-                Buttons = new List<dynamic> {
-                    new { Id = "Delete", Text = "批量删除", Handler = "Delete", ActionType = "delete" }
-                }
-            }' />
+            <div class="px-8 py-4 flex items-center justify-between bg-white border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <button type="button" 
+                            @@click="if(selectedIds.length > 0) confirmAndPost('警告：确定要批量删除已选中的攻略吗？操作不可恢复！', 'Delete', selectedIds.join(','))"
+                            class="bg-brand text-white border-brand/80 px-4 py-1.5 rounded-sm border-b-2 text-xs font-bold tracking-widest transition-all flex items-center gap-2"
+                            :class="selectedIds.length > 0 ? 'opacity-100 hover:bg-brand/90 active:translate-y-[1px] active:border-b-0' : 'opacity-50 cursor-not-allowed'">
+                        <span>批量删除</span>
+                    </button>
+                </div>
+
+                <div class="text-[10px] text-gray-400 font-medium bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+                    已选 <span class="text-brand font-bold font-mono" x-text="selectedIds.length">0</span> / @Model.Travelogues.Items.Count()
+                </div>
+            </div>
 
             <!-- 数据列表 -->
         <div class="overflow-x-auto">
