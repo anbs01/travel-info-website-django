@@ -69,25 +69,42 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         FoodList = new PaginatedList<Food>(items, totalCount, PageIndex, 10);
     }
 
-    public IActionResult OnPostDelete(int[] ids)
+    public IActionResult OnPostDelete(string ids)
     {
-        if (ids != null && ids.Length > 0)
+        if (!string.IsNullOrEmpty(ids))
         {
-            _db.Deleteable<Food>().In(ids).ExecuteCommand();
+            var idArray = ids.Split(',').Select(int.Parse).ToArray();
+            _db.Deleteable<Food>().In(idArray).ExecuteCommand();
         }
         return RedirectToPage();
     }
 
-    public IActionResult OnPostToggleSticky(int[] ids)
+    public IActionResult OnPostToggleSticky(string ids)
     {
-        if (ids != null && ids.Length > 0)
+        if (!string.IsNullOrEmpty(ids))
         {
-            var items = _db.Queryable<Food>().In(ids).ToList();
+            var idArray = ids.Split(',').Select(int.Parse).ToArray();
+            var items = _db.Queryable<Food>().In(idArray).ToList();
             foreach (var item in items)
             {
                 item.IsSticky = !item.IsSticky;
                 item.StickyAt = item.IsSticky ? DateTime.Now : null;
                 _db.Updateable(item).UpdateColumns(it => new { it.IsSticky, it.StickyAt }).ExecuteCommand();
+            }
+        }
+        return RedirectToPage();
+    }
+
+    public IActionResult OnPostToggleHidden(string ids)
+    {
+        if (!string.IsNullOrEmpty(ids))
+        {
+            var idArray = ids.Split(',').Select(int.Parse).ToArray();
+            var items = _db.Queryable<Food>().In(idArray).ToList();
+            foreach (var item in items)
+            {
+                item.IsHidden = !item.IsHidden;
+                _db.Updateable(item).UpdateColumns(it => new { it.IsHidden }).ExecuteCommand();
             }
         }
         return RedirectToPage();
