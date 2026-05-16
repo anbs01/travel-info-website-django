@@ -137,20 +137,14 @@
                     </div>
                 </div>
 
-                <!-- A-Z 索引条 -->
+                <!-- A-Z 索引条 (按需动态显示) -->
                 <div class="w-8 flex flex-col items-center justify-center bg-gray-50 border-l border-gray-100 py-4 flex-shrink-0">
-                    <template x-for="letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')" :key="letter">
+                    <template x-for="group in groupedItems" :key="group.letter">
                         <button type="button" 
-                                @@click="scrollToGroup(letter)"
-                                :disabled="!hasGroup(letter)"
-                                :class="hasGroup(letter) ? 'text-brand font-black cursor-pointer hover:scale-150 active:text-brand/60' : 'text-gray-200 cursor-default opacity-50'"
-                                class="w-full text-[11px] leading-tight transition-all py-0.5 text-center transform"
-                                x-text="letter"></button>
+                                @@click="scrollToGroup(group.letter)"
+                                class="w-full text-brand font-black cursor-pointer hover:scale-150 active:text-brand/60 text-[11px] leading-tight transition-all py-0.5 text-center transform"
+                                x-text="group.letter"></button>
                     </template>
-                    <button type="button" @@click="scrollToGroup('#')"
-                            :disabled="!hasGroup('#')"
-                            :class="hasGroup('#') ? 'text-brand font-black cursor-pointer' : 'text-gray-200 cursor-default opacity-50'"
-                            class="w-full text-[11px] mt-2">#</button>
                 </div>
             </div>
 
