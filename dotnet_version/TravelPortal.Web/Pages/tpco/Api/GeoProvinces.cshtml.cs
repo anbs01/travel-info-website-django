@@ -41,6 +41,9 @@ public class GeoProvincesModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             })
             .ToList();
 
-        return new JsonResult(new { domestic, overseas });
+        return new JsonResult(new { 
+            Domestic = domestic, 
+            Overseas = overseas 
+        });
     }
 }

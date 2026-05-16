@@ -17,9 +17,8 @@ public static class PinyinHelper
             return firstChar.ToString().ToUpper();
         }
 
-        // 简单汉字首字母快速计算逻辑（基于编码范围）
-        // 如果需要更高精度，建议引入第三方库如 PinYinConverter
-        byte[] array = Encoding.Default.GetBytes(new char[] { firstChar });
+        // 强制使用 GB2312 编码进行字节提取（汉字首字母判断标准）
+        byte[] array = System.Text.Encoding.GetEncoding("GB2312").GetBytes(new char[] { firstChar });
         if (array.Length < 2) return "#";
 
         int i = array[0] * 256 + array[1];

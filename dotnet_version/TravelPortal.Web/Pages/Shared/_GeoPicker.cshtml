@@ -142,10 +142,15 @@
                     <template x-for="letter in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')" :key="letter">
                         <button type="button" 
                                 @@click="scrollToGroup(letter)"
-                                :class="hasGroup(letter) ? 'text-brand font-bold cursor-pointer hover:scale-125' : 'text-gray-300 cursor-default'"
-                                class="w-full text-[10px] leading-tight transition-all py-0.5 text-center"
+                                :disabled="!hasGroup(letter)"
+                                :class="hasGroup(letter) ? 'text-brand font-black cursor-pointer hover:scale-150 active:text-brand/60' : 'text-gray-200 cursor-default opacity-50'"
+                                class="w-full text-[11px] leading-tight transition-all py-0.5 text-center transform"
                                 x-text="letter"></button>
                     </template>
+                    <button type="button" @@click="scrollToGroup('#')"
+                            :disabled="!hasGroup('#')"
+                            :class="hasGroup('#') ? 'text-brand font-black cursor-pointer' : 'text-gray-200 cursor-default opacity-50'"
+                            class="w-full text-[11px] mt-2">#</button>
                 </div>
             </div>
 

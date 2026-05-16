@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using SqlSugar;
 using TravelPortal.Web.Models;
 using TravelPortal.Web.Services;
+// 注册编码提供程序以支持 GB2312 (拼音识别需要)
+System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
 var builder = WebApplication.CreateBuilder(args);
 

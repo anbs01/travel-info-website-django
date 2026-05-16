@@ -22,7 +22,8 @@ function geoPicker(fieldName, initId, initName) {
             try {
                 const res = await fetch('/tpco/Api/GeoProvinces');
                 const data = await res.json();
-                this.items = this.tab === 'domestic' ? data.domestic : data.overseas;
+                // 适配大写字段名
+                this.items = this.tab === 'domestic' ? (data.Domestic || data.domestic) : (data.Overseas || data.overseas);
             } catch(e) {
                 console.error('Geo load failed', e);
             } finally {
@@ -83,9 +84,12 @@ function geoPicker(fieldName, initId, initName) {
         // 计算属性：按首字母分组
         get groupedItems() {
             const groups = {};
+            if (!this.items) return [];
+
             this.items.forEach(item => {
-                // 优先使用后端返回的首字母，如果后端没返回（旧数据），则取标题首位
-                const letter = (item.firstLetter || item.title.charAt(0) || '#').toUpperCase();
+                // 健壮性处理：尝试获取后端返回的各种可能的大小写字段
+                let fl = item.firstLetter || item.FirstLetter;
+                let letter = (fl || item.title.charAt(0) || '#').toUpperCase();
                 
                 if (!groups[letter]) groups[letter] = [];
                 groups[letter].push({
@@ -105,9 +109,15 @@ function geoPicker(fieldName, initId, initName) {
         },
 
         scrollToGroup(letter) {
-            const el = document.getElementById('group-' + letter);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const container = document.getElementById('geoListContainer');
+            const target = document.getElementById('group-' + letter);
+            if (container && target) {
+                // 计算目标元素相对于容器顶部的距离
+                const top = target.offsetTop - container.offsetTop;
+                container.scrollTo({
+                    top: top,
+                    behavior: 'smooth'
+                });
             }
         },
 
