@@ -84,6 +84,14 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             }
         }
 
+        if (Geo.Level == 1)
+        {
+            if (string.IsNullOrEmpty(Geo.Slug))
+            {
+                Geo.Slug = TravelPortal.Web.Utils.PinyinHelper.GetInitials(Geo.Title).ToLower();
+            }
+        }
+
         if (!ModelState.IsValid)
         {
             UpdatePageTitle();
