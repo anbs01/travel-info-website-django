@@ -57,6 +57,15 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
                              {
                                  it.JurisdictionLayers = _db.Queryable<Geo>().Where(g => g.ParentId == it.Id).Count().ToString();
                              }
+                             // 如果是城乡，统计各子级项数量
+                             if (it.Level == 3)
+                             {
+                                 it.ScenicSpotCount = _db.Queryable<ScenicSpot>().Where(s => s.GeoId == it.Id && !string.IsNullOrEmpty(s.ScenicGrade)).Count();
+                                 it.AttractionCount = _db.Queryable<ScenicSpot>().Where(s => s.GeoId == it.Id && string.IsNullOrEmpty(s.ScenicGrade)).Count();
+                                 it.FoodCount = _db.Queryable<Food>().Where(f => f.GeoId == it.Id).Count();
+                                 it.ProductCount = _db.Queryable<CreativeProduct>().Where(p => p.GeoId == it.Id).Count();
+                                 it.TravelogueCount = _db.Queryable<Travelogue>().Where(t => t.GeoId == it.Id).Count();
+                             }
                              // 获取父级名称（用于显示 所属省份/国家）
                              if (it.ParentId > 0)
                              {

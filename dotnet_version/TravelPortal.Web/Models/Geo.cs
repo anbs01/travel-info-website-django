@@ -68,4 +68,20 @@ public class Geo : BaseContent
 
     [SugarColumn(IsIgnore = true)]
     public List<Geo> Children { get; set; } = new();
+
+    // --- 统计属性 (UI 展示) ---
+    [SugarColumn(IsIgnore = true)]
+    public int ScenicSpotCount { get; set; }
+
+    [SugarColumn(IsIgnore = true)]
+    public int AttractionCount { get; set; }
+
+    [SugarColumn(IsIgnore = true)]
+    public int FoodCount { get; set; }
+
+    [SugarColumn(IsIgnore = true)]
+    public int ProductCount { get; set; }
+
+    [SugarColumn(IsIgnore = true)]
+    public int TravelogueCount { get; set; }
 }

@@ -44,6 +44,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
         var query = _db.Queryable<Food>()
             .LeftJoin<Geo>((f, r) => f.GeoId == r.Id)
+            .WhereIF(GeoId.HasValue, f => f.GeoId == GeoId)
             .WhereIF(!string.IsNullOrEmpty(Keyword), f => f.Title.Contains(Keyword!))
             .WhereIF(!string.IsNullOrEmpty(Category), f => f.ProductType == Category)
             .WhereIF(!string.IsNullOrEmpty(SpecialtyCategory), f => f.Classification == SpecialtyCategory)

@@ -5,7 +5,7 @@
     {
         1 => "国家",
         2 => "省份",
-        3 => "城市",
+        3 => "城乡",
         4 => "区县",
         5 => "乡镇",
         6 => "村庄",
@@ -91,12 +91,39 @@
                             </td>
                             <td class="px-6 py-4 text-gray-400 font-mono text-xs">@item.Id</td>
                             <td class="px-6 py-4">
-                                @if (Model.Level < 6 && Model.Nature != "Overseas")
+                                @if (Model.Level == 3)
                                 {
-                                    <a asp-page="Index" asp-route-parentId="@item.Id" asp-route-level="@(item.Level + 1)" class="flex items-center space-x-2 group/title">
-                                        <span class="text-gray-700 font-medium group-hover/title:text-brand transition-colors">@item.Title</span>
-                                        <svg class="w-3 h-3 text-gray-300 opacity-0 group-hover/title:opacity-100 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                    </a>
+                                    <div class="flex flex-col space-y-1.5 py-1">
+                                        <!-- 第一行：名称 + 标签 -->
+                                        <div class="flex items-center space-x-2.5">
+                                            <span class="text-gray-900 font-bold text-[15px]">@item.Title</span>
+                                            
+                                            <!-- 状态标签组 -->
+                                            <div class="flex items-center space-x-1.5 text-xs text-red-500 font-medium">
+                                                @if (item.IsHome)
+                                                {
+                                                    <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-50 text-red-600 border border-red-100">主页</span>
+                                                }
+                                                @if (item.IsSticky)
+                                                {
+                                                    <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-50 text-red-600 border border-red-100">已置顶</span>
+                                                }
+                                                @if (item.IsHidden)
+                                                {
+                                                    <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-50 text-red-600 border border-red-100">已屏蔽</span>
+                                                }
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- 第二行：子项统计 -->
+                                        <div class="flex items-center space-x-3.5 text-xs text-gray-400 font-medium whitespace-nowrap">
+                                            <a href="/tpco/ScenicSpots?GeoId=@item.Id&ScenicGrade=Scenic" class="text-gray-400 hover:text-brand hover:underline transition-colors">@item.ScenicSpotCount 景区</a>
+                                            <a href="/tpco/ScenicSpots?GeoId=@item.Id&ScenicGrade=Attraction" class="text-gray-400 hover:text-brand hover:underline transition-colors">@item.AttractionCount 打卡地</a>
+                                            <a href="/tpco/Foods?GeoId=@item.Id" class="text-gray-400 hover:text-brand hover:underline transition-colors">@item.FoodCount 美食</a>
+                                            <a href="/tpco/CreativeProducts?GeoId=@item.Id" class="text-gray-400 hover:text-brand hover:underline transition-colors">@item.ProductCount 文创</a>
+                                            <a href="/tpco/Travelogues?GeoId=@item.Id" class="text-gray-400 hover:text-brand hover:underline transition-colors">@item.TravelogueCount 攻略</a>
+                                        </div>
+                                    </div>
                                 }
                                 else
                                 {

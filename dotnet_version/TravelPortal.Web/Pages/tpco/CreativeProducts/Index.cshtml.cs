@@ -24,6 +24,9 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     public string? Search { get; set; }
 
     [BindProperty(SupportsGet = true)]
+    public int? GeoId { get; set; }
+
+    [BindProperty(SupportsGet = true)]
     public int PageIndex { get; set; } = 1;
 
     public void OnGet()
@@ -35,6 +38,7 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             .ToList();
 
         var query = _db.Queryable<CreativeProduct>();
+        if (GeoId.HasValue) query = query.Where(it => it.GeoId == GeoId);
         if (!string.IsNullOrEmpty(Category)) query = query.Where(it => it.Classification == Category);
         if (!string.IsNullOrEmpty(Search)) query = query.Where(it => it.Title.Contains(Search));
 

@@ -16,15 +16,19 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     [BindProperty(SupportsGet = true)] public string? Keyword { get; set; }
     [BindProperty(SupportsGet = true)] public string? FameLevel { get; set; }
     [BindProperty(SupportsGet = true)] public string? ScenicGrade { get; set; }
+    [BindProperty(SupportsGet = true)] public int? GeoId { get; set; }
     [BindProperty(SupportsGet = true)] public int PageIndex { get; set; } = 1;
 
     public void OnGet()
     {
         var query = _db.Queryable<ScenicSpot>()
             .LeftJoin<Geo>((s, g) => s.GeoId == g.Id)
+            .WhereIF(GeoId.HasValue, s => s.GeoId == GeoId)
             .WhereIF(!string.IsNullOrEmpty(Keyword), s => s.Title.Contains(Keyword!))
             .WhereIF(!string.IsNullOrEmpty(FameLevel), s => s.FameLevel == FameLevel)
-            .WhereIF(!string.IsNullOrEmpty(ScenicGrade), s => s.ScenicGrade == ScenicGrade)
+            .WhereIF(ScenicGrade == "Scenic", s => s.ScenicGrade != null && s.ScenicGrade != "")
+            .WhereIF(ScenicGrade == "Attraction", s => s.ScenicGrade == null || s.ScenicGrade == "")
+            .WhereIF(!string.IsNullOrEmpty(ScenicGrade) && ScenicGrade != "Scenic" && ScenicGrade != "Attraction", s => s.ScenicGrade == ScenicGrade)
             .OrderByDescending(s => s.IsSticky)
             .OrderBy(s => s.SortOrder)
             .OrderByDescending(s => s.CreatedAt)
