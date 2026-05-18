@@ -92,6 +92,40 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             }
         }
 
+        // 城乡代码校验：只能是纯英文（无空格），且判断唯一性（排除当前编辑节点本身）
+        if (Geo.Level > 1)
+        {
+            if (string.IsNullOrWhiteSpace(Geo.Slug))
+            {
+                ModelState.AddModelError("Geo.Slug", "城乡代码不能为空。");
+            }
+            else
+            {
+                Geo.Slug = Geo.Slug.Trim().ToLower();
+                if (!global::System.Text.RegularExpressions.Regex.IsMatch(Geo.Slug, @"^[a-zA-Z]+$"))
+                {
+                    ModelState.AddModelError("Geo.Slug", "城乡代码只能是纯英文字母（且不能有空格和特殊字符）。");
+                }
+                else
+                {
+                    bool isUnique = !_db.Queryable<Geo>().Any(it => it.Slug == Geo.Slug && it.Id != Geo.Id);
+                    if (!isUnique)
+                    {
+                        ModelState.AddModelError("Geo.Slug", "该城乡代码已存在，请使用其他唯一的代码。");
+                    }
+                }
+            }
+        }
+
+        // 后端强一致性安全校验：省份介绍必填
+        if (Geo.Level == 2)
+        {
+            if (string.IsNullOrWhiteSpace(Geo.Content))
+            {
+                ModelState.AddModelError("Geo.Content", "省份介绍不能为空。");
+            }
+        }
+
         if (!ModelState.IsValid)
         {
             UpdatePageTitle();
