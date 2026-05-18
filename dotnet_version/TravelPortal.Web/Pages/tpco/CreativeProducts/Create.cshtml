@@ -18,7 +18,7 @@
             <div class="grid grid-cols-1 gap-6">
                 <div class="md:col-span-2">
                     <label class="block text-sm font-semibold text-gray-700 mb-2">产品名称 <span class="text-red-500">*</span></label>
-                    <input type="text" asp-for="Product.Title" required placeholder="输入文创产品标题..."
+                    <input type="text" asp-for="Product.Title" required
                            class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-lg font-medium">
                 </div>
 
@@ -101,7 +101,7 @@
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">产品特色 (120字以内) <span class="text-red-500">*</span></label>
-                <textarea asp-for="Product.Summary" required maxlength="120" rows="3" placeholder="简要描述文创产品的特色与亮点..."
+                <textarea asp-for="Product.Summary" required maxlength="120" rows="3"
                           class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all"></textarea>
             </div>
 
@@ -121,22 +121,22 @@
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">文章作者</label>
-                    <input type="text" asp-for="Product.Author" placeholder="作者姓名"
+                    <input type="text" asp-for="Product.Author"
                            class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">文章来源</label>
-                    <input type="text" asp-for="Product.Source" placeholder="来源机构"
+                    <input type="text" asp-for="Product.Source"
                            class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">原文链接</label>
-                    <input type="url" asp-for="Product.OriginUrl" placeholder="https://..."
+                    <input type="url" asp-for="Product.OriginUrl"
                            class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">跳转链接</label>
-                    <input type="url" asp-for="Product.RedirectUrl" placeholder="内部/外部跳转地址"
+                    <input type="url" asp-for="Product.RedirectUrl"
                            class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all">
                 </div>
             </div>
