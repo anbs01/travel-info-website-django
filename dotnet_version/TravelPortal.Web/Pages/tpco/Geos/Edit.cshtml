@@ -73,6 +73,271 @@
                 </div>
             </div>
         }
+        else if (Model.Geo.Level >= 3 && Model.Geo.Nature == "Domestic")
+        {
+            <!-- 国内城镇专属编辑表单 -->
+            <div x-data="{
+                geoTags: [@(string.IsNullOrEmpty(Model.Geo.GeoTag) ? "" : string.Join(",", Model.Geo.GeoTag.Split(',').Where(t => new[] { "市府所在地", "省会城市", "副省级城市" }.Contains(t)).Select(t => $"'{t}'")))],
+                hasOtherTag: @(Model.Geo.GeoTag?.Split(',').Any(t => t.StartsWith("其他:")) == true ? "true" : "false"),
+                otherTagText: '@(Html.Raw(Model.Geo.GeoTag?.Split(',').FirstOrDefault(t => t.StartsWith("其他:"))?.Replace("其他:", "").Replace("'", "\\'") ?? ""))',
+                selectedLevel: @(Model.Geo.Level >= 3 ? Model.Geo.Level : 3),
+                bestTimes: [],
+                selectedSeasons: [@(string.IsNullOrEmpty(Model.Geo.BestTime) ? "" : string.Join(",", Model.Geo.BestTime.Split(',').Intersect(new[] { "春季", "夏季", "秋季", "冬季" }).Select(t => $"'{t}'")))],
+                hasOtherTime: @(Model.Geo.BestTime?.Split(',').Any(t => t.StartsWith("其他时间:")) == true ? "true" : "false"),
+                otherTimeText: '@(Html.Raw(Model.Geo.BestTime?.Split(',').FirstOrDefault(t => t.StartsWith("其他时间:"))?.Replace("其他时间:", "").Replace("'", "\\'") ?? ""))',
+                hideNav: @(Model.Geo.ShowNavStrip == false ? "true" : "false"),
+                selectedTags: '@(Html.Raw((Model.Geo.Tags ?? "").Replace("'", "\\'")))',
+                imageUrl: '@Model.Geo.MainImage',
+                previewImage(e) {
+                    const file = e.target.files[0];
+                    if (file) this.imageUrl = URL.createObjectURL(file);
+                },
+                toggleTag(tag) {
+                    let tags = this.selectedTags ? this.selectedTags.split(',').filter(Boolean) : [];
+                    let idx = tags.indexOf(tag);
+                    if (idx > -1) {
+                        tags.splice(idx, 1);
+                    } else {
+                        tags.push(tag);
+                    }
+                    this.selectedTags = tags.join(',');
+                },
+                isTagSelected(tag) {
+                    let tags = this.selectedTags ? this.selectedTags.split(',').filter(Boolean) : [];
+                    return tags.includes(tag);
+                }
+            }" class="space-y-6">
+                <!-- 1. 城乡简称 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">城乡简称 <span class="text-red-400">*</span></label>
+                    <div class="flex-1">
+                        <input asp-for="Geo.Title" maxlength="60" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" required />
+                    </div>
+                </div>
+
+                <!-- 2. 城乡全称 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">城乡全称 <span class="text-red-400">*</span></label>
+                    <div class="flex-1">
+                        <input asp-for="Geo.FullTitle" maxlength="60" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" required />
+                    </div>
+                </div>
+
+                <!-- 3. 城乡代码 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">城乡代码 <span class="text-red-400">*</span></label>
+                    <div class="flex-1">
+                        <input asp-for="Geo.Slug" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" 
+                               required pattern="^[a-zA-Z]+$" title="城乡代码只能是纯英文字母（且不能有空格和特殊字符）" />
+                        <span asp-validation-for="Geo.Slug" class="text-red-400 text-xs mt-1 block"></span>
+                    </div>
+                </div>
+
+                <!-- 4. 城乡标签 -->
+                <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">城乡标签</label>
+                    <div class="flex-1 space-y-3">
+                        <div class="flex flex-wrap gap-3">
+                            @foreach (var tag in new[] { "市府所在地", "省会城市", "副省级城市" })
+                            {
+                                <label class="relative flex items-center group cursor-pointer">
+                                    <input type="checkbox" value="@tag" x-model="geoTags" class="peer sr-only">
+                                    <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">@tag</div>
+                                </label>
+                            }
+                            <label class="relative flex items-center group cursor-pointer">
+                                <input type="checkbox" x-model="hasOtherTag" class="peer sr-only">
+                                <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">其他</div>
+                            </label>
+                        </div>
+                        <div x-show="hasOtherTag" x-transition class="w-full max-w-md pt-1" style="display: none;">
+                            <input type="text" x-model="otherTagText" placeholder="请输入其他标签内容..." class="w-full px-4 py-2.5 bg-gray-50 border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand text-xs font-medium transition-all" />
+                        </div>
+                        <input type="hidden" name="Geo.GeoTag" :value="[...geoTags, (hasOtherTag && otherTagText.trim() ? '其他:' + otherTagText.trim() : '')].filter(Boolean).join(',')" />
+                    </div>
+                </div>
+
+                <!-- 5. 城乡别名 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">城乡别名</label>
+                    <div class="flex-1">
+                        <input asp-for="Geo.SubTitle" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
+                    </div>
+                </div>
+
+                <!-- 6. 城乡级别 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">城乡级别 <span class="text-red-400">*</span></label>
+                    <div class="flex-1">
+                        <div class="flex flex-wrap gap-3">
+                            @foreach (var lv in new[] { (v: 3, n: "地级市"), (v: 4, n: "县级市"), (v: 5, n: "乡镇"), (v: 6, n: "村庄") })
+                            {
+                                <label class="relative flex items-center group cursor-pointer">
+                                    <input type="checkbox" :checked="selectedLevel === @lv.v" x-on:change="selectedLevel = @lv.v" class="peer sr-only" required>
+                                    <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">@lv.n</div>
+                                </label>
+                            }
+                        </div>
+                        <input type="hidden" name="Geo.Level" :value="selectedLevel" />
+                    </div>
+                </div>
+
+                <!-- 7. 行政区划 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">行政区划 <span class="text-red-400">*</span></label>
+                    <div class="flex-1">
+                        <partial name="_GeoPicker" model='new { FieldName = "Geo.ParentId", CurrentId = Model.Geo.ParentId, CurrentName = Model.Geo.Parent?.Title }' />
+                    </div>
+                </div>
+
+                <!-- 8. 旅游特色 -->
+                <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">旅游特色 <span class="text-red-400">*</span></label>
+                    <div class="flex-1">
+                        <textarea asp-for="Geo.Summary" rows="3" maxlength="120" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" required></textarea>
+                    </div>
+                </div>
+
+                <!-- 9. 详细介绍 -->
+                <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">详细介绍 <span class="text-red-400">*</span></label>
+                    <div class="flex-1">
+                        <textarea asp-for="Geo.Content" id="editor" class="hidden" required></textarea>
+                        <span asp-validation-for="Geo.Content" class="text-red-400 text-xs mt-1 block"></span>
+                    </div>
+                </div>
+
+                <!-- 10. 焦点图 -->
+                <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">焦点图</label>
+                    <div class="flex-1">
+                        <div class="space-y-4">
+                            <input type="file" name="MainImageFile" class="hidden" x-ref="photo" x-on:change="previewImage">
+                            <div class="relative group aspect-[4/3] max-w-sm rounded-2xl bg-gray-100 overflow-hidden border-2 border-dashed border-gray-200 hover:border-brand transition-all cursor-pointer" 
+                                 x-on:click.prevent="$refs.photo.click()">
+                                <template x-if="!imageUrl">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
+                                        <svg class="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        <span class="text-[10px] font-bold uppercase tracking-widest">点击上传</span>
+                                    </div>
+                                </template>
+                                <template x-if="imageUrl">
+                                    <img :src="imageUrl" class="absolute inset-0 w-full h-full object-cover">
+                                </template>
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span class="text-white text-xs font-bold">点击更换</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. 最佳旅游时间 -->
+                <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">最佳旅游时间</label>
+                    <div class="flex-1 space-y-3">
+                        <div class="flex flex-wrap gap-3">
+                            @foreach (var season in new[] { "春季", "夏季", "秋季", "冬季" })
+                            {
+                                <label class="relative flex items-center group cursor-pointer">
+                                    <input type="checkbox" value="@season" x-model="selectedSeasons" class="peer sr-only">
+                                    <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">@season</div>
+                                </label>
+                            }
+                            <label class="relative flex items-center group cursor-pointer">
+                                <input type="checkbox" x-model="hasOtherTime" class="peer sr-only">
+                                <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">其他时间</div>
+                            </label>
+                        </div>
+                        <div x-show="hasOtherTime" x-transition class="w-full max-w-md pt-1" style="display: none;">
+                            <input type="text" x-model="otherTimeText" placeholder="请输入其他旅游时间内容..." class="w-full px-4 py-2.5 bg-gray-50 border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand text-xs font-medium transition-all" />
+                        </div>
+                        <input type="hidden" name="Geo.BestTime" :value="[...selectedSeasons, (hasOtherTime && otherTimeText.trim() ? '其他时间:' + otherTimeText.trim() : '')].filter(Boolean).join(',')" />
+                    </div>
+                </div>
+
+                <!-- 12. 跳转链接 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">跳转链接</label>
+                    <div class="flex-1">
+                        <input asp-for="Geo.RedirectUrl" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
+                    </div>
+                </div>
+
+                <!-- 13. 搜索热词 -->
+                <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">搜索热词</label>
+                    <div class="flex-1 space-y-4">
+                        <input type="text" name="Geo.Tags" x-model="selectedTags" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="请选择下方热词或在此手动输入（用英文逗号分隔）..." />
+                        @if (Model.PlaceHotWords != null && Model.PlaceHotWords.Any())
+                        {
+                            <div class="space-y-1.5 p-4 bg-gray-50 rounded-2xl border border-gray-100 max-w-3xl">
+                                <div class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">推荐热词分类（点击快捷选择）：</div>
+                                <div class="flex flex-wrap gap-2 pt-1">
+                                    @foreach (var hw in Model.PlaceHotWords)
+                                    {
+                                        <button type="button" x-on:click="toggleTag('@hw')"
+                                                :class="isTagSelected('@hw') ? 'bg-brand text-white border-brand shadow-sm font-bold' : 'bg-white text-gray-600 border-gray-200 hover:border-brand hover:text-brand'"
+                                                class="px-3 py-1.5 border rounded-lg text-xs transition-all transform hover:scale-[1.03] active:scale-95 duration-100">
+                                            @hw
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- 14. 图片水印 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                    <div class="w-32 shrink-0">
+                        <div class="text-xs font-bold text-gray-700">图片水印</div>
+                        <div class="text-[10px] text-gray-400">是否在详细正文图中显示水印</div>
+                    </div>
+                    <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-4">
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" asp-for="Geo.ShowWatermark" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
+                            <span class="text-xs font-bold text-gray-500 ml-3">显示水印</span>
+                        </label>
+                        <div class="flex items-center gap-4 bg-gray-50 px-4 py-2 rounded-xl border border-gray-100">
+                            @foreach (var pos in new[] { (v:"Center", n:"中正"), (v:"BottomCenter", n:"中下"), (v:"BottomRight", n:"右下") })
+                            {
+                                <label class="flex items-center gap-1.5 cursor-pointer">
+                                    <input type="radio" asp-for="Geo.WatermarkPos" value="@pos.v" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand transition-all">
+                                    <span class="text-xs text-gray-500 font-medium transition-colors">@pos.n</span>
+                                </label>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. 详情页导航条 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                    <div class="w-32 shrink-0">
+                        <div class="text-xs font-bold text-gray-700">详情页导航条</div>
+                        <div class="text-[10px] text-gray-400">是否显示顶部导航</div>
+                    </div>
+                    <div class="flex-1">
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" :checked="hideNav" x-on:change="hideNav = $event.target.checked" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
+                            <span class="text-xs font-bold text-gray-500 ml-3">不显示</span>
+                        </label>
+                        <input type="hidden" name="Geo.ShowNavStrip" :value="hideNav ? 'false' : 'true'" />
+                    </div>
+                </div>
+
+                <!-- 16. 排序 -->
+                <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                    <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">排序</label>
+                    <div class="flex-1 flex items-center gap-3">
+                        <input type="number" asp-for="Geo.SortOrder" class="w-24 px-3 py-1.5 rounded-lg border-gray-200 focus:ring-brand focus:border-brand text-xs font-mono" />
+                        <span class="text-[10px] text-gray-400">数字越小越靠前</span>
+                    </div>
+                </div>
+            </div>
+        }
         else
         {
             <div class="space-y-6">

@@ -153,7 +153,7 @@ public abstract class BaseContent
     /// <summary>
     /// 排序
     /// </summary>
-    public int SortOrder { get; set; } = 100;
+    public int SortOrder { get; set; } = 1000;
 
     /// <summary>
     /// 系统添加时间

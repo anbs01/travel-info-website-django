@@ -28,6 +28,7 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     public List<SelectListItem> ParentOptions { get; set; } = new();
     
     public Geo? ParentGeo { get; set; }
+    public List<string> PlaceHotWords { get; set; } = new();
 
     public void OnGet(int? parentId, int? level, string? nature)
     {
@@ -42,6 +43,16 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
         UpdatePageTitle();
         LoadParents();
+        LoadHotWords();
+    }
+
+    private void LoadHotWords()
+    {
+        PlaceHotWords = _db.Queryable<HotWord>()
+            .Where(it => it.Module == HotWord.MOD_PLACE && !it.IsHidden)
+            .OrderBy(it => it.SortOrder)
+            .Select(it => it.Name)
+            .ToList();
     }
 
     private void UpdatePageTitle()
@@ -126,10 +137,36 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             }
         }
 
+        // 后端强一致性安全校验：国内城镇各必填字段校验
+        if (Geo.Level >= 3 && Geo.Nature == "Domestic")
+        {
+            if (string.IsNullOrWhiteSpace(Geo.Title))
+            {
+                ModelState.AddModelError("Geo.Title", "城乡简称不能为空。");
+            }
+            if (string.IsNullOrWhiteSpace(Geo.FullTitle))
+            {
+                ModelState.AddModelError("Geo.FullTitle", "城乡全称不能为空。");
+            }
+            if (string.IsNullOrWhiteSpace(Geo.Summary))
+            {
+                ModelState.AddModelError("Geo.Summary", "旅游特色不能为空。");
+            }
+            if (string.IsNullOrWhiteSpace(Geo.Content))
+            {
+                ModelState.AddModelError("Geo.Content", "详细介绍不能为空。");
+            }
+            if (Geo.Level < 3 || Geo.Level > 6)
+            {
+                ModelState.AddModelError("Geo.Level", "请选择正确的城乡级别。");
+            }
+        }
+
         if (!ModelState.IsValid)
         {
             UpdatePageTitle();
             LoadParents();
+            LoadHotWords();
             return Page();
         }
 
