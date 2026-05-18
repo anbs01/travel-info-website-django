@@ -14,80 +14,79 @@
     }' />
 
     <form method="post" enctype="multipart/form-data" class="p-8 space-y-10">
-
-        <!-- 基本信息 -->
-
-            <div class="grid grid-cols-1 gap-6">
-                <!-- 作品标题 -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">作品标题 <span class="text-red-500">*</span></label>
+        <div class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">作品标题 <span class="text-red-400">*</span></label>
+                <div class="flex-1">
                     <input type="text" asp-for="Travelogue.Title" required maxlength="60"
-                           class="w-full px-5 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-lg font-medium">
+                           class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium">
                 </div>
+            </div>
 
-                <!-- 作品分类 -->
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-3">作品分类 <span class="text-red-500">*</span></label>
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">作品分类 <span class="text-red-400">*</span></label>
+                <div class="flex-1">
                     <div class="flex items-center gap-6">
                         <label class="flex items-center gap-2 cursor-pointer group">
                             <input type="radio" asp-for="Travelogue.Classification" value="travelogue" x-model="mainCategory"
-                                   class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
-                            <span class="text-sm text-gray-600 group-hover:text-brand">纪行</span>
+                                   class="w-4 h-4 text-brand border-gray-300 focus:ring-brand transition-all" />
+                            <span class="text-sm text-gray-600 group-hover:text-brand transition-colors">纪行</span>
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer group">
                             <input type="radio" asp-for="Travelogue.Classification" value="guide" x-model="mainCategory"
-                                   class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
-                            <span class="text-sm text-gray-600 group-hover:text-brand">攻略</span>
+                                   class="w-4 h-4 text-brand border-gray-300 focus:ring-brand transition-all" />
+                            <span class="text-sm text-gray-600 group-hover:text-brand transition-colors">攻略</span>
                         </label>
                     </div>
                 </div>
+            </div>
 
-                <!-- 纪行类别 -->
-                <div x-show="mainCategory === 'travelogue'" x-transition>
-                    <label class="block text-sm font-bold text-gray-700 mb-3">纪行类别</label>
-                    <div class="flex flex-wrap gap-4 p-4 bg-gray-50 rounded-xl border border-dashed border-gray-100">
+            <div x-show="mainCategory === 'travelogue'" x-transition class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">纪行类别</label>
+                <div class="flex-1">
+                    <div class="flex flex-wrap gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
                         @foreach (var item in Model.TravelogueCategories)
                         {
                             <label class="flex items-center gap-2 cursor-pointer group">
                                 <input type="checkbox" name="SelectedTags" value="@item.Name"
-                                       class="w-4 h-4 rounded text-brand border-gray-300 focus:ring-brand" />
-                                <span class="text-sm text-gray-600 group-hover:text-brand">@item.Name</span>
+                                       class="w-4 h-4 rounded text-brand border-gray-300 focus:ring-brand transition-all" />
+                                <span class="text-sm text-gray-600 group-hover:text-brand transition-colors">@item.Name</span>
                             </label>
                         }
                         @if (!Model.TravelogueCategories.Any())
                         {
-                            <span class="text-[10px] text-gray-300">暂无类别热词，请在"类别管理"中添加并勾选"纪行类别"</span>
-                        }
-                    </div>
-                </div>
-
-                <!-- 攻略类别 -->
-                <div x-show="mainCategory === 'guide'" x-transition>
-                    <label class="block text-sm font-bold text-gray-700 mb-3">攻略类别</label>
-                    <div class="flex flex-wrap gap-4 p-4 bg-gray-50 rounded-xl border border-dashed border-gray-100">
-                        @foreach (var item in Model.GuideCategories)
-                        {
-                            <label class="flex items-center gap-2 cursor-pointer group">
-                                <input type="checkbox" name="SelectedTags" value="@item.Name"
-                                       class="w-4 h-4 rounded text-brand border-gray-300 focus:ring-brand" />
-                                <span class="text-sm text-gray-600 group-hover:text-brand">@item.Name</span>
-                            </label>
-                        }
-                        @if (!Model.GuideCategories.Any())
-                        {
-                            <span class="text-[10px] text-gray-300">暂无类别热词，请在"类别管理"中添加并勾选"攻略类别"</span>
+                            <span class="text-xs text-gray-400 italic">暂无类别热词，请在"类别管理"中添加并勾选"纪行类别"</span>
                         }
                     </div>
                 </div>
             </div>
 
+            <div x-show="mainCategory === 'guide'" x-transition class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">攻略类别</label>
+                <div class="flex-1">
+                    <div class="flex flex-wrap gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
+                        @foreach (var item in Model.GuideCategories)
+                        {
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="checkbox" name="SelectedTags" value="@item.Name"
+                                       class="w-4 h-4 rounded text-brand border-gray-300 focus:ring-brand transition-all" />
+                                <span class="text-sm text-gray-600 group-hover:text-brand transition-colors">@item.Name</span>
+                            </label>
+                        }
+                        @if (!Model.GuideCategories.Any())
+                        {
+                            <span class="text-xs text-gray-400 italic">暂无类别热词，请在"类别管理"中添加并勾选"攻略类别"</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <!-- 焦点图与摘要 -->
-
-            <div class="grid grid-cols-1 gap-8">
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">焦点图</label>
-                    <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-50 border-2 border-dashed border-gray-200 group hover:border-brand transition-all cursor-pointer"
+        <div class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">焦点图</label>
+                <div class="flex-1">
+                    <div class="relative w-full max-w-sm aspect-[4/3] rounded-2xl overflow-hidden bg-gray-50 border-2 border-dashed border-gray-200 group hover:border-brand transition-all cursor-pointer"
                          @@click="$refs.fileInput.click()">
                         <template x-if="imageUrl">
                             <img :src="imageUrl" class="w-full h-full object-cover" />
@@ -106,93 +105,124 @@
                            x-on:change="const file = $event.target.files[0]; if (file) { imageUrl = URL.createObjectURL(file); }" />
                     <p class="text-[10px] text-gray-400 mt-1">建议比例 4:3，支持 JPG、PNG 格式</p>
                 </div>
+            </div>
 
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">简要概述 <span class="text-red-500">*</span></label>
-                    <textarea asp-for="Travelogue.Summary" rows="8" maxlength="120" required
-                              class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm"></textarea>
+            <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">简要概述 <span class="text-red-400">*</span></label>
+                <div class="flex-1">
+                    <textarea asp-for="Travelogue.Summary" rows="6" maxlength="120" required
+                              class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium"></textarea>
                     <p class="text-[10px] text-gray-400 mt-1">120汉字以内</p>
                 </div>
             </div>
+        </div>
 
+        <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
+            <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">正文内容 <span class="text-red-400">*</span></label>
+            <div class="flex-1 rounded-xl overflow-hidden border border-gray-100">
+                <textarea id="editor" asp-for="Travelogue.Content"></textarea>
+            </div>
+        </div>
+        <partial name="_TinyMCE" model='new { Selector = "#editor", Height = 600 }' />
 
-        <!-- 正文内容 -->
-            <textarea id="editor" asp-for="Travelogue.Content"></textarea>
-            <partial name="_TinyMCE" model='new { Selector = "#editor", Height = 600 }' />
-
-
-        <!-- 扩展信息 -->
-
-            <div class="grid grid-cols-1 gap-6">
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">选择地区 <span class="text-red-500">*</span></label>
+        <div class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">选择地区 <span class="text-red-400">*</span></label>
+                <div class="flex-1">
                     <partial name="_GeoPicker" model='new { FieldName = "Travelogue.GeoId", CurrentId = (int?)null, CurrentName = (string?)null }' />
                 </div>
+            </div>
 
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">文章作者</label>
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">文章作者</label>
+                <div class="flex-1">
                     <input type="text" asp-for="Travelogue.Author"
-                           class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm" />
+                           class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
                 </div>
+            </div>
 
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">文章来源</label>
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">文章来源</label>
+                <div class="flex-1">
                     <input type="text" asp-for="Travelogue.Source"
-                           class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm" />
+                           class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
                 </div>
+            </div>
 
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-2">原文链接 <span class="text-[10px] text-gray-400 font-normal">（仅后台记录，不显示前台）</span></label>
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <div class="w-32 shrink-0">
+                    <div class="text-xs font-bold text-gray-700">原文链接</div>
+                    <div class="text-[10px] text-gray-400">仅后台记录，不显示于前台</div>
+                </div>
+                <div class="flex-1">
                     <input type="text" asp-for="Travelogue.RedirectUrl"
-                           class="w-full px-4 py-3 rounded-xl border-gray-200 focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm" />
+                           class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
                 </div>
+            </div>
 
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-bold text-gray-700 mb-3">版权选择 <span class="text-red-500">*</span></label>
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">版权选择 <span class="text-red-400">*</span></label>
+                <div class="flex-1">
                     <div class="flex flex-wrap gap-6">
                         @foreach (var cp in new[] { "原创版权", "转载声明", "风险提示", "广告提示" })
                         {
                             <label class="flex items-center gap-2 cursor-pointer group">
                                 <input type="radio" asp-for="Travelogue.CopyrightType" value="@cp"
-                                       class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
-                                <span class="text-sm text-gray-600 group-hover:text-brand">@cp</span>
+                                       class="w-4 h-4 text-brand border-gray-300 focus:ring-brand transition-all" />
+                                <span class="text-sm text-gray-600 group-hover:text-brand transition-colors">@cp</span>
+                            </label>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-6 pt-4">
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <div class="w-32 shrink-0">
+                    <div class="text-xs font-bold text-gray-700">图片水印</div>
+                    <div class="text-[10px] text-gray-400">正文图片是否带水印</div>
+                </div>
+                <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-4">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" asp-for="Travelogue.ShowWatermark" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
+                    </label>
+                    <div class="flex items-center gap-4 bg-gray-50 px-4 py-2 rounded-xl border border-gray-100">
+                        @foreach (var pos in new[] { (v:"中正", n:"中正"), (v:"中下", n:"中下"), (v:"右下", n:"右下") })
+                        {
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" asp-for="Travelogue.WatermarkPos" value="@pos.v" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand transition-all">
+                                <span class="text-xs text-gray-500 font-medium transition-colors">@pos.n</span>
                             </label>
                         }
                     </div>
                 </div>
             </div>
 
-
-            <div class="flex flex-wrap gap-12 items-center">
-                <div class="flex items-center gap-8">
-                    <label class="flex items-center gap-3 cursor-pointer">
-                        <input type="checkbox" asp-for="Travelogue.ShowWatermark" class="w-6 h-6 rounded text-brand border-gray-300 focus:ring-brand" />
-                        <span class="text-sm font-bold text-gray-700">显示图片水印</span>
-                    </label>
-                    <div class="flex items-center gap-4 bg-white px-4 py-2 rounded-lg border border-gray-100">
-                        @foreach (var pos in new[] { (v:"中正", n:"中正"), (v:"中下", n:"中下"), (v:"右下", n:"右下") })
-                        {
-                            <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" asp-for="Travelogue.WatermarkPos" value="@pos.v" class="w-4 h-4 text-brand border-gray-300 focus:ring-brand" />
-                                <span class="text-xs text-gray-500 font-medium">@pos.n</span>
-                            </label>
-                        }
-                    </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <div class="w-32 shrink-0">
+                    <div class="text-xs font-bold text-gray-700">首页推荐</div>
+                    <div class="text-[10px] text-gray-400">是否推荐至首页展示</div>
                 </div>
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" asp-for="Travelogue.IsHome" class="w-6 h-6 rounded text-brand border-gray-300 focus:ring-brand" />
-                    <span class="text-sm font-bold text-gray-700">推荐到首页</span>
-                </label>
-                <div class="flex items-center gap-3 ml-auto">
-                    <label class="text-sm font-bold text-gray-700">排序</label>
+                <div class="flex-1">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" asp-for="Travelogue.IsHome" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">排序</label>
+                <div class="flex-1 flex items-center gap-3">
                     <input type="number" asp-for="Travelogue.SortOrder" class="w-24 px-3 py-1.5 rounded-lg border-gray-200 focus:ring-brand focus:border-brand text-sm font-mono" />
                     <span class="text-[10px] text-gray-400">数字越小越靠前</span>
                 </div>
             </div>
+        </div>
 
-
-        <!-- 底部操作栏 -->
-        <div class="px-8 py-6 bg-gray-50 border-t border-gray-100 flex justify-end space-x-4">
+        <div class="pt-10 flex justify-end space-x-4">
             <button type="submit" class="px-12 py-4 bg-brand text-white rounded-2xl text-sm font-bold shadow-xl shadow-brand/30 hover:scale-105 active:scale-95 transition-all">
                 提交
             </button>
@@ -200,8 +230,8 @@
                 重置
             </button>
         </div>
-
     </form>
+    
     <script>
         function travelogueForm(initCategory, initImage) {
             return {

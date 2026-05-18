@@ -12,55 +12,64 @@
         }
     }' />
 
-        <form method="post" class="p-8 space-y-8">
-            <div class="grid grid-cols-1 gap-8">
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">交通点名称</label>
-                        <input asp-for="Transport.Title" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" required />
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">交通类型</label>
-                        <select asp-for="Transport.TransportType" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium">
-                            <option value="Airport">机场</option>
-                            <option value="Railway">火车站</option>
-                            <option value="Bus">汽车站</option>
-                            <option value="Pier">码头</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">关联城镇</label>
-                        <partial name="_GeoPicker" model='new { FieldName = "Transport.GeoId", CurrentId = (int?)null, CurrentName = (string?)null }' />
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">联系电话</label>
-                        <input asp-for="Transport.ContactPhone" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">详细地址</label>
-                        <input asp-for="Transport.Address" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">排序 (默认1000)</label>
-                        <input type="number" asp-for="Transport.SortOrder" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-mono" />
-                    </div>
+    <form method="post" class="p-8 space-y-10">
+        <div class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">交通点名称 <span class="text-red-400">*</span></label>
+                <div class="flex-1">
+                    <input asp-for="Transport.Title" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" required />
                 </div>
             </div>
 
-            <div class="pt-8 border-t border-gray-50 flex justify-end space-x-4">
-                <button type="submit" class="px-12 py-4 bg-brand text-white rounded-2xl text-sm font-bold shadow-xl shadow-brand/30 hover:scale-105 active:scale-95 transition-all">
-                    提交
-                </button>
-                <button type="reset" class="px-12 py-4 bg-gray-100 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded-2xl text-sm font-bold hover:scale-105 active:scale-95 transition-all">
-                    重置
-                </button>
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">交通类型 <span class="text-red-400">*</span></label>
+                <div class="flex-1">
+                    <select asp-for="Transport.TransportType" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium">
+                        <option value="Airport">机场</option>
+                        <option value="Railway">火车站</option>
+                        <option value="Bus">汽车站</option>
+                        <option value="Pier">码头</option>
+                    </select>
+                </div>
             </div>
-        </form>
+
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">关联城镇 <span class="text-red-400">*</span></label>
+                <div class="flex-1">
+                    <partial name="_GeoPicker" model='new { FieldName = "Transport.GeoId", CurrentId = (int?)null, CurrentName = (string?)null }' />
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">联系电话</label>
+                <div class="flex-1">
+                    <input asp-for="Transport.ContactPhone" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">详细地址</label>
+                <div class="flex-1">
+                    <input asp-for="Transport.Address" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" />
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-center gap-4 border-b border-gray-50 pb-4">
+                <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">排序</label>
+                <div class="flex-1 flex items-center gap-3">
+                    <input type="number" asp-for="Transport.SortOrder" class="w-24 px-3 py-1.5 rounded-lg border-gray-200 focus:ring-brand focus:border-brand text-sm font-mono" />
+                    <span class="text-[10px] text-gray-400">数字越小越靠前 (默认1000)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-10 flex justify-end space-x-4">
+            <button type="submit" class="px-12 py-4 bg-brand text-white rounded-2xl text-sm font-bold shadow-xl shadow-brand/30 hover:scale-105 active:scale-95 transition-all">
+                提交
+            </button>
+            <button type="reset" class="px-12 py-4 bg-gray-100 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded-2xl text-sm font-bold hover:scale-105 active:scale-95 transition-all">
+                重置
+            </button>
+        </div>
+    </form>
 </div>
