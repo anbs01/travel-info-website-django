@@ -9,11 +9,6 @@ namespace TravelPortal.Web.Models;
 public class Transport : BaseContent
 {
     /// <summary>
-    /// 关联的地理节点 ID
-    /// </summary>
-    public int GeoId { get; set; }
-
-    /// <summary>
     /// 交通类型：Airport(机场), Railway(火车站), Bus(汽车站), Pier(码头)
     /// </summary>
     [SugarColumn(Length = 50)]

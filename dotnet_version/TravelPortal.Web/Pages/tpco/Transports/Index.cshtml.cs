@@ -27,7 +27,6 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         GeoList = new SelectList(geos, "Id", "Title");
 
         var query = _db.Queryable<Transport>()
-            .LeftJoin<Geo>((t, g) => t.GeoId == g.Id)
             .WhereIF(GeoId.HasValue, t => t.GeoId == GeoId);
 
         // 客户特殊排序要求：机场 > 火车站 > 汽车站 > 水上交通 > 轨道交通 > 地面公交
@@ -43,13 +42,37 @@ public class IndexModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
                         WHEN 'PublicBus' THEN 5 
                         ELSE 99 END ASC")
             .OrderByDescending(t => t.CreatedAt)
-            .Select((t, g) => new Transport
-            {
-                Id = t.Id, Title = t.Title, TransportType = t.TransportType,
-                Geo = new Geo { Title = g.Title }, CreatedAt = t.CreatedAt, 
-                IsHidden = t.IsHidden, SortOrder = t.SortOrder
-            })
             .ToPageListAsync(PageIndex, 10);
+
+        // 1. 批量拉取关联的城镇 Geo 记录
+        var geoIds = items.Where(it => it.GeoId > 0).Select(it => it.GeoId!.Value).Distinct().ToList();
+        if (geoIds.Any())
+        {
+            var geosList = await _db.Queryable<Geo>().Where(g => geoIds.Contains(g.Id)).ToListAsync();
+            var geosMap = geosList.ToDictionary(g => g.Id);
+
+            // 2. 批量拉取这些城镇关联的父级（省份） Geo 记录
+            var parentIds = geosList.Where(g => g.ParentId > 0).Select(g => g.ParentId!.Value).Distinct().ToList();
+            var parentsMap = new Dictionary<int, string>();
+            if (parentIds.Any())
+            {
+                var parentsList = await _db.Queryable<Geo>().Where(p => parentIds.Contains(p.Id)).Select(p => new { p.Id, p.Title }).ToListAsync();
+                parentsMap = parentsList.ToDictionary(p => p.Id, p => p.Title);
+            }
+
+            // 3. 将装配好的 Geo 对象以及父级 Title 组合赋值给 items
+            foreach (var item in items)
+            {
+                if (item.GeoId.HasValue && geosMap.TryGetValue(item.GeoId.Value, out var geo))
+                {
+                    item.Geo = geo;
+                    if (geo.ParentId > 0 && parentsMap.TryGetValue(geo.ParentId.Value, out var parentTitle))
+                    {
+                        item.Geo.GeoTag = parentTitle;
+                    }
+                }
+            }
+        }
 
         int totalCount = await query.CountAsync();
         TransportList = new PaginatedList<Transport>(items, totalCount, PageIndex, 10);
