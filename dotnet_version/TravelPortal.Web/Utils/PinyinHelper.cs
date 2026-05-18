@@ -49,4 +49,27 @@ public static class PinyinHelper
         
         return "#";
     }
+
+    /// <summary>
+    /// 获取汉字字符串的全部拼音首字母（大写）
+    /// </summary>
+    public static string GetInitials(string str)
+    {
+        if (string.IsNullOrEmpty(str)) return string.Empty;
+        var sb = new StringBuilder();
+        foreach (char c in str)
+        {
+            if (char.IsWhiteSpace(c)) continue;
+            string letter = GetFirstLetter(c.ToString());
+            if (letter != "#")
+            {
+                sb.Append(letter);
+            }
+            else if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9')
+            {
+                sb.Append(char.ToUpper(c));
+            }
+        }
+        return sb.ToString();
+    }
 }
