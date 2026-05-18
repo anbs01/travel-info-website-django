@@ -13,9 +13,9 @@ public class GeoProvincesModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
     public IActionResult OnGet()
     {
-        // 顶级只返回国家 (Level 1)
+        // 顶级只返回省份 (Level 2)
         var domestic = _db.Queryable<Geo>()
-            .Where(g => g.Level == 1) 
+            .Where(g => g.Level == 2 && g.Nature == "Domestic") 
             .OrderBy(g => g.SortOrder)
             .OrderBy(g => g.Title)
             .ToList()

@@ -71,12 +71,12 @@
                     {
                         <div>
                             <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">城乡级别 <span class="text-red-400">*</span></label>
-                            <select asp-for="Geo.GeoTag" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" required>
-                                <option value="地级市">地级市</option>
-                                <option value="县级市">县级市</option>
-                                <option value="乡镇">乡镇</option>
-                                <option value="村庄">村庄</option>
-                                <option value="其他">其他</option>
+                            <select asp-for="Geo.GeoTag" id="geoTagSelect" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" required>
+                                <option value="地级市" data-level="3">地级市</option>
+                                <option value="县级市" data-level="4">县级市/区</option>
+                                <option value="乡镇" data-level="5">乡镇</option>
+                                <option value="村庄" data-level="6">村庄</option>
+                                <option value="其他" data-level="3">其他</option>
                             </select>
                         </div>
                         <div>
@@ -223,4 +223,65 @@
 
 @section Scripts {
     <partial name="_TinyMCE" model='new { Selector = "#editor", Height = 450 }' />
+    <script>
+        function initGeoLevelSync() {
+            const geoTagSelect = document.getElementById("geoTagSelect");
+            const levelInput = document.querySelector("input[name='Geo.Level']");
+            const parentLevel = @(Model.ParentGeo?.Level ?? 0);
+
+            if (geoTagSelect && levelInput) {
+                // 根据父级 Level 动态禁用不合法的城乡级别，并收集合法选项
+                let firstValidIndex = -1;
+                Array.from(geoTagSelect.options).forEach((opt, idx) => {
+                    const optLevel = parseInt(opt.getAttribute("data-level") || "3");
+                    // 仅当 option 文本中还没包含提示时才追加，防止多次初始化重复追加提示文字
+                    if (parentLevel > 0 && optLevel <= parentLevel) {
+                        opt.disabled = true;
+                        if (!opt.text.includes("(层级冲突")) {
+                            opt.text += " (层级冲突-不可选)";
+                        }
+                    } else if (firstValidIndex === -1) {
+                        firstValidIndex = idx;
+                    }
+                });
+
+                // 如果当前选中的是被禁用的，则自动选中第一个合法的选项
+                if (geoTagSelect.selectedIndex !== -1 && geoTagSelect.options[geoTagSelect.selectedIndex].disabled && firstValidIndex !== -1) {
+                    geoTagSelect.selectedIndex = firstValidIndex;
+                }
+
+                // 避免重复绑定变更事件
+                if (!geoTagSelect.dataset.listenerBound) {
+                    geoTagSelect.addEventListener("change", function () {
+                        const selectedOpt = geoTagSelect.options[geoTagSelect.selectedIndex];
+                        if (selectedOpt) {
+                            const newLevel = parseInt(selectedOpt.getAttribute("data-level") || "3");
+                            levelInput.value = newLevel;
+                        }
+                    });
+                    geoTagSelect.dataset.listenerBound = "true";
+                }
+
+                // 初始化时同步一次
+                const selectedOpt = geoTagSelect.options[geoTagSelect.selectedIndex];
+                if (selectedOpt) {
+                    const newLevel = parseInt(selectedOpt.getAttribute("data-level") || "3");
+                    levelInput.value = newLevel;
+                }
+            }
+        }
+
+        // 1. 立即执行 (Unpoly 动态 AJAX 载入 HTML 并解析 script 时生效)
+        initGeoLevelSync();
+
+        // 2. 传统浏览器 DOM 载入完成事件
+        document.addEventListener("DOMContentLoaded", initGeoLevelSync);
+
+        // 3. 注册 Unpoly 局部刷新生命周期回调，确保 SPA 路由跳转完美支持
+        if (window.up) {
+            up.compiler('#geoTagSelect', function(element) {
+                initGeoLevelSync();
+            });
+        }
+    </script>
 }

@@ -26,12 +26,19 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
     public string PageTitle { get; set; } = "添加节点";
     public List<SelectListItem> ParentOptions { get; set; } = new();
+    
+    public Geo? ParentGeo { get; set; }
 
     public void OnGet(int? parentId, int? level, string? nature)
     {
         Geo.ParentId = parentId;
         Geo.Level = level ?? 1;
         Geo.Nature = nature ?? "Domestic";
+
+        if (Geo.ParentId.HasValue && Geo.ParentId > 0)
+        {
+            ParentGeo = _db.Queryable<Geo>().InSingle(Geo.ParentId.Value);
+        }
 
         UpdatePageTitle();
         LoadParents();
@@ -47,11 +54,12 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
     private void LoadParents()
     {
-        // 只能选择比当前层级小 1 级的作为父级
+        // 允许选择比当前层级更小的所有节点作为父级（支持跳级/断层录入）
         if (Geo.Level > 1)
         {
             var parents = _db.Queryable<Geo>()
-                .Where(it => it.Level == Geo.Level - 1)
+                .Where(it => it.Level < Geo.Level)
+                .OrderBy(it => it.Level)
                 .OrderBy(it => it.SortOrder)
                 .ToList();
 
@@ -66,6 +74,16 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
+        // 后端强一致性安全校验：防行政级别冲突越级
+        if (Geo.ParentId.HasValue && Geo.ParentId > 0)
+        {
+            ParentGeo = _db.Queryable<Geo>().InSingle(Geo.ParentId.Value);
+            if (ParentGeo != null && Geo.Level <= ParentGeo.Level)
+            {
+                ModelState.AddModelError("Geo.Level", $"行政层级冲突！新建节点的层级({Geo.Level})必须低于父级节点“{ParentGeo.Title}”的层级({ParentGeo.Level})。");
+            }
+        }
+
         if (!ModelState.IsValid)
         {
             UpdatePageTitle();
