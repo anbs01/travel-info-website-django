@@ -24,7 +24,7 @@
             <input type="hidden" asp-for="Geo.ParentId" />
 
             <!-- 第一部分：核心识别属性 -->
-                <div class="grid grid-cols-1 @(Model.Geo.Level == 1 ? "md:grid-cols-2" : "md:grid-cols-3") gap-6">
+                <div class="grid grid-cols-1 gap-6">
                     <div class="md:col-span-1">
                         <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">@(Model.Geo.Level == 2 ? "省级简称" : Model.Geo.Level == 1 ? "国家简称" : "中文简称") <span class="text-red-400">*</span></label>
                         <input asp-for="Geo.Title" maxlength="60" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="@(Model.Geo.Level == 1 ? "例如：中国" : "例如：山东")" required />
@@ -36,8 +36,8 @@
                     @if (Model.Geo.Level > 1)
                     {
                         <div class="md:col-span-1">
-                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">拼音别名 / Slug <span class="text-red-400">*</span></label>
-                            <input asp-for="Geo.Slug" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：shandong" required />
+                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">城乡代码 <span class="text-red-400">*</span></label>
+                            <input asp-for="Geo.Slug" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="例如：370100" required />
                         </div>
                     }
                 </div>
@@ -46,11 +46,7 @@
             @if (Model.Geo.Level > 1)
             {
                 <!-- 第二部分：地理与行政信息 -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">城乡代码 <span class="text-red-400">*</span></label>
-                            <input asp-for="Geo.GeoCode" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="行政区划代码" required />
-                        </div>
+                    <div class="grid grid-cols-1 gap-6">
                         
                         @if (Model.Geo.Level == 2)
                         {
@@ -89,9 +85,8 @@
 
                 <!-- 第三部分：内容与多媒体 -->
                     
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        <!-- 左侧：主要文本内容 -->
-                        <div class="md:col-span-3 space-y-6">
+                    <div class="grid grid-cols-1 gap-8">
+                        <div class="space-y-6">
                             @if (Model.Geo.Level >= 2)
                             {
                                 <div>
@@ -106,8 +101,7 @@
                             </div>
                         </div>
 
-                        <!-- 右侧：媒体与元数据 -->
-                        <div class="md:col-span-1 space-y-6">
+                        <div class="space-y-6">
                             <div>
                                 <label class="block text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">焦点图片</label>
                                 <div x-data="{ photoName: null, photoPreview: null }" class="space-y-4">
@@ -156,7 +150,7 @@
 
 
                 <!-- 第四部分：高级与显示设置 -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 gap-6">
                         <div class="flex items-center justify-between">
                             <div>
                                 <div class="text-xs font-bold text-gray-700">详情页导航条</div>
