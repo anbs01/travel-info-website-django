@@ -6,9 +6,6 @@
 
 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]" x-data="scenicForm('@Model.Spot.MainImage')">
     <partial name="_AdminPageHeader" model='new { 
-        Title = "编辑打卡点", 
-        Subtitle = "Scenic Spots & Check-in Places",
-        Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z\"/><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15 11a3 3 0 11-6 0 3 3 0 016 0z\"/></svg>",
         Tabs = new[] {
             new { Name = "打卡地列表", Url = Url.Page("Index"), IsActive = false },
             new { Name = "编辑打卡点", Url = "#", IsActive = true }

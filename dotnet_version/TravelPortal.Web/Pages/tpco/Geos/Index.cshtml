@@ -34,7 +34,6 @@
         }
      }">
 <partial name="_AdminPageHeader" model='new { 
-    Title = title, 
     Tabs = new[] {
         new { Name = listTitle, Url = Url.Page("Index", new { parentId = Model.ParentId, level = Model.Level, nature = Model.Nature }), IsActive = true },
         new { Name = createTitle, Url = Url.Page("Create", new { parentId = Model.ParentId, level = (Model.Level ?? (Model.ParentGeo?.Level + 1) ?? 1), nature = Model.Nature }), IsActive = false }

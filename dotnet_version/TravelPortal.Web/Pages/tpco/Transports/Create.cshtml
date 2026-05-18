@@ -6,11 +6,8 @@
 
 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]">
     <partial name="_AdminPageHeader" model='new { 
-        Title = "发布交通点", 
-        Subtitle = "Transportation Facilities Management",
-        Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 4v16m8-8H4\"></path></svg>",
         Tabs = new[] {
-            new { Name = "交通设施", Url = Url.Page("Index"), IsActive = false },
+            new { Name = "交通管理", Url = Url.Page("Index"), IsActive = false },
             new { Name = "发布交通点", Url = Url.Page("Create"), IsActive = true }
         }
     }' />

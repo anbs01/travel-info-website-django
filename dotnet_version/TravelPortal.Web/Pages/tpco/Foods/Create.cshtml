@@ -6,9 +6,6 @@
 
 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-h-[calc(100vh-120px)]" x-data="foodForm()">
     <partial name="_AdminPageHeader" model='new { 
-        Title = "发布特色美食", 
-        Subtitle = "Regional Specialty & Food Management",
-        Icon = "<svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4\"></path></svg>",
         Tabs = new[] {
             new { Name = "美食列表", Url = Url.Page("Index"), IsActive = false },
             new { Name = "发布产品", Url = Url.Page("Create"), IsActive = true }
