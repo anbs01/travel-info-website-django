@@ -24,20 +24,34 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     [BindProperty]
     public IFormFile? MainImageFile { get; set; }
 
+    [BindProperty(SupportsGet = true)]
+    public string? ReturnUrl { get; set; }
+
     public string PageTitle { get; set; } = "编辑节点";
     public List<SelectListItem> ParentOptions { get; set; } = new();
     
     public Geo? ParentGeo { get; set; }
-    public List<string> PlaceHotWords { get; set; } = new();
+    public List<HotWord> PlaceHotWords { get; set; } = new();
 
-    public IActionResult OnGet(int id)
+    public IActionResult OnGet(int id, string? returnUrl = null)
     {
+        ReturnUrl = returnUrl;
+        if (string.IsNullOrEmpty(ReturnUrl))
+        {
+            var referer = Request.Headers["Referer"].ToString();
+            if (!string.IsNullOrEmpty(referer) && referer.Contains("/tpco/Geos", StringComparison.OrdinalIgnoreCase))
+            {
+                ReturnUrl = referer;
+            }
+        }
+
         Geo = _db.Queryable<Geo>().InSingle(id);
         if (Geo == null) return NotFound();
 
         if (Geo.ParentId.HasValue && Geo.ParentId > 0)
         {
             ParentGeo = _db.Queryable<Geo>().InSingle(Geo.ParentId.Value);
+            Geo.Parent = ParentGeo;
         }
 
         UpdatePageTitle();
@@ -51,7 +65,6 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         PlaceHotWords = _db.Queryable<HotWord>()
             .Where(it => it.Module == HotWord.MOD_PLACE && !it.IsHidden)
             .OrderBy(it => it.SortOrder)
-            .Select(it => it.Name)
             .ToList();
     }
 
@@ -85,6 +98,12 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
+        // 校验必填项：对于省份（Level=2）和城镇乡村（Level>=3），行政区划（ParentId）是强必填项！
+        if (Geo.Level > 1 && (!Geo.ParentId.HasValue || Geo.ParentId <= 0))
+        {
+            ModelState.AddModelError("Geo.ParentId", "请选择该节点的所属行政区划。");
+        }
+
         // 后端强一致性安全校验：防行政级别冲突越级
         if (Geo.ParentId.HasValue && Geo.ParentId > 0)
         {
@@ -164,6 +183,10 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
         if (!ModelState.IsValid)
         {
+            if (Geo.ParentId.HasValue && Geo.ParentId > 0)
+            {
+                Geo.Parent = _db.Queryable<Geo>().InSingle(Geo.ParentId.Value);
+            }
             UpdatePageTitle();
             LoadParents();
             LoadHotWords();
@@ -193,7 +216,12 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
         Geo.UpdatedAt = DateTime.Now;
 
-        _db.Updateable(Geo).ExecuteCommand();
+        _db.Updateable(Geo).IgnoreColumns("GeoId").ExecuteCommand();
+        
+        if (!string.IsNullOrEmpty(ReturnUrl))
+        {
+            return Redirect(ReturnUrl);
+        }
         return RedirectToPage("Index", new { parentId = Geo.ParentId, level = Geo.Level, nature = Geo.Nature });
     }
 

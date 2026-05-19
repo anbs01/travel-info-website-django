@@ -28,7 +28,7 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
     public List<SelectListItem> ParentOptions { get; set; } = new();
     
     public Geo? ParentGeo { get; set; }
-    public List<string> PlaceHotWords { get; set; } = new();
+    public List<HotWord> PlaceHotWords { get; set; } = new();
 
     public void OnGet(int? parentId, int? level, string? nature)
     {
@@ -51,7 +51,6 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         PlaceHotWords = _db.Queryable<HotWord>()
             .Where(it => it.Module == HotWord.MOD_PLACE && !it.IsHidden)
             .OrderBy(it => it.SortOrder)
-            .Select(it => it.Name)
             .ToList();
     }
 
@@ -85,6 +84,12 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
+        // 校验必填项：对于省份（Level=2）和城镇乡村（Level>=3），行政区划（ParentId）是强必填项！
+        if (Geo.Level > 1 && (!Geo.ParentId.HasValue || Geo.ParentId <= 0))
+        {
+            ModelState.AddModelError("Geo.ParentId", "请选择该节点的所属行政区划。");
+        }
+
         // 后端强一致性安全校验：防行政级别冲突越级
         if (Geo.ParentId.HasValue && Geo.ParentId > 0)
         {
@@ -164,6 +169,10 @@ public class CreateModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
         if (!ModelState.IsValid)
         {
+            if (Geo.ParentId.HasValue && Geo.ParentId > 0)
+            {
+                Geo.Parent = _db.Queryable<Geo>().InSingle(Geo.ParentId.Value);
+            }
             UpdatePageTitle();
             LoadParents();
             LoadHotWords();

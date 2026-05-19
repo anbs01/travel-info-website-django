@@ -21,7 +21,6 @@
     <form method="post" enctype="multipart/form-data" class="p-8 space-y-10">
         <input type="hidden" asp-for="Geo.Level" />
         <input type="hidden" asp-for="Geo.Nature" />
-        <input type="hidden" asp-for="Geo.ParentId" />
 
         @if (Model.Geo.Level == 2)
         {
@@ -83,25 +82,25 @@
                 hasOtherTime: false,
                 otherTimeText: '',
                 hideNav: false,
-                selectedTags: '',
+                selectedTagIds: [],
+                selectedTagNames: [],
                 imageUrl: '',
                 previewImage(e) {
                     const file = e.target.files[0];
                     if (file) this.imageUrl = URL.createObjectURL(file);
                 },
-                toggleTag(tag) {
-                    let tags = this.selectedTags ? this.selectedTags.split(',').filter(Boolean) : [];
-                    let idx = tags.indexOf(tag);
+                toggleTag(id, name) {
+                    let idx = this.selectedTagIds.indexOf(id);
                     if (idx > -1) {
-                        tags.splice(idx, 1);
+                        this.selectedTagIds.splice(idx, 1);
+                        this.selectedTagNames.splice(idx, 1);
                     } else {
-                        tags.push(tag);
+                        this.selectedTagIds.push(id);
+                        this.selectedTagNames.push(name);
                     }
-                    this.selectedTags = tags.join(',');
                 },
-                isTagSelected(tag) {
-                    let tags = this.selectedTags ? this.selectedTags.split(',').filter(Boolean) : [];
-                    return tags.includes(tag);
+                isTagSelected(id) {
+                    return this.selectedTagIds.includes(id);
                 }
             }" class="space-y-6">
                 <!-- 1. 城乡简称 -->
@@ -133,8 +132,8 @@
                 <!-- 4. 城乡标签 -->
                 <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
                     <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">城乡标签</label>
-                    <div class="flex-1 space-y-3">
-                        <div class="flex flex-wrap gap-3">
+                    <div class="flex-1">
+                        <div class="flex flex-wrap items-center gap-3">
                             @foreach (var tag in new[] { "市府所在地", "省会城市", "副省级城市" })
                             {
                                 <label class="relative flex items-center group cursor-pointer">
@@ -142,13 +141,15 @@
                                     <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">@tag</div>
                                 </label>
                             }
-                            <label class="relative flex items-center group cursor-pointer">
-                                <input type="checkbox" x-model="hasOtherTag" class="peer sr-only">
-                                <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">其他</div>
-                            </label>
-                        </div>
-                        <div x-show="hasOtherTag" x-transition class="w-full max-w-md pt-1" style="display: none;">
-                            <input type="text" x-model="otherTagText" placeholder="请输入其他标签内容..." class="w-full px-4 py-2.5 bg-gray-50 border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand text-xs font-medium transition-all" />
+                            <div class="flex items-center gap-2">
+                                <label class="relative flex items-center group cursor-pointer">
+                                    <input type="checkbox" x-model="hasOtherTag" class="peer sr-only">
+                                    <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">其他</div>
+                                </label>
+                                <div x-show="hasOtherTag" x-transition class="w-48" style="display: none;">
+                                    <input type="text" x-model="otherTagText" placeholder="请输入其他标签..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand text-xs font-medium transition-all" />
+                                </div>
+                            </div>
                         </div>
                         <input type="hidden" name="Geo.GeoTag" :value="[...geoTags, (hasOtherTag && otherTagText.trim() ? '其他:' + otherTagText.trim() : '')].filter(Boolean).join(',')" />
                     </div>
@@ -170,7 +171,7 @@
                             @foreach (var lv in new[] { (v: 3, n: "地级市"), (v: 4, n: "县级市"), (v: 5, n: "乡镇"), (v: 6, n: "村庄") })
                             {
                                 <label class="relative flex items-center group cursor-pointer">
-                                    <input type="checkbox" :checked="selectedLevel === @lv.v" x-on:change="selectedLevel = @lv.v" class="peer sr-only" required>
+                                    <input type="checkbox" :checked="selectedLevel === @lv.v" x-on:change="selectedLevel = @lv.v" class="peer sr-only">
                                     <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">@lv.n</div>
                                 </label>
                             }
@@ -184,6 +185,7 @@
                     <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0">行政区划 <span class="text-red-400">*</span></label>
                     <div class="flex-1">
                         <partial name="_GeoPicker" model='new { FieldName = "Geo.ParentId", CurrentId = Model.Geo.ParentId, CurrentName = Model.Geo.Parent?.Title }' />
+                        <span asp-validation-for="Geo.ParentId" class="text-red-400 text-xs mt-1 block"></span>
                     </div>
                 </div>
 
@@ -232,8 +234,8 @@
                 <!-- 11. 最佳旅游时间 -->
                 <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
                     <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">最佳旅游时间</label>
-                    <div class="flex-1 space-y-3">
-                        <div class="flex flex-wrap gap-3">
+                    <div class="flex-1">
+                        <div class="flex flex-wrap items-center gap-3">
                             @foreach (var season in new[] { "春季", "夏季", "秋季", "冬季" })
                             {
                                 <label class="relative flex items-center group cursor-pointer">
@@ -241,13 +243,15 @@
                                     <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">@season</div>
                                 </label>
                             }
-                            <label class="relative flex items-center group cursor-pointer">
-                                <input type="checkbox" x-model="hasOtherTime" class="peer sr-only">
-                                <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">其他时间</div>
-                            </label>
-                        </div>
-                        <div x-show="hasOtherTime" x-transition class="w-full max-w-md pt-1" style="display: none;">
-                            <input type="text" x-model="otherTimeText" placeholder="请输入其他旅游时间内容..." class="w-full px-4 py-2.5 bg-gray-50 border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand text-xs font-medium transition-all" />
+                            <div class="flex items-center gap-2">
+                                <label class="relative flex items-center group cursor-pointer">
+                                    <input type="checkbox" x-model="hasOtherTime" class="peer sr-only">
+                                    <div class="px-4 py-2 bg-gray-50 border border-gray-200 peer-checked:border-brand peer-checked:bg-brand/5 peer-checked:text-brand rounded-xl text-sm font-medium text-gray-600 transition-all">其他时间</div>
+                                </label>
+                                <div x-show="hasOtherTime" x-transition class="w-48" style="display: none;">
+                                    <input type="text" x-model="otherTimeText" placeholder="请输入其他时间..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand text-xs font-medium transition-all" />
+                                </div>
+                            </div>
                         </div>
                         <input type="hidden" name="Geo.BestTime" :value="[...selectedSeasons, (hasOtherTime && otherTimeText.trim() ? '其他时间:' + otherTimeText.trim() : '')].filter(Boolean).join(',')" />
                     </div>
@@ -265,7 +269,12 @@
                 <div class="flex flex-col md:flex-row md:items-start gap-4 border-b border-gray-50 pb-4 pt-1">
                     <label class="w-32 text-xs font-bold text-gray-500 uppercase tracking-widest shrink-0 pt-2">搜索热词</label>
                     <div class="flex-1 space-y-4">
-                        <input type="text" name="Geo.Tags" x-model="selectedTags" class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium" placeholder="请选择下方热词或在此手动输入（用英文逗号分隔）..." />
+                        <!-- 只读输入框，用于前台展示中文热词名称列表 -->
+                        <input type="text" :value="selectedTagNames.join(',')" readonly class="w-full px-4 py-3 bg-gray-50 border-transparent rounded-xl focus:bg-white focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-sm font-medium cursor-not-allowed" placeholder="请选择下方推荐热词进行添加（只读，无法手动修改）..." />
+                        
+                        <!-- 隐藏的 input，真正提交到数据库 Geo.Tags 字段中的 ID 字符串 -->
+                        <input type="hidden" name="Geo.Tags" :value="selectedTagIds.join(',')" />
+                        
                         @if (Model.PlaceHotWords != null && Model.PlaceHotWords.Any())
                         {
                             <div class="space-y-1.5 p-4 bg-gray-50 rounded-2xl border border-gray-100 max-w-3xl">
@@ -273,10 +282,10 @@
                                 <div class="flex flex-wrap gap-2 pt-1">
                                     @foreach (var hw in Model.PlaceHotWords)
                                     {
-                                        <button type="button" x-on:click="toggleTag('@hw')"
-                                                :class="isTagSelected('@hw') ? 'bg-brand text-white border-brand shadow-sm font-bold' : 'bg-white text-gray-600 border-gray-200 hover:border-brand hover:text-brand'"
+                                        <button type="button" x-on:click="toggleTag(@hw.Id, '@hw.Name')"
+                                                :class="isTagSelected(@hw.Id) ? 'bg-brand text-white border-brand shadow-sm font-bold' : 'bg-white text-gray-600 border-gray-200 hover:border-brand hover:text-brand'"
                                                 class="px-3 py-1.5 border rounded-lg text-xs transition-all transform hover:scale-[1.03] active:scale-95 duration-100">
-                                            @hw
+                                            @hw.Name
                                         </button>
                                     }
                                 </div>
