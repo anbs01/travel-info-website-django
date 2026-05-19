@@ -81,16 +81,26 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         // 允许选择比当前层级更小的所有节点作为父级（支持跳级/断层编辑）
         if (Geo.Level > 1)
         {
-            var parents = _db.Queryable<Geo>()
-                .Where(it => it.Level < Geo.Level)
-                .OrderBy(it => it.Level)
+            var query = _db.Queryable<Geo>();
+
+            // 海外城镇只可选择海外国家（Level=1 且 Nature=Overseas）作为父级，天然排除中国
+            if (Geo.Level >= 3 && Geo.Nature == "Overseas")
+            {
+                query = query.Where(it => it.Level == 1 && it.Nature == "Overseas");
+            }
+            else
+            {
+                query = query.Where(it => it.Level < Geo.Level);
+            }
+
+            var parents = query.OrderBy(it => it.Level)
                 .OrderBy(it => it.SortOrder)
                 .ToList();
 
             ParentOptions = parents.Select(it => new SelectListItem
             {
                 Value = it.Id.ToString(),
-                Text = $"[{it.Level}级] {it.Title}",
+                Text = it.Level == 1 ? it.Title : $"[{it.Level}级] {it.Title}",
                 Selected = it.Id == Geo.ParentId
             }).ToList();
         }
@@ -116,6 +126,19 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
 
         if (Geo.Level == 1)
         {
+            Geo.ParentId = 0; // 一级节点（国家）防编辑时丢失父级参数，强保底补零，防止数据库字段 NOT NULL 触发异常
+            Geo.AncestorPath = null;
+
+            // 智能判定国家性质：除“中国”外，其余国家自动判定并强制归类为海外国家性质（Overseas）
+            if (Geo.Title == "中国")
+            {
+                Geo.Nature = "Domestic";
+            }
+            else
+            {
+                Geo.Nature = "Overseas";
+            }
+
             if (string.IsNullOrEmpty(Geo.Slug))
             {
                 Geo.Slug = TravelPortal.Web.Utils.PinyinHelper.GetInitials(Geo.Title).ToLower();
@@ -181,6 +204,27 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
             }
         }
 
+        // 后端强一致性安全校验：海外城镇各必填字段校验
+        if (Geo.Level >= 3 && Geo.Nature == "Overseas")
+        {
+            if (string.IsNullOrWhiteSpace(Geo.Title))
+            {
+                ModelState.AddModelError("Geo.Title", "中文简称不能为空。");
+            }
+            if (string.IsNullOrWhiteSpace(Geo.Summary))
+            {
+                ModelState.AddModelError("Geo.Summary", "旅游特色不能为空。");
+            }
+            if (string.IsNullOrWhiteSpace(Geo.Content))
+            {
+                ModelState.AddModelError("Geo.Content", "详细介绍不能为空。");
+            }
+            if (!Geo.ParentId.HasValue || Geo.ParentId <= 0)
+            {
+                ModelState.AddModelError("Geo.ParentId", "请选择所属国家。");
+            }
+        }
+
         if (!ModelState.IsValid)
         {
             if (Geo.ParentId.HasValue && Geo.ParentId > 0)
@@ -212,6 +256,20 @@ public class EditModel : Microsoft.AspNetCore.Mvc.RazorPages.PageModel
         else
         {
             Geo.AncestorPath = null;
+        }
+
+        // 最终更新安全保障：强锁定国家/省份/城镇性质，规避隐藏域篡改
+        if (Geo.Level == 1)
+        {
+            Geo.Nature = Geo.Title == "中国" ? "Domestic" : "Overseas";
+        }
+        else if (Geo.Level == 2)
+        {
+            Geo.Nature = "Domestic";
+        }
+        else if (Geo.Level >= 3)
+        {
+            Geo.Nature = Geo.Nature == "Overseas" ? "Overseas" : "Domestic";
         }
 
         Geo.UpdatedAt = DateTime.Now;
